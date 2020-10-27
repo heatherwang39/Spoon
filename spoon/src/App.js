@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
-import Feed from './feed';
+import Feed from './react-components/Feed';
 
 class App extends React.Component {
   render() {

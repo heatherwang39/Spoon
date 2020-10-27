@@ -1,7 +1,7 @@
 import React from 'react';
 // import { Link } from "react-router-dom";
 
-import Thumbnail from './thumbnail';
+import Thumbnail from '../Thumbnail';
 
 class Feed extends React.Component {
   render() {
