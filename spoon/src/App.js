@@ -3,6 +3,7 @@ import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
 import Feed from './react-components/Feed';
+import UserProfile from './react-components/UserProfile';
 
 class App extends React.Component {
   render() {
@@ -16,6 +17,11 @@ class App extends React.Component {
               exact
               path="/"
               render={() => <Feed appState={this.state} />}
+            />
+            <Route
+              exact
+              path="/UserProfile"
+              render={() => <UserProfile appState={this.state} />}
             />
           </Switch>
         </BrowserRouter>
