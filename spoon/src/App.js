@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Feed from './feed';
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <BrowserRouter>
+          <Switch>
+            {/* Similar to a switch statement - shows the component depending on the URL path */}
+            {/* Each Route below shows a different component depending on the exact path in the URL  */}
+            <Route
+              exact
+              path="/"
+              render={() => <Feed appState={this.state} />}
+            />
+          </Switch>
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
 export default App;
