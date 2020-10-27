@@ -7,7 +7,12 @@ class Thumbnail extends React.Component {
     return (
       <div className="thumbnail">
         <div className="thumbnail-picture">
-          <p>picture</p>
+          <img
+            className="thumbnail-picture"
+            // eslint-disable-next-line global-require
+            src={require('./thumbnail_tester.jpg')}
+            alt="food"
+          />
         </div>
         <div className="thumbnail-recipe-name">
           <p className="thumbnail-recipe-name">recipe name</p>

@@ -1,40 +1,52 @@
-.thumbnail-picture {
-    position: relative;
-    height: 100px;
-    width: 100px;
-    margin: 20px;
-    padding: 10px;
-    border: 2px;
+div.thumbnail-picture {
+    /* background: lightblue; */
+    /* background-size: 50%; */
+    margin: 5%;
+    border: 1px;
     border-style: solid;
     border-color: darkgray;
-    background-color: lightgray;
+    border-radius: 5%;
+  }
+
+  img.thumbnail-picture {
+    max-width: 100%;
     border-radius: 5%;
   }
   
   .thumbnail {
     float: left;
+    position: relative;
     border: 1px;
     border-style: solid;
     border-color: darkgray;
-    margin: 10px;
+    margin: 1%;
+    margin-top: 20px;
+    margin-bottom: 40px;
     border-radius: 5%;
-  }
-  
-  div.thumbnail-username {
-    margin-left: 20px;
-  }
-  
-  p.thumbnail-username {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    width: 30%;
   }
   
   div.thumbnail-recipe-name {
-    margin-left: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
     font-size: large;
   }
   
   p.thumbnail-recipe-name {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    padding: 2%;
+    background-color: lavender;
+  }
+
+  div.thumbnail-username {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  
+  p.thumbnail-username {
+    margin-top: 2%;
+    margin-bottom: 5%;
+    padding: 1% 2% 1% 2%;
+    background-color: lavender;
   }
