@@ -1,13 +1,23 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.thumbnail-picture {
+  position: relative;
+  height: 100px;
+  width: 100px;
+  margin: 20px;
+  padding: 10px;
+  border: 2px;
+  border-style: solid;
+  border-color: darkgray;
+  background-color: lightgray;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.thumbnail {
+  float: left;
+}
+
+.thumbnail-username {
+  margin-left: 20px;
+}
+
+.thumbnail-recipe-name {
+  margin-left: 20px;
 }
