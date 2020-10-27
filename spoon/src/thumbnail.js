@@ -8,10 +8,10 @@ class Thumbnail extends React.Component {
           <p>picture</p>
         </div>
         <div className="thumbnail-recipe-name">
-          <p>recipe name</p>
+          <p className="thumbnail-recipe-name">recipe name</p>
         </div>
         <div className="thumbnail-username">
-          <p>username</p>
+          <p className="thumbnail-username">username</p>
         </div>
       </div>
     );

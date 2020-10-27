@@ -1,3 +1,10 @@
+body {
+  /* We can change these around later so that it's consistent across our app,
+   I just set these for now */
+  color: blue;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 .thumbnail-picture {
   position: relative;
   height: 100px;
@@ -8,16 +15,33 @@
   border-style: solid;
   border-color: darkgray;
   background-color: lightgray;
+  border-radius: 5%;
 }
 
 .thumbnail {
   float: left;
+  border: 1px;
+  border-style: solid;
+  border-color: darkgray;
+  margin: 10px;
+  border-radius: 5%;
 }
 
-.thumbnail-username {
+div.thumbnail-username {
   margin-left: 20px;
 }
 
-.thumbnail-recipe-name {
+p.thumbnail-username {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+div.thumbnail-recipe-name {
   margin-left: 20px;
+  font-size: large;
+}
+
+p.thumbnail-recipe-name {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
