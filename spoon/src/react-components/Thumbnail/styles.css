@@ -1,52 +1,68 @@
+.thumbnail {
+  float: left;
+  position: relative;
+  border: 1px;
+  border-style: solid;
+  border-color: darkgray;
+  margin: 1%;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  border-radius: 5%;
+  width: 30%;
+}
+
+.likes {
+  color:deeppink;
+  position: absolute;
+  top: 6%;
+  right: 8%;
+  opacity: 0;
+  transition: .5s ease;
+}
+
 div.thumbnail-picture {
-    /* background: lightblue; */
-    /* background-size: 50%; */
-    margin: 5%;
-    border: 1px;
-    border-style: solid;
-    border-color: darkgray;
-    border-radius: 5%;
-  }
+  margin: 5%;
+  border: 1px;
+  border-style: solid;
+  border-color: darkgray;
+  border-radius: 5%;
+  transition: .5s ease;
+}
 
-  img.thumbnail-picture {
-    max-width: 100%;
-    border-radius: 5%;
-  }
-  
-  .thumbnail {
-    float: left;
-    position: relative;
-    border: 1px;
-    border-style: solid;
-    border-color: darkgray;
-    margin: 1%;
-    margin-top: 20px;
-    margin-bottom: 40px;
-    border-radius: 5%;
-    width: 30%;
-  }
-  
-  div.thumbnail-recipe-name {
-    margin-left: 5%;
-    margin-right: 5%;
-    font-size: large;
-  }
-  
-  p.thumbnail-recipe-name {
-    margin-top: 5%;
-    margin-bottom: 2%;
-    padding: 2%;
-    background-color: lavender;
-  }
+div.thumbnail-picture:hover img.thumbnail-picture {
+  opacity: 0.3;
+}
 
-  div.thumbnail-username {
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-  
-  p.thumbnail-username {
-    margin-top: 2%;
-    margin-bottom: 5%;
-    padding: 1% 2% 1% 2%;
-    background-color: lavender;
-  }
+div.thumbnail-picture:hover .likes{
+  opacity: 1;
+}
+
+img.thumbnail-picture {
+  max-width: 100%;
+  border-radius: 5%;
+}
+
+div.thumbnail-recipe-name {
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: large;
+}
+
+p.thumbnail-recipe-name {
+  margin-top: 5%;
+  margin-bottom: 2%;
+  padding: 2%;
+  background-color: lavender;
+}
+
+div.thumbnail-username {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+p.thumbnail-username {
+  margin-top: 2%;
+  margin-bottom: 5%;
+  padding: 1% 2% 1% 2%;
+  background-color: lavender;
+}

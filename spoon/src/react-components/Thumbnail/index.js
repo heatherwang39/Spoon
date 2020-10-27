@@ -7,6 +7,7 @@ class Thumbnail extends React.Component {
     return (
       <div className="thumbnail">
         <div className="thumbnail-picture">
+          <div className="likes">num likes</div>
           <img
             className="thumbnail-picture"
             // eslint-disable-next-line global-require
