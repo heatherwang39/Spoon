@@ -2,6 +2,8 @@ import React from 'react';
 
 import './styles.css';
 
+// const faker = require('faker');
+
 class Thumbnail extends React.Component {
   render() {
     return (
@@ -12,6 +14,7 @@ class Thumbnail extends React.Component {
             className="thumbnail-picture"
             // eslint-disable-next-line global-require
             src={require('./thumbnail_tester.jpg')}
+            // src={faker.image.food()}
             alt="food"
           />
         </div>

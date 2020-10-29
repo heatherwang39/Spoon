@@ -9,6 +9,7 @@
   margin-bottom: 40px;
   border-radius: 5%;
   width: 30%;
+  /* min-width: 300px; */
 }
 
 .likes {
@@ -22,15 +23,12 @@
 
 div.thumbnail-picture {
   margin: 5%;
-  border: 1px;
-  border-style: solid;
-  border-color: darkgray;
-  border-radius: 5%;
-  transition: .5s ease;
+  padding-top: 90%;
 }
 
 div.thumbnail-picture:hover img.thumbnail-picture {
   opacity: 0.3;
+  border-color: black;
 }
 
 div.thumbnail-picture:hover .likes{
@@ -38,14 +36,23 @@ div.thumbnail-picture:hover .likes{
 }
 
 img.thumbnail-picture {
-  max-width: 100%;
+  width: 90%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 5%;
+  border: 1px;
+  border-style: solid;
+  border-color: darkgray;
   border-radius: 5%;
+  transition: .5s ease;
 }
 
 div.thumbnail-recipe-name {
   margin-left: 5%;
   margin-right: 5%;
-  font-size: large;
 }
 
 p.thumbnail-recipe-name {
@@ -53,6 +60,8 @@ p.thumbnail-recipe-name {
   margin-bottom: 2%;
   padding: 2%;
   background-color: lavender;
+  text-align: left;
+  font-size: 125%;
 }
 
 div.thumbnail-username {
@@ -65,4 +74,6 @@ p.thumbnail-username {
   margin-bottom: 5%;
   padding: 1% 2% 1% 2%;
   background-color: lavender;
+  text-align: left;
+  font-size: 100%;
 }

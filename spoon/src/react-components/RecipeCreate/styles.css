@@ -1,0 +1,9 @@
+.createRecipeContainer {
+    width: 100%;
+    margin: auto;
+    padding: 20px 100px;
+}
+
+.MuiTypography-body1 {
+    padding-left: 100px;
+}
