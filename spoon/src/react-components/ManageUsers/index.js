@@ -34,7 +34,7 @@ class ManageUsers extends React.Component {
 
     handleInputChange=(event)=>{
         const target = event.target
-        const value = target.value
+        const value = target.value.toLowerCase()
         console.log(value)
         this.setState({
             searchedName: value,
@@ -43,10 +43,6 @@ class ManageUsers extends React.Component {
 
     searchUser=()=>{
         console.log(this.state.searchedName)
-        const searchedUser = this.state.users.filter((user)=>{return user.name===this.state.searchedName})
-        this.setState({            
-            users: searchedUser,
-        })
     }
 
     deleteUser=(user)=>{
@@ -82,7 +78,7 @@ class ManageUsers extends React.Component {
 
             <div className="infoArea">
                 {
-                this.state.users.map((user)=>{
+                    this.state.users.filter((user)=>{return user.name.toLowerCase().includes(this.state.searchedName)}).map((user)=>{
                     return(
                         <Paper className="userListContainer">
                         <Grid className="userList" container spacing={2} alignItems="center">
@@ -107,11 +103,10 @@ class ManageUsers extends React.Component {
                         </Grid>
                         </Paper>
                     )
-                })}
+                })
+               }
             </div>
-
-        </div>
-        
+        </div>        
       )
     }
 }
