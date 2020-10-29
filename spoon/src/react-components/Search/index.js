@@ -11,14 +11,15 @@ class Search extends React.Component {
       <div>
         <Header/>
         <Grid justify="center" alignItems="center" container spacing={1}>
-          <Grid item xs={12}>
+          <Grid item xs={5}>
             <TextField
-              value={this.state.searchString}
+              //value={this.state.searchString}
               onChange={this.handleInputChange}
               type="text"
               name="searchString"
               label="Search for recipes"
               variant="outlined"
+              fullWidth
             />
           </Grid>
         </Grid>
