@@ -2,6 +2,8 @@ import React from 'react';
 
 import './styles.css';
 
+// const faker = require('faker');
+
 class Thumbnail extends React.Component {
   render() {
     return (
