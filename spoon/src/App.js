@@ -6,6 +6,7 @@ import Feed from './react-components/Feed';
 import UserProfile from './react-components/UserProfile';
 import ManageUsers from './react-components/ManageUsers';
 import ManageRecipes from './react-components/ManageRecipes';
+import Search from './react-components/Search'
 
 class App extends React.Component {
   state = {
@@ -43,6 +44,11 @@ class App extends React.Component {
               exact
               path="/ManageRecipes"
               render={() => <ManageRecipes appState={this.state} />}
+            />
+            <Route
+              exact
+              path="/Search"
+              render={() => <Search appState={this.state} />}
             />
           </Switch>
         </BrowserRouter>
