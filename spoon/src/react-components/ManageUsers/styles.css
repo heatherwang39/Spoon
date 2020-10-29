@@ -1,6 +1,6 @@
 body {
-  background-color: blanchedalmond;
   text-align: center;
+  margin-top: 100px;
 }
 
 img {
@@ -16,4 +16,8 @@ img {
   max-width: 80%;
   margin: auto;
   border-bottom: 1px solid gray;
+}
+
+.infoArea {
+  margin-top: 30px;
 }

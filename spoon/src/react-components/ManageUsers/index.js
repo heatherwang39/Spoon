@@ -9,6 +9,7 @@ import { uid } from "react-uid";
 import faker from 'faker';
 
 import './styles.css';
+import Header from '../Header';
 
 class ManageUsers extends React.Component {
     state = {
@@ -57,10 +58,11 @@ class ManageUsers extends React.Component {
 
     render() {
       return (
-        <div>
+        <div>            
+            <Header/>
             <Typography variant="h2" color="secondary" gutterBottom>ManageUsers</Typography>
             <Grid container justify="center" alignItems="center" spacing={1}>
-                <Grid item xs={7}>
+                <Grid item xs={5}>
                     <TextField value={this.state.searchedName}
                         onChange={this.handleInputChange}
                         type="text"
@@ -68,7 +70,7 @@ class ManageUsers extends React.Component {
                         placeholder="For example: Heather"
                         label="User Name" variant="outlined" fullWidth />
                 </Grid> 
-                <Grid item>                              
+                <Grid item xs={2}>                              
                     <Button onClick={this.searchUser}
                             variant="contained"
                             color="secondary"
@@ -78,7 +80,7 @@ class ManageUsers extends React.Component {
 
             </Grid>
 
-            <div>
+            <div className="infoArea">
                 {
                 this.state.users.map((user)=>{
                     return(

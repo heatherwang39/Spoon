@@ -3,11 +3,13 @@ import React from 'react';
 import './styles.css';
 
 import Thumbnail from '../Thumbnail';
+import Header from '../Header';
 
 class Feed extends React.Component {
   render() {
     return (
       <div className="feed">
+        <Header/>
         <p>Feed</p>
         <Thumbnail />
         <Thumbnail />
