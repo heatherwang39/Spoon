@@ -1,13 +1,13 @@
 .thumbnail {
   float: left;
   position: relative;
-  border: 1px;
+  /* border: 1px;
   border-style: solid;
-  border-color: darkgray;
+  border-color: darkgray; */
   margin: 1%;
   margin-top: 20px;
   margin-bottom: 40px;
-  border-radius: 5%;
+  /* border-radius: 5%; */
   width: 30%;
   /* min-width: 300px; */
 }
@@ -62,6 +62,8 @@ p.thumbnail-recipe-name {
   background-color: lavender;
   text-align: left;
   font-size: 125%;
+  color: blue;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 div.thumbnail-username {
@@ -76,4 +78,13 @@ p.thumbnail-username {
   background-color: lavender;
   text-align: left;
   font-size: 100%;
+  color: blue;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}
+
+.text-link {
+  color: inherit;
+  text-decoration: inherit;
+  font-family: inherit;
 }

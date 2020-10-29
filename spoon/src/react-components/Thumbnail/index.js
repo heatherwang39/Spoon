@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './styles.css';
 
@@ -22,7 +23,9 @@ class Thumbnail extends React.Component {
           <p className="thumbnail-recipe-name">recipe name</p>
         </div>
         <div className="thumbnail-username">
-          <p className="thumbnail-username">username</p>
+          <Link className="text-link" to={'../UserProfile'}>
+            <p className="thumbnail-username">username</p>
+          </Link>
         </div>
       </div>
     );

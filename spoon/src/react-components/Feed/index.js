@@ -9,8 +9,7 @@ class Feed extends React.Component {
   render() {
     return (
       <div className="feed">
-        <Header/>
-        <p>Feed</p>
+        <Header />
         <Thumbnail />
         <Thumbnail />
         <Thumbnail />
