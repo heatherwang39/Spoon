@@ -1,0 +1,19 @@
+body {
+  background-color: blanchedalmond;
+  text-align: center;
+}
+
+img {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.userList {
+  padding: 5px;
+}
+
+.userListContainer {
+  max-width: 80%;
+  margin: auto;
+  border-bottom: 1px solid gray;
+}
