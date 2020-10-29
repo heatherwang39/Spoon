@@ -14,6 +14,7 @@ class Thumbnail extends React.Component {
             className="thumbnail-picture"
             // eslint-disable-next-line global-require
             src={require('./thumbnail_tester.jpg')}
+            // src={faker.image.food()}
             alt="food"
           />
         </div>
