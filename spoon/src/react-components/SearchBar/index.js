@@ -1,27 +1,23 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 
 class SearchBar extends React.Component {
   render() {
     const {
-      searchedName,
+      searcheKeyword,
       handleInputChange,
-      searchUser,
+      searchObject,
       placeholder,
       label,
     } = this.props;
     return (
       <div>
-        <Typography variant="h2" color="secondary" gutterBottom>
-          ManageUsers
-        </Typography>
         <Grid container justify="center" alignItems="center" spacing={1}>
           <Grid item xs={5}>
             <TextField
-              value={searchedName}
+              value={searcheKeyword}
               onChange={handleInputChange}
               type="text"
               name="searchedName"
@@ -33,7 +29,7 @@ class SearchBar extends React.Component {
           </Grid>
           <Grid item xs={2}>
             <Button
-              onClick={searchUser}
+              onClick={searchObject}
               variant="contained"
               color="secondary"
               size="large"
