@@ -1,4 +1,6 @@
 import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,43 +15,64 @@ class RecipeInfo extends React.Component {
   render() {
     const { recipes, searchedRecipe, deleteRecipe } = this.props;
     return (
-      <div className="recipesContainer">
+      <Grid
+        container
+        xs={12}
+        spacing={1}
+        justify="space-evenly"
+        alignItems="stretch"
+      >
         {recipes
           .filter((recipe) => {
             return recipe.recipeName.toLowerCase().includes(searchedRecipe);
           })
           .map((recipe) => {
             return (
-              <Card className="recipeContainer">
-                <div>
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                lg={4}
+                xl={4}
+                container
+                direction="row"
+                alignItems="center"
+                justify="space-between"
+                className="recipeContainer"
+              >
+                <Grid item xs={3} sm={1.5} lg={1.5}>
                   <img
                     className="recipeCover"
                     alt="food"
                     src={faker.image.food()}
                   />
-                </div>
-                <div className="recipeDetails">
-                  <CardContent className="recipeContent">
+                </Grid>
+                <Grid item container direction="column" xs={6.5} sm={4} lg={4}>
+                  <Grid item>
                     <Typography component="h6" variant="h6">
                       {recipe.recipeName}
                     </Typography>
+                  </Grid>
+                  <Grid item>
                     <Typography variant="subtitle1" color="textSecondary">
                       by {recipe.owner}
                     </Typography>
-                  </CardContent>
-                </div>
-                <Button
-                  onClick={deleteRecipe}
-                  variant="contained"
-                  color="secondary"
-                  startIcon={<DeleteIcon />}
-                >
-                  Delete
-                </Button>
-              </Card>
+                  </Grid>
+                </Grid>
+                <Grid item xs={2.5} sm={1.5} lg={1.5}>
+                  <Button
+                    onClick={() => deleteRecipe(recipe)}
+                    variant="contained"
+                    color="secondary"
+                    startIcon={<DeleteIcon />}
+                  >
+                    Delete
+                  </Button>
+                </Grid>
+              </Grid>
             );
           })}
-      </div>
+      </Grid>
     );
   }
 }

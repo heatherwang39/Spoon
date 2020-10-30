@@ -6,7 +6,6 @@ import './styles.css';
 import Header from '../Header';
 import SearchBar from '../SearchBar';
 import RecipeInfo from './RecipeInfo';
-import faker from 'faker';
 
 class ManageRecipes extends React.Component {
   state = {
@@ -24,6 +23,12 @@ class ManageRecipes extends React.Component {
       { owner: 'Leonard', recipeName: 'Chicken wings' },
       { owner: 'Sheldon', recipeName: 'Chicken breast' },
       { owner: 'Raj', recipeName: 'Fried Egg' },
+      { owner: 'Heather', recipeName: 'Homemade Pizza' },
+      { owner: 'Joyce', recipeName: 'Baked Potatoes' },
+      { owner: 'Yuhan', recipeName: 'Corn Dogs' },
+      { owner: 'Elsa', recipeName: 'Chicken Pie' },
+      { owner: 'Jon', recipeName: 'French Bread' },
+      { owner: 'Aya', recipeName: 'Egg rolls' },
     ],
   };
 
@@ -64,6 +69,8 @@ class ManageRecipes extends React.Component {
           placeholder="For example: Chicken"
           label="Recipe Keyword"
         />
+        <br />
+        <br />
         <RecipeInfo
           recipes={this.state.recipes}
           searchedRecipe={this.state.searchedRecipe}
