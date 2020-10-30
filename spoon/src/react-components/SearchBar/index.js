@@ -6,7 +6,7 @@ import Grid from '@material-ui/core/Grid';
 class SearchBar extends React.Component {
   render() {
     const {
-      searcheKeyword,
+      searchedKeyword,
       handleInputChange,
       searchObject,
       placeholder,
@@ -17,7 +17,7 @@ class SearchBar extends React.Component {
         <Grid container justify="center" alignItems="center" spacing={1}>
           <Grid item xs={5}>
             <TextField
-              value={searcheKeyword}
+              value={searchedKeyword}
               onChange={handleInputChange}
               type="text"
               name="searchedName"

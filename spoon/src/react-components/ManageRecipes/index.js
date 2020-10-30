@@ -35,7 +35,7 @@ class ManageRecipes extends React.Component {
           Manage Recipes
         </Typography>
         <SearchBar
-          searcheKeyword={this.state.searchedRecipe}
+          searchedKeyword={this.state.searchedRecipe}
           handleInputChange={this.handleInputChange}
           searchObject={this.searchUser}
           placeholder="For example: Chicken"

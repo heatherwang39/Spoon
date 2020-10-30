@@ -57,7 +57,7 @@ class ManageUsers extends React.Component {
           Manage Users
         </Typography>
         <SearchBar
-          searcheKeyword={this.state.searchedName}
+          searchedKeyword={this.state.searchedName}
           handleInputChange={this.handleInputChange}
           searchObject={this.searchUser}
           placeholder="For example: Heather"
