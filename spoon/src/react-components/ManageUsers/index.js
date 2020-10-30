@@ -1,6 +1,8 @@
 import React from 'react';
+import Typography from '@material-ui/core/Typography';
 
 import './styles.css';
+
 import Header from '../Header';
 import SearchBar from '../SearchBar';
 import UserInfo from './UserInfo';
@@ -22,7 +24,6 @@ class ManageUsers extends React.Component {
       { name: 'Sheldon', followers: '7' },
       { name: 'Raj', followers: '8' },
     ],
-    searchedUser: [],
   };
 
   handleInputChange = (event) => {
@@ -52,10 +53,13 @@ class ManageUsers extends React.Component {
     return (
       <div>
         <Header />
+        <Typography variant="h2" color="secondary" gutterBottom>
+          Manage Users
+        </Typography>
         <SearchBar
-          searchedName={this.state.searchedName}
+          searcheKeyword={this.state.searchedName}
           handleInputChange={this.handleInputChange}
-          searchUser={this.searchUser}
+          searchObject={this.searchUser}
           placeholder="For example: Heather"
           label="User Name"
         />
