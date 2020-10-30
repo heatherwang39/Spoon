@@ -15,9 +15,6 @@ class SearchBar extends React.Component {
     } = this.props;
     return (
       <div>
-        <Typography variant="h2" color="secondary" gutterBottom>
-          ManageUsers
-        </Typography>
         <Grid container justify="center" alignItems="center" spacing={1}>
           <Grid item xs={5}>
             <TextField
