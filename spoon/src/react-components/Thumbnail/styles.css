@@ -53,7 +53,7 @@ img.thumbnail-picture {
   object-fit: none;
   object-position: center;
   transition: 0.5s ease;
-  max-width: 230px;
+  max-width: 30%;
 }
 
 div.thumbnail-recipe-name {
