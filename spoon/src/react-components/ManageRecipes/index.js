@@ -13,18 +13,41 @@ class ManageRecipes extends React.Component {
     searchedRecipe: '',
     recipes: [
       { owner: 'Heather', recipeName: 'Homemade Pizza' },
-      { owner: 'Joyce', recipeName: 'Twice-Baked Potatoes' },
+      { owner: 'Joyce', recipeName: 'Baked Potatoes' },
       { owner: 'Yuhan', recipeName: 'Corn Dogs' },
-      { owner: 'Elsa', recipeName: 'Chicken Pot Pie' },
-      { owner: 'Jon', recipeName: 'French Bread Pizza' },
+      { owner: 'Elsa', recipeName: 'Chicken Pie' },
+      { owner: 'Jon', recipeName: 'French Bread' },
       { owner: 'Aya', recipeName: 'Egg rolls' },
       { owner: 'James', recipeName: 'Chicken Parmesan' },
       { owner: 'Tyrion', recipeName: 'Chicken nuggets' },
-      { owner: 'Penny', recipeName: '5' },
-      { owner: 'Leonard', recipeName: '6' },
-      { owner: 'Sheldon', recipeName: '7' },
-      { owner: 'Raj', recipeName: '8' },
+      { owner: 'Penny', recipeName: 'Baked Beef' },
+      { owner: 'Leonard', recipeName: 'Chicken wings' },
+      { owner: 'Sheldon', recipeName: 'Chicken breast' },
+      { owner: 'Raj', recipeName: 'Fried Egg' },
     ],
+  };
+
+  handleInputChange = (event) => {
+    const target = event.target;
+    const value = target.value.toLowerCase();
+    console.log(value);
+    this.setState({
+      searchedRecipe: value,
+    });
+  };
+
+  searchRecipe = () => {
+    console.log(this.state.searchedRecipe);
+  };
+
+  deleteRecipe = (recipe) => {
+    const recipesToKeep = this.state.recipes.filter((r) => {
+      return r !== recipe;
+    });
+    this.setState({
+      recipes: recipesToKeep,
+    });
+    alert('Recipe ' + recipe.recipeName + ' has been deleted!');
   };
 
   render() {
@@ -37,12 +60,15 @@ class ManageRecipes extends React.Component {
         <SearchBar
           searcheKeyword={this.state.searchedRecipe}
           handleInputChange={this.handleInputChange}
-          searchObject={this.searchUser}
+          searchObject={this.searchRecipe}
           placeholder="For example: Chicken"
           label="Recipe Keyword"
         />
-        <RecipeInfo />
-        <img className="recipeImage" src={require('./pizza.jpg')} alt="food" />
+        <RecipeInfo
+          recipes={this.state.recipes}
+          searchedRecipe={this.state.searchedRecipe}
+          deleteRecipe={this.deleteRecipe}
+        />
       </div>
     );
   }

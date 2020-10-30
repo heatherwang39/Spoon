@@ -1,8 +1,26 @@
-.recipeContainer {
-  max-width: 300px;
+.recipesContainer {
+  display: flex-box;
 }
 
-.recipeImage {
-  height: 300;
-  width: 300;
+.recipeContainer {
+  margin-top: 40px;
+  display: flex;
+  max-width: 450px;
+  align-items: center;
+}
+
+.recipeDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipeContent {
+}
+
+.recipeCover {
+  max-width: 120px;
+}
+
+.className {
+  width: 300px;
 }

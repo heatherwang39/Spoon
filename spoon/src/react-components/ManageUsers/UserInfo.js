@@ -27,7 +27,11 @@ class UserInfo extends React.Component {
                   alignItems="center"
                 >
                   <Grid item xs={2}>
-                    <img alt="avatar" src={faker.image.avatar()} />
+                    <img
+                      className="userAvatar"
+                      alt="avatar"
+                      src={faker.image.avatar()}
+                    />
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="h6" color="secondary" align="left">
