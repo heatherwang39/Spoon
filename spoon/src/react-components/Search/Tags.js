@@ -12,7 +12,7 @@ class Tags extends React.Component {
           <FormControlLabel
             control={(
               <Checkbox
-                onChange={this.tagChosen}
+                onChange={tagChosen}
                 checked={tags[0]}
                 name={Object.keys(tags)[0]}
               />
@@ -22,7 +22,7 @@ class Tags extends React.Component {
           <FormControlLabel
             control={(
               <Checkbox
-                onChange={this.tagChosen}
+                onChange={tagChosen}
                 checked={tags[1]}
                 name={Object.keys(tags)[1]}
               />
@@ -32,29 +32,29 @@ class Tags extends React.Component {
           <FormControlLabel
             control={(
               <Checkbox
-                onChange={this.tagChosen}
+                onChange={tagChosen}
                 checked={tags[2]}
                 name={Object.keys(tags)[2]}
               />
             )}
             label={Object.keys(tags)[2]}
           />
-        </Grid>
-        <Grid container justify="center">
           <FormControlLabel
             control={(
               <Checkbox
-                onChange={this.tagChosen}
+                onChange={tagChosen}
                 checked={tags[3]}
                 name={Object.keys(tags)[3]}
               />
             )}
             label={Object.keys(tags)[3]}
           />
+        </Grid>
+        <Grid container justify="center">
           <FormControlLabel
             control={(
               <Checkbox
-                onChange={this.tagChosen}
+                onChange={tagChosen}
                 checked={tags[4]}
                 name={Object.keys(tags)[4]}
               />
@@ -64,7 +64,7 @@ class Tags extends React.Component {
           <FormControlLabel
             control={(
               <Checkbox
-                onChange={this.tagChosen}
+                onChange={tagChosen}
                 checked={tags[5]}
                 name={Object.keys(tags)[5]}
               />
