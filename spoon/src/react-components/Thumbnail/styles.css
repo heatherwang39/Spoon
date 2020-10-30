@@ -3,27 +3,39 @@
   position: relative;
   /* border: 1px;
   border-style: solid;
-  border-color: darkgray; */
+  border-color: darkgray;
+  border-radius: 5%; */
   margin: 1%;
   margin-top: 20px;
   margin-bottom: 40px;
-  /* border-radius: 5%; */
   width: 30%;
+  padding-top: 40%;
   /* min-width: 300px; */
 }
 
 .likes {
   color:deeppink;
   position: absolute;
-  top: 6%;
-  right: 8%;
+  top: 4%;
+  right: 6%;
   opacity: 0;
   transition: .5s ease;
 }
 
 div.thumbnail-picture {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   margin: 5%;
-  padding-top: 90%;
+  margin-bottom: 40%;
+  border: 1px;
+  border-style: solid;
+  border-color: darkgray;
+  border-radius: 5%;
+  transition: .5s ease;
+  
 }
 
 div.thumbnail-picture:hover img.thumbnail-picture {
@@ -36,29 +48,29 @@ div.thumbnail-picture:hover .likes{
 }
 
 img.thumbnail-picture {
-  width: 90%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  margin: 5%;
-  border: 1px;
-  border-style: solid;
-  border-color: darkgray;
   border-radius: 5%;
+  min-height: 100%;
+  min-width: 100%;
+  object-fit: none;
+  object-position: center;
   transition: .5s ease;
 }
 
 div.thumbnail-recipe-name {
   margin-left: 5%;
   margin-right: 5%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 5%;
+  margin-top: 100%;
 }
 
 p.thumbnail-recipe-name {
-  margin-top: 5%;
-  margin-bottom: 2%;
-  padding: 2%;
+  margin-top: 0%;
+  padding: 3%;
   background-color: lavender;
   text-align: left;
   font-size: 125%;
@@ -69,11 +81,16 @@ p.thumbnail-recipe-name {
 div.thumbnail-username {
   margin-left: 5%;
   margin-right: 5%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 5%;
+  margin-top: 110%;
 }
 
 p.thumbnail-username {
-  margin-top: 2%;
-  margin-bottom: 5%;
   padding: 1% 2% 1% 2%;
   background-color: lavender;
   text-align: left;
