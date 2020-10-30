@@ -2,17 +2,17 @@ import React from 'react';
 import './styles.css';
 import SearchBar from '../SearchBar'
 import Header from '../Header';
+import UserInfo from '../ManageUsers/UserInfo';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import { Slider } from '@material-ui/core';
-import { Checkbox } from '@material-ui/core';
-import { FormControlLabel } from '@material-ui/core';
+import Tags from './Tags'
 
 const styles = (theme) => ({ width: 40, height: 40,})
 
 class Search extends React.Component {
   state = {
-    Breakfast: true, Lunch: true, Dinner: true, Dessert: true, Vegan: true, Vegetarian: true, Meat: true,
+    tags: {Breakfast: true, Lunch: true, Dinner: true, Dessert: true, Vegan: true, Vegetarian: true, Meat: true,},
     searchedUser: "",
     searchedRecipe: "",
     marks: [
@@ -74,7 +74,6 @@ class Search extends React.Component {
           placeholder="For example: Heather"
           label="Search User"
         />
-
         <SearchBar 
           searchedName={this.state.searchedUser}
           handleInputChange={this.handleInputChange}
@@ -83,8 +82,10 @@ class Search extends React.Component {
           label="Search Recipe"
         />
 
-        <div>Filter By:</div>
-        <Grid container className={"durationSlider"} spacing={1}>
+        <Grid container className={"durationSlider"} spacing={1} alignItems="centre">
+          <Grid item xs={12}>
+            <p>Filter By:</p>
+          </Grid>
           <Grid item xs={2}>
           </Grid>
           <Grid item xs={2}>
@@ -104,35 +105,7 @@ class Search extends React.Component {
           </Grid>
         </Grid>
 
-        <Grid container justify="center">
-          <FormControlLabel
-            control={<Checkbox onChange={this.tagChosen} checked={this.state[Object.keys(this.state)[0]]} name = {Object.keys(this.state)[0]}/>}
-            label= {Object.keys(this.state)[0]}
-          />
-          <FormControlLabel
-            control={<Checkbox onChange={this.tagChosen} checked={this.state[Object.keys(this.state)[1]]} name = {Object.keys(this.state)[1]}/>}
-            label= {Object.keys(this.state)[1]}
-          />
-          <FormControlLabel
-            control={<Checkbox onChange={this.tagChosen} checked={this.state[Object.keys(this.state)[2]]} name = {Object.keys(this.state)[2]}/>}
-            label= {Object.keys(this.state)[2]}
-          />          
-        </Grid>
-
-        <Grid container justify="center">
-          <FormControlLabel
-            control={<Checkbox onChange={this.tagChosen} checked={this.state[Object.keys(this.state)[3]]} name = {Object.keys(this.state)[3]}/>}
-            label= {Object.keys(this.state)[3]}
-          />
-          <FormControlLabel
-            control={<Checkbox onChange={this.tagChosen} checked={this.state[Object.keys(this.state)[4]]} name = {Object.keys(this.state)[4]}/>}
-            label= {Object.keys(this.state)[4]}
-          />
-          <FormControlLabel
-            control={<Checkbox onChange={this.tagChosen} checked={this.state[Object.keys(this.state)[5]]} name = {Object.keys(this.state)[5]}/>}
-            label= {Object.keys(this.state)[5]}
-          />         
-        </Grid>
+        <Tags tagChosen={this.tagChosen} tags={this.state.tags}/>
 
       </div>
     );
