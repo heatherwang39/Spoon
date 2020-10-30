@@ -5,6 +5,8 @@ import './styles.css';
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
 
+// const faker = require('faker');
+
 class Feed extends React.Component {
   render() {
     return (

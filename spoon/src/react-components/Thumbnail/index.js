@@ -1,21 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import faker from 'faker';
 
 import './styles.css';
 
-// const faker = require('faker');
-
 class Thumbnail extends React.Component {
+  // const = {
+  //   likes,
+  //   recipename,
+  //   username,
+  // } = this.props
   render() {
     return (
       <div className="thumbnail">
         <div className="thumbnail-picture">
-          <div className="likes">num likes</div>
+          <div className="likes">222 likes</div>
           <img
             className="thumbnail-picture"
             // eslint-disable-next-line global-require
-            src={require('./thumbnail_tester.jpg')}
-            // src={faker.image.food()}
+            // src={require('./thumbnail_tester.jpg')}
+            src={faker.image.animals()}
             alt="food"
           />
         </div>
