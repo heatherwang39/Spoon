@@ -3,7 +3,7 @@ body {
   margin-top: 100px;
 }
 
-img {
+.userAvatar {
   width: 50px;
   border-radius: 50%;
 }

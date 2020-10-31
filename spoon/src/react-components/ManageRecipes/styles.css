@@ -1,8 +1,19 @@
 .recipeContainer {
-  max-width: 300px;
+  box-shadow: 3px 0 8px -4px #000;
+}
+.hrStyle {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
 }
 
-.recipeImage {
-  height: 300;
-  width: 300;
+.recipeCover {
+  max-width: 100px;
 }

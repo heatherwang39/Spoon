@@ -14,12 +14,12 @@
 }
 
 .likes {
-  color:deeppink;
+  color: deeppink;
   position: absolute;
   top: 4%;
   right: 6%;
   opacity: 0;
-  transition: .5s ease;
+  transition: 0.5s ease;
 }
 
 div.thumbnail-picture {
@@ -34,8 +34,7 @@ div.thumbnail-picture {
   border-style: solid;
   border-color: darkgray;
   border-radius: 5%;
-  transition: .5s ease;
-  
+  transition: 0.5s ease;
 }
 
 div.thumbnail-picture:hover img.thumbnail-picture {
@@ -43,7 +42,7 @@ div.thumbnail-picture:hover img.thumbnail-picture {
   border-color: black;
 }
 
-div.thumbnail-picture:hover .likes{
+div.thumbnail-picture:hover .likes {
   opacity: 1;
 }
 
@@ -53,7 +52,8 @@ img.thumbnail-picture {
   min-width: 100%;
   object-fit: none;
   object-position: center;
-  transition: .5s ease;
+  transition: 0.5s ease;
+  max-width: 30%;
 }
 
 div.thumbnail-recipe-name {
