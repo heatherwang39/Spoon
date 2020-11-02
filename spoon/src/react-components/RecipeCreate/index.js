@@ -8,9 +8,11 @@ import { uid } from 'react-uid';
 
 import './styles.css';
 import Header from '../Header';
+import Tags from '../Search/Tags'
 
 class RecipeCreate extends React.Component {
   state = {
+    tags: {Breakfast: true, Lunch: true, Dinner: true, Dessert: true, Vegan: true, Vegetarian: true, Meat: true,},
     recipeName: '',
     servingSize: '',
     cookTimeHrs: '',
@@ -19,6 +21,14 @@ class RecipeCreate extends React.Component {
     ingredients: '',
     instructions: '',
   };
+
+  tagChosen = (event) => {
+    const target = event.target
+    this.setState({
+      [target.name]: target.checked,
+    });
+    console.log(target.name, "checked", target.checked)
+  }
 
   // createRecipe=(event)=> {
   //     event.preventDefault();
@@ -182,7 +192,12 @@ class RecipeCreate extends React.Component {
               fullWidth
             />
           </Grid>
-
+          <Grid item xs={2}>
+            <Typography variant="body1" color="inherit" align="left">Tags:</Typography>
+          </Grid>
+          <Grid item xs={10}>
+            <Tags tagChosen={this.tagChosen} tags={this.state.tags}/>
+          </Grid>
           <Grid item xs={12}>
             <Button
               onClick={this.createRecipe}
