@@ -1,0 +1,22 @@
+.userprofile-profile {
+    float: left;
+    position: relative;
+    margin: 10%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    width: 80%;
+}
+
+.userprofile-username {
+    padding: 1%;
+}
+
+.userprofile-follower-count {
+    float: left;
+    padding: 1%;
+}
+
+.MuiButton-root.userprofile-button {
+    float: left;
+    margin: 1%;
+}
