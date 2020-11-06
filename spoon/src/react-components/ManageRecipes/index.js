@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import './styles.css';
+import * as data from '../../api/data';
 
 import Header from '../Header';
 import SearchBar from '../SearchBar';
@@ -10,26 +11,7 @@ import RecipeInfo from './RecipeInfo';
 class ManageRecipes extends React.Component {
   state = {
     searchedRecipe: '',
-    recipes: [
-      { owner: 'Heather', recipeName: 'Homemade Pizza' },
-      { owner: 'Joyce', recipeName: 'Baked Potatoes' },
-      { owner: 'Yuhan', recipeName: 'Corn Dogs' },
-      { owner: 'Elsa', recipeName: 'Chicken Pie' },
-      { owner: 'Jon', recipeName: 'French Bread' },
-      { owner: 'Aya', recipeName: 'Egg rolls' },
-      { owner: 'James', recipeName: 'Chicken Parmesan' },
-      { owner: 'Tyrion', recipeName: 'Chicken nuggets' },
-      { owner: 'Penny', recipeName: 'Baked Beef' },
-      { owner: 'Leonard', recipeName: 'Chicken wings' },
-      { owner: 'Sheldon', recipeName: 'Chicken breast' },
-      { owner: 'Raj', recipeName: 'Fried Egg' },
-      { owner: 'Heather', recipeName: 'Homemade Pizza' },
-      { owner: 'Joyce', recipeName: 'Baked Potatoes' },
-      { owner: 'Yuhan', recipeName: 'Corn Dogs' },
-      { owner: 'Elsa', recipeName: 'Chicken Pie' },
-      { owner: 'Jon', recipeName: 'French Bread' },
-      { owner: 'Aya', recipeName: 'Egg rolls' },
-    ],
+    recipes: data.allRecipes,
   };
 
   handleInputChange = (event) => {
