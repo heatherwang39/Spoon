@@ -15,7 +15,7 @@ class UserInfo extends React.Component {
       <div className="infoArea">
         {users
           .filter((user) => {
-            return user.name.toLowerCase().includes(searchedName);
+            return user.username.toLowerCase().includes(searchedName);
           })
           .map((user) => {
             return (
@@ -35,12 +35,12 @@ class UserInfo extends React.Component {
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="h6" color="secondary" align="left">
-                      {user.name}
+                      {user.username}
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="h6" color="primary" align="left">
-                      Followers: {user.followers}
+                      Followers: {user.followers.length}
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
