@@ -63,11 +63,11 @@ class App extends React.Component {
               path="/AccountCreate"
               render={() => <AccountCreate appState={this.state} />}
             />
-            <Route
+            {/* <Route
               exact
               path="/LogOut"
               render={() => <LogOut appState={this.state} />}
-            />
+            /> */}
           </Switch>
         </BrowserRouter>
       </div>

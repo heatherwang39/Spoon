@@ -23,7 +23,7 @@ class Header extends React.Component {
       {link: '../ManageRecipes', name: 'manage recipes', mode: ['admin']},
       {link: '../UserProfile', name: 'my profile', mode: ['user', 'admin']},
       {link: '../AccountCreate', name: 'sign up', mode: ['guest']},
-      {link: '../LogOut', name: 'log out', mode: ['user', 'admin']}
+      // {link: '../LogOut', name: 'log out', mode: ['user', 'admin']}
     ]
   };
 
@@ -54,35 +54,7 @@ class Header extends React.Component {
               spacing={1}
               justify="flex-end"
             >
-<<<<<<< HEAD
-              <Grid item>
-                <Link to={'../'}>
-                  <Button variant="contained">HomePage </Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to={'../Search'}>
-                  <Button variant="contained">Search </Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to={'../ManageUsers'}>
-                  <Button variant="contained">ManageUsers </Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to={'../ManageRecipes'}>
-                  <Button variant="contained">ManageRecipes </Button>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link to={'../UserProfile'}>
-                  <AccountCircle fontSize="large" color="action" />
-                </Link>
-              </Grid>
-=======
               {headerItems}
->>>>>>> 7fcf6ea6c09471b9e0b4f120bcb89e3e35ce4d57
             </Grid>
           </Toolbar>
         </AppBar>
