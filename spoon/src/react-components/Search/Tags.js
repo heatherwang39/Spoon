@@ -1,8 +1,6 @@
 import React from 'react';
 import { Checkbox, FormControlLabel } from '@material-ui/core';
 
-import Grid from '@material-ui/core/Grid';
-
 class Tags extends React.Component {
   render() {
     const { tags, tagChosen } = this.props;
@@ -15,13 +13,7 @@ class Tags extends React.Component {
       />
     ));
 
-    return (
-      <div>
-        <Grid container justify="center">
-          {checkboxes}
-        </Grid>
-      </div>
-    );
+    return <div>{checkboxes}</div>;
   }
 }
 
