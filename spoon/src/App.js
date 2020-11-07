@@ -6,15 +6,16 @@ import Feed from './react-components/Feed';
 import UserProfile from './react-components/UserProfile';
 import ManageUsers from './react-components/ManageUsers';
 import ManageRecipes from './react-components/ManageRecipes';
-import Search from './react-components/Search'
+import Search from './react-components/Search';
+import RecipeCreate from './react-components/RecipeCreate';
 
 class App extends React.Component {
   state = {
-    userMode:'admin',
-    username:'user'
-  }
+    userMode: 'admin',
+    username: 'user',
+  };
 
-  render() {    
+  render() {
     return (
       <div>
         <BrowserRouter>
@@ -50,6 +51,11 @@ class App extends React.Component {
               exact
               path="/Search"
               render={() => <Search appState={this.state} />}
+            />
+            <Route
+              exact
+              path="/RecipeCreate"
+              render={() => <RecipeCreate appState={this.state} />}
             />
           </Switch>
         </BrowserRouter>
