@@ -6,14 +6,17 @@ import Feed from './react-components/Feed';
 import UserProfile from './react-components/UserProfile';
 import ManageUsers from './react-components/ManageUsers';
 import ManageRecipes from './react-components/ManageRecipes';
-import Search from './react-components/Search'
+import Search from './react-components/Search';
+import RecipeCreate from './react-components/RecipeCreate';
+import AccountCreate from './react-components/AccountCreate';
 
 class App extends React.Component {
   state = {
-    username:'user'
-  }
+    userMode: 'guest',
+    username: 'user',
+  };
 
-  render() {    
+  render() {
     return (
       <div>
         <BrowserRouter>
@@ -50,6 +53,21 @@ class App extends React.Component {
               path="/Search"
               render={() => <Search appState={this.state} />}
             />
+            <Route
+              exact
+              path="/RecipeCreate"
+              render={() => <RecipeCreate appState={this.state} />}
+            />
+            <Route
+              exact
+              path="/AccountCreate"
+              render={() => <AccountCreate appState={this.state} />}
+            />
+            {/* <Route
+              exact
+              path="/LogOut"
+              render={() => <LogOut appState={this.state} />}
+            /> */}
           </Switch>
         </BrowserRouter>
       </div>
