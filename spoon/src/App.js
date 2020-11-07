@@ -10,6 +10,7 @@ import Search from './react-components/Search'
 
 class App extends React.Component {
   state = {
+    userMode:'admin',
     username:'user'
   }
 

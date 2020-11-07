@@ -15,13 +15,7 @@ class Tags extends React.Component {
       />
     ));
 
-    return (
-      <div>
-        <Grid container justify="center">
-          {checkboxes}
-        </Grid>
-      </div>
-    );
+    return <div>{checkboxes}</div>;
   }
 }
 
