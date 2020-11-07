@@ -48,6 +48,7 @@ class UserProfile extends React.Component {
               className="userprofile-button"
               variant="contained"
               color="secondary"
+              // onClick={this.handleFollow}
             >
               FOLLOW
             </Button>
