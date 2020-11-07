@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import './styles.css';
 import Header from '../Header';
@@ -11,6 +10,13 @@ import Tags from '../Search/Tags';
 
 class RecipeCreate extends React.Component {
   state = {
+    recipeName: '',
+    owner: '', // user id
+    ingredients: '',
+    instructions: '',
+    servingSize: '',
+    cookTimeHrs: '',
+    cookTimeMins: '',
     tags: {
       Breakfast: true,
       Lunch: true,
@@ -20,13 +26,8 @@ class RecipeCreate extends React.Component {
       Vegetarian: true,
       Meat: true,
     },
-    recipeName: '',
-    servingSize: '',
-    cookTimeHrs: '',
-    cookTimeMins: '',
     recipePhoto: '',
-    ingredients: '',
-    instructions: '',
+    likes: '',
   };
 
   tagChosen = (event) => {
@@ -34,43 +35,52 @@ class RecipeCreate extends React.Component {
     this.setState({
       [target.name]: target.checked,
     });
-    console.log(target.name, 'checked', target.checked);
-  };
-
-  // createRecipe=(event)=> {
-  //     event.preventDefault();
-  //     recipeName = this.state.recipeName,
-  //     servingSize = this.state.servingSize,
-  //     cookTimeHrs = this.state.cookTimeHrs ? this.state.cookTimeHrs : 0,
-  //     cookTimeMins = this.state.cookTimeMins,
-  //     recipePhoto = this.state.recipePhoto,
-  //     ingredients = this.state.ingredients,
-  //     instructions = this.state.instructions
-  // };
-
-  onPhotoUpload = (event) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => {
-      this.setState({ recipePhoto: reader.result });
-    });
-    reader.readAsDataURL(event.target.files[0]);
-  };
-
-  handleRecipeNameChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    this.setState({
-      recipeName: value,
-    });
   };
 
   handleInputChange = (event) => {
-    const target = event.target;
-    const value = target.value;
-    const name = target.name;
+    const name = event.target.name;
     this.setState({
-      [name]: value,
+      [name]: event.target.value,
     });
+  };
+
+  previewImage = () => {
+    let recipeimageURL = this.state.recipePhoto;
+    let placeholderImage = document.getElementById(
+      'placeholderRecipeCreateImage'
+    );
+    if (recipeimageURL.match(/\.(jpeg|jpg|png)$/) != null) {
+      placeholderImage.src = recipeimageURL;
+    } else {
+      alert('Please add a valid image URL.');
+    }
+  };
+
+  createRecipe = (event) => {
+    const recipeName = this.state.recipeName.trim();
+    const ingredients = this.state.ingredients;
+    const instructions = this.state.instructions;
+    const servingSize = this.state.servingSize;
+    const cookTimeHrs = this.state.cookTimeHrs;
+    const cookTimeMins = this.state.cookTimeMins;
+    console.log(this.state.recipePhoto);
+    if (recipeName === '') {
+      alert('Recipe name cannot be blank!');
+    } else if (this.state.recipePhoto === '') {
+      alert('Recipe photo cannot be blank!');
+    } else {
+      alert('u tried creating a recipe called ' + recipeName + '.');
+      // this.props.requestCreateRecipe({
+      //   redirect: (id) => this.props.history.push(`/view/${id}`),
+      //   data: {
+      //     name,
+      //     description: this.state.description,
+      //     ingredients: this.state.ingredients.split('\n'),
+      //     imageUrl: this.state.imagePreviewUrl,
+      //   },
+      // });
+    }
+    event.preventDefault();
   };
 
   render() {
@@ -98,7 +108,7 @@ class RecipeCreate extends React.Component {
           <Grid item xs={8}>
             <TextField
               required
-              onChange={this.handleRecipeNameChange}
+              onChange={this.handleInputChange}
               type="text"
               name="recipeName"
               placeholder="Ex. Pumpkin Cinnamon Rolls"
@@ -123,57 +133,69 @@ class RecipeCreate extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item xs={4}>
-            <TextField
-              onChange={this.handleInputChange}
-              type="number"
-              name="cookTimeHrs"
-              label="Cook Time (Hours)"
-              InputProps={{
-                inputProps: {
-                  min: 0,
-                },
-              }}
-              variant="outlined"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <TextField
-              required
-              onChange={this.handleInputChange}
-              type="number"
-              name="cookTimeMins"
-              label="Cook Time (Minutes)"
-              InputProps={{
-                inputProps: {
-                  min: 1,
-                  max: 59,
-                },
-              }}
-              variant="outlined"
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <label htmlFor="recipePhoto">
-              <input
-                accept="image/*"
-                style={{ display: 'none' }}
-                id="recipePhoto"
-                type="file"
+          <Grid item xs={6}>
+            <Grid item xs={12}>
+              <TextField
+                onChange={this.handleInputChange}
+                type="number"
+                name="cookTimeHrs"
+                label="Cook Time (Hours)"
+                InputProps={{
+                  inputProps: {
+                    min: 0,
+                  },
+                }}
+                variant="outlined"
+                fullWidth
               />
-              <Button
-                component="span"
-                onClick={this.handleRecipeNameChange}
-                variant="contained"
-                color="tertiary"
+            </Grid>
+            <br />
+            <Grid item xs={12}>
+              <TextField
+                required
+                onChange={this.handleInputChange}
+                type="number"
+                name="cookTimeMins"
+                label="Cook Time (Minutes)"
+                InputProps={{
+                  inputProps: {
+                    min: 1,
+                    max: 59,
+                  },
+                }}
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
+            <br />
+            <Grid item xs={12}>
+              <TextField
+                required
+                onChange={this.handleInputChange}
+                type="url"
                 name="recipePhoto"
-                startIcon={<CloudUploadIcon />}
+                label="Recipe Photo URL"
+                variant="outlined"
+                fullWidth
+              />
+            </Grid>
+            <br />
+            <Grid item xs={12}>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={this.previewImage}
               >
-                Upload Photo*
+                Preview Photo
               </Button>
-            </label>
+              {/* </label> */}
+            </Grid>
+          </Grid>
+          <Grid item xs={6}>
+            <img
+              src="https://www.lesgeveninzeeland.nl/storage/media/350/placeholder.png"
+              id="placeholderRecipeCreateImage"
+            />
           </Grid>
           <Grid item xs={12}>
             <TextField
@@ -204,15 +226,11 @@ class RecipeCreate extends React.Component {
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography
-              variant="body1"
-              color="inherit"
-              align="left"
-            >
+            <Typography variant="body1" color="inherit" align="left">
               Tags:
             </Typography>
           </Grid>
-          <Grid item={12}>
+          <Grid item xs={12}>
             <Tags tagChosen={this.tagChosen} tags={this.state.tags} />
           </Grid>
           <Grid item xs={12}>
@@ -220,7 +238,6 @@ class RecipeCreate extends React.Component {
               onClick={this.createRecipe}
               variant="contained"
               color="primary"
-              onClick={this.addRecipe}
               name="addRecipeButton"
             >
               Add Recipe
