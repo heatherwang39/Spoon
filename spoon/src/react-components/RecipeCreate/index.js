@@ -4,15 +4,22 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import { uid } from 'react-uid';
 
 import './styles.css';
 import Header from '../Header';
-import Tags from '../Search/Tags'
+import Tags from '../Search/Tags';
 
 class RecipeCreate extends React.Component {
   state = {
-    tags: {Breakfast: true, Lunch: true, Dinner: true, Dessert: true, Vegan: true, Vegetarian: true, Meat: true,},
+    tags: {
+      Breakfast: true,
+      Lunch: true,
+      Dinner: true,
+      Dessert: true,
+      Vegan: true,
+      Vegetarian: true,
+      Meat: true,
+    },
     recipeName: '',
     servingSize: '',
     cookTimeHrs: '',
@@ -23,12 +30,12 @@ class RecipeCreate extends React.Component {
   };
 
   tagChosen = (event) => {
-    const target = event.target
+    const target = event.target;
     this.setState({
       [target.name]: target.checked,
     });
-    console.log(target.name, "checked", target.checked)
-  }
+    console.log(target.name, 'checked', target.checked);
+  };
 
   // createRecipe=(event)=> {
   //     event.preventDefault();
@@ -73,7 +80,12 @@ class RecipeCreate extends React.Component {
         <Typography variant="h2" color="secondary" gutterBottom>
           Create Recipe
         </Typography>
-        <Typography className="createRecipeText" variant="body1" color="inherit" align="left">
+        <Typography
+          className="createRecipeText"
+          variant="body1"
+          color="inherit"
+          align="left"
+        >
           Fields marked with * are required.
         </Typography>
         <Grid
@@ -149,7 +161,6 @@ class RecipeCreate extends React.Component {
                 accept="image/*"
                 style={{ display: 'none' }}
                 id="recipePhoto"
-                mulitple
                 type="file"
               />
               <Button
@@ -160,7 +171,7 @@ class RecipeCreate extends React.Component {
                 name="recipePhoto"
                 startIcon={<CloudUploadIcon />}
               >
-                Upload Photos*
+                Upload Photo*
               </Button>
             </label>
           </Grid>
@@ -192,11 +203,17 @@ class RecipeCreate extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item xs={2}>
-            <Typography className="createRecipeText" variant="body1" color="inherit" align="left">Tags:</Typography>
+          <Grid item xs={12}>
+            <Typography
+              variant="body1"
+              color="inherit"
+              align="left"
+            >
+              Tags:
+            </Typography>
           </Grid>
-          <Grid item xs={10}>
-            <Tags tagChosen={this.tagChosen} tags={this.state.tags}/>
+          <Grid item={12}>
+            <Tags tagChosen={this.tagChosen} tags={this.state.tags} />
           </Grid>
           <Grid item xs={12}>
             <Button
