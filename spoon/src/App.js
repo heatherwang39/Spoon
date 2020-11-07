@@ -6,14 +6,14 @@ import Feed from './react-components/Feed';
 import UserProfile from './react-components/UserProfile';
 import ManageUsers from './react-components/ManageUsers';
 import ManageRecipes from './react-components/ManageRecipes';
-import Search from './react-components/Search'
+import Search from './react-components/Search';
 
 class App extends React.Component {
   state = {
-    username:'user'
-  }
+    username: 'user',
+  };
 
-  render() {    
+  render() {
     return (
       <div>
         <BrowserRouter>
