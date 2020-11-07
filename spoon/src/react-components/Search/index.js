@@ -19,8 +19,6 @@ class Search extends React.Component {
     return (
       <div>
         <Header/>
-        <Grid container spacing = {2} justify = "center" >
-          <Grid item xs={12}>
             <Button
                 onClick={this.switchSearch}
                 variant="contained"
@@ -29,11 +27,9 @@ class Search extends React.Component {
             >              
               {this.state.currentSearch === "recipe" ? "Search For User Instead" : "Search For Recipe Instead"}
             </Button>
-          </Grid>
-          <Grid item>
-            {this.state.currentSearch === "recipe" ? <RecipeSearch/> : <UserSearch/>}
-          </Grid>
-        </Grid>
+            <br /><br />
+          {this.state.currentSearch === "recipe" ? <RecipeSearch/> : <UserSearch/>}
+        
       </div>
     )
   }

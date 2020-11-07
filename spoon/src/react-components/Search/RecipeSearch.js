@@ -4,6 +4,7 @@ import SearchBar from '../SearchBar'
 import Grid from '@material-ui/core/Grid';
 import { Slider } from '@material-ui/core';
 import Tags from './Tags'
+import Typography from '@material-ui/core/Typography';
 
 class RecipeSearch extends React.Component {
   // TODO: checkboxes are not working right now. use mapping instead. because having a key-value object in state for the tags is way 
@@ -61,41 +62,37 @@ class RecipeSearch extends React.Component {
 
   render() {
     return (
-      <div>
-        
-        <SearchBar 
-          searchedName={this.state.searchedRecipe}
-          handleInputChange={this.searchRecipe}
-          placeholder="For example: chicken parmesan, broccoli"
-          label="Search Recipe"
-        />
-
-        <Grid container className={"durationSlider"} spacing={1} alignItems="flex-start">
-          <Grid item xs={12}>
-            <p>Filter By:</p>
-          </Grid>
-          <Grid item xs={2}>
-          </Grid>
-          <Grid item xs={2}>
-            Total time:
-          </Grid>
-          <Grid item xs={5}>
-            <Slider 
-              // duration filter
-              value={this.state.durationRange}
-              onChange={this.durationRangeChange}
-              valueLabelDisplay="off"
-              getAriaValueText={this.getDurationSettings}
-              min={0}
-              max={210}
-              step={10}
-              marks={this.state.marks}
-            />
-          </Grid>
+      <Grid container justify = "center" spacing = {4}>
+        <Grid item xs={12}>
+          <SearchBar 
+            searchedName={this.state.searchedRecipe}
+            handleInputChange={this.searchRecipe}
+            placeholder="For example: chicken parmesan, broccoli"
+            label="Search Recipe"
+          />
         </Grid>
 
+        <Grid item xs={12}>Total Time:</Grid>
+
+        <Grid item xs={5}>
+          <Slider
+            // duration filter
+            value={this.state.durationRange}
+            onChange={this.durationRangeChange}
+            valueLabelDisplay="off"
+            getAriaValueText={this.getDurationSettings}
+            min={0}
+            max={210}
+            step={10}
+            marks={this.state.marks}
+          />
+        </Grid>
+        
+        <Grid item xs={12}>Tags:</Grid>
+
         <Tags tagChosen={this.tagChosen} tags={this.state.tags}/>
-      </div>
+
+      </Grid>
     );
   }
 }
