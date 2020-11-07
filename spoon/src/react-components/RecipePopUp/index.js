@@ -29,23 +29,39 @@ class RecipePopup extends React.Component {
 
     return (
       <div>
-        <Dialog open={open} scroll="paper" fullWidth={true} maxWidth = {'md'}>
+        <Dialog open={open} scroll="paper" fullWidth={true} maxWidth={'md'}>
           <DialogTitle>
-            <Typography variant="h4" color="primary" align="left">
-              {recipeName}
-            </Typography>
-            <Button
-              onClick={closePopup}
-              variant="contained"
-              color="primary"
-              name="closePopup"
-            >
-              <CloseIcon />
-            </Button>
-            <Typography variant="h5" color="secondary" align="left">
-              By: {owner}
-            </Typography>
-            <Grid container className="favouritesContainer" justify="flex-end">
+            <Grid container className="popupTitleContainer" justify="flex-end">
+              <Grid item xs={11}>
+                <Typography
+                  className="recipePopupText"
+                  variant="h4"
+                  color="primary"
+                  align="left"
+                >
+                  {recipeName}
+                </Typography>
+              </Grid>
+              <Grid item xs={1}>
+                <Button
+                  onClick={closePopup}
+                  variant="contained"
+                  color="primary"
+                  name="closePopup"
+                >
+                  <CloseIcon />
+                </Button>
+              </Grid>
+              <Grid item xs={10}>
+                <Typography
+                  className="recipePopupText"
+                  variant="h5"
+                  color="secondary"
+                  align="left"
+                >
+                  By: {owner}
+                </Typography>
+              </Grid>
               <Grid item>
                 {/* // TODO: ADD FAVOURITE FUNCTION */}
                 <Button color="primary">
@@ -58,15 +74,60 @@ class RecipePopup extends React.Component {
                   color="textPrimary"
                   align="right"
                 >
-                  {likes}
+                  {likes} Likes
                 </Typography>
               </Grid>
             </Grid>
           </DialogTitle>
           <DialogContent dividers>
             <img class="recipe-photo" src={recipePhoto} />
+            <div style={{ display: 'flex' }}>
+              <Typography variant="h6" color="secondary">
+                Serving Size:
+              </Typography>
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                style={{ marginLeft: 10 }}
+              >
+                {servingSize}
+              </Typography>
+            </div>
+            <div style={{ display: 'flex' }}>
+              <Typography variant="h6" color="secondary">
+                Cook Time:
+              </Typography>
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                style={{ marginLeft: 10 }}
+              >
+                {cookTimeHrs} Hour(s) and {cookTimeMins} Minutes
+              </Typography>
+            </div>
+            <div style={{ display: 'flex' }}>
+              <Typography variant="h6" color="secondary">
+                Tags:
+              </Typography>
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                style={{ marginLeft: 10 }}
+              >
+                {tags}
+              </Typography>
+            </div>
+            <Typography variant="h6" color="secondary" align="left">
+              Ingredients:
+            </Typography>
             <Typography variant="body1" color="textSecondary" align="left">
               {ingredients}
+            </Typography>
+            <Typography variant="h6" color="secondary" align="left">
+              Instructions:
+            </Typography>
+            <Typography variant="body1" color="textSecondary" align="left">
+              {instructions}
             </Typography>
           </DialogContent>
         </Dialog>

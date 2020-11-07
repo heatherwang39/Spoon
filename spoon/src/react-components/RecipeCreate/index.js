@@ -73,7 +73,7 @@ class RecipeCreate extends React.Component {
         <Typography variant="h2" color="secondary" gutterBottom>
           Create Recipe
         </Typography>
-        <Typography variant="body1" color="inherit" align="left">
+        <Typography className="createRecipeText" variant="body1" color="inherit" align="left">
           Fields marked with * are required.
         </Typography>
         <Grid
@@ -193,7 +193,7 @@ class RecipeCreate extends React.Component {
             />
           </Grid>
           <Grid item xs={2}>
-            <Typography variant="body1" color="inherit" align="left">Tags:</Typography>
+            <Typography className="createRecipeText" variant="body1" color="inherit" align="left">Tags:</Typography>
           </Grid>
           <Grid item xs={10}>
             <Tags tagChosen={this.tagChosen} tags={this.state.tags}/>

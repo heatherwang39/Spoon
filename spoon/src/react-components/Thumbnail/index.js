@@ -51,13 +51,13 @@ class Thumbnail extends React.Component {
         <RecipePopup
           recipeName="recipe name"
           owner="username"
-          ingredients="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          instructions="placeholder"
-          servingSize="0"
-          cookTimeHrs="0"
-          cookTimeMins="0"
-          tags="placeholder"
-          recipePhoto="https://www.cbronline.com/wp-content/uploads/2016/06/what-is-URL-770x503.jpg"
+          ingredients="ingredients-placeholder"
+          instructions="instructions-placeholder"
+          servingSize="5"
+          cookTimeHrs="1"
+          cookTimeMins="30"
+          tags="tags-placeholder"
+          recipePhoto={faker.image.animals()}
           likes="222"
           open={open}
           closePopup={this.closePopup}

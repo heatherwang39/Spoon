@@ -1,20 +1,5 @@
-.MuiTypography-body1 {
+.recipePopupText {
   padding: 0px 15px;
-}
-
-
-.MuiTypography-h4 {
-  padding: 0px 15px;
-}
-
-.MuiTypography-h5 {
-  padding: 0px 15px;
-}
-
-.favouritesContainer {
-  width: 100%;
-  margin: auto;
-  padding: 10px 15px 0;
 }
 
 .recipe-photo {
@@ -23,6 +8,7 @@
   padding: 5px;
   width: 80%;
   height: auto;
+  max-height: 400px;
   display: block;
   margin-left: auto;
   margin-right: auto;
