@@ -7,3 +7,15 @@
 .createRecipeText {
   padding-left: 100px;
 }
+
+#placeholderRecipeCreateImage {
+  border: 3px solid #dddddd;
+  border-radius: 3px;
+  padding: 5px;
+  width: 85%;
+  height: auto;
+  max-height: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

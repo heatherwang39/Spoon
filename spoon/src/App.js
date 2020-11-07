@@ -16,7 +16,7 @@ class App extends React.Component {
     username:'user'
   }
 
-  render() {    
+  render() {
     return (
       <div>
         <BrowserRouter>
