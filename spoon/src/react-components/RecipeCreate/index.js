@@ -11,20 +11,14 @@ import Tags from '../Search/Tags';
 class RecipeCreate extends React.Component {
   state = {
     recipeName: '',
-    owner: '', // user id
+    owner: '',
     ingredients: '',
     instructions: '',
     servingSize: '',
     cookTimeHrs: '',
     cookTimeMins: '',
     tags: {
-      Breakfast: true,
-      Lunch: true,
-      Dinner: true,
-      Dessert: true,
-      Vegan: true,
-      Vegetarian: true,
-      Meat: true,
+      Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, Vegetarian: false, Meat: false
     },
     recipePhoto: '',
     likes: '',
@@ -57,28 +51,20 @@ class RecipeCreate extends React.Component {
   };
 
   createRecipe = (event) => {
-    const recipeName = this.state.recipeName.trim();
-    const ingredients = this.state.ingredients;
-    const instructions = this.state.instructions;
-    const servingSize = this.state.servingSize;
-    const cookTimeHrs = this.state.cookTimeHrs;
-    const cookTimeMins = this.state.cookTimeMins;
-    console.log(this.state.recipePhoto);
-    if (recipeName === '') {
-      alert('Recipe name cannot be blank!');
-    } else if (this.state.recipePhoto === '') {
-      alert('Recipe photo cannot be blank!');
+    const {
+      recipeName,
+      ingredients,
+      instructions,
+      servingSize,
+      cookTimeHrs,
+      cookTimeMins,
+      recipePhoto,
+    } = this.state;
+    if(!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
+      alert('Please fill out all the required fields!');
     } else {
-      alert('u tried creating a recipe called ' + recipeName + '.');
-      // this.props.requestCreateRecipe({
-      //   redirect: (id) => this.props.history.push(`/view/${id}`),
-      //   data: {
-      //     name,
-      //     description: this.state.description,
-      //     ingredients: this.state.ingredients.split('\n'),
-      //     imageUrl: this.state.imagePreviewUrl,
-      //   },
-      // });
+      // TODO
+      alert('You tried creating a recipe called ' + recipeName + '.');
     }
     event.preventDefault();
   };
