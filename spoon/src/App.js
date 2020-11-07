@@ -7,10 +7,12 @@ import UserProfile from './react-components/UserProfile';
 import ManageUsers from './react-components/ManageUsers';
 import ManageRecipes from './react-components/ManageRecipes';
 import Search from './react-components/Search'
+import RecipeCreate from './react-components/RecipeCreate'
+import AccountCreate from './react-components/AccountCreate'
 
 class App extends React.Component {
   state = {
-    userMode:'admin',
+    userMode:'guest',
     username:'user'
   }
 
@@ -50,6 +52,16 @@ class App extends React.Component {
               exact
               path="/Search"
               render={() => <Search appState={this.state} />}
+            />
+            <Route
+              exact
+              path="/RecipeCreate"
+              render={() => <RecipeCreate appState={this.state} />}
+            />
+            <Route
+              exact
+              path="/AccountCreate"
+              render={() => <AccountCreate appState={this.state} />}
             />
           </Switch>
         </BrowserRouter>

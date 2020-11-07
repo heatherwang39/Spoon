@@ -18,18 +18,20 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <Header/>
-            <Button
-                onClick={this.switchSearch}
-                variant="contained"
-                color="primary"
-                size="small"
-            >              
-              {this.state.currentSearch === "recipe" ? "Search For User Instead" : "Search For Recipe Instead"}
-            </Button>
-            <br /><br />
-          {this.state.currentSearch === "recipe" ? <RecipeSearch/> : <UserSearch/>}
+        <Header userMode={this.props.appState.userMode} />
         
+        <Button
+            onClick={this.switchSearch}
+            variant="contained"
+            color="primary"
+            size="small"
+        >              
+          {this.state.currentSearch === "recipe" ? "Search For User Instead" : "Search For Recipe Instead"}
+        </Button>
+
+        <br /><br />
+
+        {this.state.currentSearch === "recipe" ? <RecipeSearch/> : <UserSearch/>}
       </div>
     )
   }

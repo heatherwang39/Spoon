@@ -20,8 +20,8 @@ class Header extends React.Component {
       {link: '../Search', name: 'search', mode: ['user', 'admin', 'guest']},
       {link: '../ManageUsers', name: 'manage users', mode: ['admin']},
       {link: '../ManageRecipes', name: 'manage recipes', mode: ['admin']},
-      {link: '../Profile', name: 'my profile', mode: ['user', 'admin']},
-      {link: '../SignUp', name: 'sign up', mode: ['guest']},
+      {link: '../UserProfile', name: 'my profile', mode: ['user', 'admin']},
+      {link: '../AccountCreate', name: 'sign up', mode: ['guest']},
       {link: '../LogOut', name: 'log out', mode: ['user', 'admin']}
     ]
   };

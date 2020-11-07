@@ -4,14 +4,13 @@ import SearchBar from '../SearchBar'
 import Grid from '@material-ui/core/Grid';
 import { Slider } from '@material-ui/core';
 import Tags from './Tags'
-import Typography from '@material-ui/core/Typography';
 
 class RecipeSearch extends React.Component {
   // TODO: checkboxes are not working right now. use mapping instead. because having a key-value object in state for the tags is way 
   // too difficult.
   state = {
     tags: {
-      Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, Vegetarian: false, Meat: false
+      Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, 'Nut-free': false
     },
     searchedRecipe: "",
     marks: [

@@ -25,7 +25,7 @@ class UserProfile extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header userMode={this.props.appState.userMode} />
         <div className="userprofile-profile">
           <div>
             <Typography
