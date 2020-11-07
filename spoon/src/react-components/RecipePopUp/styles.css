@@ -2,18 +2,8 @@
   padding: 0px 15px;
 }
 
-img {
-  border: 3px solid #dddddd;
-  border-radius: 3px;
-  padding: 5px;
-  width: 80%;
-  height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
 
-.MuiTypography-h3 {
+.MuiTypography-h4 {
   padding: 0px 15px;
 }
 
@@ -25,4 +15,15 @@ img {
   width: 100%;
   margin: auto;
   padding: 10px 15px 0;
+}
+
+.recipe-photo {
+  border: 3px solid #dddddd;
+  border-radius: 3px;
+  padding: 5px;
+  width: 80%;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
