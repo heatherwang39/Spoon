@@ -3,76 +3,132 @@ import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import Grid from "@material-ui/core/Grid";
+import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CloseIcon from '@material-ui/icons/Close';
 
 import './styles.css';
 
-// BELOW IS EXAMPLE OF HOW TO USE IT
-
-{/*
-
-<RecipePopup
-    title="recipe title"
-    author="username"
-    photo="./thumbnail_tester.jpg"
-    numLikes="num likes"
-    openPopup={openPopup}
-    setOpenPopup={setOpenPopup}>
-    hello hello
-</RecipePopup>
-+
-onClick={setOpenPopup(true)}
-+
-import RecipePopup from '../RecipePopup';
-
-*/}
-
 class RecipePopup extends React.Component {
   render() {
     const {
-      title,
-      author,
-      photo,
-      numLikes,
-      children,
-      openPopup,
-      setOpenPopup
+      recipeName,
+      owner,
+      ingredients,
+      instructions,
+      servingSize,
+      cookTimeHrs,
+      cookTimeMins,
+      tags,
+      recipePhoto,
+      likes,
+      open,
+      closePopup,
     } = this.props;
 
     return (
       <div>
-        <Dialog open={openPopup}
-        scroll="paper">
-          <DialogTitle >
-            <div>
-              <Typography variant="h3" color="primary" align="left">
-                {title}
-              </Typography>
-              <Button onClick={setOpenPopup(false)}
-                variant="contained"
-                color="primary"
-                name="closePopup">
-                <CloseIcon />
-              </Button>
-            </div>
+        <Dialog open={open} scroll="paper" fullWidth={true} maxWidth={'md'}>
+          <DialogTitle>
+            <Grid container className="popupTitleContainer" justify="flex-end">
+              <Grid item xs={11}>
+                <Typography
+                  className="recipePopupText"
+                  variant="h4"
+                  color="primary"
+                  align="left"
+                >
+                  {recipeName}
+                </Typography>
+              </Grid>
+              <Grid item xs={1}>
+                <Button
+                  onClick={closePopup}
+                  variant="contained"
+                  color="primary"
+                  name="closePopup"
+                >
+                  <CloseIcon />
+                </Button>
+              </Grid>
+              <Grid item xs={10}>
+                <Typography
+                  className="recipePopupText"
+                  variant="h5"
+                  color="secondary"
+                  align="left"
+                >
+                  By: {owner}
+                </Typography>
+              </Grid>
+              <Grid item>
+                {/* // TODO: ADD FAVOURITE FUNCTION */}
+                <Button color="primary">
+                  <FavoriteIcon />
+                </Button>
+              </Grid>
+              <Grid item>
+                <Typography
+                  variant="subtitle1"
+                  color="textPrimary"
+                  align="right"
+                >
+                  {likes} Likes
+                </Typography>
+              </Grid>
+            </Grid>
           </DialogTitle>
           <DialogContent dividers>
-              <Typography variant="h5" color="secondary" align="left">By: {author}</Typography>
-              <img src={require(photo)}/>
-              <Grid container className="favouritesContainer" justify="flex-end">
-                <Grid item>
-                  {/* TO FIX, REPLACE ONCLICK WITH APPROPRIATE ACTION*/}
-                  {/* <Button color="primary" onClick={handleClickOpen}><FavoriteIcon /></Button> */}
-                  <Button color="primary"><FavoriteIcon /></Button>
-                </Grid>
-                <Grid item>
-                  <Typography variant="subtitle1" color="textPrimary" align="right">{numLikes}</Typography>
-                </Grid>
-              </Grid>
-              <Typography variant="body1" color="textSecondary" align="left">{children}</Typography>
+            <img class="recipe-photo" src={recipePhoto} />
+            <div style={{ display: 'flex' }}>
+              <Typography variant="h6" color="secondary">
+                Serving Size:
+              </Typography>
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                style={{ marginLeft: 10 }}
+              >
+                {servingSize}
+              </Typography>
+            </div>
+            <div style={{ display: 'flex' }}>
+              <Typography variant="h6" color="secondary">
+                Cook Time:
+              </Typography>
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                style={{ marginLeft: 10 }}
+              >
+                {cookTimeHrs} Hour(s) and {cookTimeMins} Minutes
+              </Typography>
+            </div>
+            <div style={{ display: 'flex' }}>
+              <Typography variant="h6" color="secondary">
+                Tags:
+              </Typography>
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                style={{ marginLeft: 10 }}
+              >
+                {tags}
+              </Typography>
+            </div>
+            <Typography variant="h6" color="secondary" align="left">
+              Ingredients:
+            </Typography>
+            <Typography variant="body1" color="textSecondary" align="left">
+              {ingredients}
+            </Typography>
+            <Typography variant="h6" color="secondary" align="left">
+              Instructions:
+            </Typography>
+            <Typography variant="body1" color="textSecondary" align="left">
+              {instructions}
+            </Typography>
           </DialogContent>
         </Dialog>
       </div>

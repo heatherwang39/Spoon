@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import faker from 'faker';
+import RecipePopup from '../RecipePopUp';
 
 import './styles.css';
 
@@ -10,7 +11,21 @@ class Thumbnail extends React.Component {
   //   recipename,
   //   username,
   // } = this.props
+
+  state = {
+    open: false,
+  };
+
+  openPopup = () => {
+    this.setState({ open: true });
+  };
+
+  closePopup = () => {
+    this.setState({ open: false });
+  };
+
   render() {
+    const { open } = this.state;
     return (
       <div className="thumbnail">
         <div className="thumbnail-picture">
@@ -21,6 +36,7 @@ class Thumbnail extends React.Component {
             // src={require('./thumbnail_tester.jpg')}
             src={faker.image.animals()}
             alt="food"
+            onClick={this.openPopup}
           />
         </div>
         <div className="thumbnail-recipe-name">
@@ -31,6 +47,21 @@ class Thumbnail extends React.Component {
             <p className="thumbnail-username">username</p>
           </Link>
         </div>
+
+        <RecipePopup
+          recipeName="recipe name"
+          owner="username"
+          ingredients="ingredients-placeholder"
+          instructions="instructions-placeholder"
+          servingSize="5"
+          cookTimeHrs="1"
+          cookTimeMins="30"
+          tags="tags-placeholder"
+          recipePhoto={faker.image.animals()}
+          likes="222"
+          open={open}
+          closePopup={this.closePopup}
+        />
       </div>
     );
   }
