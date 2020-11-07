@@ -15,32 +15,40 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 class Header extends React.Component {
   state = {
     pages: [
-      {link: '../', name: 'feed', mode: ['user', 'admin']},
-      {link: '../RecentRecipes', name: 'recent recipes', mode: ['user', 'admin', 'guest']},
-      {link: '../RecipeCreate', name: 'create recipe', mode: ['user', 'admin']},
-      {link: '../Search', name: 'search', mode: ['user', 'admin', 'guest']},
-      {link: '../ManageUsers', name: 'manage users', mode: ['admin']},
-      {link: '../ManageRecipes', name: 'manage recipes', mode: ['admin']},
-      {link: '../UserProfile', name: 'my profile', mode: ['user', 'admin']},
-      {link: '../AccountCreate', name: 'sign up', mode: ['guest']},
-      // {link: '../LogOut', name: 'log out', mode: ['user', 'admin']}
-    ]
+      { link: '../', name: 'feed', mode: ['user', 'admin'] },
+      {
+        link: '../RecentRecipes',
+        name: 'recent recipes',
+        mode: ['user', 'admin', 'guest'],
+      },
+      {
+        link: '../RecipeCreate',
+        name: 'create recipe',
+        mode: ['user', 'admin'],
+      },
+      { link: '../Search', name: 'search', mode: ['user', 'admin', 'guest'] },
+      { link: '../ManageUsers', name: 'manage users', mode: ['admin'] },
+      { link: '../ManageRecipes', name: 'manage recipes', mode: ['admin'] },
+      { link: '../UserProfile', name: 'my profile', mode: ['user', 'admin'] },
+      { link: '../AccountCreate', name: 'sign up', mode: ['guest'] },
+      { link: '../LogOut', name: 'log out', mode: ['user', 'admin'] },
+    ],
   };
 
   render() {
-    const {userMode} = this.props;
+    const { userMode } = this.props;
 
     const headerItems = this.state.pages
-    .filter((page) => {
-      return page.mode.includes(userMode);
-    })
-    .map((page) => (
-      <Grid item>
-        <Link to={page.link}>
-          <Button variant="contained"> {page.name} </Button>
-        </Link>
-      </Grid>
-    ));
+      .filter((page) => {
+        return page.mode.includes(userMode);
+      })
+      .map((page) => (
+        <Grid item>
+          <Link to={page.link}>
+            <Button variant="contained"> {page.name} </Button>
+          </Link>
+        </Grid>
+      ));
 
     return (
       <div className="headerContainer">
