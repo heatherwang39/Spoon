@@ -6,8 +6,12 @@ import { Slider } from '@material-ui/core';
 import Tags from './Tags'
 
 class RecipeSearch extends React.Component {
+  // TODO: checkboxes are not working right now. use mapping instead. because having a key-value object in state for the tags is way 
+  // too difficult.
   state = {
-    tags: {Breakfast: true, Lunch: true, Dinner: true, Dessert: true, Vegan: true, Vegetarian: true, Meat: true,},
+    tags: {
+      Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, Vegetarian: false, Meat: false
+    },
     searchedRecipe: "",
     marks: [
       {value: 0, label: '0m',},
@@ -27,7 +31,7 @@ class RecipeSearch extends React.Component {
     const value = target.value.toLowerCase();
     console.log(value);
     this.setState({
-      searchedUser: value,
+      searchedRecipe: value,
     });
   }
 
@@ -47,10 +51,12 @@ class RecipeSearch extends React.Component {
 
   tagChosen = (event) => {
     const target = event.target
+    const name = target.name
+    const newtags = {...this.state.tags, [name] : target.checked}
     this.setState({
-      [target.name]: target.checked,
+      tags: newtags,
     });
-    console.log(target.name, "checked", target.checked)
+    console.log(name, "checked", target.checked)
   }
 
   render() {

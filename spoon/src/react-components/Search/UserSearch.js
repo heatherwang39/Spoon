@@ -7,7 +7,7 @@ class UserSearch extends React.Component {
   state = {
     currInput: '',
     searchedName:
-      'hahahahahahah placeholder figure out a better strategy later',
+      null,
     users: [
       { name: 'Heather', followers: '5' },
       { name: 'Joyce', followers: '6' },
