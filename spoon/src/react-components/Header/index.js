@@ -7,6 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import LocalDiningOutlinedIcon from '@material-ui/icons/LocalDiningOutlined';
+import AccountCircle from '@material-ui/icons/AccountCircle';
 
 // import "./styles.css";
 
@@ -53,7 +54,35 @@ class Header extends React.Component {
               spacing={1}
               justify="flex-end"
             >
+<<<<<<< HEAD
+              <Grid item>
+                <Link to={'../'}>
+                  <Button variant="contained">HomePage </Button>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to={'../Search'}>
+                  <Button variant="contained">Search </Button>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to={'../ManageUsers'}>
+                  <Button variant="contained">ManageUsers </Button>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to={'../ManageRecipes'}>
+                  <Button variant="contained">ManageRecipes </Button>
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link to={'../UserProfile'}>
+                  <AccountCircle fontSize="large" color="action" />
+                </Link>
+              </Grid>
+=======
               {headerItems}
+>>>>>>> 7fcf6ea6c09471b9e0b4f120bcb89e3e35ce4d57
             </Grid>
           </Toolbar>
         </AppBar>

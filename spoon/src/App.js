@@ -6,15 +6,15 @@ import Feed from './react-components/Feed';
 import UserProfile from './react-components/UserProfile';
 import ManageUsers from './react-components/ManageUsers';
 import ManageRecipes from './react-components/ManageRecipes';
-import Search from './react-components/Search'
-import RecipeCreate from './react-components/RecipeCreate'
-import AccountCreate from './react-components/AccountCreate'
+import Search from './react-components/Search';
+import RecipeCreate from './react-components/RecipeCreate';
+import AccountCreate from './react-components/AccountCreate';
 
 class App extends React.Component {
   state = {
-    userMode:'guest',
-    username:'user'
-  }
+    userMode: 'guest',
+    username: 'user',
+  };
 
   render() {
     return (
