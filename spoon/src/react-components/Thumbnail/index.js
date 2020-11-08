@@ -12,11 +12,11 @@ import './styles.css';
 class Thumbnail extends React.Component {
 
   state = {
-    open: false,
+    open: false, // Whether or not the recipe popup is open
     liked: false,
     likes: 222,
     recipeName: "Recipe Name",
-    username: "User"
+    username: "User",
   };
 
   openPopup = () => {
@@ -82,8 +82,8 @@ class Thumbnail extends React.Component {
         </div>
 
         <RecipePopup
-          recipeName="recipe name"
-          owner="username"
+          recipeName={this.state.recipeName}
+          owner={this.state.username}
           ingredients="ingredients-placeholder"
           instructions="instructions-placeholder"
           servingSize="5"
@@ -91,7 +91,9 @@ class Thumbnail extends React.Component {
           cookTimeMins="30"
           tags="tags-placeholder"
           recipePhoto={faker.image.animals()}
-          likes="222"
+          likes={this.state.likes}
+          handleLike={this.handleLike}
+          liked={this.state.liked}
           open={open}
           closePopup={this.closePopup}
         />
