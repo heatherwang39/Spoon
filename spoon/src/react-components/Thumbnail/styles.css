@@ -1,16 +1,11 @@
 .thumbnail {
   float: left;
   position: relative;
-  /* border: 1px;
-  border-style: solid;
-  border-color: darkgray;
-  border-radius: 5%; */
   margin: 1%;
   margin-top: 20px;
   margin-bottom: 40px;
   width: 30%;
   padding-top: 40%;
-  /* min-width: 300px; */
 }
 
 .likes {
@@ -37,12 +32,31 @@ div.thumbnail-picture {
   transition: 0.5s ease;
 }
 
-div.thumbnail-picture:hover img.thumbnail-picture {
-  opacity: 0.3;
-  border-color: black;
+.thumbnail-hover {
+  position: absolute;
+  background-color: white;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border-radius: 5%;
+  opacity: 0;
+  transition: 0.5s ease;
 }
 
-div.thumbnail-picture:hover .likes {
+.thumbnail-picture:hover .thumbnail-hover {
+  opacity: 0.4;
+}
+
+.thumbnail-likes {
+  position: absolute;
+  width: 20%;
+  margin: 40%;
+  opacity: 0;
+  transition: 0.5s ease;
+}
+
+.thumbnail-picture:hover .thumbnail-likes {
   opacity: 1;
 }
 
