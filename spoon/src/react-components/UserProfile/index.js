@@ -13,13 +13,34 @@ import Header from '../Header';
 class UserProfile extends React.Component {
 
   state = {
-    tabVal: 0
+    tabVal: 0,
+    follow: false,
+    followers: 420,
+    color: 'secondary'
   }
 
   handleTabs = (e, val) => {
     this.setState({
       tabVal: val
     });
+  };
+
+  handleFollow = (e) => {
+    if (!this.state.follow) {
+      const followers = this.state.followers + 1
+      this.setState({
+        follow: true,
+        followers: followers,
+        color: 'default'
+      })
+    } else {
+      const followers = this.state.followers - 1
+      this.setState({
+        follow: false,
+        followers: followers,
+        color: 'secondary'
+      })
+    }
   };
 
   render() {
@@ -42,15 +63,18 @@ class UserProfile extends React.Component {
               color="secondary"
               align="left"
             >
-              420 followers
+              {this.state.followers} followers
             </Typography>
             <Button
               className="userprofile-button"
               variant="contained"
-              color="secondary"
-              // onClick={this.handleFollow}
+              color={this.state.color}
+              onClick={this.handleFollow}
+              disableRipple
+              disableElevation
             >
-              FOLLOW
+              {!this.state.follow && 'FOLLOW'}
+              {this.state.follow && 'UNFOLLOW'}
             </Button>
           </div>
           <div>
