@@ -13,7 +13,10 @@ import Header from '../Header';
 class UserProfile extends React.Component {
 
   state = {
-    tabVal: 0
+    tabVal: 0,
+    follow: false,
+    followers: 420,
+    color: 'secondary'
   }
 
   handleTabs = (e, val) => {
@@ -22,10 +25,28 @@ class UserProfile extends React.Component {
     });
   };
 
+  handleFollow = (e) => {
+    if (!this.state.follow) {
+      const followers = this.state.followers + 1
+      this.setState({
+        follow: true,
+        followers: followers,
+        color: 'default'
+      })
+    } else {
+      const followers = this.state.followers - 1
+      this.setState({
+        follow: false,
+        followers: followers,
+        color: 'secondary'
+      })
+    }
+  };
+
   render() {
     return (
       <div>
-        <Header />
+        <Header userMode={this.props.appState.userMode} />
         <div className="userprofile-profile">
           <div>
             <Typography
@@ -42,14 +63,18 @@ class UserProfile extends React.Component {
               color="secondary"
               align="left"
             >
-              420 followers
+              {this.state.followers} followers
             </Typography>
             <Button
               className="userprofile-button"
               variant="contained"
-              color="secondary"
+              color={this.state.color}
+              onClick={this.handleFollow}
+              disableRipple
+              disableElevation
             >
-              FOLLOW
+              {!this.state.follow && 'FOLLOW'}
+              {this.state.follow && 'UNFOLLOW'}
             </Button>
           </div>
           <div>
@@ -60,22 +85,18 @@ class UserProfile extends React.Component {
               </Tabs>
             </AppBar>
             <TabPanel value={this.state.tabVal} index={0}>
-              <div className="tabcontent">
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-              </div>
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
             </TabPanel>
             <TabPanel value={this.state.tabVal} index={1}>
-              <div className="tabcontent">
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-              </div>
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
             </TabPanel>
           </div>
         </div>

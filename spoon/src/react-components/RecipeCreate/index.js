@@ -10,6 +10,14 @@ import Tags from '../Search/Tags';
 
 class RecipeCreate extends React.Component {
   state = {
+    tags: {
+      Breakfast: true,
+      Lunch: true,
+      Dinner: true,
+      Dessert: true,
+      Vegan: true,
+      'Nut-free': true,
+    },
     recipeName: '',
     owner: '',
     ingredients: '',
@@ -25,9 +33,11 @@ class RecipeCreate extends React.Component {
   };
 
   tagChosen = (event) => {
-    const target = event.target;
+    const target = event.target
+    const name = target.name
+    const newtags = {...this.state.tags, [name] : target.checked}
     this.setState({
-      [target.name]: target.checked,
+      tags: newtags,
     });
   };
 
@@ -72,7 +82,7 @@ class RecipeCreate extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header userMode={this.props.appState.userMode} />
         <Typography variant="h2" color="secondary" gutterBottom>
           Create Recipe
         </Typography>
