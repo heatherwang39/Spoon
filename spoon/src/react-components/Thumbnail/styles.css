@@ -2,7 +2,7 @@
   float: left;
   position: relative;
   margin: 1%;
-  margin-top: 20px;
+  margin-top: 0px;
   margin-bottom: 40px;
   width: 30%;
   padding-top: 40%;
@@ -54,6 +54,7 @@ div.thumbnail-picture {
   margin: 40%;
   opacity: 0;
   transition: 0.5s ease;
+  text-align: center;
 }
 
 .thumbnail-picture:hover .thumbnail-likes {
@@ -87,9 +88,8 @@ p.thumbnail-recipe-name {
   padding: 3%;
   background-color: lavender;
   text-align: left;
-  font-size: 125%;
-  color: blue;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: x-large;
+  color: #f50057;
 }
 
 div.thumbnail-username {
@@ -105,12 +105,11 @@ div.thumbnail-username {
 }
 
 p.thumbnail-username {
-  padding: 1% 2% 1% 2%;
+  padding: 2%;
   background-color: lavender;
   text-align: left;
-  font-size: 100%;
-  color: blue;
-  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  color: #f50057;
   text-decoration: none;
 }
 

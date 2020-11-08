@@ -85,22 +85,18 @@ class UserProfile extends React.Component {
               </Tabs>
             </AppBar>
             <TabPanel value={this.state.tabVal} index={0}>
-              <div className="tabcontent">
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-              </div>
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
             </TabPanel>
             <TabPanel value={this.state.tabVal} index={1}>
-              <div className="tabcontent">
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-                <Thumbnail />
-              </div>
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
+              <Thumbnail />
             </TabPanel>
           </div>
         </div>
