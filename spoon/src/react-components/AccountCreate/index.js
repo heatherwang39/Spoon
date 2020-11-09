@@ -11,12 +11,12 @@ class AccountCreate extends React.Component {
     message: "",
     header: (<Header state={this.props.appState} />)
   }
+
   success = () => {
-    // const newProps = {username: "user1", userType: "user"}
-    // const newHeader = {...this.state.header, [this.props]:newProps}
-    // this.setState({
-    //   header: newHeader 
-    // })
+    const newState = {username: "user1", userMode: "user"}
+    this.setState({
+      header: (<Header state={newState} />)
+    })
     this.setState({message:
       "You have successfully signed up for an account!"}
     )
@@ -34,7 +34,7 @@ class AccountCreate extends React.Component {
               type="text"
               name=""
               placeholder="e.g. user1"
-              label="username"
+              label="Username"
               variant="outlined"
               fullWidth
             />
