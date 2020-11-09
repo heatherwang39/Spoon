@@ -8,42 +8,10 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteOutlined from '@material-ui/icons/FavoriteBorderOutlined';
 import CloseIcon from '@material-ui/icons/Close';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-// import EditRecipe from './EditRecipe';
 
-import * as data from '../../api/data';
 import './styles.css';
 
 class RecipePopup extends React.Component {
-  state = {
-    recipeNameEdit: '',
-    usernameEdit: '',
-    ingredientsEdit: '',
-    instructionsEdit: '',
-    servingSizeEdit: '',
-    cookTimeHrsEdit: '',
-    cookTimeMinsEdit: '',
-    tagsEdit: '',
-    recipePhotoEdit: '',
-    submitEdit: '',
-    recipes: data.allRecipes,
-    editVisible: true, // true only if recipe owner's is logged in
-  };
-
-  editRecipe = (event) => {
-    console.log('clicked edit recipe button');
-  };
-
-  onEditSubmit = (event) => {
-    event.preventDefault()
-    this.setState({
-      items: this.state.inputValEdit,
-      ingredients: this.state.ingredientValEdit,
-      showRecipeEditForm: false
-    });
-  }
-
   render() {
     const {
       recipeName,
@@ -117,19 +85,6 @@ class RecipePopup extends React.Component {
           </DialogTitle>
           <DialogContent dividers>
             <img class="recipe-photo" src={recipePhoto} />
-            <div class="editRecipeButton">
-              {this.state.editVisible ? (
-                <Button
-                  onClick={this.editRecipe}
-                  color="primary"
-                  name="closePopup"
-                  size="small"
-                >
-                  <EditIcon />
-                  Edit
-                </Button>
-              ) : null}
-            </div>
             <div style={{ display: 'flex' }}>
               <Typography variant="h6" color="secondary">
                 Serving Size:
@@ -180,18 +135,6 @@ class RecipePopup extends React.Component {
             </Typography>
           </DialogContent>
         </Dialog>
-        {/* <EditRecipe
-            recipeName={this.state.recipeNameEdit}
-            owner={this.state.usernameEdit}
-            ingredients={this.state.ingredientsEdit}
-            instructions={this.state.instructionsEdit}
-            servingSize={this.state.servingSizeEdit}
-            cookTimeHrs={this.state.cookTimeHrsEdit}
-            cookTimeMins={this.state.cookTimeMinsEdit}
-            tags={this.state.tagsEdit}
-            recipePhoto={this.state.recipePhotoEdit}
-            submitEdit={this.submitEdit}
-          /> */}
       </div>
     );
   }
