@@ -5,7 +5,6 @@ import RecipePopup from '../RecipePopUp';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteOutlined from '@material-ui/icons/FavoriteBorderOutlined';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -16,7 +15,7 @@ class Thumbnail extends React.Component {
   state = {
     open: false, // Whether or not the recipe popup is open
     liked: false,
-    likes: this.props.likes
+    likes: this.props.likes,
   };
 
   openPopup = () => {
@@ -45,15 +44,25 @@ class Thumbnail extends React.Component {
 
   render() {
     const { open } = this.state;
-    const { recipename, username, editDeleteVisible, editRecipe, deleteRecipe } = this.props
+    const {
+      recipeName,
+      owner,
+      ingredients,
+      instructions,
+      servingSize,
+      cookTimeHrs,
+      cookTimeMins,
+      tags,
+      recipePhoto,
+      editDeleteVisible,
+      editRecipe,
+      deleteRecipe,
+    } = this.props;
 
     return (
       <div className="thumbnail">
         <div className="thumbnail-picture">
-          <div
-            className="thumbnail-hover"
-            onClick={this.openPopup}
-          />
+          <div className="thumbnail-hover" onClick={this.openPopup} />
           <div className="thumbnail-likes">
             <Button
               color="secondary"
@@ -68,12 +77,12 @@ class Thumbnail extends React.Component {
           </div>
           <img
             className="thumbnail-picture"
-            src={faker.image.animals()}
-            alt="food"
+            src={recipePhoto}
+            alt="Recipe Photo"
           />
         </div>
         <div className="thumbnail-recipe-name">
-          <p className="thumbnail-recipe-name">{recipename}</p>
+          <p className="thumbnail-recipe-name">{recipeName}</p>
         </div>
         <div className="thumbnail-username">
           <Link
@@ -86,13 +95,19 @@ class Thumbnail extends React.Component {
         <div className="thumbnail-buttons">
           {editDeleteVisible ? (
             <div>
-              <Button variant="text" color="secondary" size="small"
+              <Button
+                variant="text"
+                color="secondary"
+                size="small"
                 onClick={editRecipe}
                 startIcon={<EditIcon />}
               >
                 Edit
               </Button>
-              <Button variant="text" color="secondary" size="small"
+              <Button
+                variant="text"
+                color="secondary"
+                size="small"
                 onClick={deleteRecipe}
                 startIcon={<DeleteIcon />}
               >
@@ -103,15 +118,15 @@ class Thumbnail extends React.Component {
         </div>
 
         <RecipePopup
-          recipeName={recipename}
-          owner={username}
-          ingredients="ingredients-placeholder"
-          instructions="instructions-placeholder"
-          servingSize="5"
-          cookTimeHrs="1"
-          cookTimeMins="30"
-          tags="tags-placeholder"
-          recipePhoto={faker.image.animals()}
+          recipeName={recipeName}
+          owner={owner}
+          ingredients={ingredients}
+          instructions={instructions}
+          servingSize={servingSize}
+          cookTimeHrs={cookTimeHrs}
+          cookTimeMins={cookTimeMins}
+          tags={tags}
+          recipePhoto={recipePhoto}
           likes={this.state.likes}
           handleLike={this.handleLike}
           liked={this.state.liked}

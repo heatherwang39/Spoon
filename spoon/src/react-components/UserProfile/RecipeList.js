@@ -14,12 +14,19 @@ class RecipeList extends React.Component {
         .map((recipe) => {
           return (
             <Thumbnail
+              recipeName={recipe.recipeName}
+              owner={recipe.owner}
+              ingredients={recipe.ingredients}
+              instructions={recipe.instructions}
+              servingSize={recipe.servingSize}
+              cookTimeHrs={recipe.cookTimeHrs}
+              cookTimeMins={recipe.cookTimeMins}
+              tags={recipe.tags}
+              recipePhoto={recipe.recipePhoto}
+              likes={recipe.likes}
               editDeleteVisible={true}
               editRecipe={() => editRecipe(recipe)}
               deleteRecipe={() => deleteRecipe(recipe)}
-              likes={recipe.likes}
-              recipename={recipe.recipeName}
-              username={recipe.owner}
             />
           );
         })
