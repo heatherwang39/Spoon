@@ -75,7 +75,8 @@ class UserProfile extends React.Component {
 
   render() {
     const { editOpen } = this.state;
-    // const { username } = this.props.location.state;
+    const { appState } = this.props;
+    console.log(appState)
     return (
       <div>
         <Header userMode={this.props.appState.userMode} />
