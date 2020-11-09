@@ -87,9 +87,9 @@ class Thumbnail extends React.Component {
         <div className="thumbnail-username">
           <Link
             className="text-link"
-            to={`../UserProfile/${username}`}
+            to={`../UserProfile/${owner}`}
           >
-            <p className="thumbnail-username">{username}</p>
+            <p className="thumbnail-username">{owner}</p>
           </Link>
         </div>
         <div className="thumbnail-buttons">
