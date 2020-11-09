@@ -87,6 +87,7 @@ class Header extends React.Component {
           <Toolbar style={{ paddingTop: '0.5%', paddingBottom: '0.5%' }}>
             {/* title/feed */}
             <Link
+            
               href={'../'}
               style={{ textDecoration: 'none', color: 'unset' }}
             >
