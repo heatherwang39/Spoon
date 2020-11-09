@@ -76,7 +76,7 @@ class RecipeInfo extends React.Component {
           cookTimeMins={recipe.cookTimeMins}
           tags={recipe.tags}
           recipePhoto={recipe.recipePhoto}
-          likes={recipe.likes}
+          likes={this.state.likes}
           handleLike={() => handleLike(this)}
           liked={this.state.liked}
           open={this.state.open}
