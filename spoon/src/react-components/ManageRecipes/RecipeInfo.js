@@ -7,23 +7,18 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import './styles.css';
 
 import { deleteRecipe } from '../../actions/manage';
+import { openPopup, closePopup, handleLike } from '../../actions/recipePop';
 import RecipePopup from '../RecipePopUp';
 
 class RecipeInfo extends React.Component {
   state = {
     open: false, // Whether or not the recipe popup is open
-  };
-
-  openPopup = () => {
-    this.setState({ open: true });
-  };
-
-  closePopup = () => {
-    this.setState({ open: false });
+    liked: false,
+    likes: 0,
   };
 
   render() {
-    const { recipe, searchedRecipe, manageRecipeComponent } = this.props;
+    const { recipe, manageRecipeComponent } = this.props;
     return (
       <Grid
         item
@@ -37,17 +32,21 @@ class RecipeInfo extends React.Component {
         justify="space-between"
         className="recipeContainer"
       >
-        <Grid item xs={3} sm={1.5} lg={1.5}>
+        <Grid item xs={3} sm={2} lg={2}>
           <img
             className="recipeCover"
             alt="food"
             src={recipe.recipePhoto}
-            onClick={this.openPopup}
+            onClick={() => openPopup(this, recipe.likes)}
           />
         </Grid>
-        <Grid item container direction="column" xs={6.5} sm={4} lg={4}>
+        <Grid item container direction="column" xs={7} sm={4} lg={4}>
           <Grid item>
-            <Typography component="h6" variant="h6" onClick={this.openPopup}>
+            <Typography
+              component="h6"
+              variant="h6"
+              onClick={() => openPopup(this, recipe.likes)}
+            >
               {recipe.recipeName}
             </Typography>
           </Grid>
@@ -57,7 +56,7 @@ class RecipeInfo extends React.Component {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item xs={2.5} sm={1.5} lg={1.5}>
+        <Grid item xs={3} sm={2} lg={2}>
           <Button
             onClick={() => deleteRecipe(manageRecipeComponent, recipe)}
             variant="contained"
@@ -77,8 +76,11 @@ class RecipeInfo extends React.Component {
           cookTimeMins={recipe.cookTimeMins}
           tags={recipe.tags}
           recipePhoto={recipe.recipePhoto}
+          likes={recipe.likes}
+          handleLike={() => handleLike(this)}
+          liked={this.state.liked}
           open={this.state.open}
-          closePopup={this.closePopup}
+          closePopup={() => closePopup(this)}
         />
       </Grid>
     );
