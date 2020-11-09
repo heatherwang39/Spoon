@@ -39,7 +39,7 @@ class Feed extends React.Component {
           <Tab label="Discover" disableRipple />
         </Tabs>
       <div className="feed">
-        <Header userMode={appState.userMode} />
+        <Header state={appState} />
         <TabPanel value={this.state.tabVal} index={0}>
           <p className="feed-message">See latest recipes from the chefs you are following!</p>
           {this.state.users.filter((u) =>  {

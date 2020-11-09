@@ -9,7 +9,7 @@ class AccountCreate extends React.Component {
   render() {
     return (
       <div>
-        <Header userMode={this.props.appState.userMode} />
+        <Header state={this.props.appState} />
         <Grid container justify="center" alignItems="center" spacing={1}>
           <Grid item xs={5}>
             <TextField

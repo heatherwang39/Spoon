@@ -12,8 +12,8 @@ import AccountCreate from './react-components/AccountCreate';
 
 class App extends React.Component {
   state = {
-    userMode: 'user',
-    username: 'user1',
+    userMode: 'admin',
+    username: 'user2',
   };
 
   render() {

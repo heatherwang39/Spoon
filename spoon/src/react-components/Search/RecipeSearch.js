@@ -4,13 +4,14 @@ import SearchBar from '../SearchBar'
 import Grid from '@material-ui/core/Grid';
 import { Slider } from '@material-ui/core';
 import Tags from './Tags'
+import RecipeList from './RecipeList';
 
 class RecipeSearch extends React.Component {
   // TODO: checkboxes are not working right now. use mapping instead. because having a key-value object in state for the tags is way 
   // too difficult.
   state = {
     tags: {
-      Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, 'Nut-free': false
+      Breakfast: true, Lunch: true, Dinner: true, Dessert: true, Vegan: true, NutFree: true
     },
     searchedRecipe: "",
     marks: [
@@ -56,7 +57,7 @@ class RecipeSearch extends React.Component {
     this.setState({
       tags: newtags,
     });
-    console.log(name, "checked", target.checked)
+    // console.log(name, "checked", target.checked)
   }
 
   render() {
@@ -91,6 +92,9 @@ class RecipeSearch extends React.Component {
 
         <Tags tagChosen={this.tagChosen} tags={this.state.tags}/>
 
+        <Grid item xs={12}>
+          <RecipeList tags={this.state.tags} duration={this.state.durationRange} searched={this.state.searchedRecipe}/>
+        </Grid>
       </Grid>
     );
   }

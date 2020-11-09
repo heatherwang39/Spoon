@@ -69,6 +69,7 @@ img.thumbnail-picture {
   object-position: center;
   transition: 0.5s ease;
   max-width: 30%;
+  max-height: 30%;
 }
 
 div.thumbnail-recipe-name {
@@ -86,13 +87,13 @@ div.thumbnail-recipe-name {
 p.thumbnail-recipe-name {
   margin-top: 0%;
   padding: 3%;
-  background-color: lavender;
+  background-color: #ffebee;
   text-align: left;
   font-size: x-large;
   color: #f50057;
-  white-space: nowrap; 
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; 
+  text-overflow: ellipsis;
 }
 
 div.thumbnail-username {
@@ -109,12 +110,12 @@ div.thumbnail-username {
 
 p.thumbnail-username {
   padding: 2%;
-  background-color: lavender;
+  background-color: #ffebee;
   text-align: left;
   font-size: large;
   color: #f50057;
   text-decoration: none;
-  white-space: nowrap; 
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }

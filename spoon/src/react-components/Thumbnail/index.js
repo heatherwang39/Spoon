@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import faker from 'faker';
 import RecipePopup from '../RecipePopUp';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteOutlined from '@material-ui/icons/FavoriteBorderOutlined';
@@ -54,7 +53,7 @@ class Thumbnail extends React.Component {
       cookTimeMins,
       tags,
       recipePhoto,
-      editDeleteVisible,
+      own,
       editRecipe,
       deleteRecipe,
     } = this.props;
@@ -78,7 +77,7 @@ class Thumbnail extends React.Component {
           <img
             className="thumbnail-picture"
             src={recipePhoto}
-            alt="Recipe Photo"
+            alt="Recipe"
           />
         </div>
         <div className="thumbnail-recipe-name">
@@ -93,7 +92,7 @@ class Thumbnail extends React.Component {
           </Link>
         </div>
         <div className="thumbnail-buttons">
-          {editDeleteVisible ? (
+          {own ? (
             <div>
               <Button
                 variant="text"

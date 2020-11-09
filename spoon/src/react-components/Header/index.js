@@ -33,7 +33,8 @@ class Header extends React.Component {
       },
     accountPages: [
       {
-        link: '../UserProfile/user1', //hard coded for now, not sure how this is impl in the end
+        // link: `../UserProfile/${state.username}`, //hard coded for now, not sure how this is impl in the end
+        link: `../UserProfile/user1`,
         name: 'my profile',
         mode: ['user', 'admin'],
         icon: SentimentSatisfiedIcon,
@@ -79,11 +80,11 @@ class Header extends React.Component {
   // }
 
   render() {
-    const { userMode, username } = this.props;
+    const { state } = this.props;
 
     return (
       <div className="headerContainer">
-      {console.log(this.state.accountPages)}
+      {/* {console.log(state)} */}
         <AppBar color="secondary">
           <Toolbar style={{paddingTop:"0.5%", paddingBottom:"0.5%"}}>
             {/* title/feed */}
@@ -112,15 +113,15 @@ class Header extends React.Component {
                 <DropDownMenu
                   menu="account"
                   pages={this.state.accountPages}
-                  userMode={this.props.userMode}
+                  userMode={state.userMode} //not to be confused with this.state
                 />
               </Grid>
               <Grid item>
-                {userMode == 'admin' ? (
+                {state.userMode == 'admin' ? (
                   <DropDownMenu
                     menu="manage"
                     pages={this.state.managePages}
-                    userMode={this.props.userMode}
+                    userMode={state.userMode}
                   />
                 ) : null}
               </Grid>

@@ -92,7 +92,7 @@ class DropDownMenu extends React.Component {
             onClick={this.handleClick}
             ref={this.state.anchorRef}
           >
-            <MenuIcon style={{ color: 'white'}} fontSize="medium" />
+            <MenuIcon style={{ color: 'white'}}/>
             <Typography noWrap variant="button" style={{ color: 'white', marginRight: "4px"}}>
                 {menu}
             </Typography>
@@ -115,7 +115,6 @@ class DropDownMenu extends React.Component {
           keepMounted
           open={Boolean(this.state.anchorRef)}
           onClose={this.handleClose}
-          anchor
           PaperProps={{
             style: {
               marginTop: "1%",
