@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { uid } from 'react-uid';
 
 import './styles.css';
 import * as data from '../../api/data';
@@ -20,7 +21,7 @@ class UserProfile extends React.Component {
     own: false, // Whether or not this is the user's own page
     username: 'user1',
     follow: false,
-    followers: 420,
+    followers: '2',
     color: 'secondary',
     recipes: data.allRecipes,
     users: data.allUsers,
@@ -170,6 +171,7 @@ class UserProfile extends React.Component {
                       own={this.state.own}
                       editRecipe={() => this.editRecipe(recipe)}
                       deleteRecipe={() => this.deleteRecipe(recipe)}
+                      key={uid(recipe)}
                     />
                   );
                 })}
@@ -198,7 +200,9 @@ class UserProfile extends React.Component {
                         likes={recipe[0].likes}
                       />
                     );
-                  } else { return <div></div> }
+                  } else {
+                    return <div></div>;
+                  }
                 })}
             </TabPanel>
           </div>
@@ -227,4 +231,3 @@ function TabPanel(props) {
 }
 
 export default withRouter(UserProfile);
-
