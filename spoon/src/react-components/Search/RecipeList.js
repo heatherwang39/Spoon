@@ -1,4 +1,5 @@
 import React from 'react';
+import { uid } from 'react-uid';
 
 import './styles.css';
 import * as data from '../../api/data';
@@ -16,50 +17,54 @@ class RecipeList extends React.Component {
     this.setState({ editOpen: false });
   };
 
-
   render() {
-    const { tags, duration, searched} = this.props;
+    const { tags, duration, searched } = this.props;
     // this.setState({username: useLocation()})
     // const { username } = this.props.location.state;
     return (
       <div>
-          { 
-            this.state.recipes
-            .filter((r) => {
-              //tags
-              if ((r.tags.filter((tag) => {
-                return tags[tag] === true
-              })).length !== 0) {
-                return true
-              } else {
-                return false
-              }
-              })
-            .filter((r) => {
-                //duration
-                return r.cookTimeHrs * 60 + r.cookTimeMins <= duration[1] 
-                && r.cookTimeHrs * 60 + r.cookTimeMins >= duration[0]
-            })
-            .filter((r) => {
-                //search
-                return r.recipeName.toLowerCase().includes(searched);
-            })
-            .map((recipe) => {              
-                return (<Thumbnail
-                  recipeName={recipe.recipeName}
-                  owner={recipe.owner}
-                  ingredients={recipe.ingredients}
-                  instructions={recipe.instructions}
-                  servingSize={recipe.servingSize}
-                  cookTimeHrs={recipe.cookTimeHrs}
-                  cookTimeMins={recipe.cookTimeMins}
-                  tags={recipe.tags}
-                  recipePhoto={recipe.recipePhoto}
-                  likes={recipe.likes}
-                />)
-            })
-          }
-        </div>
+        {this.state.recipes
+          .filter((r) => {
+            //tags
+            if (
+              r.tags.filter((tag) => {
+                return tags[tag] === true;
+              }).length !== 0
+            ) {
+              return true;
+            } else {
+              return false;
+            }
+          })
+          .filter((r) => {
+            //duration
+            return (
+              r.cookTimeHrs * 60 + r.cookTimeMins <= duration[1] &&
+              r.cookTimeHrs * 60 + r.cookTimeMins >= duration[0]
+            );
+          })
+          .filter((r) => {
+            //search
+            return r.recipeName.toLowerCase().includes(searched);
+          })
+          .map((recipe) => {
+            return (
+              <Thumbnail
+                recipeName={recipe.recipeName}
+                owner={recipe.owner}
+                ingredients={recipe.ingredients}
+                instructions={recipe.instructions}
+                servingSize={recipe.servingSize}
+                cookTimeHrs={recipe.cookTimeHrs}
+                cookTimeMins={recipe.cookTimeMins}
+                tags={recipe.tags}
+                recipePhoto={recipe.recipePhoto}
+                likes={recipe.likes}
+                key={uid(recipe)}
+              />
+            );
+          })}
+      </div>
     );
   }
 }
