@@ -19,9 +19,9 @@
       })
     }
 
-    check = () => {
-      success
-    }
+    // check = () => {
+    //   success
+    // }
 
     success = () => {
       const newState = {username: "user1", userMode: "user"}
@@ -66,7 +66,7 @@
 
            <Grid item xs={12}>
              <Button
-               onClick={this.check}
+               onClick={this.success}
                variant="outlined"
                color="secondary"
                size="large"
