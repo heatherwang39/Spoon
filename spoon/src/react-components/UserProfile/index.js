@@ -139,13 +139,15 @@ class UserProfile extends React.Component {
                 const recipe = this.state.recipes.filter((r) => {
                   return r.recipeId === recipe_id
                 });
-                return (
-                  <Thumbnail
-                    likes={recipe[0].likes}
-                    recipename={recipe[0].recipeName}
-                    username={recipe[0].owner}
-                  />
-                )
+                if (recipe[0] != null) {
+                  return (
+                    <Thumbnail
+                      likes={recipe[0].likes}
+                      recipename={recipe[0].recipeName}
+                      username={recipe[0].owner}
+                    />
+                  )
+                }
               })}
             </TabPanel>
           </div>

@@ -33,7 +33,7 @@ class Header extends React.Component {
       },
     accountPages: [
       {
-        link: '../UserProfile',
+        link: '../UserProfile/user1', //hard coded for now, not sure how this is impl in the end
         name: 'my profile',
         mode: ['user', 'admin'],
         icon: SentimentSatisfiedIcon,

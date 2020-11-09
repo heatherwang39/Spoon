@@ -66,6 +66,7 @@ class UserInfo extends React.Component {
                       </Button>
                     ) : (
                       <Link to={`../UserProfile/${user.username}`}>hi</Link>
+                      // TODO: make button
                     )}
                   </Grid>
                 </Grid>
