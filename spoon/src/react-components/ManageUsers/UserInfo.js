@@ -45,9 +45,14 @@ class UserInfo extends React.Component {
                     />
                   </Grid>
                   <Grid item xs={3}>
-                    <Typography variant="h6" color="secondary" align="left">
-                      {user.username}
-                    </Typography>
+                    <Link
+                      className="text-link"
+                      to={`../UserProfile/${user.username}`}
+                    >
+                      <Typography variant="h6" color="secondary" align="left">
+                        {user.username}
+                      </Typography>
+                    </Link>
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="h6" color="primary" align="left">
