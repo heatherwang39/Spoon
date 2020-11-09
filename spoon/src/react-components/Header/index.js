@@ -44,6 +44,12 @@ class Header extends React.Component {
         icon: PersonAddIcon,
       },
       {
+        link: '../LogOut',
+        name: 'sign in',
+        mode: ['guest'],
+        icon: SentimentSatisfiedIcon,
+      },
+      {
         link: '../RecipeCreate',
         name: 'create recipe',
         mode: ['user', 'admin'],
@@ -71,11 +77,6 @@ class Header extends React.Component {
       },
     ],
   };
-
-  // componentDidMount(){
-  //   const newAccPages = {...this.state.accountPages[0], link : `../UserProfile/${this.props.username}`}
-  //   this.setState({accountPages: newAccPages})
-  // }
 
   render() {
     const { state } = this.props;

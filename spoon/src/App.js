@@ -9,10 +9,11 @@ import ManageRecipes from './react-components/ManageRecipes';
 import Search from './react-components/Search';
 import RecipeCreate from './react-components/RecipeCreate';
 import AccountCreate from './react-components/AccountCreate';
+import LogOut from './react-components/LogOut';
 
 class App extends React.Component {
   state = {
-    userMode: 'admin',
+    userMode: 'guest',
     username: 'user2',
   };
 
@@ -63,11 +64,11 @@ class App extends React.Component {
               path="/AccountCreate"
               render={() => <AccountCreate appState={this.state} />}
             />
-            {/* <Route
+            <Route
               exact
               path="/LogOut"
               render={() => <LogOut appState={this.state} />}
-            /> */}
+            />
           </Switch>
         </BrowserRouter>
       </div>
