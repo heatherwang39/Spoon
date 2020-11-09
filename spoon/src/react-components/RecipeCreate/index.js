@@ -26,7 +26,11 @@ class RecipeCreate extends React.Component {
     cookTimeHrs: '',
     cookTimeMins: '',
     tags: {
+<<<<<<< Updated upstream
       Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, Vegetarian: false, Meat: false
+=======
+      Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, NutFree: false
+>>>>>>> Stashed changes
     },
     recipePhoto: '',
     likes: '',
@@ -73,8 +77,13 @@ class RecipeCreate extends React.Component {
     if(!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
       alert('Please fill out all the required fields!');
     } else {
+<<<<<<< Updated upstream
       // TODO
       alert('You tried creating a recipe called ' + recipeName + '.');
+=======
+      // BACK-END CALL
+      alert('You tried creating a recipe called ' + recipeName + '! This is a back-end call that will be implemented in Phase 2.');
+>>>>>>> Stashed changes
     }
     event.preventDefault();
   };
@@ -202,7 +211,7 @@ class RecipeCreate extends React.Component {
               name="ingredients"
               label="Ingredients"
               rows={8}
-              helperText="Please list each ingredient on a separate line."
+              helperText="Please list each ingredient separated by commas."
               variant="outlined"
               fullWidth
             />
@@ -216,7 +225,7 @@ class RecipeCreate extends React.Component {
               name="instructions"
               label="Instructions"
               rows={10}
-              helperText="Please list each instruction on a separate line."
+              helperText="Please list each instruction separated by commas."
               variant="outlined"
               fullWidth
             />
