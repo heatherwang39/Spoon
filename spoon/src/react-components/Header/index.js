@@ -13,12 +13,12 @@ import { uid } from 'react-uid';
 //icons
 import LocalDiningOutlinedIcon from '@material-ui/icons/LocalDiningOutlined';
 import SearchIcon from '@material-ui/icons/Search';
-import AddIcon from '@material-ui/icons/Add';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import DnsIcon from '@material-ui/icons/Dns';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PeopleIcon from '@material-ui/icons/People';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import "./styles.css";
 
 /* Component for the Header */
@@ -33,7 +33,7 @@ class Header extends React.Component {
       },
     accountPages: [
       {
-        link: '../UserProfile',
+        link: '../UserProfile/user1', //hard coded for now, not sure how this is impl in the end
         name: 'my profile',
         mode: ['user', 'admin'],
         icon: SentimentSatisfiedIcon,
@@ -48,7 +48,7 @@ class Header extends React.Component {
         link: '../RecipeCreate',
         name: 'create recipe',
         mode: ['user', 'admin'],
-        icon: AddIcon,
+        icon: PostAddIcon,
       },
       {
         link: '../LogOut',
@@ -73,15 +73,17 @@ class Header extends React.Component {
     ],
   };
 
-  //render methods\
-
-  
+  // componentDidMount(){
+  //   const newAccPages = {...this.state.accountPages[0], link : `../UserProfile/${this.props.username}`}
+  //   this.setState({accountPages: newAccPages})
+  // }
 
   render() {
-    const { userMode } = this.props;
+    const { userMode, username } = this.props;
 
     return (
       <div className="headerContainer">
+      {console.log(this.state.accountPages)}
         <AppBar color="secondary">
           <Toolbar style={{paddingTop:"0.5%", paddingBottom:"0.5%"}}>
             {/* title/feed */}

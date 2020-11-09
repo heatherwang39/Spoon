@@ -32,7 +32,7 @@ class Search extends React.Component {
 
         <br /><br />
 
-        {this.state.currentSearch === "recipe" ? <RecipeSearch/> : <UserSearch/>}
+        {this.state.currentSearch === "recipe" ? <RecipeSearch/> : <UserSearch userMode={this.props.appState.userMode}/>}
       </div>
     )
   }

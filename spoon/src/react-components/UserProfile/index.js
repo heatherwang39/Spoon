@@ -13,6 +13,7 @@ import Thumbnail from '../Thumbnail';
 import Header from '../Header';
 import RecipeList from './RecipeList';
 import RecipeEdit from './RecipeEdit';
+import {withRouter} from 'react-router-dom';
 
 class UserProfile extends React.Component {
   state = {
@@ -26,6 +27,11 @@ class UserProfile extends React.Component {
     users: data.allUsers,
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
+  };
+  componentDidMount(){
+    const pathname = this.props.location.pathname;
+    this.setState({username: pathname.slice(pathname.lastIndexOf("/")+1)})
+    console.log("username", this.state.username)
   };
 
   editRecipe = (recipe) => {
@@ -75,10 +81,11 @@ class UserProfile extends React.Component {
 
   render() {
     const { editOpen } = this.state;
+    // this.setState({username: useLocation()})
     // const { username } = this.props.location.state;
     return (
       <div>
-        <Header userMode={this.props.appState.userMode} />
+        <Header userMode={this.props.appState.userMode} username={this.props.appState.username} />
         <div className="userprofile-profile">
           <div>
             <Typography
@@ -132,20 +139,22 @@ class UserProfile extends React.Component {
                 const recipe = this.state.recipes.filter((r) => {
                   return r.recipeId === recipe_id
                 });
-                return (
-                  <Thumbnail
-                    recipeName={recipe[0].recipeName}
-                    owner={recipe[0].owner}
-                    ingredients={recipe[0].ingredients}
-                    instructions={recipe[0].instructions}
-                    servingSize={recipe[0].servingSize}
-                    cookTimeHrs={recipe[0].cookTimeHrs}
-                    cookTimeMins={recipe[0].cookTimeMins}
-                    tags={recipe[0].tags}
-                    recipePhoto={recipe[0].recipePhoto}
-                    likes={recipe[0].likes}
-                  />
-                )
+                if (recipe[0] != null) {
+                  return (
+                    <Thumbnail
+                      recipeName={recipe[0].recipeName}
+                      owner={recipe[0].owner}
+                      ingredients={recipe[0].ingredients}
+                      instructions={recipe[0].instructions}
+                      servingSize={recipe[0].servingSize}
+                      cookTimeHrs={recipe[0].cookTimeHrs}
+                      cookTimeMins={recipe[0].cookTimeMins}
+                      tags={recipe[0].tags}
+                      recipePhoto={recipe[0].recipePhoto}
+                      likes={recipe[0].likes}
+                    />
+                  )
+                }
               })}
             </TabPanel>
           </div>
@@ -173,4 +182,4 @@ function TabPanel(props) {
   return <div>{value === index && children}</div>;
 }
 
-export default UserProfile;
+export default withRouter( UserProfile);

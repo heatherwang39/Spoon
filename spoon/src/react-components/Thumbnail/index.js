@@ -85,8 +85,11 @@ class Thumbnail extends React.Component {
           <p className="thumbnail-recipe-name">{recipeName}</p>
         </div>
         <div className="thumbnail-username">
-          <Link className="text-link" to="../UserProfile">
-            <p className="thumbnail-username">{owner}</p>
+          <Link
+            className="text-link"
+            to={`../UserProfile/${username}`}
+          >
+            <p className="thumbnail-username">{username}</p>
           </Link>
         </div>
         <div className="thumbnail-buttons">

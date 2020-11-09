@@ -78,12 +78,14 @@ class DropDownMenu extends React.Component {
           <Button
             disableRipple
             size="small"
-            color="primary"
+            color="secondary"
             disableElevation
             style={{
               border: '2px solid',
               borderColor: 'white',
             }}
+            variant="contained"
+
             // drop down menu stuff
             aria-controls={this.state.open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
@@ -116,7 +118,7 @@ class DropDownMenu extends React.Component {
           anchor
           PaperProps={{
             style: {
-              marginTop: "0.5%",
+              marginTop: "1%",
               border: '2px solid',
               borderColor: 'Blue',
               boxShadow: 'none',
