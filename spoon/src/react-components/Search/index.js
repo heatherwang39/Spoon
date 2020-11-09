@@ -19,12 +19,13 @@ class Search extends React.Component {
     return (
       <div>
         <Header userMode={this.props.appState.userMode} />
-        
+
         <Button
             onClick={this.switchSearch}
             variant="contained"
             color="primary"
             size="small"
+            disableRipple
         >              
           {this.state.currentSearch === "recipe" ? "Search For User Instead" : "Search For Recipe Instead"}
         </Button>
