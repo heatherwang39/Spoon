@@ -17,6 +17,9 @@ class RecipeList extends React.Component {
               editDeleteVisible={true}
               editRecipe={() => editRecipe(recipe)}
               deleteRecipe={() => deleteRecipe(recipe)}
+              likes={recipe.likes}
+              recipename={recipe.recipeName}
+              username={recipe.owner}
             />
           );
         })

@@ -17,11 +17,13 @@ import RecipeEdit from './RecipeEdit';
 class UserProfile extends React.Component {
   state = {
     tabVal: 0,
-    username: 'User1',
+    own: false, // Whether or not this is the user's own page
+    username: 'user1', 
     follow: false,
     followers: 420,
     color: 'secondary',
     recipes: data.allRecipes,
+    users: data.allUsers,
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
   };
@@ -73,6 +75,7 @@ class UserProfile extends React.Component {
 
   render() {
     const { editOpen } = this.state;
+    // const { username } = this.props.location.state;
     return (
       <div>
         <Header userMode={this.props.appState.userMode} />
@@ -94,7 +97,7 @@ class UserProfile extends React.Component {
             >
               {this.state.followers} followers
             </Typography>
-            <Button
+            {!this.state.own && <Button
               className="userprofile-button"
               variant="contained"
               color={this.state.color}
@@ -104,7 +107,7 @@ class UserProfile extends React.Component {
             >
               {!this.state.follow && 'FOLLOW'}
               {this.state.follow && 'UNFOLLOW'}
-            </Button>
+            </Button>}
           </div>
           <div>
             <AppBar position="static" color="secondary">
@@ -115,16 +118,28 @@ class UserProfile extends React.Component {
             </AppBar>
             <TabPanel value={this.state.tabVal} index={0}>
               <RecipeList
-                recipes={this.state.recipes}
+                recipes={this.state.recipes.filter((r) => {
+                  return r.owner === this.state.username;
+                })}
                 editRecipe={this.editRecipe}
                 deleteRecipe={this.deleteRecipe}
               />
             </TabPanel>
             <TabPanel value={this.state.tabVal} index={1}>
-              <Thumbnail />
-              <Thumbnail />
-              <Thumbnail />
-              <Thumbnail />
+              {this.state.users.filter((u) => {
+                return u.username === this.state.username;
+              })[0].liked.map((recipe_id) => {
+                const recipe = this.state.recipes.filter((r) => {
+                  return r.recipeId === recipe_id
+                });
+                return (
+                  <Thumbnail
+                    likes={recipe[0].likes}
+                    recipename={recipe[0].recipeName}
+                    username={recipe[0].owner}
+                  />
+                )
+              })}
             </TabPanel>
           </div>
         </div>
