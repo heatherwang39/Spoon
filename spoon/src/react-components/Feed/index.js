@@ -16,6 +16,7 @@ class Feed extends React.Component {
     recipes: data.allRecipes.slice(0, 9), //back-end call
     user: this.props.appState.username, //back-end call
     feed: [],
+    userMode: this.props.appState.userMode,
   };
 
   handleTabs = (e, val) => {
@@ -37,7 +38,9 @@ class Feed extends React.Component {
           style={{ float: 'left' }}
         >
           <Tab label="Feed" disableRipple/>
-          <Tab label="Discover" disableRipple/>
+          {this.state.userMode !== 'guest' ? (
+            <Tab label="Discover" disableRipple/>
+          ) : null }
         </Tabs>
       <div className="feed">
         <Header state={appState} />

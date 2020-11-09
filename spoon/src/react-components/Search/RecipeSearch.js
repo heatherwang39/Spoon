@@ -30,7 +30,6 @@ class RecipeSearch extends React.Component {
   searchRecipe = (event) => {
     const target = event.target;
     const value = target.value.toLowerCase();
-    console.log(value);
     this.setState({
       searchedRecipe: value,
     });
@@ -47,7 +46,6 @@ class RecipeSearch extends React.Component {
     this.setState({
       durationRange: newValue,
     });
-    console.log("duration filter is", newValue)
   }
 
   tagChosen = (event) => {
@@ -57,7 +55,6 @@ class RecipeSearch extends React.Component {
     this.setState({
       tags: newtags,
     });
-    // console.log(name, "checked", target.checked)
   }
 
   render() {
