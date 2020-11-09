@@ -6,7 +6,7 @@ import * as data from '../../api/data';
 
 import Header from '../Header';
 import SearchBar from '../SearchBar';
-import RecipeInfo from './RecipeInfo';
+import RecipeList from './RecipeList';
 
 class ManageRecipes extends React.Component {
   state = {
@@ -43,7 +43,8 @@ class ManageRecipes extends React.Component {
         />
         <br />
         <br />
-        <RecipeInfo
+
+        <RecipeList
           recipes={this.state.recipes}
           searchedRecipe={this.state.searchedRecipe}
           manageRecipeComponent={this}
