@@ -10,6 +10,8 @@ class HeaderButton extends React.Component {
       <div>
         {
           <Button
+            size="small"
+            variant="contained"
             disableRipple
             href={page.link}
             color="primary"
@@ -19,8 +21,12 @@ class HeaderButton extends React.Component {
               borderColor: 'white',
             }}
           >
-            <PageIcon style={{ color: 'white' }} fontSize="large" />
-            <Typography noWrap variant="button" style={{ color: 'white' }}>
+            <PageIcon style={{ color: 'white' }} fontSize="medium" />
+            <Typography
+              noWrap
+              variant="button"
+              style={{ color: 'white', marginRight: '4px' }}
+            >
               {page.name}
             </Typography>
           </Button>

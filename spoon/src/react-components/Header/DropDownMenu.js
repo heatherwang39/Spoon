@@ -5,27 +5,34 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import "./styles.css";
 
 class DropDownMenu extends React.Component {
   state = {
     open: false,
     anchorRef: null,
+    menuIcon: ArrowDropDownIcon,
   };
 
   handleClick = (event) => {
     this.setState({
       anchorRef: event.currentTarget,
+      menuIcon: ArrowDropUpIcon
     });
   };
 
   handleClose = () => {
     this.setState({
       anchorRef: null,
+      menuIcon: ArrowDropDownIcon,
     });
   };
 
   render() {
-    const { menu, MenuIcon, pages, userMode } = this.props;
+    const { menu, pages, userMode } = this.props;
+    const MenuIcon = this.state.menuIcon;
     const menuPages = pages
       .filter((page) => {
         return page.mode.includes(userMode);
@@ -70,7 +77,7 @@ class DropDownMenu extends React.Component {
         {
           <Button
             disableRipple
-            // href={page.link}
+            size="small"
             color="primary"
             disableElevation
             style={{
@@ -83,9 +90,9 @@ class DropDownMenu extends React.Component {
             onClick={this.handleClick}
             ref={this.state.anchorRef}
           >
-            <MenuIcon style={{ color: 'white' }} fontSize="large" />
-            <Typography noWrap variant="button" style={{ color: 'white' }}>
-              {menu}
+            <MenuIcon style={{ color: 'white'}} fontSize="medium" />
+            <Typography noWrap variant="button" style={{ color: 'white', marginRight: "4px"}}>
+                {menu}
             </Typography>
           </Button>
         }
@@ -109,7 +116,7 @@ class DropDownMenu extends React.Component {
           anchor
           PaperProps={{
             style: {
-              marginTop: '2px',
+              marginTop: "0.5%",
               border: '2px solid',
               borderColor: 'Blue',
               boxShadow: 'none',

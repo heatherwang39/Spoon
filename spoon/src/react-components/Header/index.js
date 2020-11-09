@@ -2,7 +2,6 @@ import React from 'react';
 // import { Link } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
-import Button from '@material-ui/core/Button';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -20,9 +19,7 @@ import DnsIcon from '@material-ui/icons/Dns';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PeopleIcon from '@material-ui/icons/People';
-import PersonIcon from '@material-ui/icons/Person';
-import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
-// import "./styles.css";
+import "./styles.css";
 
 /* Component for the Header */
 class Header extends React.Component {
@@ -86,7 +83,7 @@ class Header extends React.Component {
     return (
       <div className="headerContainer">
         <AppBar color="secondary">
-          <Toolbar>
+          <Toolbar style={{paddingTop:"0.5%", paddingBottom:"0.5%"}}>
             {/* title/feed */}
             <Link
               href={'../'}
@@ -112,7 +109,6 @@ class Header extends React.Component {
               <Grid item>
                 <DropDownMenu
                   menu="account"
-                  MenuIcon={PersonIcon}
                   pages={this.state.accountPages}
                   userMode={this.props.userMode}
                 />
@@ -121,7 +117,6 @@ class Header extends React.Component {
                 {userMode == 'admin' ? (
                   <DropDownMenu
                     menu="manage"
-                    MenuIcon={FormatListBulletedIcon}
                     pages={this.state.managePages}
                     userMode={this.props.userMode}
                   />
