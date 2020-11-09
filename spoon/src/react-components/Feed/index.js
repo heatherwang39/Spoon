@@ -1,7 +1,7 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import * as data from '../../api/data';
 
 import './styles.css';
 
@@ -10,7 +10,11 @@ import Header from '../Header';
 
 class Feed extends React.Component {
   state = {
-    tabVal: 0
+    tabVal: 0,
+    users: data.allUsers, // back-end call
+    recipes: data.allRecipes.slice(0,9), //back-end call
+    user: 'user1', //back-end call
+    feed: []
   }
 
   handleTabs = (e, val) => {
@@ -38,19 +42,32 @@ class Feed extends React.Component {
         <Header userMode={appState.userMode} />
         <TabPanel value={this.state.tabVal} index={0}>
           <p className="feed-message">See latest recipes from the chefs you are following!</p>
-          <Thumbnail />
-          <Thumbnail />
-          <Thumbnail />
-          <Thumbnail />
-          <Thumbnail />
-          <Thumbnail />
+          {this.state.users.filter((u) =>  {
+              return u.username === this.state.user
+            })[0].feed.map((recipe_id) => {
+              const recipe = this.state.recipes.filter((r) => {
+                return r.recipeId === recipe_id
+              });
+              return (
+                <Thumbnail
+                  likes={recipe[0].likes}
+                  recipename={recipe[0].recipeName}
+                  username={recipe[0].owner}
+                />
+              );
+            })}
         </TabPanel>
         <TabPanel value={this.state.tabVal} index={1}>
           <p className="feed-message">See the newest recipes posted onto Spoon!</p>
-          <Thumbnail />
-          <Thumbnail />
-          <Thumbnail />
-          <Thumbnail />
+          {this.state.recipes.map((recipe) => {
+              return (
+                <Thumbnail
+                  likes={recipe.likes}
+                  recipename={recipe.recipeName}
+                  username={recipe.owner}
+                />
+              );
+            })}
         </TabPanel>
       </div>
     </div>

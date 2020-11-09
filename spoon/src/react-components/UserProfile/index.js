@@ -14,6 +14,7 @@ class UserProfile extends React.Component {
 
   state = {
     tabVal: 0,
+    username: 'User1',
     follow: false,
     followers: 420,
     color: 'secondary'
@@ -55,7 +56,7 @@ class UserProfile extends React.Component {
               color="secondary"
               align="left"
             >
-              xXfire_dragonXx
+              {this.state.username}
             </Typography>
             <Typography
               className="userprofile-follower-count"

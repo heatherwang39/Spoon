@@ -45,7 +45,7 @@ div.thumbnail-picture {
 }
 
 .thumbnail-picture:hover .thumbnail-hover {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .thumbnail-likes {

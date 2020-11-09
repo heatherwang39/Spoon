@@ -14,9 +14,7 @@ class Thumbnail extends React.Component {
   state = {
     open: false, // Whether or not the recipe popup is open
     liked: false,
-    likes: 222,
-    recipeName: "Recipe Name",
-    username: "User",
+    likes: this.props.likes
   };
 
   openPopup = () => {
@@ -45,7 +43,7 @@ class Thumbnail extends React.Component {
 
   render() {
     const { open } = this.state;
-    // const { likes, recipename, username } = this.props
+    const { likes, recipename, username } = this.props
 
     return (
       <div className="thumbnail">
@@ -73,17 +71,17 @@ class Thumbnail extends React.Component {
           />
         </div>
         <div className="thumbnail-recipe-name">
-          <p className="thumbnail-recipe-name">{this.state.recipeName}</p>
+          <p className="thumbnail-recipe-name">{recipename}</p>
         </div>
         <div className="thumbnail-username">
           <Link className="text-link" to={'../UserProfile'}>
-            <p className="thumbnail-username">{this.state.username}</p>
+            <p className="thumbnail-username">{username}</p>
           </Link>
         </div>
 
         <RecipePopup
-          recipeName={this.state.recipeName}
-          owner={this.state.username}
+          recipeName={recipename}
+          owner={username}
           ingredients="ingredients-placeholder"
           instructions="instructions-placeholder"
           servingSize="5"

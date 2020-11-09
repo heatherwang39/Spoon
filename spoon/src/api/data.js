@@ -87,6 +87,7 @@ export const recipe1 = new Recipe(
   ],
   4,
   1,
+  0,
   ['Lunch', 'Dinner', 'NutFree'],
   '',
   4
@@ -103,9 +104,10 @@ export const recipe2 = new Recipe(
   ],
   2,
   0,
+  50,
   ['Lunch', 'Dinner', 'Vegan', 'NutFree'],
   '',
-  4
+  3
 );
 
 export const tags = {
