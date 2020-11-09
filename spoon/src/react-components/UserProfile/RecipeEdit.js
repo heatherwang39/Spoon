@@ -177,7 +177,7 @@ class RecipeEdit extends React.Component {
               <Grid item xs={6}>
                 <img
                   src={this.state.recipePhoto}
-                  alt="Recipe Photo"
+                  alt="food"
                   id="placeholderRecipeCreateImage"
                 />
               </Grid>

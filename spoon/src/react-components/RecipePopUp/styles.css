@@ -1,5 +1,5 @@
-.recipePopupText {
-  padding: 0px 15px;
+.recipePopupTitle {
+  padding: 0px 20px;
 }
 
 .recipe-photo {
@@ -8,7 +8,6 @@
   padding: 5px;
   width: 80%;
   height: auto;
-  max-height: 500px;
   display: block;
   margin-left: auto;
   margin-right: auto;

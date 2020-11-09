@@ -142,9 +142,16 @@ class UserProfile extends React.Component {
                 if (recipe[0] != null) {
                   return (
                     <Thumbnail
+                      recipeName={recipe[0].recipeName}
+                      owner={recipe[0].owner}
+                      ingredients={recipe[0].ingredients}
+                      instructions={recipe[0].instructions}
+                      servingSize={recipe[0].servingSize}
+                      cookTimeHrs={recipe[0].cookTimeHrs}
+                      cookTimeMins={recipe[0].cookTimeMins}
+                      tags={recipe[0].tags}
+                      recipePhoto={recipe[0].recipePhoto}
                       likes={recipe[0].likes}
-                      recipename={recipe[0].recipeName}
-                      username={recipe[0].owner}
                     />
                   )
                 }
