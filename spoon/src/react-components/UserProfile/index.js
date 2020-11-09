@@ -85,7 +85,7 @@ class UserProfile extends React.Component {
     // const { username } = this.props.location.state;
     return (
       <div>
-        <Header userMode={this.props.appState.userMode} username={this.props.appState.username} />
+        <Header state={this.props.appState} />
         <div className="userprofile-profile">
           <div>
             <Typography

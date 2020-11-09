@@ -15,7 +15,6 @@ class UserSearch extends React.Component {
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.value.toLowerCase();
-    console.log('typing', value);
     this.setState({
       currInput: value,
     });
@@ -43,6 +42,7 @@ class UserSearch extends React.Component {
           users={this.state.users}
           searchedName={this.state.searchedName}
           userMode={userMode}
+          searchPage={true}
         />
       </div>
     );

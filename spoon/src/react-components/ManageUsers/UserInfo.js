@@ -18,8 +18,9 @@ class UserInfo extends React.Component {
     const {
       users,
       searchedName,
-      manageUserComponent: callerComponent,
+      callerComponent,
       userMode,
+      searchPage,
     } = this.props;
     return (
       <div className="infoArea">
@@ -55,7 +56,7 @@ class UserInfo extends React.Component {
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
-                    {userMode === 'admin' ? (
+                    {userMode === 'admin' && !searchPage ? (
                       <Button
                         onClick={() => deleteUser(callerComponent, user)}
                         variant="contained"
@@ -65,8 +66,14 @@ class UserInfo extends React.Component {
                         Delete
                       </Button>
                     ) : (
-                      <Link to={`../UserProfile/${user.username}`}>hi</Link>
-                      // TODO: make button
+                      <Button variant="contained" color="secondary">
+                        <Link
+                          style={{ textDecoration: 'none', color: 'unset' }}
+                          to={`../UserProfile/${user.username}`}
+                        >
+                          View profile
+                        </Link>
+                      </Button>
                     )}
                   </Grid>
                 </Grid>

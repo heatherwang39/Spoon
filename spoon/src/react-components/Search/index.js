@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import './styles.css';
 import RecipeSearch from './RecipeSearch';
 import UserSearch from './UserSearch';
+import { Paper } from '@material-ui/core';
 
 class Search extends React.Component {
   state = {
@@ -18,7 +19,7 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <Header userMode={this.props.appState.userMode} />
+        <Header state={this.props.appState} />
 
         <Button
             onClick={this.switchSearch}
