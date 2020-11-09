@@ -7,7 +7,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import "./styles.css";
+import { uid } from 'react-uid';
+
+import './styles.css';
 
 class DropDownMenu extends React.Component {
   state = {
@@ -19,7 +21,7 @@ class DropDownMenu extends React.Component {
   handleClick = (event) => {
     this.setState({
       anchorRef: event.currentTarget,
-      menuIcon: ArrowDropUpIcon
+      menuIcon: ArrowDropUpIcon,
     });
   };
 
@@ -38,39 +40,39 @@ class DropDownMenu extends React.Component {
         return page.mode.includes(userMode);
       })
       .map((page) => {
-        const PageIcon = page.icon
-        return(
-        <MenuItem
-          disableRipple
-          style={{
-            backgroundColor: 'transparent',
-          }}
-        >
-          <Grid container alignItems="center" spacing={5}>
-            <Grid item xs={4}>
-              <Button
-                size="small"
-                onClick={this.handleClose}
-                color="primary"
-                variant="contained"
-                disableRipple
-                to={Link}
-                href={page.link}
-                disableElevation
-              >
-                <PageIcon />
-              </Button>
+        const PageIcon = page.icon;
+        return (
+          <MenuItem
+            disableRipple
+            style={{
+              backgroundColor: 'transparent',
+            }}
+            key={uid(page)}
+          >
+            <Grid container alignItems="center" spacing={5}>
+              <Grid item xs={4}>
+                <Button
+                  size="small"
+                  onClick={this.handleClose}
+                  color="primary"
+                  variant="contained"
+                  disableRipple
+                  to={Link}
+                  href={page.link}
+                  disableElevation
+                >
+                  <PageIcon />
+                </Button>
+              </Grid>
+              <Grid item xs={8}>
+                <Typography variant="body2" align="left" noWrap>
+                  {page.name}
+                </Typography>
+              </Grid>
             </Grid>
-            <Grid item xs={8}>
-              <Typography variant="body2" align="left" noWrap>
-                {page.name}
-              </Typography>
-            </Grid>
-          </Grid>
-        </MenuItem>
-      )
-    }
-      )
+          </MenuItem>
+        );
+      });
 
     return (
       <div>
@@ -85,16 +87,19 @@ class DropDownMenu extends React.Component {
               borderColor: 'white',
             }}
             variant="contained"
-
             // drop down menu stuff
             aria-controls={this.state.open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
             onClick={this.handleClick}
             ref={this.state.anchorRef}
           >
-            <MenuIcon style={{ color: 'white'}}/>
-            <Typography noWrap variant="button" style={{ color: 'white', marginRight: "4px"}}>
-                {menu}
+            <MenuIcon style={{ color: 'white' }} />
+            <Typography
+              noWrap
+              variant="button"
+              style={{ color: 'white', marginRight: '4px' }}
+            >
+              {menu}
             </Typography>
           </Button>
         }
@@ -117,7 +122,7 @@ class DropDownMenu extends React.Component {
           onClose={this.handleClose}
           PaperProps={{
             style: {
-              marginTop: "1%",
+              marginTop: '1%',
               border: '2px solid',
               borderColor: 'Blue',
               boxShadow: 'none',
