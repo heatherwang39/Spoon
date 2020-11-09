@@ -8,6 +8,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import "./styles.css";
+import { uid } from 'react-uid';
 
 class DropDownMenu extends React.Component {
   state = {
@@ -41,6 +42,7 @@ class DropDownMenu extends React.Component {
         const PageIcon = page.icon
         return(
         <MenuItem
+          key={uid(page)}
           disableRipple
           style={{
             backgroundColor: 'transparent',
