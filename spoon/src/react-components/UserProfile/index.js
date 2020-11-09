@@ -13,6 +13,7 @@ import Thumbnail from '../Thumbnail';
 import Header from '../Header';
 import RecipeList from './RecipeList';
 import RecipeEdit from './RecipeEdit';
+import {withRouter} from 'react-router-dom';
 
 class UserProfile extends React.Component {
   state = {
@@ -26,6 +27,12 @@ class UserProfile extends React.Component {
     users: data.allUsers,
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
+  };
+
+  setUsername = () => {
+    const pathname = this.props.location.pathname;
+    this.setState({username: pathname.slice(pathname.lastIndexOf("/")+1)})
+    console.log("username", this.state.username)
   };
 
   editRecipe = (recipe) => {
@@ -75,12 +82,14 @@ class UserProfile extends React.Component {
 
   render() {
     const { editOpen } = this.state;
+    // this.setState({username: useLocation()})
     // const { username } = this.props.location.state;
     return (
       <div>
         <Header userMode={this.props.appState.userMode} />
         <div className="userprofile-profile">
           <div>
+            {this.setUsername()}
             <Typography
               className="userprofile-username"
               variant="h2"
@@ -166,4 +175,4 @@ function TabPanel(props) {
   return <div>{value === index && children}</div>;
 }
 
-export default UserProfile;
+export default withRouter( UserProfile);

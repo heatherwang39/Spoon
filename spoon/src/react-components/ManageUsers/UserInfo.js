@@ -7,12 +7,20 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import faker from 'faker';
 import { uid } from 'react-uid';
 
+// delete
+import { Link } from 'react-router-dom';
+
 import './styles.css';
 import { deleteUser } from '../../actions/manage';
 
 class UserInfo extends React.Component {
   render() {
-    const { users, searchedName, manageUserComponent } = this.props;
+    const {
+      users,
+      searchedName,
+      manageUserComponent: callerComponent,
+      userMode,
+    } = this.props;
     return (
       <div className="infoArea">
         {users
@@ -42,18 +50,23 @@ class UserInfo extends React.Component {
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="h6" color="primary" align="left">
-                      Followers: {user.followers.length}
+                      Followers:
+                      {user.followers.length}
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
-                    <Button
-                      onClick={() => deleteUser(manageUserComponent, user)}
-                      variant="contained"
-                      color="secondary"
-                      startIcon={<DeleteIcon />}
-                    >
-                      Delete
-                    </Button>
+                    {userMode === 'admin' ? (
+                      <Button
+                        onClick={() => deleteUser(callerComponent, user)}
+                        variant="contained"
+                        color="secondary"
+                        startIcon={<DeleteIcon />}
+                      >
+                        Delete
+                      </Button>
+                    ) : (
+                      <Link to={`../UserProfile/${user.username}`}>hi</Link>
+                    )}
                   </Grid>
                 </Grid>
               </Paper>

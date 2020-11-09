@@ -43,7 +43,8 @@ class ManageUsers extends React.Component {
         <UserInfo
           users={this.state.users}
           searchedName={this.state.searchedName}
-          manageUserComponent={this}
+          callerComponent={this}
+          userMode={this.props.appState.userMode}
         />
       </div>
     );

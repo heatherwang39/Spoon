@@ -13,12 +13,12 @@ import { uid } from 'react-uid';
 //icons
 import LocalDiningOutlinedIcon from '@material-ui/icons/LocalDiningOutlined';
 import SearchIcon from '@material-ui/icons/Search';
-import AddIcon from '@material-ui/icons/Add';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import DnsIcon from '@material-ui/icons/Dns';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PeopleIcon from '@material-ui/icons/People';
+import PostAddIcon from '@material-ui/icons/PostAdd';
 import "./styles.css";
 
 /* Component for the Header */
@@ -48,7 +48,7 @@ class Header extends React.Component {
         link: '../RecipeCreate',
         name: 'create recipe',
         mode: ['user', 'admin'],
-        icon: AddIcon,
+        icon: PostAddIcon,
       },
       {
         link: '../LogOut',
