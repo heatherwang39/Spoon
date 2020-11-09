@@ -77,11 +77,7 @@ class RecipePopup extends React.Component {
                 </Button>
               </Grid>
               <Grid item>
-                <Typography
-                  variant="subtitle1"
-                  color="primary"
-                  align="right"
-                >
+                <Typography variant="subtitle1" color="primary" align="right">
                   {likes} Likes
                 </Typography>
               </Grid>

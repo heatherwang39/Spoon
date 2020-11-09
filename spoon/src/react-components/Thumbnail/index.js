@@ -5,12 +5,14 @@ import RecipePopup from '../RecipePopUp';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteOutlined from '@material-ui/icons/FavoriteBorderOutlined';
 import Button from '@material-ui/core/Button';
+import ButtonGroup from '@material-ui/core/ButtonGroup';
 import { Typography } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import './styles.css';
 
 class Thumbnail extends React.Component {
-
   state = {
     open: false, // Whether or not the recipe popup is open
     liked: false,
@@ -27,23 +29,23 @@ class Thumbnail extends React.Component {
 
   handleLike = () => {
     if (!this.state.liked) {
-      const likes = this.state.likes + 1
+      const likes = this.state.likes + 1;
       this.setState({
         liked: true,
-        likes: likes
-      })
+        likes: likes,
+      });
     } else {
-      const likes = this.state.likes - 1
+      const likes = this.state.likes - 1;
       this.setState({
         liked: false,
-        likes: likes
-      })
+        likes: likes,
+      });
     }
   };
 
   render() {
     const { open } = this.state;
-    const { likes, recipename, username } = this.props
+    const { recipename, username, editDeleteVisible, editRecipe, deleteRecipe } = this.props
 
     return (
       <div className="thumbnail">
@@ -77,6 +79,24 @@ class Thumbnail extends React.Component {
           <Link className="text-link" to={'../UserProfile'}>
             <p className="thumbnail-username">{username}</p>
           </Link>
+        </div>
+        <div className="thumbnail-buttons">
+          {editDeleteVisible ? (
+            <div>
+              <Button variant="text" color="secondary" size="small"
+                onClick={editRecipe}
+                startIcon={<EditIcon />}
+              >
+                Edit
+              </Button>
+              <Button variant="text" color="secondary" size="small"
+                onClick={deleteRecipe}
+                startIcon={<DeleteIcon />}
+              >
+                Delete
+              </Button>
+            </div>
+          ) : null}
         </div>
 
         <RecipePopup
