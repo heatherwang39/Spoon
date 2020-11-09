@@ -7,6 +7,7 @@ import './styles.css';
 
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
+import { uid } from 'react-uid';
 
 class Feed extends React.Component {
   state = {
@@ -35,8 +36,8 @@ class Feed extends React.Component {
           textColor="secondary"
           style={{float: "left"}}
         >
-          <Tab label="Feed" disableRipple />
-          <Tab label="Discover" disableRipple />
+          <Tab label="Feed" disableRipple/>
+          <Tab label="Discover" disableRipple/>
         </Tabs>
       <div className="feed">
         <Header state={appState} />
@@ -60,6 +61,7 @@ class Feed extends React.Component {
                   tags={recipe[0].tags}
                   recipePhoto={recipe[0].recipePhoto}
                   likes={recipe[0].likes}
+                  key={uid(recipe[0])}
                 />
               );
             })}
@@ -79,6 +81,7 @@ class Feed extends React.Component {
                   tags={recipe.tags}
                   recipePhoto={recipe.recipePhoto}
                   likes={recipe.likes}
+                  key={uid(recipe)}
                 />
               );
             })}
