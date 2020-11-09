@@ -77,7 +77,7 @@ class Thumbnail extends React.Component {
           <img
             className="thumbnail-picture"
             src={recipePhoto}
-            alt="Recipe Photo"
+            alt="Recipe"
           />
         </div>
         <div className="thumbnail-recipe-name">

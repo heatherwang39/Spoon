@@ -27,10 +27,14 @@ class UserProfile extends React.Component {
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
   };
+
   componentDidMount() {
     const pathname = this.props.location.pathname;
-    this.setState({ username: pathname.slice(pathname.lastIndexOf('/') + 1) });
-    console.log('username', this.state.username);
+    const username = pathname.slice(pathname.lastIndexOf('/') + 1)
+    const own = this.props.appState.username === username
+    // console.log(own)
+    this.setState({ username: username, own: own});
+    // console.log('username', this.state.username);
   }
 
   editRecipe = (recipe) => {
@@ -80,6 +84,8 @@ class UserProfile extends React.Component {
 
   render() {
     const { editOpen } = this.state;
+    // const { appState } = this.props;
+    // console.log(`appstate: {appState}`, appState)
     // this.setState({username: useLocation()})
     // const { username } = this.props.location.state;
     return (
