@@ -44,7 +44,7 @@ class RecipeInfo extends React.Component {
                   <img
                     className="recipeCover"
                     alt="food"
-                    src={faker.image.food()}
+                    src={recipe.recipePhoto}
                   />
                 </Grid>
                 <Grid item container direction="column" xs={6.5} sm={4} lg={4}>
