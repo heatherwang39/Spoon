@@ -45,7 +45,7 @@ div.thumbnail-picture {
 }
 
 .thumbnail-picture:hover .thumbnail-hover {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 
 .thumbnail-likes {
@@ -90,6 +90,9 @@ p.thumbnail-recipe-name {
   text-align: left;
   font-size: x-large;
   color: #f50057;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 div.thumbnail-username {
@@ -111,6 +114,18 @@ p.thumbnail-username {
   font-size: large;
   color: #f50057;
   text-decoration: none;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.thumbnail-buttons {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin-top: 130%;
 }
 
 .text-link {

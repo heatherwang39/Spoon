@@ -17,7 +17,6 @@ class ManageUsers extends React.Component {
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.value.toLowerCase();
-    console.log(value);
     this.setState({
       searchedName: value,
     });
@@ -25,16 +24,6 @@ class ManageUsers extends React.Component {
 
   searchUser = () => {
     console.log(this.state.searchedName);
-  };
-
-  deleteUser = (user) => {
-    const usersToKeep = this.state.users.filter((u) => {
-      return u !== user;
-    });
-    this.setState({
-      users: usersToKeep,
-    });
-    alert('User ' + user.username + ' has been deleted!');
   };
 
   render() {
@@ -54,7 +43,7 @@ class ManageUsers extends React.Component {
         <UserInfo
           users={this.state.users}
           searchedName={this.state.searchedName}
-          deleteUser={this.deleteUser}
+          manageUserComponent={this}
         />
       </div>
     );

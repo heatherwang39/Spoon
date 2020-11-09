@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteOutlined from '@material-ui/icons/FavoriteBorderOutlined';
 import CloseIcon from '@material-ui/icons/Close';
 
 import './styles.css';
@@ -23,6 +24,8 @@ class RecipePopup extends React.Component {
       tags,
       recipePhoto,
       likes,
+      liked,
+      handleLike,
       open,
       closePopup,
     } = this.props;
@@ -63,17 +66,18 @@ class RecipePopup extends React.Component {
                 </Typography>
               </Grid>
               <Grid item>
-                {/* // TODO: ADD FAVOURITE FUNCTION */}
-                <Button color="primary">
-                  <FavoriteIcon />
+                <Button
+                  color="primary"
+                  disableRipple
+                  onClick={handleLike}
+                  style={{ backgroundColor: 'transparent' }}
+                >
+                  {!liked && <FavoriteOutlined />}
+                  {liked && <FavoriteIcon />}
                 </Button>
               </Grid>
               <Grid item>
-                <Typography
-                  variant="subtitle1"
-                  color="textPrimary"
-                  align="right"
-                >
+                <Typography variant="subtitle1" color="primary" align="right">
                   {likes} Likes
                 </Typography>
               </Grid>

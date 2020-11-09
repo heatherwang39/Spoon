@@ -6,7 +6,7 @@ import * as data from '../../api/data';
 
 import Header from '../Header';
 import SearchBar from '../SearchBar';
-import RecipeInfo from './RecipeInfo';
+import RecipeList from './RecipeList';
 
 class ManageRecipes extends React.Component {
   state = {
@@ -27,16 +27,6 @@ class ManageRecipes extends React.Component {
     console.log(this.state.searchedRecipe);
   };
 
-  deleteRecipe = (recipe) => {
-    const recipesToKeep = this.state.recipes.filter((r) => {
-      return r !== recipe;
-    });
-    this.setState({
-      recipes: recipesToKeep,
-    });
-    alert('Recipe ' + recipe.recipeName + ' has been deleted!');
-  };
-
   render() {
     return (
       <div>
@@ -53,10 +43,11 @@ class ManageRecipes extends React.Component {
         />
         <br />
         <br />
-        <RecipeInfo
+
+        <RecipeList
           recipes={this.state.recipes}
           searchedRecipe={this.state.searchedRecipe}
-          deleteRecipe={this.deleteRecipe}
+          manageRecipeComponent={this}
         />
       </div>
     );
