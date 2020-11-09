@@ -37,7 +37,7 @@ class RecipePopup extends React.Component {
             <Grid container className="popupTitleContainer" justify="flex-end">
               <Grid item xs={11}>
                 <Typography
-                  className="recipePopupText"
+                  className="recipePopupTitle"
                   variant="h4"
                   color="primary"
                   align="left"
@@ -57,7 +57,6 @@ class RecipePopup extends React.Component {
               </Grid>
               <Grid item xs={10}>
                 <Typography
-                  className="recipePopupText"
                   variant="h5"
                   color="secondary"
                   align="left"
@@ -118,20 +117,24 @@ class RecipePopup extends React.Component {
                 color="textSecondary"
                 style={{ marginLeft: 10 }}
               >
-                {tags}
+                {tags.join(", ")}
               </Typography>
             </div>
             <Typography variant="h6" color="secondary" align="left">
               Ingredients:
             </Typography>
             <Typography variant="body1" color="textSecondary" align="left">
-              {ingredients}
+              {ingredients.map((i, key) => {
+                  return <li key={key}>{i} </li>;
+                })}
             </Typography>
             <Typography variant="h6" color="secondary" align="left">
               Instructions:
             </Typography>
             <Typography variant="body1" color="textSecondary" align="left">
-              {instructions}
+              {instructions.map((i, key) => {
+                return <div key={key}>{i} <br/><br/></div>;
+              })}
             </Typography>
           </DialogContent>
         </Dialog>
