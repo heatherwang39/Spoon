@@ -10,7 +10,7 @@ class RecipeList extends React.Component {
   render() {
     const { recipes, searchedRecipe, manageRecipeComponent } = this.props;
     return (
-      <Grid container spacing={1} justify="space-evenly" alignItems="stretch">
+      <Grid container spacing={1} justify="flex-start" alignItems="stretch">
         {recipes
           .filter((recipe) => {
             return recipe.recipeName.toLowerCase().includes(searchedRecipe);
