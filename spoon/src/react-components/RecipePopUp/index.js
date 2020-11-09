@@ -32,7 +32,7 @@ class RecipePopup extends React.Component {
 
     return (
       <div>
-        <Dialog open={open} scroll="paper" fullWidth={true} maxWidth={'md'}>
+        <Dialog open={open} scroll="paper" fullWidth maxWidth={'md'}>
           <DialogTitle>
             <Grid container className="popupTitleContainer" justify="flex-end">
               <Grid item xs={11}>
@@ -56,11 +56,7 @@ class RecipePopup extends React.Component {
                 </Button>
               </Grid>
               <Grid item xs={10}>
-                <Typography
-                  variant="h5"
-                  color="secondary"
-                  align="left"
-                >
+                <Typography variant="h5" color="secondary" align="left">
                   By: {owner}
                 </Typography>
               </Grid>
@@ -83,7 +79,7 @@ class RecipePopup extends React.Component {
             </Grid>
           </DialogTitle>
           <DialogContent dividers>
-            <img class="recipe-photo" src={recipePhoto} alt="food"/>
+            <img className="recipe-photo" src={recipePhoto} alt="food"/>
             <div style={{ display: 'flex' }}>
               <Typography variant="h6" color="secondary">
                 Serving Size:
@@ -117,25 +113,43 @@ class RecipePopup extends React.Component {
                 color="textSecondary"
                 style={{ marginLeft: 10 }}
               >
-                {tags.join(", ")}
+                {tags.join(', ')}
               </Typography>
             </div>
             <Typography variant="h6" color="secondary" align="left">
               Ingredients:
             </Typography>
-            <Typography variant="body1" color="textSecondary" align="left">
-              {ingredients.map((i, key) => {
-                  return <li key={key}>{i} </li>;
-                })}
-            </Typography>
+            {ingredients.map((i, key) => {
+              return (
+                <li key={key}>
+                  <Typography
+                    variant="body1"
+                    color="textSecondary"
+                    align="left"
+                  >
+                    {i}
+                  </Typography>
+                </li>
+              );
+            })}
             <Typography variant="h6" color="secondary" align="left">
               Instructions:
             </Typography>
-            <Typography variant="body1" color="textSecondary" align="left">
-              {instructions.map((i, key) => {
-                return <div key={key}>{i} <br/><br/></div>;
-              })}
-            </Typography>
+            {instructions.map((i, key) => {
+              return (
+                <div key={key}>
+                  <Typography
+                    variant="body1"
+                    color="textSecondary"
+                    align="left"
+                  >
+                    {i}
+                  </Typography>
+                  <br />
+                  <br />
+                </div>
+              );
+            })}
           </DialogContent>
         </Dialog>
       </div>
