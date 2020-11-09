@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
 import AppBar from '@material-ui/core/AppBar';
@@ -7,7 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import DropDownMenu from './DropDownMenu.js';
-import HeaderButton from './HeaderButton.js'
+import HeaderButton from './HeaderButton.js';
 import { uid } from 'react-uid';
 
 //icons
@@ -19,22 +18,21 @@ import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PeopleIcon from '@material-ui/icons/People';
 import PostAddIcon from '@material-ui/icons/PostAdd';
-import "./styles.css";
+import './styles.css';
 
 /* Component for the Header */
 class Header extends React.Component {
   state = {
-    search: //an array, in case we need to add more in the future
-      {
-        link: '../Search',
-        name: 'search',
-        mode: ['user', 'admin', 'guest'],
-        icon: SearchIcon,
-      },
+    //an array, in case we need to add more in the future
+    search: {
+      link: '../Search',
+      name: 'search',
+      mode: ['user', 'admin', 'guest'],
+      icon: SearchIcon,
+    },
     accountPages: [
       {
-        // link: `../UserProfile/${state.username}`, //hard coded for now, not sure how this is impl in the end
-        link: `../UserProfile/user1`,
+        link: `../UserProfile/${this.props.state.username}`,
         name: 'my profile',
         mode: ['user', 'admin'],
         icon: SentimentSatisfiedIcon,
@@ -84,9 +82,9 @@ class Header extends React.Component {
 
     return (
       <div className="headerContainer">
-      {/* {console.log(state)} */}
+        {/* {console.log(state)} */}
         <AppBar color="secondary">
-          <Toolbar style={{paddingTop:"0.5%", paddingBottom:"0.5%"}}>
+          <Toolbar style={{ paddingTop: '0.5%', paddingBottom: '0.5%' }}>
             {/* title/feed */}
             <Link
               href={'../'}
@@ -108,7 +106,9 @@ class Header extends React.Component {
               spacing={2}
               justify="flex-end"
             >
-              <Grid item><HeaderButton page={this.state.search}/></Grid>
+              <Grid item>
+                <HeaderButton page={this.state.search} />
+              </Grid>
               <Grid item>
                 <DropDownMenu
                   menu="account"
