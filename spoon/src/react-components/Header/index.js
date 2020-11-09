@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import DropDownMenu from './DropDownMenu.js';
 import HeaderButton from './HeaderButton.js';
-// import { uid } from 'react-uid';
 
 //icons
 import LocalDiningOutlinedIcon from '@material-ui/icons/LocalDiningOutlined';

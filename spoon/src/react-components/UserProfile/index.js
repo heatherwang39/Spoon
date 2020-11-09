@@ -26,22 +26,41 @@ class UserProfile extends React.Component {
     users: data.allUsers,
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
+    og_tags: {
+      Breakfast: false,
+      Lunch: false,
+      Dinner: false,
+      Dessert: false,
+      Vegan: false,
+      NutFree: false,
+    },
   };
 
   componentDidMount() {
     const pathname = this.props.location.pathname;
-    const username = pathname.slice(pathname.lastIndexOf('/') + 1)
-    const own = this.props.appState.username === username
-    // console.log(own)
-    this.setState({ username: username, own: own});
-    // console.log('username', this.state.username);
+    const username = pathname.slice(pathname.lastIndexOf('/') + 1);
+    const own = this.props.appState.username === username;
+    this.setState({ username: username, own: own });
   }
 
   editRecipe = (recipe) => {
-    this.setState({
-      editOpen: true,
-      recipeToEdit: recipe,
-    });
+    this.setState(
+      {
+        editOpen: true,
+        recipeToEdit: recipe,
+      },
+      function () {
+        let tags = this.state.recipeToEdit.tags;
+        let new_tags = [];
+        if (tags) {
+          tags.map((tag) => new_tags.push(tag.toString()));
+        }
+        if (new_tags) {
+          new_tags.map((tag) => (this.state.og_tags[tag] = true));
+        }
+        console.log(this.state.og_tags);
+      }
+    );
   };
 
   closePopup = () => {
@@ -192,7 +211,7 @@ class UserProfile extends React.Component {
           servingSize={this.state.recipeToEdit.servingSize}
           cookTimeHrs={this.state.recipeToEdit.cookTimeHrs}
           cookTimeMins={this.state.recipeToEdit.cookTimeMins}
-          tags={this.state.recipeToEdit.tags}
+          tags={this.state.og_tags}
           recipePhoto={this.state.recipeToEdit.recipePhoto}
           open={editOpen}
           closePopup={this.closePopup}
@@ -208,3 +227,4 @@ function TabPanel(props) {
 }
 
 export default withRouter(UserProfile);
+

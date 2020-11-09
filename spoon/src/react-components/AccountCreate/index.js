@@ -44,7 +44,7 @@ class AccountCreate extends React.Component {
             <TextField
               //   value={searchedKeyword}
               //   onChange={handleInputChange}
-              type="text"
+              // type="text"
               name=""
               placeholder="e.g. user1"
               label="Password"
