@@ -27,16 +27,6 @@ class ManageRecipes extends React.Component {
     console.log(this.state.searchedRecipe);
   };
 
-  deleteRecipe = (recipe) => {
-    const recipesToKeep = this.state.recipes.filter((r) => {
-      return r !== recipe;
-    });
-    this.setState({
-      recipes: recipesToKeep,
-    });
-    alert('Recipe ' + recipe.recipeName + ' has been deleted!');
-  };
-
   render() {
     return (
       <div>
@@ -56,7 +46,7 @@ class ManageRecipes extends React.Component {
         <RecipeInfo
           recipes={this.state.recipes}
           searchedRecipe={this.state.searchedRecipe}
-          deleteRecipe={this.deleteRecipe}
+          manageRecipeComponent={this}
         />
       </div>
     );

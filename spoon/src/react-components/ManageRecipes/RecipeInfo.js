@@ -4,12 +4,15 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import faker from 'faker';
+import { uid } from 'react-uid';
 
 import './styles.css';
 
+import { deleteRecipe } from '../../actions/manage';
+
 class RecipeInfo extends React.Component {
   render() {
-    const { recipes, searchedRecipe, deleteRecipe } = this.props;
+    const { recipes, searchedRecipe, manageRecipeComponent } = this.props;
     return (
       <Grid
         container
@@ -35,6 +38,7 @@ class RecipeInfo extends React.Component {
                 alignItems="center"
                 justify="space-between"
                 className="recipeContainer"
+                key={uid(recipe)}
               >
                 <Grid item xs={3} sm={1.5} lg={1.5}>
                   <img
@@ -57,7 +61,7 @@ class RecipeInfo extends React.Component {
                 </Grid>
                 <Grid item xs={2.5} sm={1.5} lg={1.5}>
                   <Button
-                    onClick={() => deleteRecipe(recipe)}
+                    onClick={() => deleteRecipe(manageRecipeComponent, recipe)}
                     variant="contained"
                     color="secondary"
                     startIcon={<DeleteIcon />}
