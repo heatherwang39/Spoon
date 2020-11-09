@@ -10,14 +10,6 @@ import Tags from '../Search/Tags';
 
 class RecipeCreate extends React.Component {
   state = {
-    tags: {
-      Breakfast: true,
-      Lunch: true,
-      Dinner: true,
-      Dessert: true,
-      Vegan: true,
-      'Nut-free': true,
-    },
     recipeName: '',
     owner: '',
     ingredients: '',
@@ -26,7 +18,7 @@ class RecipeCreate extends React.Component {
     cookTimeHrs: '',
     cookTimeMins: '',
     tags: {
-      Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, Vegetarian: false, Meat: false
+      Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, NutFree: false, Meat: false
     },
     recipePhoto: '',
     likes: '',
@@ -66,14 +58,14 @@ class RecipeCreate extends React.Component {
       ingredients,
       instructions,
       servingSize,
-      cookTimeHrs,
+      // cookTimeHrs, // COMMENTED OUT TO AVOID JS WARNING
       cookTimeMins,
       recipePhoto,
     } = this.state;
     if(!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
       alert('Please fill out all the required fields!');
     } else {
-      // TODO
+      // BACK-END CALL
       alert('You tried creating a recipe called ' + recipeName + '.');
     }
     event.preventDefault();
@@ -82,7 +74,7 @@ class RecipeCreate extends React.Component {
   render() {
     return (
       <div>
-        <Header userMode={this.props.appState.userMode} />
+        <Header state={this.props.appState} />
         <Typography variant="h2" color="secondary" gutterBottom>
           Create Recipe
         </Typography>
@@ -190,6 +182,7 @@ class RecipeCreate extends React.Component {
           <Grid item xs={6}>
             <img
               src="https://www.lesgeveninzeeland.nl/storage/media/350/placeholder.png"
+              alt="food"
               id="placeholderRecipeCreateImage"
             />
           </Grid>

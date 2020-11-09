@@ -12,7 +12,7 @@ import AccountCreate from './react-components/AccountCreate';
 
 class App extends React.Component {
   state = {
-    userMode: 'user',
+    userMode: 'admin',
     username: 'user1',
   };
 
@@ -33,9 +33,9 @@ class App extends React.Component {
               path="/Feed"
               render={() => <Feed appState={this.state} />}
             />
-            <Route
+            <Route 
               exact
-              path="/UserProfile"
+              path='/UserProfile/:id'
               render={() => <UserProfile appState={this.state} />}
             />
             <Route

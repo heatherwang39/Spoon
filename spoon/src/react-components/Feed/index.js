@@ -39,7 +39,7 @@ class Feed extends React.Component {
           <Tab label="Discover" disableRipple />
         </Tabs>
       <div className="feed">
-        <Header userMode={appState.userMode} />
+        <Header state={appState} />
         <TabPanel value={this.state.tabVal} index={0}>
           <p className="feed-message">See latest recipes from the chefs you are following!</p>
           {this.state.users.filter((u) =>  {
@@ -50,9 +50,16 @@ class Feed extends React.Component {
               });
               return (
                 <Thumbnail
+                  recipeName={recipe[0].recipeName}
+                  owner={recipe[0].owner}
+                  ingredients={recipe[0].ingredients}
+                  instructions={recipe[0].instructions}
+                  servingSize={recipe[0].servingSize}
+                  cookTimeHrs={recipe[0].cookTimeHrs}
+                  cookTimeMins={recipe[0].cookTimeMins}
+                  tags={recipe[0].tags}
+                  recipePhoto={recipe[0].recipePhoto}
                   likes={recipe[0].likes}
-                  recipename={recipe[0].recipeName}
-                  username={recipe[0].owner}
                 />
               );
             })}
@@ -62,9 +69,16 @@ class Feed extends React.Component {
           {this.state.recipes.map((recipe) => {
               return (
                 <Thumbnail
+                  recipeName={recipe.recipeName}
+                  owner={recipe.owner}
+                  ingredients={recipe.ingredients}
+                  instructions={recipe.instructions}
+                  servingSize={recipe.servingSize}
+                  cookTimeHrs={recipe.cookTimeHrs}
+                  cookTimeMins={recipe.cookTimeMins}
+                  tags={recipe.tags}
+                  recipePhoto={recipe.recipePhoto}
                   likes={recipe.likes}
-                  recipename={recipe.recipeName}
-                  username={recipe.owner}
                 />
               );
             })}

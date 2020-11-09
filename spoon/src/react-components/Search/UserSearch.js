@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles.css';
 import SearchBar from '../SearchBar';
-import UserInfo from './UserInfo';
+import UserInfo from '../ManageUsers/UserInfo';
 import * as data from '../../api/data';
 
 class UserSearch extends React.Component {
@@ -15,7 +15,6 @@ class UserSearch extends React.Component {
   handleInputChange = (event) => {
     const target = event.target;
     const value = target.value.toLowerCase();
-    console.log('typing', value);
     this.setState({
       currInput: value,
     });
@@ -29,6 +28,7 @@ class UserSearch extends React.Component {
   };
 
   render() {
+    const {userMode} = this.props
     return (
       <div>
         <SearchBar
@@ -41,6 +41,8 @@ class UserSearch extends React.Component {
         <UserInfo
           users={this.state.users}
           searchedName={this.state.searchedName}
+          userMode={userMode}
+          searchPage={true}
         />
       </div>
     );

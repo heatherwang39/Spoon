@@ -29,7 +29,7 @@ class ManageUsers extends React.Component {
   render() {
     return (
       <div>
-        <Header userMode={this.props.appState.userMode} />
+        <Header state={this.props.appState} />
         <Typography variant="h2" color="secondary" gutterBottom>
           Manage Users
         </Typography>
@@ -43,7 +43,8 @@ class ManageUsers extends React.Component {
         <UserInfo
           users={this.state.users}
           searchedName={this.state.searchedName}
-          manageUserComponent={this}
+          callerComponent={this}
+          userMode={this.props.appState.userMode}
         />
       </div>
     );

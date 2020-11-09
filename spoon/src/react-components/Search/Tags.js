@@ -7,7 +7,7 @@ class Tags extends React.Component {
     const checkboxes = Object.entries(tags).map((entry) => (
       <FormControlLabel
         control={
-          <Checkbox onChange={tagChosen} checked={entry[1]} name={entry[0]} />
+          <Checkbox onChange={tagChosen} checked={entry[1]} name={entry[0]} disableRipple />
         }
         label={entry[0]}
       />

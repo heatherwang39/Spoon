@@ -7,12 +7,21 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import faker from 'faker';
 import { uid } from 'react-uid';
 
+// delete
+import { Link } from 'react-router-dom';
+
 import './styles.css';
 import { deleteUser } from '../../actions/manage';
 
 class UserInfo extends React.Component {
   render() {
-    const { users, searchedName, manageUserComponent } = this.props;
+    const {
+      users,
+      searchedName,
+      callerComponent,
+      userMode,
+      searchPage,
+    } = this.props;
     return (
       <div className="infoArea">
         {users
@@ -36,24 +45,41 @@ class UserInfo extends React.Component {
                     />
                   </Grid>
                   <Grid item xs={3}>
-                    <Typography variant="h6" color="secondary" align="left">
-                      {user.username}
-                    </Typography>
+                    <Link
+                      className="text-link"
+                      to={`../UserProfile/${user.username}`}
+                    >
+                      <Typography variant="h6" color="secondary" align="left">
+                        {user.username}
+                      </Typography>
+                    </Link>
                   </Grid>
                   <Grid item xs={3}>
                     <Typography variant="h6" color="primary" align="left">
-                      Followers: {user.followers.length}
+                      Followers:
+                      {user.followers.length}
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
-                    <Button
-                      onClick={() => deleteUser(manageUserComponent, user)}
-                      variant="contained"
-                      color="secondary"
-                      startIcon={<DeleteIcon />}
-                    >
-                      Delete
-                    </Button>
+                    {userMode === 'admin' && !searchPage ? (
+                      <Button
+                        onClick={() => deleteUser(callerComponent, user)}
+                        variant="contained"
+                        color="secondary"
+                        startIcon={<DeleteIcon />}
+                      >
+                        Delete
+                      </Button>
+                    ) : (
+                      <Button variant="contained" color="secondary">
+                        <Link
+                          style={{ textDecoration: 'none', color: 'unset' }}
+                          to={`../UserProfile/${user.username}`}
+                        >
+                          View profile
+                        </Link>
+                      </Button>
+                    )}
                   </Grid>
                 </Grid>
               </Paper>

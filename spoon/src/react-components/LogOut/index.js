@@ -2,7 +2,7 @@ import React from 'react';
 
 class Feed extends React.Component {
   render() {
-    <Header userMode={this.props.appState.userMode} />
+    <Header state={this.props.appState} />
 
     {this.props.appState.userMode}
     return (
