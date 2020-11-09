@@ -69,6 +69,7 @@ img.thumbnail-picture {
   object-position: center;
   transition: 0.5s ease;
   max-width: 30%;
+  max-height: 30%;
 }
 
 div.thumbnail-recipe-name {
