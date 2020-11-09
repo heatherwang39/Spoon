@@ -119,6 +119,15 @@ p.thumbnail-username {
   text-overflow: ellipsis;
 }
 
+.thumbnail-buttons {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin-top: 125%;
+}
+
 .text-link {
   color: inherit;
   text-decoration: inherit;
