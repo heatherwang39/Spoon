@@ -73,15 +73,17 @@ class Header extends React.Component {
     ],
   };
 
-  //render methods\
-
-  
+  // componentDidMount(){
+  //   const newAccPages = {...this.state.accountPages[0], link : `../UserProfile/${this.props.username}`}
+  //   this.setState({accountPages: newAccPages})
+  // }
 
   render() {
-    const { userMode } = this.props;
+    const { userMode, username } = this.props;
 
     return (
       <div className="headerContainer">
+      {console.log(this.state.accountPages)}
         <AppBar color="secondary">
           <Toolbar style={{paddingTop:"0.5%", paddingBottom:"0.5%"}}>
             {/* title/feed */}

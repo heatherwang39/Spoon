@@ -40,7 +40,7 @@ class ManageRecipes extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header userMode={this.props.appState.userMode} />
         <Typography variant="h2" color="secondary" gutterBottom>
           Manage Recipes
         </Typography>

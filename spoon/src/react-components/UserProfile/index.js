@@ -28,8 +28,7 @@ class UserProfile extends React.Component {
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
   };
-
-  setUsername = () => {
+  componentDidMount(){
     const pathname = this.props.location.pathname;
     this.setState({username: pathname.slice(pathname.lastIndexOf("/")+1)})
     console.log("username", this.state.username)
@@ -86,10 +85,9 @@ class UserProfile extends React.Component {
     // const { username } = this.props.location.state;
     return (
       <div>
-        <Header userMode={this.props.appState.userMode} />
+        <Header userMode={this.props.appState.userMode} username={this.props.appState.username} />
         <div className="userprofile-profile">
           <div>
-            {this.setUsername()}
             <Typography
               className="userprofile-username"
               variant="h2"
