@@ -11,15 +11,14 @@ import * as data from '../../api/data';
 
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
-import RecipeList from './RecipeList';
 import RecipeEdit from './RecipeEdit';
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class UserProfile extends React.Component {
   state = {
     tabVal: 0,
     own: false, // Whether or not this is the user's own page
-    username: 'user1', 
+    username: 'user1',
     follow: false,
     followers: 420,
     color: 'secondary',
@@ -28,11 +27,15 @@ class UserProfile extends React.Component {
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
   };
-  componentDidMount(){
+
+  componentDidMount() {
     const pathname = this.props.location.pathname;
-    this.setState({username: pathname.slice(pathname.lastIndexOf("/")+1)})
-    console.log("username", this.state.username)
-  };
+    const username = pathname.slice(pathname.lastIndexOf('/') + 1)
+    const own = this.props.appState.username === username
+    // console.log(own)
+    this.setState({ username: username, own: own});
+    // console.log('username', this.state.username);
+  }
 
   editRecipe = (recipe) => {
     this.setState({
@@ -81,6 +84,8 @@ class UserProfile extends React.Component {
 
   render() {
     const { editOpen } = this.state;
+    // const { appState } = this.props;
+    // console.log(`appstate: {appState}`, appState)
     // this.setState({username: useLocation()})
     // const { username } = this.props.location.state;
     return (
@@ -104,17 +109,19 @@ class UserProfile extends React.Component {
             >
               {this.state.followers} followers
             </Typography>
-            {!this.state.own && <Button
-              className="userprofile-button"
-              variant="contained"
-              color={this.state.color}
-              onClick={this.handleFollow}
-              disableRipple
-              disableElevation
-            >
-              {!this.state.follow && 'FOLLOW'}
-              {this.state.follow && 'UNFOLLOW'}
-            </Button>}
+            {!this.state.own && (
+              <Button
+                className="userprofile-button"
+                variant="contained"
+                color={this.state.color}
+                onClick={this.handleFollow}
+                disableRipple
+                disableElevation
+              >
+                {!this.state.follow && 'FOLLOW'}
+                {this.state.follow && 'UNFOLLOW'}
+              </Button>
+            )}
           </div>
           <div>
             <AppBar position="static" color="secondary">
@@ -124,38 +131,56 @@ class UserProfile extends React.Component {
               </Tabs>
             </AppBar>
             <TabPanel value={this.state.tabVal} index={0}>
-              <RecipeList
-                recipes={this.state.recipes.filter((r) => {
+              {this.state.recipes
+                .filter((r) => {
                   return r.owner === this.state.username;
-                })}
-                editRecipe={this.editRecipe}
-                deleteRecipe={this.deleteRecipe}
-              />
-            </TabPanel>
-            <TabPanel value={this.state.tabVal} index={1}>
-              {this.state.users.filter((u) => {
-                return u.username === this.state.username;
-              })[0].liked.map((recipe_id) => {
-                const recipe = this.state.recipes.filter((r) => {
-                  return r.recipeId === recipe_id
-                });
-                if (recipe[0] != null) {
+                })
+                .map((recipe) => {
                   return (
                     <Thumbnail
-                      recipeName={recipe[0].recipeName}
-                      owner={recipe[0].owner}
-                      ingredients={recipe[0].ingredients}
-                      instructions={recipe[0].instructions}
-                      servingSize={recipe[0].servingSize}
-                      cookTimeHrs={recipe[0].cookTimeHrs}
-                      cookTimeMins={recipe[0].cookTimeMins}
-                      tags={recipe[0].tags}
-                      recipePhoto={recipe[0].recipePhoto}
-                      likes={recipe[0].likes}
+                      recipeName={recipe.recipeName}
+                      owner={recipe.owner}
+                      ingredients={recipe.ingredients}
+                      instructions={recipe.instructions}
+                      servingSize={recipe.servingSize}
+                      cookTimeHrs={recipe.cookTimeHrs}
+                      cookTimeMins={recipe.cookTimeMins}
+                      tags={recipe.tags}
+                      recipePhoto={recipe.recipePhoto}
+                      likes={recipe.likes}
+                      own={this.state.own}
+                      editRecipe={() => this.editRecipe(recipe)}
+                      deleteRecipe={() => this.deleteRecipe(recipe)}
                     />
-                  )
-                }
-              })}
+                  );
+                })}
+            </TabPanel>
+            <TabPanel value={this.state.tabVal} index={1}>
+              {this.state.users
+                .filter((u) => {
+                  return u.username === this.state.username;
+                })[0]
+                .liked.map((recipe_id) => {
+                  const recipe = this.state.recipes.filter((r) => {
+                    return r.recipeId === recipe_id;
+                  });
+                  if (recipe[0] != null) {
+                    return (
+                      <Thumbnail
+                        recipeName={recipe[0].recipeName}
+                        owner={recipe[0].owner}
+                        ingredients={recipe[0].ingredients}
+                        instructions={recipe[0].instructions}
+                        servingSize={recipe[0].servingSize}
+                        cookTimeHrs={recipe[0].cookTimeHrs}
+                        cookTimeMins={recipe[0].cookTimeMins}
+                        tags={recipe[0].tags}
+                        recipePhoto={recipe[0].recipePhoto}
+                        likes={recipe[0].likes}
+                      />
+                    );
+                  }
+                })}
             </TabPanel>
           </div>
         </div>
@@ -182,4 +207,4 @@ function TabPanel(props) {
   return <div>{value === index && children}</div>;
 }
 
-export default withRouter( UserProfile);
+export default withRouter(UserProfile);

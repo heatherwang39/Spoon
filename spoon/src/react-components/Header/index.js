@@ -33,7 +33,8 @@ class Header extends React.Component {
       },
     accountPages: [
       {
-        link: '../UserProfile/user1', //hard coded for now, not sure how this is impl in the end
+        // link: `../UserProfile/${state.username}`, //hard coded for now, not sure how this is impl in the end
+        link: `../UserProfile/user1`,
         name: 'my profile',
         mode: ['user', 'admin'],
         icon: SentimentSatisfiedIcon,
@@ -83,7 +84,7 @@ class Header extends React.Component {
 
     return (
       <div className="headerContainer">
-      {console.log(state)}
+      {/* {console.log(state)} */}
         <AppBar color="secondary">
           <Toolbar style={{paddingTop:"0.5%", paddingBottom:"0.5%"}}>
             {/* title/feed */}

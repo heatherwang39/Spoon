@@ -10,9 +10,7 @@ import UserInfo from './UserInfo';
 
 class ManageUsers extends React.Component {
   state = {
-    currInput: '',
-    searchedName:
-      null,
+    searchedName: '',
     users: data.allUsers,
   };
 
@@ -20,14 +18,11 @@ class ManageUsers extends React.Component {
     const target = event.target;
     const value = target.value.toLowerCase();
     this.setState({
-      currInput: value,
+      searchedName: value,
     });
   };
 
-  searchUser = (event) => {
-    this.setState({
-      searchedName: this.state.currInput,
-    });    
+  searchUser = () => {
     console.log(this.state.searchedName);
   };
 
