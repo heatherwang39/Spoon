@@ -26,12 +26,15 @@ class RecipeList extends React.Component {
           { 
             this.state.recipes
             .filter((r) => {
-                //tags
-                if ((r.tags.filter((tag) => {
-                  return tags[tag] === true
-                })).length != 0) 
-                  return true
-            })
+              //tags
+              if ((r.tags.filter((tag) => {
+                return tags[tag] === true
+              })).length !== 0) {
+                return true
+              } else {
+                return false
+              }
+              })
             .filter((r) => {
                 //duration
                 return r.cookTimeHrs * 60 + r.cookTimeMins <= duration[1] 
@@ -61,9 +64,9 @@ class RecipeList extends React.Component {
   }
 }
 
-function TabPanel(props) {
-  const { children, value, index } = props;
-  return <div>{value === index && children}</div>;
-}
+// function TabPanel(props) {
+//   const { children, value, index } = props;
+//   return <div>{value === index && children}</div>;
+// }
 
 export default RecipeList;
