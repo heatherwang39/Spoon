@@ -1,3 +1,5 @@
+//This file is the constructor for User class
+
 export class User {
   constructor(
     username,

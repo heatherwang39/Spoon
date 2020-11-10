@@ -1,8 +1,11 @@
+//These are hard coded user, recipe and tags data for phase 1. They will be replace by back-end call in phase 2.
+
 import { User } from '../types/user';
 import { Recipe } from '../types/recipe';
 
-/*{
-username: ”user”, // unique
+/*User Data Structure
+{
+username: "user”, // unique
 password: “user”,
 isAdmin: false,
 avatar:url,
@@ -10,7 +13,7 @@ followers: String[username1, username2, ...],
 following: String[username1, username2, ...],
 recipes: int[recipeId],
 liked: [recipeId],
-feed: [recipeId] // list of 9 or 12, kick out old ones when new ones come in
+feed: [recipeId] 
 }
 */
 
@@ -59,7 +62,8 @@ export const user4 = new User(
   [1]
 );
 
-/*{
+/*Recipe Data Structure
+{
   recipeId:int, // unique
   recipeName: “”,
   owner:the owner's username,
@@ -175,6 +179,7 @@ export const recipe5 = new Recipe(
   2
 );
 
+//hard coded tags, will be replaced by back end call in phase 2
 export const tags = {
   Breakfast: [2, 5],
   Lunch: [1, 2, 3, 4, 5],
