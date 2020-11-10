@@ -80,7 +80,7 @@ class RecipePopup extends React.Component {
           </DialogTitle>
           <DialogContent dividers>
             <img className="recipe-photo" src={recipePhoto} alt="food" />
-            <div class="recipe-popout-text-flex">
+            <div className="recipe-popout-text-flex">
               <Typography variant="h6" color="secondary">
                 Serving Size:
               </Typography>
@@ -92,7 +92,7 @@ class RecipePopup extends React.Component {
                 {servingSize}
               </Typography>
             </div>
-            <div class="recipe-popout-text-flex">
+            <div className="recipe-popout-text-flex">
               <Typography variant="h6" color="secondary">
                 Cook Time:
               </Typography>
@@ -104,7 +104,7 @@ class RecipePopup extends React.Component {
                 {cookTimeHrs} Hour(s) and {cookTimeMins} Minutes
               </Typography>
             </div>
-            <div class="recipe-popout-text-flex">
+            <div className="recipe-popout-text-flex">
               <Typography variant="h6" color="secondary">
                 Tags:
               </Typography>
