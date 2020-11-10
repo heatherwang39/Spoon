@@ -8,6 +8,7 @@ import './styles.css';
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
 import { uid } from 'react-uid';
+import { SignalCellularNullRounded } from '@material-ui/icons';
 
 class Feed extends React.Component {
   state = {
@@ -37,41 +38,42 @@ class Feed extends React.Component {
           textColor="secondary"
           style={{ float: 'left' }}
         >
-          <Tab label="Feed" disableRipple/>
+          
           {this.state.userMode !== 'guest' ? (
-            <Tab label="Discover" disableRipple/>
+            <Tab label="Feed" disableRipple/>
           ) : null }
+          <Tab label="Discover" disableRipple/>
         </Tabs>
       <div className="feed">
         <Header state={appState} />
-        <TabPanel value={this.state.tabVal} index={0}>
-          <p className="feed-message">
-            See latest recipes from the chefs you are following!
-          </p>
-          {this.state.users.filter((u) =>  {
-              return u.username === this.state.user
-            })[0].feed.map((recipe_id) => {
-              const recipe = this.state.recipes.filter((r) => {
-                return r.recipeId === recipe_id
-              });
-              return (
-                <Thumbnail
-                  recipeName={recipe[0].recipeName}
-                  owner={recipe[0].owner}
-                  ingredients={recipe[0].ingredients}
-                  instructions={recipe[0].instructions}
-                  servingSize={recipe[0].servingSize}
-                  cookTimeHrs={recipe[0].cookTimeHrs}
-                  cookTimeMins={recipe[0].cookTimeMins}
-                  tags={recipe[0].tags}
-                  recipePhoto={recipe[0].recipePhoto}
-                  likes={recipe[0].likes}
-                  key={uid(recipe[0])}
-                />
-              );
-            })}
-        </TabPanel>
-        <TabPanel value={this.state.tabVal} index={1}>
+          <TabPanel value={this.state.tabVal} index={this.state.userMode !== 'guest' ? 0 : null}>
+            <p className="feed-message">
+              See latest recipes from the chefs you are following!
+            </p>
+            {this.state.users.filter((u) =>  {
+                return u.username === this.state.user
+              })[0].feed.map((recipe_id) => {
+                const recipe = this.state.recipes.filter((r) => {
+                  return r.recipeId === recipe_id
+                });
+                return (
+                  <Thumbnail
+                    recipeName={recipe[0].recipeName}
+                    owner={recipe[0].owner}
+                    ingredients={recipe[0].ingredients}
+                    instructions={recipe[0].instructions}
+                    servingSize={recipe[0].servingSize}
+                    cookTimeHrs={recipe[0].cookTimeHrs}
+                    cookTimeMins={recipe[0].cookTimeMins}
+                    tags={recipe[0].tags}
+                    recipePhoto={recipe[0].recipePhoto}
+                    likes={recipe[0].likes}
+                    key={uid(recipe[0])}
+                  />
+                );
+              })}
+          </TabPanel>
+        <TabPanel value={this.state.tabVal} index={this.state.userMode !== 'guest' ? 1 : 0}>
           <p className="feed-message">
             See the newest recipes posted onto Spoon!
           </p>
