@@ -94,6 +94,10 @@
                 disableRipple
               >
                 Sign In
+                {/* Here is where we would 
+                validate the user's login, 
+                and retrieve their account 
+                information from the backend. */}
               </Button>
               </Grid>
             <Grid item xs={12}>

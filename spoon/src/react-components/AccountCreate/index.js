@@ -92,6 +92,10 @@ class AccountCreate extends React.Component {
               disableRipple
             >
               Sign Up
+               {/* Here is where we would 
+                create a new account in 
+                the backend (username and
+                password both are entered). */}
             </Button>
             </Grid>
 

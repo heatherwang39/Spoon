@@ -9,8 +9,8 @@ import Thumbnail from '../Thumbnail';
 class RecipeList extends React.Component {
   state = {
     color: 'secondary',
-    recipes: data.allRecipes,
-    users: data.allUsers,
+    recipes: data.allRecipes, // Here we have mock data, but this is where we would retrieve all the backend
+                              // recipe data for searching
   };
 
   closePopup = () => {
@@ -19,8 +19,6 @@ class RecipeList extends React.Component {
 
   render() {
     const { tags, duration, searched } = this.props;
-    // this.setState({username: useLocation()})
-    // const { username } = this.props.location.state;
     return (
       <div>
         {this.state.recipes
@@ -31,7 +29,7 @@ class RecipeList extends React.Component {
                 return tags[tag] === true;
               }).length !== 0
             ) {
-              return true;
+              return true;to 
             } else {
               return false;
             }
@@ -68,10 +66,5 @@ class RecipeList extends React.Component {
     );
   }
 }
-
-// function TabPanel(props) {
-//   const { children, value, index } = props;
-//   return <div>{value === index && children}</div>;
-// }
 
 export default RecipeList;
