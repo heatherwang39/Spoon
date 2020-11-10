@@ -19,15 +19,15 @@ class UserProfile extends React.Component {
   state = {
     tabVal: 0,
     own: false, // Whether or not this is the user's own page
-    username: 'user1',
-    follow: false,
-    followers: '2',
+    username: 'user1', // back-end call
+    follow: false, // back-end call
+    followers: '2', // back-end call
     color: 'secondary',
-    recipes: data.allRecipes,
-    users: data.allUsers,
+    recipes: data.allRecipes, // back-end call
+    users: data.allUsers, // back-end call
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
-    og_tags: {
+    og_tags: { // back-end call
       Breakfast: false,
       Lunch: false,
       Dinner: false,
@@ -41,7 +41,11 @@ class UserProfile extends React.Component {
     const pathname = this.props.location.pathname;
     const username = pathname.slice(pathname.lastIndexOf('/') + 1);
     const own = this.props.appState.username === username;
-    this.setState({ username: username, own: own });
+    const user = this.state.users.filter((u) => {
+      return u.username === username
+    });
+    const followers = user[0].followers.length;
+    this.setState({ username: username, own: own, followers: followers });
   }
 
   editRecipe = (recipe) => {
