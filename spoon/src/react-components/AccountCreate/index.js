@@ -9,7 +9,34 @@ import Header from '../Header';
 class AccountCreate extends React.Component {
   state = {
     message: "",
+    username: "",
+    password: "",
     header: (<Header state={this.props.appState} />)
+  }
+  
+  componentDidMount(){
+    const newState = {username: "guest", userMode: "guest"}
+    this.setState({
+      header: (<Header state={newState} />)
+    })
+  }
+
+  handleInputChange = (event) => {
+    const name = event.target.name;
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
+  check = () => {
+    if (this.state.password === "" || this.state.username === ""){
+      this.setState({message:
+        "Please enter a username and password."}
+      )
+    }
+    else {
+      this.success()
+    }
   }
 
   success = () => {
@@ -20,6 +47,10 @@ class AccountCreate extends React.Component {
     this.setState({message:
       "You have successfully signed up for an account!"}
     )
+    this.setState({
+      username: "",
+      password: ""
+    })
   }
 
   render() {
@@ -29,24 +60,22 @@ class AccountCreate extends React.Component {
         <Grid container justify="center" alignItems="center" spacing={1}>
           <Grid item xs={5}>
             <TextField
-              //   value={searchedKeyword}
-              //   onChange={handleInputChange}
+              name="username"
+              value={this.state.username}
+              onChange={this.handleInputChange}
               type="text"
-              name=""
-              placeholder="e.g. user1"
+              placeholder="e.g. user"
               label="Username"
               variant="outlined"
               fullWidth
             />
           </Grid>
-
           <Grid item xs={5}>
             <TextField
-              //   value={searchedKeyword}
-              //   onChange={handleInputChange}
-              // type="text"
-              name=""
-              placeholder="e.g. user1"
+              name="password"
+              value={this.state.password}
+              onChange={this.handleInputChange}
+              placeholder="e.g. user"
               label="Password"
               variant="outlined"
               type="password"
@@ -56,7 +85,7 @@ class AccountCreate extends React.Component {
 
           <Grid item xs={12}>
             <Button
-              onClick={this.success}
+              onClick={this.check}
               variant="outlined"
               color="secondary"
               size="large"
@@ -64,8 +93,9 @@ class AccountCreate extends React.Component {
               Sign Up
             </Button>
             </Grid>
+
           <Grid item xs={12}>
-          <Typography>{this.state.message}</Typography>
+            <Typography>{this.state.message}</Typography>
           </Grid>
 
         </Grid>
