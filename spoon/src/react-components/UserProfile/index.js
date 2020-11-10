@@ -57,9 +57,15 @@ class UserProfile extends React.Component {
           tags.map((tag) => new_tags.push(tag.toString()));
         }
         if (new_tags) {
-          new_tags.map((tag) => (this.state.og_tags[tag] = true));
+          const og_tags = this.state.og_tags
+          for (let i = 0; i < new_tags.length; i++) {
+            console.log(new_tags[i])
+            og_tags[new_tags[i]] = true
+          }
+          this.setState({
+              og_tags: og_tags
+          })
         }
-        console.log(this.state.og_tags);
       }
     );
   };
@@ -104,10 +110,6 @@ class UserProfile extends React.Component {
 
   render() {
     const { editOpen } = this.state;
-    // const { appState } = this.props;
-    // console.log(`appstate: {appState}`, appState)
-    // this.setState({username: useLocation()})
-    // const { username } = this.props.location.state;
     return (
       <div>
         <Header state={this.props.appState} />
@@ -198,6 +200,7 @@ class UserProfile extends React.Component {
                         tags={recipe[0].tags}
                         recipePhoto={recipe[0].recipePhoto}
                         likes={recipe[0].likes}
+                        key={uid(recipe[0])}
                       />
                     );
                   } else {
