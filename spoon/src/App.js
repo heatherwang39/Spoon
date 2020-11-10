@@ -13,7 +13,7 @@ import LogOut from './react-components/LogOut';
 
 class App extends React.Component {
   state = {
-    userMode: 'admin',
+    userMode: 'user',
     username: 'user1',
   };
 
@@ -34,9 +34,9 @@ class App extends React.Component {
               path="/Feed"
               render={() => <Feed appState={this.state} />}
             />
-            <Route 
+            <Route
               exact
-              path='/UserProfile/:id'
+              path="/UserProfile/:id"
               render={() => <UserProfile appState={this.state} />}
             />
             <Route

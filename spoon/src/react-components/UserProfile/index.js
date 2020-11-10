@@ -5,6 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import { uid } from 'react-uid';
 
 import './styles.css';
 import * as data from '../../api/data';
@@ -20,7 +21,7 @@ class UserProfile extends React.Component {
     own: false, // Whether or not this is the user's own page
     username: 'user1',
     follow: false,
-    followers: 420,
+    followers: '2',
     color: 'secondary',
     recipes: data.allRecipes,
     users: data.allUsers,
@@ -56,9 +57,15 @@ class UserProfile extends React.Component {
           tags.map((tag) => new_tags.push(tag.toString()));
         }
         if (new_tags) {
-          new_tags.map((tag) => (this.state.og_tags[tag] = true));
+          const og_tags = this.state.og_tags
+          for (let i = 0; i < new_tags.length; i++) {
+            console.log(new_tags[i])
+            og_tags[new_tags[i]] = true
+          }
+          this.setState({
+              og_tags: og_tags
+          })
         }
-        console.log(this.state.og_tags);
       }
     );
   };
@@ -103,10 +110,6 @@ class UserProfile extends React.Component {
 
   render() {
     const { editOpen } = this.state;
-    // const { appState } = this.props;
-    // console.log(`appstate: {appState}`, appState)
-    // this.setState({username: useLocation()})
-    // const { username } = this.props.location.state;
     return (
       <div>
         <Header state={this.props.appState} />
@@ -170,6 +173,7 @@ class UserProfile extends React.Component {
                       own={this.state.own}
                       editRecipe={() => this.editRecipe(recipe)}
                       deleteRecipe={() => this.deleteRecipe(recipe)}
+                      key={uid(recipe)}
                     />
                   );
                 })}
@@ -196,9 +200,12 @@ class UserProfile extends React.Component {
                         tags={recipe[0].tags}
                         recipePhoto={recipe[0].recipePhoto}
                         likes={recipe[0].likes}
+                        key={uid(recipe[0])}
                       />
                     );
-                  } else { return <div></div> }
+                  } else {
+                    return <div></div>;
+                  }
                 })}
             </TabPanel>
           </div>
@@ -227,4 +234,3 @@ function TabPanel(props) {
 }
 
 export default withRouter(UserProfile);
-

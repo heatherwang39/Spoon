@@ -67,6 +67,7 @@ class UserInfo extends React.Component {
                         variant="contained"
                         color="secondary"
                         startIcon={<DeleteIcon />}
+                        disableRipple
                       >
                         Delete
                       </Button>
