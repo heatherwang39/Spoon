@@ -1,3 +1,15 @@
 .headerContainer {
   width: max-content;
 }
+.menuText {
+  color: 'white';
+  margin-right: '4px';
+}
+.menuIcon {
+  color: 'white';
+}
+
+.style {
+   padding-top: '0.5%';
+   padding-bottom: '0.5%' 
+}

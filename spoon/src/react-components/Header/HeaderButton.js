@@ -21,12 +21,8 @@ class HeaderButton extends React.Component {
               borderColor: 'white',
             }}
           >
-            <PageIcon style={{ color: 'white' }}/>
-            <Typography
-              noWrap
-              variant="button"
-              style={{ color: 'white', marginRight: '4px' }}
-            >
+            <PageIcon className="menuIcon" />
+            <Typography noWrap variant="button" className="menuText">
               {page.name}
             </Typography>
           </Button>

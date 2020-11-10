@@ -13,7 +13,7 @@ import SignIn from './react-components/SignIn';
 
 class App extends React.Component {
   state = {
-    userMode: 'user',
+    userMode: 'admin',
     username: 'user1',
   };
 

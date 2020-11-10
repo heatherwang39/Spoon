@@ -93,11 +93,11 @@ class DropDownMenu extends React.Component {
             onClick={this.handleClick}
             ref={this.state.anchorRef}
           >
-            <MenuIcon style={{ color: 'white' }} />
+            <MenuIcon className = "menuIcon" />
             <Typography
               noWrap
               variant="button"
-              style={{ color: 'white', marginRight: '4px' }}
+              className="menuText"
             >
               {menu}
             </Typography>

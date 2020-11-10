@@ -91,6 +91,7 @@
                 variant="outlined"
                 color="secondary"
                 size="large"
+                disableRipple
               >
                 Sign In
               </Button>

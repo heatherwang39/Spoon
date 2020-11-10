@@ -25,38 +25,38 @@ class Header extends React.Component {
     //an array, in case we need to add more in the future
     search: {
       link: '../Search',
-      name: 'search',
+      name: 'SEARCH',
       mode: ['user', 'admin', 'guest'],
       icon: SearchIcon,
     },
     accountPages: [
       {
         link: `../UserProfile/${this.props.state.username}`,
-        name: 'my profile',
+        name: 'My Profile',
         mode: ['user', 'admin'],
         icon: SentimentSatisfiedIcon,
       },
       {
         link: '../AccountCreate',
-        name: 'sign up',
+        name: 'Sign Up',
         mode: ['guest'],
         icon: PersonAddIcon,
       },
       {
         link: '../SignIn',
-        name: 'sign in',
+        name: 'Sign In',
         mode: ['guest'],
         icon: SentimentSatisfiedIcon,
       },
       {
         link: '../RecipeCreate',
-        name: 'create recipe',
+        name: 'Create Recipe',
         mode: ['user', 'admin'],
         icon: PostAddIcon,
       },
       {
         link: '../SignIn',
-        name: 'log out',
+        name: 'Log Out',
         mode: ['user', 'admin'],
         icon: ExitToAppIcon,
       },
@@ -64,13 +64,13 @@ class Header extends React.Component {
     managePages: [
       {
         link: '../ManageUsers',
-        name: 'users',
+        name: 'Users',
         mode: ['admin'],
         icon: PeopleIcon,
       },
       {
         link: '../ManageRecipes',
-        name: 'recipes',
+        name: 'Recipes',
         mode: ['admin'],
         icon: DnsIcon,
       },
@@ -82,12 +82,10 @@ class Header extends React.Component {
 
     return (
       <div className="headerContainer">
-        {/* {console.log(state)} */}
         <AppBar color="secondary">
-          <Toolbar style={{ paddingTop: '0.5%', paddingBottom: '0.5%' }}>
+          <Toolbar className="toolbar">
             {/* title/feed */}
             <Link
-            
               href={'../'}
               style={{ textDecoration: 'none', color: 'unset' }}
             >

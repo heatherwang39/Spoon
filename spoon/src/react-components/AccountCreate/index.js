@@ -89,6 +89,7 @@ class AccountCreate extends React.Component {
               variant="outlined"
               color="secondary"
               size="large"
+              disableRipple
             >
               Sign Up
             </Button>
