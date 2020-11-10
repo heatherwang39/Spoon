@@ -79,7 +79,7 @@ class RecipePopup extends React.Component {
             </Grid>
           </DialogTitle>
           <DialogContent dividers>
-            <img className="recipe-photo" src={recipePhoto} alt="food"/>
+            <img className="recipe-photo" src={recipePhoto} alt="food" />
             <div style={{ display: 'flex' }}>
               <Typography variant="h6" color="secondary">
                 Serving Size:
@@ -121,15 +121,15 @@ class RecipePopup extends React.Component {
             </Typography>
             {ingredients.map((i, key) => {
               return (
-                <li key={key}>
+                <div key={key}>
                   <Typography
                     variant="body1"
                     color="textSecondary"
                     align="left"
                   >
-                    {i}
+                    • {i}
                   </Typography>
-                </li>
+                </div>
               );
             })}
             <Typography variant="h6" color="secondary" align="left">
