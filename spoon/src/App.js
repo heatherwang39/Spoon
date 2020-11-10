@@ -13,7 +13,7 @@ import LogOut from './react-components/LogOut';
 
 class App extends React.Component {
   state = {
-    userMode: 'admin',
+    userMode: 'guest',
     username: 'user1',
   };
 
