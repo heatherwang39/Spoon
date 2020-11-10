@@ -5,8 +5,8 @@
   import Typography from '@material-ui/core/Typography';
 
   import Header from '../Header';
-  //  "log out" takes you to this, which is the sign in page
-  class LogOut extends React.Component {
+  // this is both the sign in page and the page you get taken to when you log out
+  class SignIn extends React.Component {
     state = {
       message: "",
       password: "",
@@ -105,4 +105,4 @@
    }
  }
 
- export default LogOut;
+ export default SignIn;

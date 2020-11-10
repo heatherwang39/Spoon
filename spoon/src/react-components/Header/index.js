@@ -43,7 +43,7 @@ class Header extends React.Component {
         icon: PersonAddIcon,
       },
       {
-        link: '../LogOut',
+        link: '../SignIn',
         name: 'sign in',
         mode: ['guest'],
         icon: SentimentSatisfiedIcon,
@@ -55,7 +55,7 @@ class Header extends React.Component {
         icon: PostAddIcon,
       },
       {
-        link: '../LogOut',
+        link: '../SignIn',
         name: 'log out',
         mode: ['user', 'admin'],
         icon: ExitToAppIcon,

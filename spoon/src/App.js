@@ -9,7 +9,7 @@ import ManageRecipes from './react-components/ManageRecipes';
 import Search from './react-components/Search';
 import RecipeCreate from './react-components/RecipeCreate';
 import AccountCreate from './react-components/AccountCreate';
-import LogOut from './react-components/LogOut';
+import SignIn from './react-components/SignIn';
 
 class App extends React.Component {
   state = {
@@ -66,8 +66,8 @@ class App extends React.Component {
             />
             <Route
               exact
-              path="/LogOut"
-              render={() => <LogOut appState={this.state} />}
+              path="/SignIn"
+              render={() => <SignIn appState={this.state} />}
             />
           </Switch>
         </BrowserRouter>
