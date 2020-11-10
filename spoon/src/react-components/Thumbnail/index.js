@@ -14,7 +14,7 @@ class Thumbnail extends React.Component {
   state = {
     open: false, // Whether or not the recipe popup is open
     liked: false,
-    likes: this.props.likes,
+    likes: this.props.likes, //this would be back-end call in phase 2
   };
 
   openPopup = () => {
@@ -74,20 +74,13 @@ class Thumbnail extends React.Component {
             </Button>
             <Typography color="secondary">{this.state.likes}</Typography>
           </div>
-          <img
-            className="thumbnail-picture"
-            src={recipePhoto}
-            alt="Recipe"
-          />
+          <img className="thumbnail-picture" src={recipePhoto} alt="Recipe" />
         </div>
         <div className="thumbnail-recipe-name">
           <p className="thumbnail-recipe-name">{recipeName}</p>
         </div>
         <div className="thumbnail-username">
-          <Link
-            className="text-link"
-            to={`../UserProfile/${owner}`}
-          >
+          <Link className="text-link" to={`../UserProfile/${owner}`}>
             <p className="thumbnail-username">{owner}</p>
           </Link>
         </div>
