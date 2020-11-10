@@ -13,8 +13,8 @@ import SignIn from './react-components/SignIn';
 
 class App extends React.Component {
   state = {
-    userMode: 'guest',
-    username: 'user2',
+    userMode: 'user',
+    username: 'user1',
   };
 
   render() {
