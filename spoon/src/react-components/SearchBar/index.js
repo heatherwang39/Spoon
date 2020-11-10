@@ -33,6 +33,7 @@ class SearchBar extends React.Component {
               variant="contained"
               color="secondary"
               size="large"
+              disableRipple
             >
               Search
             </Button>

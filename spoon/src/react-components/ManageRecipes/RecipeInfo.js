@@ -62,6 +62,7 @@ class RecipeInfo extends React.Component {
             variant="contained"
             color="secondary"
             startIcon={<DeleteIcon />}
+            disableRipple
           >
             Delete
           </Button>

@@ -34,9 +34,9 @@ class App extends React.Component {
               path="/Feed"
               render={() => <Feed appState={this.state} />}
             />
-            <Route 
+            <Route
               exact
-              path='/UserProfile/:id'
+              path="/UserProfile/:id"
               render={() => <UserProfile appState={this.state} />}
             />
             <Route
