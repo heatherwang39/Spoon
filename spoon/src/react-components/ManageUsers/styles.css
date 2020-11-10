@@ -21,3 +21,8 @@ body {
 .infoArea {
   margin-top: 30px;
 }
+
+.user-info-link {
+  text-decoration: none;
+  color: 'unset';
+}

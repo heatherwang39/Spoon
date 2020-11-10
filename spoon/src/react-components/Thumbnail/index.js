@@ -64,10 +64,10 @@ class Thumbnail extends React.Component {
           <div className="thumbnail-hover" onClick={this.openPopup} />
           <div className="thumbnail-likes">
             <Button
+              className="recipe-like-button"
               color="secondary"
               disableRipple
               onClick={this.handleLike}
-              style={{ backgroundColor: 'transparent' }}
             >
               {!this.state.liked && <FavoriteOutlined />}
               {this.state.liked && <FavoriteIcon />}

@@ -134,3 +134,7 @@ p.thumbnail-username {
   text-decoration: inherit;
   font-family: inherit;
 }
+
+.recipe-like-button {
+  background-color: transparent;
+}
