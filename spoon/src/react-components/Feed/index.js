@@ -31,7 +31,7 @@ class Feed extends React.Component {
     return (
       <div>
         <Tabs
-          className="tab-float"
+          className="feed-side-bar"
           value={this.state.tabVal}
           onChange={this.handleTabs}
           orientation="vertical"
