@@ -13,7 +13,11 @@ import LogOut from './react-components/LogOut';
 
 class App extends React.Component {
   state = {
+<<<<<<< HEAD
     userMode: 'admin',
+=======
+    userMode: 'user',
+>>>>>>> 319210be75d9b4647345729d582a62c536bfeac7
     username: 'user1',
   };
 
