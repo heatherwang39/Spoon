@@ -8,7 +8,6 @@ import './styles.css';
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
 import { uid } from 'react-uid';
-import { SignalCellularNullRounded } from '@material-ui/icons';
 
 class Feed extends React.Component {
   state = {
