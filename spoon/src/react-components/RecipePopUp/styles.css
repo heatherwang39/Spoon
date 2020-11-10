@@ -12,3 +12,12 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.recipe-popout-text-flex {
+  display: flex;
+}
+
+.recipe-popout-text-margin {
+  padding-left: 10px;
+}
+

@@ -80,38 +80,38 @@ class RecipePopup extends React.Component {
           </DialogTitle>
           <DialogContent dividers>
             <img className="recipe-photo" src={recipePhoto} alt="food" />
-            <div style={{ display: 'flex' }}>
+            <div class="recipe-popout-text-flex">
               <Typography variant="h6" color="secondary">
                 Serving Size:
               </Typography>
               <Typography
+                className="recipe-popout-text-margin"
                 variant="h6"
                 color="textSecondary"
-                style={{ marginLeft: 10 }}
               >
                 {servingSize}
               </Typography>
             </div>
-            <div style={{ display: 'flex' }}>
+            <div class="recipe-popout-text-flex">
               <Typography variant="h6" color="secondary">
                 Cook Time:
               </Typography>
               <Typography
+                className="recipe-popout-text-margin"
                 variant="h6"
                 color="textSecondary"
-                style={{ marginLeft: 10 }}
               >
                 {cookTimeHrs} Hour(s) and {cookTimeMins} Minutes
               </Typography>
             </div>
-            <div style={{ display: 'flex' }}>
+            <div class="recipe-popout-text-flex">
               <Typography variant="h6" color="secondary">
                 Tags:
               </Typography>
               <Typography
+                className="recipe-popout-text-margin"
                 variant="h6"
                 color="textSecondary"
-                style={{ marginLeft: 10 }}
               >
                 {tags.join(', ')}
               </Typography>
@@ -146,7 +146,6 @@ class RecipePopup extends React.Component {
                     {i}
                   </Typography>
                   <br />
-                  <br />
                 </div>
               );
             })}
@@ -158,3 +157,4 @@ class RecipePopup extends React.Component {
 }
 
 export default RecipePopup;
+
