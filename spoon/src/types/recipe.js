@@ -1,3 +1,5 @@
+//This file is the constructor for Recipe class
+
 export class Recipe {
   constructor(
     recipeId,
