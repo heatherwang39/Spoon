@@ -29,7 +29,7 @@ class RecipeList extends React.Component {
                 return tags[tag] === true;
               }).length !== 0
             ) {
-              return true;to 
+              return true;
             } else {
               return false;
             }
