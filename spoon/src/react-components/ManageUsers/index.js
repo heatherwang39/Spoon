@@ -11,7 +11,7 @@ import UserInfo from './UserInfo';
 class ManageUsers extends React.Component {
   state = {
     searchedName: '',
-    users: data.allUsers,
+    users: data.allUsers, //this should be back-end call in phase 2
   };
 
   handleInputChange = (event) => {

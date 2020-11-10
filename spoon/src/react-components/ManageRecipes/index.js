@@ -11,7 +11,7 @@ import RecipeList from './RecipeList';
 class ManageRecipes extends React.Component {
   state = {
     searchedRecipe: '',
-    recipes: data.allRecipes,
+    recipes: data.allRecipes, //this should be back-end call in phase 2
   };
 
   handleInputChange = (event) => {
