@@ -31,11 +31,11 @@ class Feed extends React.Component {
     return (
       <div>
         <Tabs
+          className="tab-float"
           value={this.state.tabVal}
           onChange={this.handleTabs}
           orientation="vertical"
           textColor="secondary"
-          style={{ float: 'left' }}
         >
           
           {this.state.userMode !== 'guest' ? (

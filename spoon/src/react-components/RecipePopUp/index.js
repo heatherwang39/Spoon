@@ -62,10 +62,10 @@ class RecipePopup extends React.Component {
               </Grid>
               <Grid item>
                 <Button
+                  className="recipe-like-button"
                   color="primary"
                   disableRipple
                   onClick={handleLike}
-                  style={{ backgroundColor: 'transparent' }}
                 >
                   {!liked && <FavoriteOutlined />}
                   {liked && <FavoriteIcon />}

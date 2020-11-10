@@ -7,7 +7,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import faker from 'faker';
 import { uid } from 'react-uid';
 
-// delete
 import { Link } from 'react-router-dom';
 
 import './styles.css';
@@ -74,7 +73,7 @@ class UserInfo extends React.Component {
                     ) : (
                       <Button variant="contained" color="secondary">
                         <Link
-                          style={{ textDecoration: 'none', color: 'unset' }}
+                          className="user-info-link"
                           to={`../UserProfile/${user.username}`}
                         >
                           View profile

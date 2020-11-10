@@ -86,14 +86,14 @@ export const recipe1 = new Recipe(
     '1.Place the warm water in the large bowl of a heavy duty stand mixer. Sprinkle the yeast over the warm water and let it sit for 5 minutes until the yeast is dissolved.',
     '2.Add the flour, salt, sugar, and olive oil, and using the mixing paddle attachment, mix on low speed for a minute. Then replace the mixing paddle with the dough hook attachment.',
     '3.Let the dough rise: Spread a thin layer of olive oil over the inside of a large bowl. Place the pizza dough in the bowl and turn it around so that it gets coated with the oil.',
-    '4.Make ahead freezing',
-    '5.Sprinkle pizza peel with corn meal, put flattened dough on top',
+    '4.Make ahead freezing.',
+    '5.Sprinkle pizza peel with corn meal, put flattened dough on top.',
   ],
   4,
   1,
   45,
   ['Lunch', 'Dinner', 'NutFree'],
-  'https://www.simplyrecipes.com/wp-content/uploads/2019/09/easy-pepperoni-pizza-lead-4.jpg',
+  'https://media4.s-nbcnews.com/j/newscms/2020_09/3246761/plain_pizza_f431dcc55520ce41f835a97a5383f171.fit-760w.jpg',
   4
 );
 
