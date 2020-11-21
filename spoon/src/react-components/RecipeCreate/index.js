@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import './styles.css';
 import Header from '../Header';
@@ -20,7 +21,7 @@ class RecipeCreate extends React.Component {
     tags: {
       Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, NutFree: false
     },
-    recipePhoto: '',
+    recipePhoto: 'https://www.lesgeveninzeeland.nl/storage/media/350/placeholder.png',
     likes: '',
   };
 
@@ -30,6 +31,17 @@ class RecipeCreate extends React.Component {
     const newtags = {...this.state.tags, [name] : target.checked}
     this.setState({
       tags: newtags,
+    });
+  };
+
+  onPhotoUpload = (event) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      this.setState({ recipePhoto: reader.result });
+    });
+    reader.readAsDataURL(event.target.files[0]);
+    this.setState({
+      recipePhoto: event.target.files[0],
     });
   };
 
@@ -157,31 +169,28 @@ class RecipeCreate extends React.Component {
             </Grid>
             <br />
             <Grid item xs={12}>
-              <TextField
-                required
-                onChange={this.handleInputChange}
-                type="url"
-                name="recipePhoto"
-                label="Recipe Photo URL"
-                variant="outlined"
-                fullWidth
-              />
-            </Grid>
-            <br />
-            <Grid item xs={12}>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={this.previewImage}
-              >
-                Preview Photo
-              </Button>
-              {/* </label> */}
+              <label htmlFor="createRecipePhoto">
+                <input
+                  accept="image/*"
+                  id="createRecipePhoto"
+                  type="file"
+                  onChange={this.onPhotoUpload}
+                />
+                <Button
+                  component="span"
+                  variant="contained"
+                  color="secondary"
+                  name="createRecipePhoto"
+                  startIcon={<CloudUploadIcon />}
+                >
+                  Upload Photo*
+                </Button>
+              </label>
             </Grid>
           </Grid>
           <Grid item xs={6}>
             <img
-              src="https://www.lesgeveninzeeland.nl/storage/media/350/placeholder.png"
+              src={this.state.recipePhoto}
               alt="food"
               id="placeholderRecipeCreateImage"
             />
