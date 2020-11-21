@@ -50,8 +50,9 @@ div.thumbnail-picture {
 
 .thumbnail-likes {
   position: absolute;
-  width: 20%;
-  margin: 40%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   opacity: 0;
   transition: 0.5s ease;
   text-align: center;
@@ -65,7 +66,7 @@ img.thumbnail-picture {
   border-radius: 5%;
   min-height: 100%;
   min-width: 100%;
-  object-fit: none;
+  object-fit: cover;
   object-position: center;
   transition: 0.5s ease;
   max-width: 30%;
