@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 import './styles.css';
 
@@ -46,6 +47,17 @@ class RecipeEdit extends React.Component {
     const name = event.target.name;
     this.setState({
       [name]: event.target.value,
+    });
+  };
+
+  onPhotoUpload = (event) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      this.setState({ recipePhoto: reader.result });
+    });
+    reader.readAsDataURL(event.target.files[0]);
+    this.setState({
+      recipePhoto: event.target.files[0],
     });
   };
 
@@ -168,15 +180,23 @@ class RecipeEdit extends React.Component {
                 </Grid>
                 <br />
                 <Grid item xs={12}>
-                  <TextField
-                    value={this.state.recipePhoto}
-                    onChange={this.handleInputChange}
-                    type="url"
-                    name="recipePhoto"
-                    label="Recipe Photo URL"
-                    variant="outlined"
-                    fullWidth
-                  />
+                  <label htmlFor="createRecipePhoto">
+                    <input
+                      accept="image/*"
+                      id="createRecipePhoto"
+                      type="file"
+                      onChange={this.onPhotoUpload}
+                    />
+                    <Button
+                      component="span"
+                      variant="contained"
+                      color="secondary"
+                      name="createRecipePhoto"
+                      startIcon={<CloudUploadIcon />}
+                    >
+                      Upload New Photo*
+                    </Button>
+                  </label>
                 </Grid>
               </Grid>
               <Grid item xs={6}>
