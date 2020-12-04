@@ -14,7 +14,7 @@ class UserSearch extends React.Component {
 
   componentDidMount(){
     //get users
-    fetch('http://localhost:5000/api/users')
+    fetch('/users')
     .then((res) => { 
       if (res.status === 200) {
           // return a promise that resolves with the JSON body
