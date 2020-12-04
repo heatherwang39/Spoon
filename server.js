@@ -52,6 +52,47 @@ const mongoChecker = (req, res, next) => {
 // Serve the build
 app.use(express.static(path.join(__dirname, "/client/build")));
 
+// Route for adding a user
+/* 
+Request body expects:
+{
+  "username": <username>,
+  "password": <password>,
+  "isAdmin": <boolean>
+}
+Returned JSON should be the database document added.
+*/
+// POST /users
+app.post('/users', mongoChecker, (req, res) => {
+
+	// Create a new restaurant
+	const user = new User({
+    username: req.body.username,
+    password: req.body.password,
+    isAdmin: req.body.isAdmin,
+		avatar: "",
+    followers: [],
+    following: [],
+    recipes: [],
+    liked: [],
+    feed: []
+	})
+
+	user.save().then((user) => {
+		res.send(user)
+	}).catch((error) => {
+		// log server error to the console, not to the client.
+		log(error)
+    // check for if mongo server suddenly dissconnected before this request.
+    if (isMongoError(error)) { 
+      res.status(500).send('Internal server error')
+    } else {
+      // 400 for bad request gets sent to client.
+      res.status(400).send('Bad Request') 
+    }
+	})
+})
+
 /*************************************************/
 // Express server listening...
 const port = process.env.PORT || 5000;
