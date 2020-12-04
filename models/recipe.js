@@ -1,12 +1,12 @@
 // Recipe mongoose model
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const Recipe = mongoose.model('Recipe', {
-  recipeId: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
+const Recipe = mongoose.model("Recipe", {
+  // recipeId: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   required: true,
+  // },
   recipeName: {
     type: String,
     required: true,
@@ -14,15 +14,15 @@ const Recipe = mongoose.model('Recipe', {
     trim: true,
   },
   owner: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId, //stores the _id of the user
     required: true,
   },
   ingredients: {
-    type: Array,
+    type: [String],
     required: true,
   },
   instructions: {
-    type: Array,
+    type: [String],
     required: true,
   },
   servingSize: {
@@ -40,7 +40,7 @@ const Recipe = mongoose.model('Recipe', {
     min: 1,
   },
   tags: {
-    type: Array,
+    type: [String],
     required: true,
   },
   recipePhoto: {

@@ -1,8 +1,8 @@
 // User mongoose model
 
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const User = mongoose.model('User', {
+const User = mongoose.model("User", {
   username: {
     type: String,
     required: true,
@@ -24,23 +24,23 @@ const User = mongoose.model('User', {
     required: true,
   },
   followers: {
-    type: Array,
+    type: [mongoose.Schema.Types.ObjectId],
     required: true,
   },
   following: {
-    type: Array,
+    type: [mongoose.Schema.Types.ObjectId],
     required: true,
   },
   recipes: {
-    type: Array,
+    type: [mongoose.Schema.Types.ObjectId],
     required: true,
   },
   liked: {
-    type: Array,
+    type: [mongoose.Schema.Types.ObjectId],
     required: true,
   },
   feed: {
-    type: Array,
+    type: [mongoose.Schema.Types.ObjectId],
     required: true,
   },
 });
