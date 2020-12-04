@@ -89,13 +89,7 @@ class Header extends React.Component {
               href={'../'}
               style={{ textDecoration: 'none', color: 'unset' }}
             >
-              <Typography variant="h4">Spoon</Typography>
-            </Link>
-            <Link
-              href={'../'}
-              style={{ textDecoration: 'none', color: 'unset' }}
-            >
-              <LocalDiningOutlinedIcon fontSize="large" />
+              <img className="spoon_logo" src={require('./spoon_logo.png')} alt="Spoon Logo"/>
             </Link>
 
             {/* buttons */}
