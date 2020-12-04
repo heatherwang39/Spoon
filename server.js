@@ -91,7 +91,32 @@ app.post('/users', mongoChecker, (req, res) => {
       res.status(400).send('Bad Request') 
     }
 	})
-})
+});
+
+// Route for deleting a user
+// Returned JSON should be the database document removed
+// DELETE /users.:id
+app.delete('/users/:id', mongoChecker, (req, res) => {
+	const id = req.params.id
+
+	// Validate id
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send('Resource not found')
+		return;
+	}
+  
+  User.findByIdAndRemove(id).then((user) => {
+		if (!user) {
+			res.status(404).send()
+		} else {   
+			res.send(user)
+		}
+	})
+	.catch((error) => {
+		log(error)
+		res.status(500).send()
+	})
+});
 
 /*************************************************/
 // Express server listening...
