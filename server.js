@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 
 // express-session for managing user sessions
 const session = require("express-session");
+const { mongo } = require("mongoose");
 app.use(bodyParser.urlencoded({ extended: true }));
 
 function isMongoError(error) {
@@ -78,6 +79,7 @@ app.post('/users', mongoChecker, (req, res) => {
     feed: []
 	})
 
+  // add a user
 	user.save().then((user) => {
 		res.send(user)
 	}).catch((error) => {
@@ -94,7 +96,7 @@ app.post('/users', mongoChecker, (req, res) => {
 });
 
 // Route for deleting a user
-// Returned JSON should be the database document removed
+// Returned JSON should be the database document removed.
 // DELETE /users.:id
 app.delete('/users/:id', mongoChecker, (req, res) => {
 	const id = req.params.id
@@ -105,6 +107,7 @@ app.delete('/users/:id', mongoChecker, (req, res) => {
 		return;
 	}
   
+  // delete a user by their id
   User.findByIdAndRemove(id).then((user) => {
 		if (!user) {
 			res.status(404).send()
@@ -117,6 +120,50 @@ app.delete('/users/:id', mongoChecker, (req, res) => {
 		res.status(500).send()
 	})
 });
+
+// Route for making changes to a user
+// The body will be an array that consists of a list of changes to make to the
+// user:
+/*
+[
+  { "op": "replace", "path": "/year", "value": 4 },
+  { "op": "replace", "path": "/name", "value": "Jim" },
+  ...
+]
+Returned JSON should be the database document updated.
+*/
+// PATCH /users/:id
+app.patch('/users/:id', mongoChecker, (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;  // so that we don't run the rest of the handler.
+	}
+
+	// Find the fields to update and their values.
+	const fieldsToUpdate = {}
+	req.body.map((change) => {
+		const propertyToChange = change.path.substr(1) // getting rid of the '/' character
+		fieldsToUpdate[propertyToChange] = change.value
+	})
+
+	// update a user by their id
+	User.findOneAndUpdate({_id: id}, {$set: fieldsToUpdate}, {new: true, useFindAndModify: false}).then((user) => {
+		if (!user) {
+			res.status(404).send('Resource not found')
+		} else {   
+			res.send(user)
+		}
+	}).catch((error) => {
+		log(error)
+		if (isMongoError(error)) {
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request')
+		}
+	})
+})
 
 /*************************************************/
 // Express server listening...
