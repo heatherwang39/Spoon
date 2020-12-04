@@ -165,9 +165,117 @@ app.patch('/users/:id', mongoChecker, (req, res) => {
 	})
 })
 
+//get all users
+//returned json is list of users
+app.get('/users', async (req, res) => {
+	try {
+		const users = await User.find();
+		res.send(users)
+	} catch(error) {
+		log(error) // log server error to the console, not to the client.
+		if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
+		}
+	}
+})
+
+//get specific user
+//returned json is user document
+app.get('/users/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;  // so that we don't run the rest of the handler.
+	}
+
+	//check mongoose connection
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	//
+	User.findById(id).then((user) => {
+		if (!user) {
+			res.status(404).send('Resource not found') 
+		} else {
+			res.send({user})
+		}
+	})
+	.catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')  // server error
+	}) 
+})
+
+//add recipe
+//returned json is recipe document
+app.post('/recipes', async (req, res) => {
+	// log(req.body)
+
+	// check mongoose connection established.
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	}  
+
+	// Create a new student using the Student mongoose model
+	const recipe = new Student()
+	Object.assign(recipe, req.body)
+
+	student.save().then((result) => {
+		res.send(result)
+	}).catch((error) => {
+		log(error) // log server error to the console, not to the client.
+		if (isMongoError(error)) { // check for if mongo server suddenly dissconnected before this request.
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request') // 400 for bad request gets sent to client.
+		}
+	})
+
+})
+
+//delete recipe
+//returned json is recipe document
+app.delete('/api/students/:id', async (req, res) => {
+	const id = req.params.id
+
+	// Validate id
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send('Resource not found')
+		return;
+	}
+
+	// check mongoose connection established.
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	Recipe.findByIdAndRemove(id).then((recipe) => {
+		if (!recipe) {
+			res.status(404).send()
+		} else {   
+			res.send(recipe)
+		}
+	})
+	.catch((error) => {
+		log(error)
+		res.status(500).send() // server error, could not delete.
+	})
+})
+
+
 /*************************************************/
 // Express server listening...
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
+app.listen(port, mongoChecker, () => {
   log(`Listening on port ${port}...`);
 });
