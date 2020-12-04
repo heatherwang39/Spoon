@@ -23,6 +23,10 @@ const { ObjectID } = require("mongodb");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
+//cors (connecting ports)
+const cors = require("cors")
+app.use(cors())
+
 // express-session for managing user sessions
 const session = require("express-session");
 const { mongo } = require("mongoose");
@@ -64,14 +68,15 @@ Request body expects:
 Returned JSON should be the database document added.
 */
 // POST /users
-app.post('/users', mongoChecker, (req, res) => {
+app.post('/api/users', mongoChecker, (req, res) => {
 
 	// Create a new restaurant
 	const user = new User({
     username: req.body.username,
     password: req.body.password,
-    isAdmin: req.body.isAdmin,
-		avatar: "",
+	isAdmin: req.body.isAdmin,
+	//to do: remove link
+	avatar: "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2019/12/03202400/Yellow-Labrador-Retriever.jpg",
     followers: [],
     following: [],
     recipes: [],
@@ -79,7 +84,7 @@ app.post('/users', mongoChecker, (req, res) => {
     feed: []
 	})
 
-  // add a user
+ 	// add a user
 	user.save().then((user) => {
 		res.send(user)
 	}).catch((error) => {
@@ -167,7 +172,7 @@ app.patch('/users/:id', mongoChecker, (req, res) => {
 
 //get all users
 //returned json is list of users
-app.get('/users', async (req, res) => {
+app.get('/api/users', async (req, res) => {
 	try {
 		const users = await User.find();
 		res.send(users)
@@ -183,7 +188,7 @@ app.get('/users', async (req, res) => {
 
 //get specific user
 //returned json is user document
-app.get('/users/:id', (req, res) => {
+app.get('/api/users/:id', (req, res) => {
 	const id = req.params.id
 
 	if (!ObjectID.isValid(id)) {
@@ -214,7 +219,7 @@ app.get('/users/:id', (req, res) => {
 
 //add recipe
 //returned json is recipe document
-app.post('/recipes', async (req, res) => {
+app.post('/api/recipes', async (req, res) => {
 	// log(req.body)
 
 	// check mongoose connection established.
@@ -243,7 +248,7 @@ app.post('/recipes', async (req, res) => {
 
 //delete recipe
 //returned json is recipe document
-app.delete('/api/students/:id', async (req, res) => {
+app.delete('/api/recipes/:id', async (req, res) => {
 	const id = req.params.id
 
 	// Validate id
