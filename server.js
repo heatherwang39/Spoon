@@ -277,6 +277,76 @@ app.delete('/recipes/:id', async (req, res) => {
 	})
 })
 
+// Route for making changes to a recipe
+app.patch('/recipes/:id', mongoChecker, (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+
+	// Find the fields to update and their values.
+	const fieldsToUpdate = {}
+	req.body.map((change) => {
+		const propertyToChange = change.path.substr(1) // getting rid of the '/' character
+		fieldsToUpdate[propertyToChange] = change.value
+	})
+
+	// update a recipe by its id
+	Recipe.findOneAndUpdate({_id: id}, {$set: fieldsToUpdate}, {new: true, useFindAndModify: false}).then((recipe) => {
+		if (!recipe) {
+			res.status(404).send('Resource not found')
+		} else {   
+			res.send(recipe)
+		}
+	}).catch((error) => {
+		log(error)
+		if (isMongoError(error)) {
+			res.status(500).send('Internal server error')
+		} else {
+			res.status(400).send('Bad Request')
+		}
+	})
+})
+
+// a GET route to get all recipes
+app.get('/recipes', mongoChecker, authenticate, async (req, res) => {
+    try {
+        const recipes = await Recipe.find({recipeId: req.recipe._id}) // TO FIX
+        res.send({ recipes })
+    } catch(error) {
+        log(error)
+        res.status(500).send("Internal Server Error")
+    }
+})
+
+// a GET route to get a specific recipe
+app.get('/recipes/:id', (req, res) => {
+	const id = req.params.id
+
+	if (!ObjectID.isValid(id)) {
+		res.status(404).send()
+		return;
+	}
+	if (mongoose.connection.readyState != 1) {
+		log('Issue with mongoose connection')
+		res.status(500).send('Internal server error')
+		return;
+	} 
+
+	Recipe.findById(id).then((recipe) => {
+		if (!recipe) {
+			res.status(404).send('Resource not found') 
+		} else {
+			res.send({recipe})
+		}
+	})
+	.catch((error) => {
+		log(error)
+		res.status(500).send('Internal Server Error')
+	}) 
+})
 
 /*************************************************/
 // Express server listening...
