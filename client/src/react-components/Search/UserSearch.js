@@ -9,8 +9,28 @@ class UserSearch extends React.Component {
     currInput: '',
     searchedName:
       null,
-    users: data.allUsers,
-  };
+    users: []
+  }
+
+  componentDidMount(){
+    //get users
+    fetch('/users')
+    .then((res) => { 
+      if (res.status === 200) {
+          // return a promise that resolves with the JSON body
+          return res.json() 
+      } else {
+          alert('Could not get users')
+      }                
+    })
+    .then((json) => {
+      console.log(json)
+      this.setState({users: json})
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  } 
 
   handleInputChange = (event) => {
     const target = event.target;
