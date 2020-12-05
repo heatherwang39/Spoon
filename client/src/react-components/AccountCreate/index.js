@@ -11,6 +11,7 @@ class AccountCreate extends React.Component {
     message: "",
     username: "",
     password: "",
+    repeatedPassword: "",
     header: (<Header state={this.props.appState} />)
   }
   
@@ -34,6 +35,11 @@ class AccountCreate extends React.Component {
         "Please enter a username and password."}
       )
     }
+    else if (this.state.password !== this.state.repeatedPassword){
+      this.setState({message:
+        "The two passwords don't match."}
+      )      
+    }
     else {
       this.success()
     }
@@ -49,7 +55,8 @@ class AccountCreate extends React.Component {
     )
     this.setState({
       username: "",
-      password: ""
+      password: "",
+      repeatedPassword:"",
     })
   }
 
@@ -58,7 +65,7 @@ class AccountCreate extends React.Component {
       <div>
         {this.state.header}
         <Grid container justify="center" alignItems="center" spacing={1}>
-          <Grid item xs={5}>
+          <Grid item xs={4}>
             <TextField
               name="username"
               value={this.state.username}
@@ -70,7 +77,7 @@ class AccountCreate extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={4}>
             <TextField
               name="password"
               value={this.state.password}
@@ -82,7 +89,18 @@ class AccountCreate extends React.Component {
               fullWidth
             />
           </Grid>
-
+          <Grid item xs={4}>
+            <TextField
+              name="repeatedPassword"
+              value={this.state.repeatedPassword}
+              onChange={this.handleInputChange}
+              placeholder="e.g. user"
+              label="Repeat Password"
+              variant="outlined"
+              type="password"
+              fullWidth
+            />
+          </Grid>
           <Grid item xs={12}>
             <Button
               onClick={this.check}
