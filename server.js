@@ -53,9 +53,6 @@ const mongoChecker = (req, res, next) => {
   }
 };
 
-/*** Webpage routes below **********************************/
-// Serve the build
-app.use(express.static(path.join(__dirname, "/client/build")));
 
 // Route for adding a user
 /* 
@@ -347,6 +344,23 @@ app.get('/recipes/:id', (req, res) => {
 		res.status(500).send('Internal Server Error')
 	}) 
 })
+
+/*** Webpage routes below **********************************/
+// Serve the build
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+// All routes other than above will go to index.html
+app.get("*", (req, res) => {
+    // check for page routes that we expect in the frontend to provide correct status code.
+    const goodPageRoutes = ["/", "/login", "/feed"];
+    if (!goodPageRoutes.includes(req.url)) {
+        // if url not in expected page routes, set status to 404.
+        res.status(404);
+    }
+
+    // send index.html
+    res.sendFile(path.join(__dirname, "/client/build/index.html"));
+});
 
 /*************************************************/
 // Express server listening...
