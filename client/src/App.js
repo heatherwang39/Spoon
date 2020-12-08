@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
+import { checkSession } from './actions/user';
 
 import Feed from './react-components/Feed';
 import UserProfile from './react-components/UserProfile';
@@ -12,9 +13,14 @@ import AccountCreate from './react-components/AccountCreate';
 import SignIn from './react-components/SignIn';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    checkSession(this); //check the user is logged in and check the userMode
+  }
+
   state = {
-    userMode: 'admin',
     username: 'user1',
+    userMode: 'guest', //'admin','user'
   };
 
   render() {
