@@ -414,16 +414,16 @@ app.patch("/api/recipes/:id", mongoChecker, (req, res) => {
     });
 });
 
-// // a GET route to get all recipes
-// app.get('/recipes', mongoChecker, authenticate, async (req, res) => {
-//     try {
-//         const recipes = await Recipe.find({recipeId: req.recipe._id}) // TO FIX
-//         res.send({ recipes })
-//     } catch(error) {
-//         log(error)
-//         res.status(500).send("Internal Server Error")
-//     }
-// })
+// a GET route to get all recipes
+app.get('/recipes', mongoChecker, authenticate, async (req, res) => {
+    try {
+        const recipes = await Recipe.find()
+        res.send({ recipes })
+    } catch(error) {
+		log(error)
+        res.status(500).send("Internal Server Error")
+    }
+})
 
 // a GET route to get a specific recipe
 app.get("/api/recipes/:id", (req, res) => {
