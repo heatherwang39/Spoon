@@ -1,16 +1,20 @@
 import React from 'react';
 import { uid } from 'react-uid';
+import { allRecipes } from './../../actions/allRecipes';
 
 import './styles.css';
-import * as data from '../../api/data';
 
 import Thumbnail from '../Thumbnail';
 
 class RecipeList extends React.Component {
+  constructor(props) {
+    super(props);
+    allRecipes(this.state.recipes);
+  }
+
   state = {
     color: 'secondary',
-    recipes: data.allRecipes, // Here we have mock data, but this is where we would retrieve all the backend
-                              // recipe data for searching
+    recipes: [],
   };
 
   closePopup = () => {

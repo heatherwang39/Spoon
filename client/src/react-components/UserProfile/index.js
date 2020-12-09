@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
+import { allRecipes } from './../../actions/allRecipes';
 
 import './styles.css';
 import * as data from '../../api/data';
@@ -16,6 +17,11 @@ import RecipeEdit from './RecipeEdit';
 import { withRouter } from 'react-router-dom';
 
 class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    allRecipes(this.state.recipes);
+  }
+
   state = {
     tabVal: 0,
     own: false, // Whether or not this is the user's own page
@@ -23,11 +29,12 @@ class UserProfile extends React.Component {
     follow: false, // back-end call
     followers: '2', // back-end call
     color: 'secondary',
-    recipes: data.allRecipes, // back-end call
+    recipes: [], // back-end call
     users: data.allUsers, // back-end call
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
-    og_tags: { // back-end call
+    og_tags: {
+      // back-end call
       Breakfast: false,
       Lunch: false,
       Dinner: false,
@@ -42,7 +49,7 @@ class UserProfile extends React.Component {
     const username = pathname.slice(pathname.lastIndexOf('/') + 1);
     const own = this.props.appState.username === username;
     const user = this.state.users.filter((u) => {
-      return u.username === username
+      return u.username === username;
     });
     const followers = user[0].followers.length;
     this.setState({ username: username, own: own, followers: followers });
@@ -61,14 +68,14 @@ class UserProfile extends React.Component {
           tags.map((tag) => new_tags.push(tag.toString()));
         }
         if (new_tags) {
-          const og_tags = this.state.og_tags
+          const og_tags = this.state.og_tags;
           for (let i = 0; i < new_tags.length; i++) {
-            console.log(new_tags[i])
-            og_tags[new_tags[i]] = true
+            console.log(new_tags[i]);
+            og_tags[new_tags[i]] = true;
           }
           this.setState({
-              og_tags: og_tags
-          })
+            og_tags: og_tags,
+          });
         }
       }
     );

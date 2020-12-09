@@ -1,17 +1,22 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { allRecipes } from './../../actions/allRecipes';
 
 import './styles.css';
-import * as data from '../../api/data';
 
 import Header from '../Header';
 import SearchBar from '../SearchBar';
 import RecipeList from './RecipeList';
 
 class ManageRecipes extends React.Component {
+  constructor(props) {
+    super(props);
+    allRecipes(this.state.recipes);
+  }
+
   state = {
     searchedRecipe: '',
-    recipes: data.allRecipes, //this should be back-end call in phase 2
+    recipes: [],
   };
 
   handleInputChange = (event) => {

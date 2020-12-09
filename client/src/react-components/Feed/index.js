@@ -2,6 +2,7 @@ import React from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import * as data from '../../api/data';
+import { allRecipes } from './../../actions/allRecipes';
 
 import './styles.css';
 
@@ -10,6 +11,12 @@ import Header from '../Header';
 import { uid } from 'react-uid';
 
 class Feed extends React.Component {
+
+  // constructor(props) {
+  //   super(props);
+  //   allRecipes(this.state.recipes);
+  // }
+
   state = {
     tabVal: 0,
     users: data.allUsers, // back-end call
