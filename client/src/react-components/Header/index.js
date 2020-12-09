@@ -3,13 +3,11 @@ import Link from '@material-ui/core/Link';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import DropDownMenu from './DropDownMenu.js';
 import HeaderButton from './HeaderButton.js';
 
 //icons
-import LocalDiningOutlinedIcon from '@material-ui/icons/LocalDiningOutlined';
 import SearchIcon from '@material-ui/icons/Search';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import DnsIcon from '@material-ui/icons/Dns';
