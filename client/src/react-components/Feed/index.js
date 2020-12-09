@@ -11,9 +11,7 @@ import Header from '../Header';
 import { uid } from 'react-uid';
 
 class Feed extends React.Component {
-
-  // constructor(props) {
-  //   super(props);
+  // componentDidMount() {
   //   allRecipes(this.state.recipes);
   // }
 

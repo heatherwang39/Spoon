@@ -10,7 +10,6 @@ export const allRecipes = (recipes) => {
       } else {
         // TODO: DON'T USE ALERTS
         alert('Could not get all recipes!');
-        return false;
       }
     })
     .then((json) => {

@@ -7,8 +7,7 @@ import './styles.css';
 import Thumbnail from '../Thumbnail';
 
 class RecipeList extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     allRecipes(this.state.recipes);
   }
 

@@ -17,8 +17,7 @@ import RecipeEdit from './RecipeEdit';
 import { withRouter } from 'react-router-dom';
 
 class UserProfile extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     allRecipes(this.state.recipes);
   }
 

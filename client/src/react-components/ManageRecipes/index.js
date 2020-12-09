@@ -9,8 +9,7 @@ import SearchBar from '../SearchBar';
 import RecipeList from './RecipeList';
 
 class ManageRecipes extends React.Component {
-  constructor(props) {
-    super(props);
+  componentDidMount() {
     allRecipes(this.state.recipes);
   }
 
