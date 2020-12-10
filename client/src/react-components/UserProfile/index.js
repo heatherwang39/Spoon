@@ -8,6 +8,9 @@ import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
 import { allRecipes } from './../../actions/allRecipes';
 
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import './styles.css';
 import * as data from '../../api/data';
 
@@ -18,7 +21,15 @@ import { withRouter } from 'react-router-dom';
 
 class UserProfile extends React.Component {
   componentDidMount() {
-    allRecipes(this.state.recipes);
+    allRecipes(this.state.openWarning, this.state.recipes);
+    const pathname = this.props.location.pathname;
+    const username = pathname.slice(pathname.lastIndexOf('/') + 1);
+    const own = this.props.appState.username === username;
+    const user = this.state.users.filter((u) => {
+      return u.username === username;
+    });
+    const followers = user[0].followers.length;
+    this.setState({ username: username, own: own, followers: followers });
   }
 
   state = {
@@ -28,7 +39,7 @@ class UserProfile extends React.Component {
     follow: false, // back-end call
     followers: '2', // back-end call
     color: 'secondary',
-    recipes: [], // back-end call
+    recipes: [],
     users: data.allUsers, // back-end call
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
@@ -41,18 +52,12 @@ class UserProfile extends React.Component {
       Vegan: false,
       NutFree: false,
     },
+    openWarning: true,
   };
 
-  componentDidMount() {
-    const pathname = this.props.location.pathname;
-    const username = pathname.slice(pathname.lastIndexOf('/') + 1);
-    const own = this.props.appState.username === username;
-    const user = this.state.users.filter((u) => {
-      return u.username === username;
-    });
-    const followers = user[0].followers.length;
-    this.setState({ username: username, own: own, followers: followers });
-  }
+  closeWarning = () => {
+    this.setState({ openWarning: false });
+  };
 
   editRecipe = (recipe) => {
     this.setState(
@@ -233,6 +238,11 @@ class UserProfile extends React.Component {
           open={editOpen}
           closePopup={this.closePopup}
         />
+        <Snackbar open={this.state.openWarning} autoHideDuration={6000} onClose={this.closeWarning}>
+          <MuiAlert onClose={this.closeWarning} variant="filled" severity="error">
+            Could not get all recipes!
+          </MuiAlert>
+        </Snackbar>
       </div>
     );
   }

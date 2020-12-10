@@ -4,6 +4,9 @@ import Tab from '@material-ui/core/Tab';
 import * as data from '../../api/data';
 import { allRecipes } from './../../actions/allRecipes';
 
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import './styles.css';
 
 import Thumbnail from '../Thumbnail';
@@ -12,7 +15,7 @@ import { uid } from 'react-uid';
 
 class Feed extends React.Component {
   // componentDidMount() {
-  //   allRecipes(this.state.recipes);
+  //   allRecipes(this.state.openWarning, this.state.recipes);
   // }
 
   state = {
@@ -22,6 +25,11 @@ class Feed extends React.Component {
     user: this.props.appState.username, //back-end call
     feed: [],
     userMode: this.props.appState.userMode,
+    openWarning: true,
+  };
+
+  closeWarning = () => {
+    this.setState({ openWarning: false });
   };
 
   handleTabs = (e, val) => {
@@ -100,6 +108,11 @@ class Feed extends React.Component {
             })}
           </TabPanel>
         </div>
+        {/* <Snackbar open={this.state.openWarning} autoHideDuration={6000} onClose={this.closeWarning}>
+          <MuiAlert onClose={this.closeWarning} variant="filled" severity="error">
+            Could not get all recipes!
+          </MuiAlert>
+        </Snackbar> */}
       </div>
     );
   }

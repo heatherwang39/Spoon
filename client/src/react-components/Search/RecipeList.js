@@ -2,18 +2,26 @@ import React from 'react';
 import { uid } from 'react-uid';
 import { allRecipes } from './../../actions/allRecipes';
 
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import './styles.css';
 
 import Thumbnail from '../Thumbnail';
 
 class RecipeList extends React.Component {
   componentDidMount() {
-    allRecipes(this.state.recipes);
+    allRecipes(this.state.openWarning, this.state.recipes);
   }
 
   state = {
     color: 'secondary',
     recipes: [],
+    openWarning: true,
+  };
+
+  closeWarning = () => {
+    this.setState({ openWarning: false });
   };
 
   closePopup = () => {
@@ -65,6 +73,11 @@ class RecipeList extends React.Component {
               />
             );
           })}
+        <Snackbar open={this.state.openWarning} autoHideDuration={6000} onClose={this.closeWarning}>
+          <MuiAlert onClose={this.closeWarning} variant="filled" severity="error">
+            Could not get all recipes!
+          </MuiAlert>
+        </Snackbar>
       </div>
     );
   }

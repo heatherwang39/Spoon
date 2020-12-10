@@ -1,6 +1,6 @@
 // A function to send a GET request to the web server
 // to get all the recipes
-export const allRecipes = (recipes) => {
+export const allRecipes = (openWarning, recipes) => {
   const url = 'http://localhost:5000/api/recipes';
 
   fetch(url)
@@ -8,8 +8,7 @@ export const allRecipes = (recipes) => {
       if (res.status === 200) {
         return res.json();
       } else {
-        // TODO: DON'T USE ALERTS
-        alert('Could not get all recipes!');
+        openWarning.setState({ openWarning: true })
       }
     })
     .then((json) => {
