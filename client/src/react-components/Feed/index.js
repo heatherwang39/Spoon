@@ -4,8 +4,8 @@ import Tab from '@material-ui/core/Tab';
 import * as data from '../../api/data';
 import { allRecipes } from './../../actions/allRecipes';
 
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import './styles.css';
 
@@ -17,6 +17,11 @@ class Feed extends React.Component {
   // componentDidMount() {
   //   allRecipes(this);
   // }
+
+  constructor(props) {
+    super(props);
+    this.props.history.push('/Feed');
+  }
 
   state = {
     tabVal: 0,
@@ -50,23 +55,27 @@ class Feed extends React.Component {
           orientation="vertical"
           textColor="secondary"
         >
-          
           {this.state.userMode !== 'guest' ? (
-            <Tab label="Feed" disableRipple/>
-          ) : null }
-          <Tab label="Discover" disableRipple/>
+            <Tab label="Feed" disableRipple />
+          ) : null}
+          <Tab label="Discover" disableRipple />
         </Tabs>
-      <div className="feed">
-        <Header state={appState} />
-          <TabPanel value={this.state.tabVal} index={this.state.userMode !== 'guest' ? 0 : null}>
+        <div className="feed">
+          <Header state={appState} />
+          <TabPanel
+            value={this.state.tabVal}
+            index={this.state.userMode !== 'guest' ? 0 : null}
+          >
             <p className="feed-message">
               See latest recipes from the chefs you are following!
             </p>
-            {this.state.users.filter((u) =>  {
-                return u.username === this.state.user
-              })[0].feed.map((recipe_id) => {
+            {this.state.users
+              .filter((u) => {
+                return u.username === this.state.user;
+              })[0]
+              .feed.map((recipe_id) => {
                 const recipe = this.state.recipes.filter((r) => {
-                  return r.recipeId === recipe_id
+                  return r.recipeId === recipe_id;
                 });
                 return (
                   <Thumbnail
@@ -85,11 +94,14 @@ class Feed extends React.Component {
                 );
               })}
           </TabPanel>
-        <TabPanel value={this.state.tabVal} index={this.state.userMode !== 'guest' ? 1 : 0}>
-          <p className="feed-message">
-            See the newest recipes posted onto Spoon!
-          </p>
-          {this.state.recipes.map((recipe) => {
+          <TabPanel
+            value={this.state.tabVal}
+            index={this.state.userMode !== 'guest' ? 1 : 0}
+          >
+            <p className="feed-message">
+              See the newest recipes posted onto Spoon!
+            </p>
+            {this.state.recipes.map((recipe) => {
               return (
                 <Thumbnail
                   recipeName={recipe.recipeName}

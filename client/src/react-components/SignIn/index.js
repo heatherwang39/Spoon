@@ -56,6 +56,11 @@ class SignIn extends React.Component {
   //   this.setState({ message: 'You have successfully signed in!' });
   // };
 
+  constructor(props) {
+    super(props);
+    this.props.history.push('/SignIn');
+  }
+
   state = {
     email: '',
     password: '',
@@ -133,9 +138,13 @@ class SignIn extends React.Component {
           </Grid>
           <Grid item xs={12}>
             {app.state.userMode !== 'guest' ? (
-              <Typography>'You have successfully logged in'</Typography>
+              <Typography color="primary">
+                You have successfully logged in
+              </Typography>
             ) : (
-              <Typography>'Please enter the correct credentials'</Typography>
+              <Typography color="secondary">
+                Please enter the correct credentials
+              </Typography>
             )}
             {/* <Typography>{this.state.message}</Typography> */}
           </Grid>

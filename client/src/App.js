@@ -39,13 +39,8 @@ class App extends React.Component {
             {/* Each Route below shows a different component depending on the exact path in the URL  */}
             <Route
               exact
-              path="/"
-              render={() => <Feed appState={this.state} />}
-            />
-            <Route
-              exact
-              path="/Feed"
-              render={() => <Feed appState={this.state} />}
+              path={['/', '/Feed']}
+              render={(props) => <Feed {...props} appState={this.state} />}
             />
             <Route
               exact
@@ -77,7 +72,19 @@ class App extends React.Component {
               path="/AccountCreate"
               render={() => <AccountCreate appState={this.state} />}
             />
-            <Route exact path="/SignIn" render={() => <SignIn app={this} />} />
+            <Route
+              exact
+              path="/SignIn"
+              render={(props) => (
+                <div>
+                  {this.state.userMode !== 'guest' ? (
+                    <Feed {...props} appState={this.state} />
+                  ) : (
+                    <SignIn {...props} app={this} />
+                  )}
+                </div>
+              )}
+            />
           </Switch>
         </BrowserRouter>
       </div>
