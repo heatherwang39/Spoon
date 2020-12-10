@@ -15,7 +15,7 @@ import { uid } from 'react-uid';
 
 class Feed extends React.Component {
   // componentDidMount() {
-  //   allRecipes(this.state.openWarning, this.state.recipes);
+  //   allRecipes(this);
   // }
 
   state = {

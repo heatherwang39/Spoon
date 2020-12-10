@@ -21,7 +21,7 @@ import { withRouter } from 'react-router-dom';
 
 class UserProfile extends React.Component {
   componentDidMount() {
-    allRecipes(this.state.openWarning, this.state.recipes);
+    allRecipes(this);
     const pathname = this.props.location.pathname;
     const username = pathname.slice(pathname.lastIndexOf('/') + 1);
     const own = this.props.appState.username === username;

@@ -14,7 +14,7 @@ import RecipeList from './RecipeList';
 
 class ManageRecipes extends React.Component {
   componentDidMount() {
-    allRecipes(this.state.openWarning, this.state.recipes);
+    allRecipes(this);
   }
 
   state = {

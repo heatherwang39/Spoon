@@ -11,7 +11,7 @@ import Thumbnail from '../Thumbnail';
 
 class RecipeList extends React.Component {
   componentDidMount() {
-    allRecipes(this.state.openWarning, this.state.recipes);
+    allRecipes(this);
   }
 
   state = {
