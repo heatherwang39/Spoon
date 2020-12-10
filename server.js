@@ -97,7 +97,7 @@ app.post("/users/login", (req, res) => {
   // by their email and password
   User.findByUsernamePassword(username, password)
     .then((user) => {
-      log(user);
+      // log(user);
       // Add the user's id to the session.
       // We can check later if this exists to ensure we are logged in.
       req.session.userId = user._id;
@@ -113,7 +113,7 @@ app.post("/users/login", (req, res) => {
       log(req.session);
     })
     .catch((error) => {
-      log(error);
+      // log(error);
       res.status(400).send();
     });
 });
@@ -132,7 +132,7 @@ app.get("/users/logout", (req, res) => {
 
 // A route to check if a user is logged in on the session
 app.get("/users/check-session", (req, res) => {
-  log(req.session);
+  // log(req.session);
   if (req.session.username) {
     res.send({
       username: req.session.username,
