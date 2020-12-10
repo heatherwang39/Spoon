@@ -2,15 +2,11 @@
 
 "use strict";
 const log = console.log;
-const path = require("path");
 
 const express = require("express");
 // starting the express server
 const app = express();
-
-//cors (connecting ports)
-const cors = require("cors");
-app.use(cors());
+const path = require("path");
 
 // mongoose and mongo connection
 const { mongoose } = require("./db/mongoose");
@@ -18,7 +14,7 @@ mongoose.set("useFindAndModify", false); // for some deprecation issues
 
 // import the mongoose models
 const { User } = require("./models/user");
-const { Recipe } = require("./models/recipe");
+const { Recipe, Image } = require("./models/recipe");
 
 // to validate object IDs
 const { ObjectID } = require("mongodb");
@@ -27,10 +23,25 @@ const { ObjectID } = require("mongodb");
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 
+//cors (connecting ports)
+const cors = require("cors");
+app.use(cors());
+
 // express-session for managing user sessions
 const session = require("express-session");
 const { mongo } = require("mongoose");
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// cloudinary
+const cloudinary = require("cloudinary");
+cloudinary.config({
+  cloud_name: "spoonimages",
+  api_key: "987758156522799",
+  api_secret: "FJUyYJawLTF73AZr74G0fDyKkHI",
+});
+// multipart middleware: allows you to access uploaded file from req.file
+const multipart = require("connect-multiparty");
+const multipartMiddleware = multipart();
 
 function isMongoError(error) {
   // checks for first error returned by promise rejection if Mongo database suddently disconnects
@@ -97,23 +108,20 @@ app.post("/users/login", (req, res) => {
   // by their email and password
   User.findByUsernamePassword(username, password)
     .then((user) => {
-      log(user);
+      //   log(user);
       // Add the user's id to the session.
       // We can check later if this exists to ensure we are logged in.
       req.session.userId = user._id;
       req.session.username = user.username; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
-      let checkedMode;
       if (user.isAdmin == true) {
-        checkedMode = "admin";
+        req.session.userMode = "admin";
       } else {
-        checkedMode = "user";
+        req.session.userMode = "user";
       }
-      req.session.userMode = checkedMode;
-      res.send({ username: user.username, userMode: checkedMode });
-      log(req.session);
+      res.send({ username: user.username });
     })
     .catch((error) => {
-      log(error);
+      //   log(error);
       res.status(400).send();
     });
 });
@@ -132,7 +140,6 @@ app.get("/users/logout", (req, res) => {
 
 // A route to check if a user is logged in on the session
 app.get("/users/check-session", (req, res) => {
-  log(req.session);
   if (req.session.username) {
     res.send({
       username: req.session.username,
@@ -315,6 +322,25 @@ app.get("/api/users/:id", (req, res) => {
     });
 });
 
+// Add recipe image to cloudinary server
+app.post("/api/images", multipartMiddleware, (req, res) => {
+  cloudinary.uploader.upload(req.files.image.path, function (result) {
+    var img = new Image({
+      image_id: result.public_id,
+      image_url: result.url,
+    });
+
+    img.save().then(
+      (saveImg) => {
+        res.send(saveImg);
+      },
+      (error) => {
+        res.status(400).send("Bad request");
+      }
+    );
+  });
+});
+
 //add recipe
 //returned json is recipe document
 app.post("/api/recipes", async (req, res) => {
@@ -327,11 +353,14 @@ app.post("/api/recipes", async (req, res) => {
     return;
   }
 
-  // Create a new student using the Student mongoose model
-  const recipe = new Student();
-  Object.assign(recipe, req.body);
+  // Create a new recipe using the Recipe mongoose model
+  const recipe = new Recipe();
+  const recipeContents = req.body.recipeContents;
+  req.body.recipeContents.recipePhoto = req.body.imageSchema;
 
-  student
+  Object.assign(recipe, recipeContents);
+
+  recipe
     .save()
     .then((result) => {
       res.send(result);
@@ -391,7 +420,7 @@ app.patch("/api/recipes/:id", mongoChecker, (req, res) => {
   // Find the fields to update and their values.
   const fieldsToUpdate = {};
   req.body.map((change) => {
-    const propertyToChange = change.path.substr(1); // getting rid of the '/' character
+    const propertyToChange = change.path;
     fieldsToUpdate[propertyToChange] = change.value;
   });
 

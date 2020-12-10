@@ -1,8 +1,21 @@
-// Recipe mongoose model
-
 const mongoose = require("mongoose");
 
-const Recipe = mongoose.model("Recipe", {
+// Image mongoose model for recipe photos
+const imageSchema = mongoose.Schema({
+  image_id: {
+      type: String,
+      required: true
+  },
+  image_url: {
+      type: String,
+      required: true,
+      default: 'https://www.lesgeveninzeeland.nl/storage/media/350/placeholder.png',
+  },
+});
+
+// Recipe mongoose model
+
+const RecipeSchema = new mongoose.Schema({
   // recipeId: {
   //   type: mongoose.Schema.Types.ObjectId,
   //   required: true,
@@ -44,7 +57,7 @@ const Recipe = mongoose.model("Recipe", {
     required: true,
   },
   recipePhoto: {
-    type: String,
+    type: imageSchema,
     required: true,
   },
   likes: {
@@ -53,4 +66,7 @@ const Recipe = mongoose.model("Recipe", {
   },
 });
 
-module.exports = { Recipe };
+const Recipe = mongoose.model('recipe', RecipeSchema);
+const Image = mongoose.model('image', imageSchema);
+
+module.exports = { Recipe, Image };
