@@ -2,34 +2,19 @@ import React from 'react';
 import './styles.css';
 import SearchBar from '../SearchBar';
 import UserInfo from '../ManageUsers/UserInfo';
-import * as data from '../../api/data';
+import { getAllUsers } from '../../actions/users';
 
 class UserSearch extends React.Component {
   state = {
     currInput: '',
     searchedName:
       null,
-    users: []
+    users: [],
   }
 
   componentDidMount(){
     //get users
-    fetch('/users')
-    .then((res) => { 
-      if (res.status === 200) {
-          // return a promise that resolves with the JSON body
-          return res.json() 
-      } else {
-          alert('Could not get users')
-      }                
-    })
-    .then((json) => {
-      console.log(json)
-      this.setState({users: json})
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+    getAllUsers(this);
   } 
 
   handleInputChange = (event) => {
