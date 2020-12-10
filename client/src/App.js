@@ -13,13 +13,20 @@ import AccountCreate from './react-components/AccountCreate';
 import SignIn from './react-components/SignIn';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    checkSession(this); //check the user is logged in and check the userMode
+  // constructor(props) {
+  //   super(props);
+  //   //check the user is logged in and check the userMode,if the user already logged in, the state will be
+  //   //set to the current user's username and userMode('user' or 'admin')
+  //   checkSession(this);
+  // }
+  componentDidMount() {
+    //check the user is logged in and check the userMode,if the user already logged in, the state will be
+    //set to the current user's username and userMode('user' or 'admin')
+    checkSession(this);
   }
 
   state = {
-    username: 'user1',
+    username: 'user1', //will be changed to '' later after each page implement back-end calls
     userMode: 'guest', //'admin','user'
   };
 
@@ -70,11 +77,7 @@ class App extends React.Component {
               path="/AccountCreate"
               render={() => <AccountCreate appState={this.state} />}
             />
-            <Route
-              exact
-              path="/SignIn"
-              render={() => <SignIn appState={this.state} />}
-            />
+            <Route exact path="/SignIn" render={() => <SignIn app={this} />} />
           </Switch>
         </BrowserRouter>
       </div>

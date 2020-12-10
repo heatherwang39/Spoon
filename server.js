@@ -2,11 +2,15 @@
 
 "use strict";
 const log = console.log;
+const path = require("path");
 
 const express = require("express");
 // starting the express server
 const app = express();
-const path = require("path");
+
+//cors (connecting ports)
+const cors = require("cors");
+app.use(cors());
 
 // mongoose and mongo connection
 const { mongoose } = require("./db/mongoose");
@@ -22,10 +26,6 @@ const { ObjectID } = require("mongodb");
 // body-parser: middleware for parsing HTTP JSON body into a usable object
 const bodyParser = require("body-parser");
 app.use(bodyParser.json());
-
-//cors (connecting ports)
-const cors = require("cors");
-app.use(cors());
 
 // express-session for managing user sessions
 const session = require("express-session");
@@ -97,20 +97,23 @@ app.post("/users/login", (req, res) => {
   // by their email and password
   User.findByUsernamePassword(username, password)
     .then((user) => {
-      //   log(user);
+      log(user);
       // Add the user's id to the session.
       // We can check later if this exists to ensure we are logged in.
       req.session.userId = user._id;
       req.session.username = user.username; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
+      let checkedMode;
       if (user.isAdmin == true) {
-        req.session.userMode = "admin";
+        checkedMode = "admin";
       } else {
-        req.session.userMode = "user";
+        checkedMode = "user";
       }
-      res.send({ username: user.username });
+      req.session.userMode = checkedMode;
+      res.send({ username: user.username, userMode: checkedMode });
+      log(req.session);
     })
     .catch((error) => {
-      //   log(error);
+      log(error);
       res.status(400).send();
     });
 });
@@ -129,6 +132,7 @@ app.get("/users/logout", (req, res) => {
 
 // A route to check if a user is logged in on the session
 app.get("/users/check-session", (req, res) => {
+  log(req.session);
   if (req.session.username) {
     res.send({
       username: req.session.username,
