@@ -24,8 +24,7 @@ export const allRecipes = (recipeList) => {
 
 // Upload the recipe photo to Cloudinary
 export const changeRecipePhoto = (image, component) => {
-  const form = new FormData();
-  form.append('image', image);
+  const form = new FormData(image);
 
   const request = new Request('/api/images', {
     method: 'post',

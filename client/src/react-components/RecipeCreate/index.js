@@ -36,13 +36,13 @@ class RecipeCreate extends React.Component {
         og_tags: newtags,
       },
       function () {
-        let tags = Object.assign({},this.state.og_tags);
+        let tags = Object.assign({}, this.state.og_tags);
         let new_tags = [];
         for (let key in tags) {
           let value = tags[key];
           if (value) {
             new_tags.push(key.toString());
-          } 
+          }
         }
         this.setState({
           tags: new_tags,
@@ -74,14 +74,7 @@ class RecipeCreate extends React.Component {
       cookTimeMins,
       recipePhoto,
     } = this.state;
-    if (
-      !recipeName ||
-      !ingredients ||
-      !instructions ||
-      !servingSize ||
-      !cookTimeMins ||
-      !recipePhoto.image_url
-    ) {
+    if (!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
       alert('Please fill out all the required fields!');
     } else {
       addRecipe(this);
@@ -175,26 +168,24 @@ class RecipeCreate extends React.Component {
             </Grid>
             <br />
             <Grid item xs={12}>
-              <label htmlFor="createRecipePhoto">
-                <input
-                  accept="image/*"
-                  id="createRecipePhoto"
-                  type="file"
-                  onChange={(e) => {
-                    e.preventDefault();
-                    changeRecipePhoto(e.target.files[0], this);
-                  }}
-                />
+              <form className="image-form" onSubmit={(e) => {
+                e.preventDefault();
+                changeRecipePhoto(e.target, this);
+              }}>
+                <div class="image-form__field">
+                  <label></label>
+                  <input name="image" accept="image/*" type="file" />
+                </div>
                 <Button
-                  component="span"
                   variant="contained"
                   color="secondary"
-                  name="createRecipePhoto"
+                  type="submit"
                   startIcon={<CloudUploadIcon />}
+                  className="image-form__submit-button"
                 >
                   Upload Photo*
                 </Button>
-              </label>
+              </form>
             </Grid>
           </Grid>
           <Grid item xs={6}>
