@@ -198,9 +198,6 @@ app.post("/api/users", mongoChecker, (req, res) => {
     username: req.body.username,
     password: req.body.password,
     isAdmin: req.body.isAdmin,
-    //to do: remove link
-    avatar:
-      "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2019/12/03202400/Yellow-Labrador-Retriever.jpg",
     followers: [],
     following: [],
     recipes: [],
