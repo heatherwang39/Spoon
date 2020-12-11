@@ -45,7 +45,7 @@ const RecipeSchema = new mongoose.Schema({
     min: 1,
   },
   tags: {
-    type: Object,
+    type: [String],
   },
   recipePhoto: {
     type: imageSchema,

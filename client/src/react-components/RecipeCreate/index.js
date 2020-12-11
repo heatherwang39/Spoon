@@ -19,9 +19,10 @@ class RecipeCreate extends React.Component {
     servingSize: '',
     cookTimeHrs: '0',
     cookTimeMins: '',
-    tags: {
+    og_tags: {
       Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, NutFree: false
     },
+    tags: [],
     recipePhoto: '',
     likes: '0',
   };
@@ -29,10 +30,25 @@ class RecipeCreate extends React.Component {
   tagChosen = (event) => {
     const target = event.target;
     const name = target.name;
-    const newtags = { ...this.state.tags, [name]: target.checked };
-    this.setState({
-      tags: newtags,
-    });
+    const newtags = { ...this.state.og_tags, [name]: target.checked };
+    this.setState(
+      {
+        og_tags: newtags,
+      },
+      function () {
+        let tags = Object.assign({},this.state.og_tags);
+        let new_tags = [];
+        for (let key in tags) {
+          let value = tags[key];
+          if (value) {
+            new_tags.push(key.toString());
+          } 
+        }
+        this.setState({
+          tags: new_tags,
+        });
+      }
+    );
   };
 
   handleInputChange = (event) => {
@@ -45,9 +61,9 @@ class RecipeCreate extends React.Component {
   jsonInputChange = (event) => {
     const name = event.target.name;
     this.setState({
-      [name]: event.target.value.toString().split("\n"),
-    })
-  }
+      [name]: event.target.value.toString().split('\n'),
+    });
+  };
 
   createRecipe = (event) => {
     const {
@@ -58,7 +74,14 @@ class RecipeCreate extends React.Component {
       cookTimeMins,
       recipePhoto,
     } = this.state;
-    if(!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto.image_url) {
+    if (
+      !recipeName ||
+      !ingredients ||
+      !instructions ||
+      !servingSize ||
+      !cookTimeMins ||
+      !recipePhoto.image_url
+    ) {
       alert('Please fill out all the required fields!');
     } else {
       addRecipe(this);
@@ -215,7 +238,7 @@ class RecipeCreate extends React.Component {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <Tags tagChosen={this.tagChosen} tags={this.state.tags} />
+            <Tags tagChosen={this.tagChosen} tags={this.state.og_tags} />
           </Grid>
           <Grid item xs={12}>
             <Button
