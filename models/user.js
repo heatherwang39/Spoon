@@ -21,10 +21,6 @@ const UserSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  avatar: {
-    type: String,
-    required: true,
-  },
   followers: {
     type: [mongoose.Schema.Types.ObjectId],
     required: true,

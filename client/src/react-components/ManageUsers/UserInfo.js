@@ -4,7 +4,6 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
-import faker from 'faker';
 import { uid } from 'react-uid';
 
 import { Link } from 'react-router-dom';
@@ -36,14 +35,7 @@ class UserInfo extends React.Component {
                   spacing={2}
                   alignItems="center"
                 >
-                  <Grid item xs={2}>
-                    <img
-                      className="userAvatar"
-                      alt="avatar"
-                      src={faker.image.avatar()}
-                    />
-                  </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Link
                       className="text-link"
                       to={`../UserProfile/${user.username}`}
@@ -53,7 +45,7 @@ class UserInfo extends React.Component {
                       </Typography>
                     </Link>
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Typography variant="h6" color="primary" align="left">
                       Followers:
                       {user.followers.length}

@@ -62,7 +62,7 @@ class SignIn extends React.Component {
   }
 
   state = {
-    email: '',
+    username: '',
     password: '',
   };
 

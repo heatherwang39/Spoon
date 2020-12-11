@@ -157,7 +157,7 @@ app.get("/users/check-session", (req, res) => {
 
 // get the currently logged-in user
 // returned json is user document
-app.get("users/currentUser", mongoChecker, (req, res) => {
+app.get("/api/users/currentUser", mongoChecker, (req, res) => {
   if (!ObjectID.isValid(req.session.userId)) {
     res.status(404).send();
     return; // so that we don't run the rest of the handler.
@@ -198,9 +198,6 @@ app.post("/api/users", mongoChecker, (req, res) => {
     username: req.body.username,
     password: req.body.password,
     isAdmin: req.body.isAdmin,
-    //to do: remove link
-    avatar:
-      "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2019/12/03202400/Yellow-Labrador-Retriever.jpg",
     followers: [],
     following: [],
     recipes: [],
