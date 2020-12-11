@@ -6,7 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
-import { setUserProfile, checkFollow } from './../../actions/users.js';
+import { setUserProfile, checkFollow, addToUser, getCurrentUser } from './../../actions/users.js';
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -24,17 +24,22 @@ class UserProfile extends React.Component {
     const userId = pathname.slice(pathname.lastIndexOf('/') + 1);
     setUserProfile(this, userId, this.props.appState.username)
     if (this.props.appState.userMode !== 'guest') {
+      getCurrentUser(this, userId)
       checkFollow(this, userId)
+      console.log(this.state.follow)
     }
   }
 
   state = {
     tabVal: 0,
     own: false, // Whether or not this is the user's own page
-    username: 'user', 
+    loggedUser: {}, // user id of currently logged in user
+    userId: '', // user id of profile user
+    username: '', // username of profile user
     follow: false, // Whether or not the logged in user is following this user
-    followers: '0',
-    color: 'secondary',
+    followers: [],
+    numFollowers: '0',
+    color: 'secondary', // color of follow button
     recipes: [],
     liked: [],
     editOpen: false, // Whether or not the edit recipe popup is open
@@ -103,17 +108,41 @@ class UserProfile extends React.Component {
 
   handleFollow = (e) => {
     if (!this.state.follow) {
-      const followers = this.state.followers + 1;
+      // add logged user to followers of user profile
+      this.state.followers.push(this.state.loggedUser._id)
+      addToUser(this.state.userId, [{'path': '/followers', 'value': this.state.followers}])
+
+      // add user profile to following of logged user
+      this.state.loggedUser.following.push(this.state.userId)
+      addToUser(this.state.loggedUser._id, [{'path': '/following', 'value': this.state.loggedUser.following}])
+
+      // change state of follow related variables
+      const followers = this.state.numFollowers + 1;
       this.setState({
         follow: true,
-        followers: followers,
+        numFollowers: followers,
         color: 'default',
       });
     } else {
-      const followers = this.state.followers - 1;
+      // remove logged user from followers of user profile
+      const index1 = this.state.followers.indexOf(this.state.loggedUser._id)
+      if (index1 !== -1) {
+        this.state.followers.splice(index1, 1)
+      }
+      addToUser(this.state.userId, [{'path': '/followers', 'value': this.state.followers}])
+
+      // remove user profile from following of logged user
+      const index2 = this.state.loggedUser.following.indexOf(this.state.userId)
+      if (index2 !== -1) {
+        this.state.loggedUser.following.splice(index2, 1)
+      }
+      addToUser(this.state.loggedUser._id, [{'path': '/following', 'value': this.state.loggedUser.following}])
+
+      // change state of follow related variables
+      const followers = this.state.numFollowers - 1;
       this.setState({
         follow: false,
-        followers: followers,
+        numFollowers: followers,
         color: 'secondary',
       });
     }
@@ -140,7 +169,7 @@ class UserProfile extends React.Component {
               color="secondary"
               align="left"
             >
-              {this.state.followers} followers
+              {this.state.numFollowers} followers
             </Typography>
             {!this.state.own && this.props.appState.userMode !== 'guest' && (
               <Button

@@ -22,7 +22,8 @@ export const getAllUsers = (manageComp) => {
     });
 };
 
-export const updateSearchForm = (searchComp, field) => {
+// A functon to update the search user form while input changes
+export const updateSearchUserForm = (searchComp, field) => {
   const value = field.value.toLowerCase();
 
   searchComp.setState({
@@ -67,12 +68,12 @@ export const deleteUser = (manageComp, userId) => {
     });
 };
 
-export const deleteRecipe = (manage, recipe) => {
-  const recipesToKeep = manage.state.recipes.filter((r) => {
-    return r !== recipe;
-  });
-  manage.setState({
-    recipes: recipesToKeep,
-  });
-  alert('Recipe ' + recipe.recipeName + ' has been deleted!');
-};
+// export const deleteRecipe = (manage, recipe) => {
+//   const recipesToKeep = manage.state.recipes.filter((r) => {
+//     return r !== recipe;
+//   });
+//   manage.setState({
+//     recipes: recipesToKeep,
+//   });
+//   alert('Recipe ' + recipe.recipeName + ' has been deleted!');
+// };

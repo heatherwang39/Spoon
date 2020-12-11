@@ -6,7 +6,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 import './styles.css';
 
-import { deleteRecipe } from '../../actions/manage';
+import { deleteRecipe } from '../../actions/recipes';
 import { openPopup, closePopup, handleLike } from '../../actions/recipePop';
 import RecipePopup from '../RecipePopUp';
 
@@ -58,7 +58,7 @@ class RecipeInfo extends React.Component {
         </Grid>
         <Grid item xs={3} sm={2} lg={2}>
           <Button
-            onClick={() => deleteRecipe(manageRecipeComponent, recipe)}
+            onClick={() => deleteRecipe(manageRecipeComponent, recipe._id)}
             variant="contained"
             color="secondary"
             startIcon={<DeleteIcon />}

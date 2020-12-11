@@ -22,6 +22,15 @@ export const allRecipes = (recipeList) => {
     });
 };
 
+// A functon to update the search user form while input changes
+export const updateSearchRecipeForm = (searchComp, field) => {
+  const value = field.value.toLowerCase();
+
+  searchComp.setState({
+    searchedRecipe: value,
+  });
+};
+
 // Upload the recipe photo to Cloudinary
 export const changeRecipePhoto = (image, component) => {
   const form = new FormData(image);
@@ -87,13 +96,46 @@ export const updateRecipe = (recipeId, changes) => {
     body: changes,
   });
 
+  fetch(request).then((res) => {
+    if (res.status === 200) {
+      return res.json();
+    } else {
+      // TODO: DON'T USE ALERTS
+      alert('Could not update recipe!');
+    }
+  });
+};
+
+export const deleteRecipe = (manageComp, recipeId) => {
+  // Create our request constructor with all the parameters we need
+  const request = new Request(`/api/recipes/${recipeId}`, {
+    method: 'delete',
+  });
+
+  // delete the user
   fetch(request)
     .then((res) => {
       if (res.status === 200) {
+        console.log('delete the recipe successfully.');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  //get all updated users
+  const url = '/api/recipes';
+  fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
         return res.json();
-      } else {
-        // TODO: DON'T USE ALERTS
-        alert('Could not update recipe!');
+      }
+    })
+    .then((json) => {
+      if (json) {
+        manageComp.setState({
+          recipes: json,
+        });
       }
     })
     .catch((error) => {
