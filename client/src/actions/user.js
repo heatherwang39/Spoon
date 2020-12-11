@@ -29,11 +29,11 @@ export const updateLoginForm = (loginComp, field) => {
 };
 
 // A function to send a POST request with the user to be logged in
-export const login = (loginComp, app) => {
+export const login = (comp, app) => {
   // Create our request constructor with all the parameters we need
   const request = new Request(`/users/login`, {
     method: 'post',
-    body: JSON.stringify(loginComp.state),
+    body: JSON.stringify(comp.state),
     headers: {
       Accept: 'application/json, text/plain, */*',
       'Content-Type': 'application/json',
@@ -86,3 +86,61 @@ export const logout = (logoutComp, app) => {
       console.log(error);
     });
 };
+
+//A function to create a user and session
+export const signup = (signupComp, app) => {
+  console.log("state:", signupComp)
+
+  const request = new Request('/api/users', {
+    method: 'post',
+    body: JSON.stringify(signupComp.state),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json"
+    }
+  });
+
+  fetch(request)
+    .then((user) => {
+      if (user.status === 200) {
+        app.setState({
+          username: signupComp.state.username,
+          userMode: user
+        });
+        signupHelper(signupComp)
+      } 
+      else {
+        // signupComp.setState({message: 'Something went wrong. You were unable to sign up.'})
+      }
+    })
+    .catch((error) => {
+      if (error.code === 11000){
+        console.log("whhhaaajjjsjdkfkj")
+        signupComp.setState({message: 'This username is already taken.'})
+      } 
+      console.log(error);
+    });
+};
+
+export const signupHelper = (signupComp) => {
+
+  // Create session with new account
+  const sesRequest = new Request(`/users/login`, {
+    method: 'post',
+    body: JSON.stringify({    
+      username: signupComp.state.username,
+      password: signupComp.state.password,
+    }),
+    headers: {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
+  });
+
+  // Send the request with fetch()
+  fetch(sesRequest)
+    .catch((error) => {
+      console.log(error);
+    });
+    
+}

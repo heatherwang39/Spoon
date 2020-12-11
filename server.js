@@ -474,7 +474,7 @@ app.patch("/api/recipes/:id", mongoChecker, (req, res) => {
 });
 
 // a GET route to get all recipes
-app.get("/api/recipes", mongoChecker, authenticate, async (req, res) => {
+app.get("/api/recipes", mongoChecker, async (req, res) => {
   try {
     const recipes = await Recipe.find();
     res.send(recipes);
