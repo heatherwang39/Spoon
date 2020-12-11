@@ -103,11 +103,7 @@ export const signup = (signupComp, app) => {
   fetch(request)
     .then((user) => {
       if (user.status === 200) {
-        app.setState({
-          username: signupComp.state.username,
-          userMode: user
-        });
-        signupHelper(signupComp)
+        signupHelper(signupComp, app)
       } 
       else {
         signupComp.setState({message: 'Something went wrong. You were unable to sign up.'})
@@ -118,7 +114,7 @@ export const signup = (signupComp, app) => {
     });
 };
 
-export const signupHelper = (signupComp) => {
+export const signupHelper = (signupComp, app) => {
 
   // Create session with new account
   const sesRequest = new Request(`/users/login`, {
@@ -135,6 +131,13 @@ export const signupHelper = (signupComp) => {
 
   // Send the request with fetch()
   fetch(sesRequest)
+    .then((ses)=>{
+      signupComp.setState({message: 'You have successfully signed up. You will be redirected to your feed in 2 seconds!'})
+      setTimeout(() => app.setState({
+        username: signupComp.state.username,
+        userMode: "user" //newly created user is never admin
+      }), 2000);
+    })
     .catch((error) => {
       console.log(error);
     });
