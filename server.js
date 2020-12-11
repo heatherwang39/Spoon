@@ -157,7 +157,7 @@ app.get("/users/check-session", (req, res) => {
 
 // get the currently logged-in user
 // returned json is user document
-app.get("users/currentUser", mongoChecker, (req, res) => {
+app.get("/api/users/currentUser", mongoChecker, (req, res) => {
   if (!ObjectID.isValid(req.session.userId)) {
     res.status(404).send();
     return; // so that we don't run the rest of the handler.
