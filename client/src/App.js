@@ -28,7 +28,7 @@ class App extends React.Component {
 
   state = {
     username: 'user1', //will be changed to '' later after each page implement back-end calls
-    userMode: 'admin', //'admin','user'
+    userMode: 'guest', //'admin','user'
   };
 
   render() {
