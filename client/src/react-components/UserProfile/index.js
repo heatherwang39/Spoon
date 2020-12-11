@@ -48,7 +48,7 @@ class UserProfile extends React.Component {
       Vegan: false,
       NutFree: false,
     },
-    openWarning: true,
+    openWarning: false,
   };
 
   closeWarning = () => {

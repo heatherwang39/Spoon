@@ -17,7 +17,7 @@ class RecipeList extends React.Component {
   state = {
     color: 'secondary',
     recipes: [],
-    openWarning: true,
+    openWarning: false,
   };
 
   closeWarning = () => {
@@ -68,7 +68,7 @@ class RecipeList extends React.Component {
                 cookTimeHrs={recipe.cookTimeHrs}
                 cookTimeMins={recipe.cookTimeMins}
                 tags={recipe.tags}
-                recipePhoto={recipe.recipePhoto}
+                recipePhoto={recipe.recipePhoto.image_url}
                 likes={recipe.likes}
                 key={uid(recipe)}
               />

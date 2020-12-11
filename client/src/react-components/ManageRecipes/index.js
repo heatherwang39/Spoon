@@ -20,7 +20,7 @@ class ManageRecipes extends React.Component {
   state = {
     searchedRecipe: '',
     recipes: [],
-    openWarning: true,
+    openWarning: false,
   };
 
   closeWarning = () => {

@@ -30,7 +30,7 @@ class Feed extends React.Component {
     user: this.props.appState.username, //back-end call
     feed: [],
     userMode: this.props.appState.userMode,
-    openWarning: true,
+    openWarning: false,
   };
 
   closeWarning = () => {
@@ -112,7 +112,7 @@ class Feed extends React.Component {
                   cookTimeHrs={recipe.cookTimeHrs}
                   cookTimeMins={recipe.cookTimeMins}
                   tags={recipe.tags}
-                  recipePhoto={recipe.recipePhoto}
+                  recipePhoto={recipe.recipePhoto.image_url}
                   likes={recipe.likes}
                   key={uid(recipe)}
                 />
