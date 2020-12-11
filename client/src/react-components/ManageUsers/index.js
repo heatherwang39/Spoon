@@ -2,17 +2,25 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import './styles.css';
-import * as data from '../../api/data';
+// import * as data from '../../api/data';
+import { getAllUsers, updateSearchForm } from '../../actions/manage';
 
 import Header from '../Header';
 import SearchBar from '../SearchBar';
 import UserInfo from './UserInfo';
 
 class ManageUsers extends React.Component {
-  state = {
-    searchedName: '',
-    users: data.allUsers, //this should be back-end call in phase 2
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchedName: '',
+      users: [],
+    };
+  }
+
+  componentDidMount() {
+    getAllUsers(this);
+  }
 
   handleInputChange = (event) => {
     const target = event.target;
@@ -23,7 +31,7 @@ class ManageUsers extends React.Component {
   };
 
   searchUser = () => {
-    console.log(this.state.searchedName);
+    console.log('You are searching for: ' + this.state.searchedName);
   };
 
   render() {
@@ -35,7 +43,7 @@ class ManageUsers extends React.Component {
         </Typography>
         <SearchBar
           searchedKeyword={this.state.searchedName}
-          handleInputChange={this.handleInputChange}
+          handleInputChange={(e) => updateSearchForm(this, e.target)}
           searchObject={this.searchUser}
           placeholder="For example: Heather"
           label="User Name"

@@ -54,7 +54,7 @@ class UserInfo extends React.Component {
                   <Grid item xs={3}>
                     {userMode === 'admin' && !searchPage ? (
                       <Button
-                        onClick={() => deleteUser(callerComponent, user)}
+                        onClick={() => deleteUser(callerComponent, user._id)}
                         variant="contained"
                         color="secondary"
                         startIcon={<DeleteIcon />}
