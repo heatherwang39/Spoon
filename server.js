@@ -194,7 +194,7 @@ Returned JSON should be the database document added.
 */
 // POST /users
 app.post("/api/users", mongoChecker, (req, res) => {
-  // Create a new restaurant
+  // Create a new user
   const user = new User({
     username: req.body.username,
     password: req.body.password,
@@ -260,8 +260,7 @@ app.delete("/api/users/:id", mongoChecker, (req, res) => {
 // user:
 /*
 [
-  { "op": "replace", "path": "/year", "value": 4 },
-  { "op": "replace", "path": "/name", "value": "Jim" },
+  { "op": "replace", "path": "/followers", "value": ["user1", "user2"] },
   ...
 ]
 Returned JSON should be the database document updated.
@@ -373,6 +372,25 @@ app.post("/api/images", multipartMiddleware, (req, res) => {
   });
 });
 
+/// Remove recipe image from cloudinary server by its id
+app.delete("/api/images/:id", (req, res) => {
+  const imageId = req.params.imageId;
+
+  cloudinary.uploader.destroy(imageId, function (result) {
+    models.Image.findOneAndRemove({ image_id: imageId })
+      .then((img) => {
+        if (!img) {
+          res.status(404).send();
+        } else {
+          res.send(img);
+        }
+      })
+      .catch((error) => {
+        res.status(500).send();
+      });
+  });
+});
+
 //add recipe
 //returned json is recipe document
 app.post("/api/recipes", async (req, res) => {
@@ -386,11 +404,18 @@ app.post("/api/recipes", async (req, res) => {
   }
 
   // Create a new recipe using the Recipe mongoose model
-  const recipe = new Recipe();
-  const recipeContents = req.body.recipeContents;
-  req.body.recipeContents.recipePhoto = req.body.imageSchema;
-
-  Object.assign(recipe, recipeContents);
+  const recipe = new Recipe({
+    recipeName: req.body.recipeName,
+    owner: req.body.owner,
+    ingredients: req.body.ingredients,
+    instructions: req.body.instructions,
+    servingSize: req.body.servingSize,
+    cookTimeHrs: req.body.cookTimeHrs,
+    cookTimeMins: req.body.cookTimeMins,
+    tags: req.body.tags,
+    recipePhoto: req.body.recipePhoto,
+    likes: req.body.likes,
+  });
 
   recipe
     .save()
