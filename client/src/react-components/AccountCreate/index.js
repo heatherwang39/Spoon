@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import Header from '../Header';
+import { signup } from '../../actions/user';
 
 class AccountCreate extends React.Component {
   state = {
@@ -12,9 +13,14 @@ class AccountCreate extends React.Component {
     username: "",
     password: "",
     repeatedPassword: "",
-    header: (<Header state={this.props.appState} />)
+    isAdmin: false
   }
-  
+
+  constructor(props) {
+    super(props);
+    this.props.history.push('/AccountCreate');
+  }
+
   componentDidMount(){
     const newState = {username: "guest", userMode: "guest"}
     this.setState({
@@ -46,24 +52,26 @@ class AccountCreate extends React.Component {
   }
 
   success = () => {
-    const newState = {username: "user1", userMode: "user"}
-    this.setState({
-      header: (<Header state={newState} />)
-    })
     this.setState({message:
       "You have successfully signed up for an account!"}
     )
-    this.setState({
-      username: "",
-      password: "",
-      repeatedPassword:"",
-    })
+    signup(this, this.props.app)
   }
 
   render() {
+    const { app } = this.props;
     return (
       <div>
-        {this.state.header}
+        {app.state.userMode !== 'guest' ? (
+          <Header
+            state={{
+              username: app.state.username,
+              userMode: app.state.userMode,
+            }}
+          />
+        ) : (
+          <Header state={{ username: 'guest', userMode: 'guest' }} />
+        )}
         <Grid container justify="center" alignItems="center" spacing={1}>
           <Grid item xs={4}>
             <TextField
@@ -110,10 +118,6 @@ class AccountCreate extends React.Component {
               disableRipple
             >
               Sign Up
-               {/* Here is where we would 
-                create a new account in 
-                the backend (username and
-                password both are entered). */}
             </Button>
             </Grid>
 

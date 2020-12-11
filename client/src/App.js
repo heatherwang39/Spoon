@@ -28,7 +28,7 @@ class App extends React.Component {
 
   state = {
     username: 'user1', //will be changed to '' later after each page implement back-end calls
-    userMode: 'admin', //'admin','user'
+    userMode: 'guest', //'admin','user'
   };
 
   render() {
@@ -71,7 +71,15 @@ class App extends React.Component {
             <Route
               exact
               path="/AccountCreate"
-              render={() => <AccountCreate appState={this.state} />}
+              render={(props) => (
+                <div>
+                  {this.state.userMode !== 'guest' ? (
+                    <Feed {...props} appState={this.state} />
+                  ) : (
+                    <AccountCreate {...props} app={this} />
+                  )}
+                </div>
+              )}
             />
             <Route
               exact
@@ -86,11 +94,7 @@ class App extends React.Component {
                 </div>
               )}
             />
-            <Route
-              exact
-              path="/LogOut"
-              render={() => <LogOut appState={this} />}
-            />
+            <Route exact path="/LogOut" render={() => <LogOut app={this} />} />
           </Switch>
         </BrowserRouter>
       </div>
