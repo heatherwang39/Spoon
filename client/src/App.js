@@ -27,8 +27,8 @@ class App extends React.Component {
   }
 
   state = {
-    username: 'user2', //will be changed to '' later after each page implement back-end calls
-    userMode: 'user', //'admin','user'
+    username: 'user1', //will be changed to '' later after each page implement back-end calls
+    userMode: 'guest', //'admin','user'
   };
 
   render() {
@@ -71,7 +71,15 @@ class App extends React.Component {
             <Route
               exact
               path="/AccountCreate"
-              render={() => <AccountCreate appState={this.state} />}
+              render={(props) => (
+                <div>
+                  {this.state.userMode !== 'guest' ? (
+                    <Feed {...props} appState={this.state} />
+                  ) : (
+                    <AccountCreate {...props} app={this} />
+                  )}
+                </div>
+              )}
             />
             <Route
               exact

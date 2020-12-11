@@ -14,7 +14,8 @@ export const allRecipes = (recipeList) => {
       }
     })
     .then((json) => {
-      recipeList.setState({ recipes: json.recipes });
+      console.log("json", json)
+      recipeList.setState({ recipes: json });
     })
     .catch((error) => {
       console.log(error);
@@ -55,6 +56,10 @@ export const addRecipe = (component) => {
   const request = new Request('/api/recipes', {
     method: 'post',
     body: JSON.stringify(component.state),
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json"
+    }
   });
 
   fetch(request)

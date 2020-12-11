@@ -34,6 +34,7 @@ class RecipeList extends React.Component {
       <div>
         {this.state.recipes
           .filter((r) => {
+            console.log(r)
             //tags
             if (
               r.tags.filter((tag) => {
