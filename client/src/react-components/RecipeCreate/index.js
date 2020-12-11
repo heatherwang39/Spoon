@@ -17,13 +17,13 @@ class RecipeCreate extends React.Component {
     ingredients: '',
     instructions: '',
     servingSize: '',
-    cookTimeHrs: '',
+    cookTimeHrs: '0',
     cookTimeMins: '',
     tags: {
       Breakfast: false, Lunch: false, Dinner: false, Dessert: false, Vegan: false, NutFree: false
     },
-    recipePhoto: 'https://www.lesgeveninzeeland.nl/storage/media/350/placeholder.png',
-    likes: '',
+    recipePhoto: '',
+    likes: '0',
   };
 
   tagChosen = (event) => {
@@ -42,6 +42,13 @@ class RecipeCreate extends React.Component {
     });
   };
 
+  jsonInputChange = (event) => {
+    const name = event.target.name;
+    this.setState({
+      [name]: event.target.value.toString().split("\n"),
+    })
+  }
+
   createRecipe = (event) => {
     const {
       recipeName,
@@ -51,11 +58,10 @@ class RecipeCreate extends React.Component {
       cookTimeMins,
       recipePhoto,
     } = this.state;
-    if(!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
+    if(!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto.image_url) {
       alert('Please fill out all the required fields!');
     } else {
-      // BACK-END CALL
-      alert('You tried creating a recipe called ' + recipeName + '! This is a back-end call that will be implemented in Phase 2.');
+      addRecipe(this);
     }
     event.preventDefault();
   };
@@ -170,7 +176,7 @@ class RecipeCreate extends React.Component {
           </Grid>
           <Grid item xs={6}>
             <img
-              src={this.state.recipePhoto}
+              src={this.state.recipePhoto.image_url}
               alt="Recipe Food"
               id="placeholderRecipeCreateImage"
             />
@@ -179,12 +185,12 @@ class RecipeCreate extends React.Component {
             <TextField
               required
               multiline
-              onChange={this.handleInputChange}
+              onChange={this.jsonInputChange}
               type="text"
               name="ingredients"
               label="Ingredients"
               rows={8}
-              helperText="Please list each ingredient separated by commas."
+              helperText="Please list each ingredient on a new line."
               variant="outlined"
               fullWidth
             />
@@ -193,12 +199,12 @@ class RecipeCreate extends React.Component {
             <TextField
               required
               multiline
-              onChange={this.handleInputChange}
+              onChange={this.jsonInputChange}
               type="text"
               name="instructions"
               label="Instructions"
               rows={10}
-              helperText="Please list each instruction separated by commas."
+              helperText="Please number each instruction listed on a new line."
               variant="outlined"
               fullWidth
             />

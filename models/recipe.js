@@ -4,12 +4,9 @@ const mongoose = require("mongoose");
 const imageSchema = mongoose.Schema({
   image_id: {
       type: String,
-      required: true
   },
   image_url: {
       type: String,
-      required: true,
-      default: 'https://www.lesgeveninzeeland.nl/storage/media/350/placeholder.png',
   },
 });
 
@@ -22,47 +19,39 @@ const RecipeSchema = new mongoose.Schema({
   // },
   recipeName: {
     type: String,
-    required: true,
     minlegth: 1,
     trim: true,
   },
   owner: {
-    type: mongoose.Schema.Types.ObjectId, //stores the _id of the user
-    required: true,
+    type: String, //stores the string of the user's uername TODO: CHANGE TO USERSCHEMA
   },
   ingredients: {
     type: [String],
-    required: true,
   },
   instructions: {
     type: [String],
-    required: true,
   },
   servingSize: {
     type: Number,
-    required: true,
     min: 1,
   },
   cookTimeHrs: {
+    type: Number,
     default: 0,
     min: 0,
   },
   cookTimeMins: {
     type: Number,
-    required: true,
     min: 1,
   },
   tags: {
-    type: [String],
-    required: true,
+    type: Object,
   },
   recipePhoto: {
     type: imageSchema,
-    required: true,
   },
   likes: {
     type: Number,
-    required: true,
   },
 });
 
