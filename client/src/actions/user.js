@@ -73,7 +73,7 @@ export const logout = (logoutComp, app) => {
     .then((json) => {
       console.log(app);
       app.setState({
-        username: 'guest', // will be set to '' after other page implemented the back end call
+        username: 'user1', // will be set to '' after other page implemented the back end call
         userMode: 'guest',
       });
       console.log(json);
