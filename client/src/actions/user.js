@@ -49,13 +49,38 @@ export const login = (loginComp, app) => {
     })
     .then((json) => {
       if (json.username !== undefined) {
-        console.log(app);
         app.setState({
           username: json.username,
           userMode: json.userMode,
         });
-        console.log(app);
       }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// A function to send a GET request to logout the current user
+export const logout = (logoutComp, app) => {
+  const url = `/users/logout`;
+
+  fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then((json) => {
+      console.log(app);
+      app.setState({
+        username: 'guest', // will be set to '' after other page implemented the back end call
+        userMode: 'guest',
+      });
+      console.log(json);
+      logoutComp.setState({
+        usernameBeforeLogout: json.username,
+      });
+      console.log(logoutComp);
     })
     .catch((error) => {
       console.log(error);

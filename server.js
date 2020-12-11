@@ -110,7 +110,7 @@ app.post("/users/login", (req, res) => {
       }
       req.session.userMode = checkedMode;
       res.send({ username: user.username, userMode: checkedMode });
-      log(req.session);
+      // log(req.session);
     })
     .catch((error) => {
       // log(error);
@@ -121,11 +121,12 @@ app.post("/users/login", (req, res) => {
 // A route to logout a user
 app.get("/users/logout", (req, res) => {
   // Remove the session
+  const usernameBeforeLogout = req.session.username;
   req.session.destroy((error) => {
     if (error) {
       res.status(500).send(error);
     } else {
-      res.send();
+      res.send({ username: usernameBeforeLogout });
     }
   });
 });

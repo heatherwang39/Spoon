@@ -11,6 +11,7 @@ import Search from './react-components/Search';
 import RecipeCreate from './react-components/RecipeCreate';
 import AccountCreate from './react-components/AccountCreate';
 import SignIn from './react-components/SignIn';
+import LogOut from './react-components/LogOut';
 
 class App extends React.Component {
   // constructor(props) {
@@ -84,6 +85,11 @@ class App extends React.Component {
                   )}
                 </div>
               )}
+            />
+            <Route
+              exact
+              path="/LogOut"
+              render={() => <LogOut appState={this} />}
             />
           </Switch>
         </BrowserRouter>

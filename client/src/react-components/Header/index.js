@@ -53,7 +53,7 @@ class Header extends React.Component {
         icon: PostAddIcon,
       },
       {
-        link: '../SignIn',
+        link: '../LogOut',
         name: 'Log Out',
         mode: ['user', 'admin'],
         icon: ExitToAppIcon,
@@ -87,7 +87,11 @@ class Header extends React.Component {
               href={'../'}
               style={{ textDecoration: 'none', color: 'unset' }}
             >
-              <img className="spoon_logo" src={require('./spoon_logo.png')} alt="Spoon Logo"/>
+              <img
+                className="spoon_logo"
+                src={require('./spoon_logo.png')}
+                alt="Spoon Logo"
+              />
             </Link>
 
             {/* buttons */}
