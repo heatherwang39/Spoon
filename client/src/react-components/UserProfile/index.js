@@ -6,13 +6,12 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
-import { allRecipes } from './../../actions/recipes';
+import { setUserProfile, checkFollow } from './../../actions/users.js';
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 import './styles.css';
-import * as data from '../../api/data';
 
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
@@ -21,30 +20,25 @@ import { withRouter } from 'react-router-dom';
 
 class UserProfile extends React.Component {
   componentDidMount() {
-    allRecipes(this);
     const pathname = this.props.location.pathname;
-    const username = pathname.slice(pathname.lastIndexOf('/') + 1);
-    const own = this.props.appState.username === username;
-    const user = this.state.users.filter((u) => {
-      return u.username === username;
-    });
-    const followers = user[0].followers.length;
-    this.setState({ username: username, own: own, followers: followers });
+    const userId = pathname.slice(pathname.lastIndexOf('/') + 1);
+    setUserProfile(this, userId, this.props.appState.username)
+    checkFollow(this, userId)
   }
 
   state = {
     tabVal: 0,
     own: false, // Whether or not this is the user's own page
-    username: 'user1', // back-end call
-    follow: false, // back-end call
-    followers: '2', // back-end call
+    username: 'user', 
+    follow: false, // Whether or not the logged in user is following this user
+    followers: '0',
     color: 'secondary',
     recipes: [],
-    users: data.allUsers, // back-end call
+    liked: [],
     editOpen: false, // Whether or not the edit recipe popup is open
     recipeToEdit: '',
     og_tags: {
-      // back-end call
+      // back-end call (?)
       Breakfast: false,
       Lunch: false,
       Dinner: false,
@@ -168,11 +162,7 @@ class UserProfile extends React.Component {
               </Tabs>
             </AppBar>
             <TabPanel value={this.state.tabVal} index={0}>
-              {this.state.recipes
-                .filter((r) => {
-                  return r.owner === this.state.username;
-                })
-                .map((recipe) => {
+              {this.state.recipes.map((recipe) => {
                   return (
                     <Thumbnail
                       recipeName={recipe.recipeName}
@@ -194,11 +184,7 @@ class UserProfile extends React.Component {
                 })}
             </TabPanel>
             <TabPanel value={this.state.tabVal} index={1}>
-              {this.state.users
-                .filter((u) => {
-                  return u.username === this.state.username;
-                })[0]
-                .liked.map((recipe_id) => {
+              {this.state.liked.map((recipe_id) => {
                   const recipe = this.state.recipes.filter((r) => {
                     return r.recipeId === recipe_id;
                   });
@@ -221,7 +207,8 @@ class UserProfile extends React.Component {
                   } else {
                     return <div></div>;
                   }
-                })}
+                })
+              }
             </TabPanel>
           </div>
         </div>
