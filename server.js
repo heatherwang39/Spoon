@@ -163,7 +163,7 @@ Returned JSON should be the database document added.
 */
 // POST /users
 app.post("/api/users", mongoChecker, (req, res) => {
-  // Create a new restaurant
+  // Create a new user
   const user = new User({
     username: req.body.username,
     password: req.body.password,
@@ -342,24 +342,47 @@ app.post("/api/images", multipartMiddleware, (req, res) => {
   });
 });
 
+/// Remove recipe image from cloudinary server by its id
+app.delete("/api/images/:id", (req, res) => {
+  const imageId = req.params.imageId;
+
+  cloudinary.uploader.destroy(imageId, function (result) {
+    models.Image.findOneAndRemove({ image_id: imageId })
+      .then((img) => {
+        if (!img) {
+          res.status(404).send();
+        } else {
+          res.send(img);
+        }
+      })
+      .catch((error) => {
+        res.status(500).send();
+      });
+  });
+});
+
 //add recipe
 //returned json is recipe document
 app.post("/api/recipes", async (req, res) => {
-  // log(req.body)
-
   // check mongoose connection established.
   if (mongoose.connection.readyState != 1) {
     log("Issue with mongoose connection");
     res.status(500).send("Internal server error");
     return;
   }
-
-  // Create a new recipe using the Recipe mongoose model
-  const recipe = new Recipe();
-  const recipeContents = req.body.recipeContents;
-  req.body.recipeContents.recipePhoto = req.body.imageSchema;
-
-  Object.assign(recipe, recipeContents);
+  // Create a new recipe
+  const recipe = new Recipe({
+    recipeName: req.body.recipeName,
+    owner: req.body.owner,
+    ingredients: req.body.ingredients,
+    instructions: req.body.instructions,
+    servingSize: req.body.servingSize,
+    cookTimeHrs: req.body.cookTimeHrs,
+    cookTimeMins: req.body.cookTimeMins,
+    tags: req.body.tags,
+    recipePhoto: req.body.recipePhoto,
+    likes: req.body.likes,
+  });
 
   recipe
     .save()
@@ -452,10 +475,15 @@ app.patch("/api/recipes/:id", mongoChecker, (req, res) => {
 app.get("/api/recipes", mongoChecker, authenticate, async (req, res) => {
   try {
     const recipes = await Recipe.find();
-    res.send({ recipes });
+    res.send(recipes);
   } catch (error) {
-    log(error);
-    res.status(500).send("Internal Server Error");
+    log(error); // log server error to the console, not to the client.
+    if (isMongoError(error)) {
+      // check for if mongo server suddenly dissconnected before this request.
+      res.status(500).send("Internal server error");
+    } else {
+      res.status(400).send("Bad Request"); // 400 for bad request gets sent to client.
+    }
   }
 });
 
