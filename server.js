@@ -112,7 +112,7 @@ app.post("/users/login", (req, res) => {
       // Add the user's id to the session.
       // We can check later if this exists to ensure we are logged in.
       req.session.userId = user._id;
-      req.session.username = user.username; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
+      req.session.username = user.username; // we will later send the username to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
       let checkedMode;
       if (user.isAdmin == true) {
         checkedMode = "admin";
