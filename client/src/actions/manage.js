@@ -30,38 +30,41 @@ export const updateSearchForm = (searchComp, field) => {
   });
 };
 
-export const deleteUser = (manage, userId) => {
+export const deleteUser = (manageComp, userId) => {
   // Create our request constructor with all the parameters we need
-  // const request = new Request(`/api/users/${userId}`, {
-  //   method: 'delete',
-  // });
-
-  // // Send the request with fetch()
-  // fetch(request)
-  // .then((res) => {
-  //   if (res.status === 200) {
-  //     return res.json();
-  //   }
-  // })
-  // .then((json) => {
-  //   if (json.username !== undefined) {
-  //     app.setState({
-  //       username: json.username,
-  //       userMode: json.userMode,
-  //     });
-  //   }
-  // })
-  // .catch((error) => {
-  //   console.log(error);
-  // });
-
-  const usersToKeep = manage.state.users.filter((u) => {
-    return u !== user;
+  const request = new Request(`/api/users/${userId}`, {
+    method: 'delete',
   });
-  manage.setState({
-    users: usersToKeep,
-  });
-  alert('User ' + user.username + ' has been deleted!');
+
+  // delete the user
+  fetch(request)
+    .then((res) => {
+      if (res.status === 200) {
+        console.log('delete the user successfully.');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  //get all updated users
+  const url = '/api/users';
+  fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then((json) => {
+      if (json) {
+        manageComp.setState({
+          users: json,
+        });
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const deleteRecipe = (manage, recipe) => {
