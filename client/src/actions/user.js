@@ -110,14 +110,10 @@ export const signup = (signupComp, app) => {
         signupHelper(signupComp)
       } 
       else {
-        // signupComp.setState({message: 'Something went wrong. You were unable to sign up.'})
+        signupComp.setState({message: 'Something went wrong. You were unable to sign up.'})
       }
     })
     .catch((error) => {
-      if (error.code === 11000){
-        console.log("whhhaaajjjsjdkfkj")
-        signupComp.setState({message: 'This username is already taken.'})
-      } 
       console.log(error);
     });
 };
