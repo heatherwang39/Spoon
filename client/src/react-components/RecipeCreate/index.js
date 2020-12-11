@@ -8,6 +8,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import './styles.css';
 import Header from '../Header';
 import Tags from '../Search/Tags';
+import { addRecipe, changeRecipePhoto } from '../../actions/recipes';
 
 class RecipeCreate extends React.Component {
   state = {
@@ -26,22 +27,11 @@ class RecipeCreate extends React.Component {
   };
 
   tagChosen = (event) => {
-    const target = event.target
-    const name = target.name
-    const newtags = {...this.state.tags, [name] : target.checked}
+    const target = event.target;
+    const name = target.name;
+    const newtags = { ...this.state.tags, [name]: target.checked };
     this.setState({
       tags: newtags,
-    });
-  };
-
-  onPhotoUpload = (event) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => {
-      this.setState({ recipePhoto: reader.result });
-    });
-    reader.readAsDataURL(event.target.files[0]);
-    this.setState({
-      recipePhoto: event.target.files[0],
     });
   };
 
@@ -52,25 +42,12 @@ class RecipeCreate extends React.Component {
     });
   };
 
-  previewImage = () => {
-    let recipeimageURL = this.state.recipePhoto;
-    let placeholderImage = document.getElementById(
-      'placeholderRecipeCreateImage'
-    );
-    if (recipeimageURL.match(/\.(jpeg|jpg|png)$/) != null) {
-      placeholderImage.src = recipeimageURL;
-    } else {
-      alert('Please add a valid image URL.');
-    }
-  };
-
   createRecipe = (event) => {
     const {
       recipeName,
       ingredients,
       instructions,
       servingSize,
-      // cookTimeHrs, // COMMENTED OUT TO AVOID JS WARNING
       cookTimeMins,
       recipePhoto,
     } = this.state;
@@ -174,7 +151,10 @@ class RecipeCreate extends React.Component {
                   accept="image/*"
                   id="createRecipePhoto"
                   type="file"
-                  onChange={this.onPhotoUpload}
+                  onChange={(e) => {
+                    e.preventDefault();
+                    changeRecipePhoto(e.target.files[0], this);
+                  }}
                 />
                 <Button
                   component="span"
@@ -191,7 +171,7 @@ class RecipeCreate extends React.Component {
           <Grid item xs={6}>
             <img
               src={this.state.recipePhoto}
-              alt="food"
+              alt="Recipe Food"
               id="placeholderRecipeCreateImage"
             />
           </Grid>

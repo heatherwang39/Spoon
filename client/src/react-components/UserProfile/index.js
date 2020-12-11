@@ -6,7 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
-import { allRecipes } from './../../actions/allRecipes';
+import { allRecipes } from './../../actions/recipes';
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";

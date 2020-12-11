@@ -1,6 +1,6 @@
 import React from 'react';
 import { uid } from 'react-uid';
-import { allRecipes } from './../../actions/allRecipes';
+import { allRecipes } from './../../actions/recipes';
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
