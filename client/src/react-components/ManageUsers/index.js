@@ -3,7 +3,7 @@ import Typography from '@material-ui/core/Typography';
 
 import './styles.css';
 // import * as data from '../../api/data';
-import { getAllUsers, updateSearchForm } from '../../actions/manage';
+import { getAllUsers, updateSearchUserForm } from '../../actions/manage';
 
 import Header from '../Header';
 import SearchBar from '../SearchBar';
@@ -43,7 +43,7 @@ class ManageUsers extends React.Component {
         </Typography>
         <SearchBar
           searchedKeyword={this.state.searchedName}
-          handleInputChange={(e) => updateSearchForm(this, e.target)}
+          handleInputChange={(e) => updateSearchUserForm(this, e.target)}
           searchObject={this.searchUser}
           placeholder="For example: Heather"
           label="User Name"
