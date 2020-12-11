@@ -84,6 +84,26 @@ const authenticate = (req, res, next) => {
   }
 };
 
+// Middleware for authentication of resources that only admins have access to
+const adminAuthenticate = (req, res, next) => {
+  if (req.session.userId && req.session.userMode == "admin") {
+    User.findById(req.session.userId)
+      .then((user) => {
+        if (!user) {
+          return Promise.reject();
+        } else {
+          req.user = user;
+          next();
+        }
+      })
+      .catch((error) => {
+        res.status(401).send("Unauthorized");
+      });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+};
+
 /*** Session handling **************************************/
 // Create a session and session cookie
 app.use(
@@ -227,7 +247,7 @@ app.post("/api/users", mongoChecker, (req, res) => {
 // Route for deleting a user
 // Returned JSON should be the database document removed.
 // DELETE /users.:id
-app.delete("/api/users/:id", mongoChecker, (req, res) => {
+app.delete("/api/users/:id", mongoChecker, adminAuthenticate, (req, res) => {
   const id = req.params.id;
 
   // Validate id
@@ -443,7 +463,7 @@ app.post("/api/recipes", async (req, res) => {
 
 //delete recipe
 //returned json is recipe document
-app.delete("/api/recipes/:id", async (req, res) => {
+app.delete("/api/recipes/:id", adminAuthenticate, async (req, res) => {
   const id = req.params.id;
 
   // Validate id
