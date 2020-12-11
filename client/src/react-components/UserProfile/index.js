@@ -23,7 +23,9 @@ class UserProfile extends React.Component {
     const pathname = this.props.location.pathname;
     const userId = pathname.slice(pathname.lastIndexOf('/') + 1);
     setUserProfile(this, userId, this.props.appState.username)
-    checkFollow(this, userId)
+    if (this.props.appState.userMode !== 'guest') {
+      checkFollow(this, userId)
+    }
   }
 
   state = {
@@ -140,7 +142,7 @@ class UserProfile extends React.Component {
             >
               {this.state.followers} followers
             </Typography>
-            {!this.state.own && (
+            {!this.state.own && this.props.appState.userMode !== 'guest' && (
               <Button
                 className="userprofile-button"
                 variant="contained"
