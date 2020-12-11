@@ -21,12 +21,12 @@ class AccountCreate extends React.Component {
     this.props.history.push('/AccountCreate');
   }
 
-  componentDidMount(){
-    const newState = {username: "guest", userMode: "guest"}
-    this.setState({
-      header: (<Header state={newState} />)
-    })
-  }
+  // componentDidMount(){
+  //   const newState = {username: "guest", userMode: "guest"}
+  //   this.setState({
+  //     header: (<Header state={newState} />)
+  //   })
+  // }
 
   handleInputChange = (event) => {
     const name = event.target.name;
@@ -52,9 +52,6 @@ class AccountCreate extends React.Component {
   }
 
   success = () => {
-    this.setState({message:
-      "You have successfully signed up for an account!"}
-    )
     signup(this, this.props.app)
   }
 
