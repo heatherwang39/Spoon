@@ -256,7 +256,7 @@ app.delete("/api/users/:id", mongoChecker, (req, res) => {
 // user:
 /*
 [
-  { "op": "replace", "path": "/followers", "value": ["user1", "user2"] },
+  { "path": "/followers", "value": ["user1", "user2"] },
   ...
 ]
 Returned JSON should be the database document updated.
