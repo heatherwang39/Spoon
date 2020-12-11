@@ -14,7 +14,7 @@ export const allRecipes = (recipeList) => {
       }
     })
     .then((json) => {
-      console.log("json", json)
+      console.log('json', json);
       recipeList.setState({ recipes: json });
     })
     .catch((error) => {
@@ -56,9 +56,9 @@ export const addRecipe = (component) => {
     method: 'post',
     body: JSON.stringify(component.state),
     headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json"
-    }
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
   });
 
   fetch(request)
@@ -71,6 +71,29 @@ export const addRecipe = (component) => {
       } else {
         // TODO: DON'T USE ALERTS
         alert('Could not upload recipe!');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+// Update recipe info
+export const updateRecipe = (recipeId, changes) => {
+  // Changes should be an array of {path, value} objects
+  const url = '/api/recipes/' + recipeId;
+  const request = new Request(url, {
+    method: 'PATCH',
+    body: changes,
+  });
+
+  fetch(request)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      } else {
+        // TODO: DON'T USE ALERTS
+        alert('Could not update recipe!');
       }
     })
     .catch((error) => {

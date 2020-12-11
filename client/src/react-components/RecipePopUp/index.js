@@ -79,7 +79,7 @@ class RecipePopup extends React.Component {
             </Grid>
           </DialogTitle>
           <DialogContent dividers>
-            <img className="recipe-photo" src={recipePhoto} alt="food" />
+            <img className="recipe-photo" src={recipePhoto} alt="Recipe Food" />
             <div className="recipe-popout-text-flex">
               <Typography variant="h6" color="secondary">
                 Serving Size:
