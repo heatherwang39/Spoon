@@ -86,11 +86,7 @@ class App extends React.Component {
                 </div>
               )}
             />
-            <Route
-              exact
-              path="/LogOut"
-              render={() => <LogOut appState={this} />}
-            />
+            <Route exact path="/LogOut" render={() => <LogOut app={this} />} />
           </Switch>
         </BrowserRouter>
       </div>

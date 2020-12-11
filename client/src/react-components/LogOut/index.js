@@ -1,7 +1,4 @@
 import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import Header from '../Header';
@@ -16,16 +13,10 @@ class LogOut extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this);
-    console.log(this.props.appState);
-    this.userLogOut = () => logout(this, this.props.appState);
+    logout(this, this.props.app);
   }
 
   render() {
-    const { app } = this.props.appState;
-
-    // this.setState({ usernameBeforeLogout: this.props.appState.state.username });
-
     return (
       <div>
         <Header state={{ username: 'guest', userMode: 'guest' }} />

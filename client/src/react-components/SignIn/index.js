@@ -68,8 +68,6 @@ class SignIn extends React.Component {
 
   render() {
     const { app } = this.props;
-    console.log(app);
-
     return (
       <div>
         {/* {this.state.successFlag ? (

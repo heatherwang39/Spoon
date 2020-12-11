@@ -108,7 +108,6 @@ app.post("/users/login", (req, res) => {
   // by their email and password
   User.findByUsernamePassword(username, password)
     .then((user) => {
-      log(user);
       // Add the user's id to the session.
       // We can check later if this exists to ensure we are logged in.
       req.session.userId = user._id;
@@ -121,7 +120,6 @@ app.post("/users/login", (req, res) => {
       }
       req.session.userMode = checkedMode;
       res.send({ username: user.username, userMode: checkedMode });
-      log(req.session);
     })
     .catch((error) => {
       log(error);
