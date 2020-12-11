@@ -14,12 +14,21 @@ export const allRecipes = (recipeList) => {
       }
     })
     .then((json) => {
-      console.log("json", json)
+      console.log('json', json);
       recipeList.setState({ recipes: json });
     })
     .catch((error) => {
       console.log(error);
     });
+};
+
+// A functon to update the search user form while input changes
+export const updateSearchRecipeForm = (searchComp, field) => {
+  const value = field.value.toLowerCase();
+
+  searchComp.setState({
+    searchedRecipe: value,
+  });
 };
 
 // Upload the recipe photo to Cloudinary
@@ -56,9 +65,9 @@ export const addRecipe = (component) => {
     method: 'post',
     body: JSON.stringify(component.state),
     headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json"
-    }
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
   });
 
   fetch(request)
@@ -71,6 +80,43 @@ export const addRecipe = (component) => {
       } else {
         // TODO: DON'T USE ALERTS
         alert('Could not upload recipe!');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const deleteRecipe = (manageComp, recipeId) => {
+  // Create our request constructor with all the parameters we need
+  const request = new Request(`/api/recipes/${recipeId}`, {
+    method: 'delete',
+  });
+
+  // delete the user
+  fetch(request)
+    .then((res) => {
+      if (res.status === 200) {
+        console.log('delete the recipe successfully.');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  //get all updated users
+  const url = '/api/recipes';
+  fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then((json) => {
+      if (json) {
+        manageComp.setState({
+          recipes: json,
+        });
       }
     })
     .catch((error) => {

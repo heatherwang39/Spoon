@@ -112,7 +112,7 @@ app.post("/users/login", (req, res) => {
       // Add the user's id to the session.
       // We can check later if this exists to ensure we are logged in.
       req.session.userId = user._id;
-      req.session.username = user.username; // we will later send the email to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
+      req.session.username = user.username; // we will later send the username to the browser when checking if someone is logged in through GET /check-session (we will display it on the frontend dashboard. You could however also just send a boolean flag).
       let checkedMode;
       if (user.isAdmin == true) {
         checkedMode = "admin";
@@ -387,12 +387,24 @@ app.delete("/api/images/:id", (req, res) => {
   });
 });
 
-//add recipe
-//returned json is recipe document
+// Route for adding a recipe
+/* Request body expects:
+{
+  "recipeName": <recipe name>,
+  "owner": <owner>,
+  "ingredients": <list of ingredients>,
+  "instructions": <list of instructions>,
+  "servingSize": <serving size>,
+  "cookTimeHrs": <cook time in hours>,
+  "cookTimeMins": <cook time in minutes,
+  "tags": <list of tags>,
+  "recipePhoto": <ImageSchema>,
+  "likes": <likes>
+}
+*/
+// Returned json should be the added recipe document
 app.post("/api/recipes", async (req, res) => {
-  // log(req.body)
-
-  // check mongoose connection established.
+  // Check mongoose connection established.
   if (mongoose.connection.readyState != 1) {
     log("Issue with mongoose connection");
     res.status(500).send("Internal server error");
@@ -462,6 +474,14 @@ app.delete("/api/recipes/:id", async (req, res) => {
 });
 
 // Route for making changes to a recipe
+/* Request body expects:
+[
+  { "op": "replace", "path": "/recipeName", "value": <new recipe name> },
+  { "op": "replace", "path": "/servingSize", "value": <new serving size> },
+  ...
+]
+*/
+// Returned json should be the edited recipe document
 app.patch("/api/recipes/:id", mongoChecker, (req, res) => {
   const id = req.params.id;
 
@@ -473,7 +493,7 @@ app.patch("/api/recipes/:id", mongoChecker, (req, res) => {
   // Find the fields to update and their values.
   const fieldsToUpdate = {};
   req.body.map((change) => {
-    const propertyToChange = change.path;
+    const propertyToChange = change.path.substr(1); // getting rid of the '/' character
     fieldsToUpdate[propertyToChange] = change.value;
   });
 
