@@ -16,12 +16,8 @@ class Thumbnail extends React.Component {
   componentDidMount() {
     getRecipe(this, this.state.recipeId);
     if (this.props.userMode !== 'guest') {
-      getCurrentUser(this)
-      checkLiked(this, this.state.recipeId)
-      const own = this.state.owner === this.state.loggedUser
-      this.setState({
-        own: own,
-      })
+      getCurrentUser(this);
+      checkLiked(this, this.state.recipeId);
     }
   }
 
@@ -41,7 +37,6 @@ class Thumbnail extends React.Component {
     recipePhoto: '', // imageSchema object
     likes: 0,
     loggedUser: {},
-    own: false
   };
 
   openPopup = () => {
@@ -55,27 +50,31 @@ class Thumbnail extends React.Component {
   handleLike = () => {
     if (!this.state.liked) {
       // add recipe to liked of user
-      this.state.loggedUser.liked.push(this.state.recipeId)
-      addToUser(this.state.loggedUser._id, [{'path': '/liked', 'value': this.state.loggedUser.liked}])
+      this.state.loggedUser.liked.push(this.state.recipeId);
+      addToUser(this.state.loggedUser._id, [
+        { path: '/liked', value: this.state.loggedUser.liked },
+      ]);
 
       // increase likes on recipe
       const likes = this.state.likes + 1;
-      updateRecipe(this.state.recipeId, [{'path': '/likes', 'value': likes}])
+      updateRecipe(this.state.recipeId, [{ path: '/likes', value: likes }]);
       this.setState({
         liked: true,
         likes: likes,
       });
     } else {
       // remove recipe from liked of user
-      const index = this.state.loggedUser.liked.indexOf(this.state.recipeId)
+      const index = this.state.loggedUser.liked.indexOf(this.state.recipeId);
       if (index !== -1) {
-        this.state.loggedUser.liked.splice(index, 1)
+        this.state.loggedUser.liked.splice(index, 1);
       }
-      addToUser(this.state.loggedUser._id, [{'path': '/liked', 'value': this.state.loggedUser.liked}])
+      addToUser(this.state.loggedUser._id, [
+        { path: '/liked', value: this.state.loggedUser.liked },
+      ]);
 
       // decease likes on recipe
       const likes = this.state.likes - 1;
-      updateRecipe(this.state.recipeId, [{'path': '/likes', 'value': likes}])
+      updateRecipe(this.state.recipeId, [{ path: '/likes', value: likes }]);
       this.setState({
         liked: false,
         likes: likes,
@@ -85,39 +84,46 @@ class Thumbnail extends React.Component {
 
   render() {
     const { open } = this.state;
-    const {
-      editRecipe,
-      deleteRecipe,
-    } = this.props;
+    const { editRecipe, deleteRecipe } = this.props;
 
     return (
       <div className="thumbnail">
         <div className="thumbnail-picture">
           <div className="thumbnail-hover" onClick={this.openPopup} />
           <div className="thumbnail-likes">
-          {!this.state.own && this.props.userMode !== 'guest' && (<Button
-              className="recipe-like-button"
-              color="secondary"
-              disableRipple
-              onClick={this.handleLike}
-            >
-              {!this.state.liked && <FavoriteOutlined />}
-              {this.state.liked && <FavoriteIcon />}
-            </Button>)}
+            {this.state.owner !== this.state.loggedUser.username &&
+              this.props.userMode !== 'guest' && (
+                <Button
+                  className="recipe-like-button"
+                  color="secondary"
+                  disableRipple
+                  onClick={this.handleLike}
+                >
+                  {!this.state.liked && <FavoriteOutlined />}
+                  {this.state.liked && <FavoriteIcon />}
+                </Button>
+              )}
             <Typography color="secondary">{this.state.likes}</Typography>
           </div>
-          <img className="thumbnail-picture" src={this.state.recipePhoto} alt="Recipe" />
+          <img
+            className="thumbnail-picture"
+            src={this.state.recipePhoto}
+            alt="Recipe"
+          />
         </div>
         <div className="thumbnail-recipe-name">
           <p className="thumbnail-recipe-name">{this.state.recipeName}</p>
         </div>
         <div className="thumbnail-username">
-          <Link className="text-link" to={`../UserProfile/${this.state.ownerId}`}>
+          <Link
+            className="text-link"
+            to={`../UserProfile/${this.state.ownerId}`}
+          >
             <p className="thumbnail-username">{this.state.owner}</p>
           </Link>
         </div>
         <div className="thumbnail-buttons">
-          {this.state.own ? (
+          {this.state.owner === this.state.loggedUser.username ? (
             <div>
               <Button
                 variant="text"
