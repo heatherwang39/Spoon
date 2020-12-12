@@ -9,8 +9,13 @@ export const checkSession = (app) => {
       }
     })
     .then((json) => {
-      if (json && json.username) {
-        app.setState({ username: json.username, userMode: json.userMode, userId: json.userId});
+      if (json) {
+        app.setState({
+          username: json.username,
+          userMode: json.userMode,
+          userId: json.userId,
+          checkSessionIsFinished: true,
+        });
       }
     })
     .catch((error) => {
@@ -91,24 +96,25 @@ export const logout = (logoutComp, app) => {
 
 //A function to create a user and session
 export const signup = (signupComp, app) => {
-  console.log("state:", signupComp)
+  console.log('state:', signupComp);
 
   const request = new Request('/api/users', {
     method: 'post',
     body: JSON.stringify(signupComp.state),
     headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json"
-    }
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': 'application/json',
+    },
   });
 
   fetch(request)
     .then((user) => {
       if (user.status === 200) {
-        signupHelper(signupComp, app)
-      } 
-      else {
-        signupComp.setState({message: 'Something went wrong. You were unable to sign up.'})
+        signupHelper(signupComp, app);
+      } else {
+        signupComp.setState({
+          message: 'Something went wrong. You were unable to sign up.',
+        });
       }
     })
     .catch((error) => {
@@ -117,11 +123,10 @@ export const signup = (signupComp, app) => {
 };
 
 export const signupHelper = (signupComp, app) => {
-
   // Create session with new account
   const sesRequest = new Request(`/users/login`, {
     method: 'post',
-    body: JSON.stringify({    
+    body: JSON.stringify({
       username: signupComp.state.username,
       password: signupComp.state.password,
     }),
@@ -133,21 +138,27 @@ export const signupHelper = (signupComp, app) => {
 
   // Send the request with fetch()
   fetch(sesRequest)
-    .then((res)=> {
+    .then((res) => {
       if (res.status === 200) {
         return res.json();
       }
     })
-    .then((json)=>{
-      signupComp.setState({message: 'You have successfully signed up. You will be redirected to your feed in 2 seconds!'})
-      setTimeout(() => app.setState({
-        username: json.username,
-        userMode: "user", //newly created user is never admin
-        userId: json.userId
-      }), 2000);
+    .then((json) => {
+      signupComp.setState({
+        message:
+          'You have successfully signed up. You will be redirected to your feed in 2 seconds!',
+      });
+      setTimeout(
+        () =>
+          app.setState({
+            username: json.username,
+            userMode: 'user', //newly created user is never admin
+            userId: json.userId,
+          }),
+        2000
+      );
     })
     .catch((error) => {
       console.log(error);
     });
-    
-}
+};

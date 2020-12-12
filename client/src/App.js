@@ -15,32 +15,27 @@ import LogOut from './react-components/LogOut';
 import Unauthorized from './react-components/Unauthorized';
 
 class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   //check the user is logged in and check the userMode,if the user already logged in, the state will be
-  //   //set to the current user's username and userMode('user' or 'admin')
-  //   checkSession(this);
-  // }
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '', //will be changed to '' later after each page implement back-end calls
+      userMode: 'guest', //'admin','user'
+      userId: '',
+      checkSessionIsFinished: false,
+    };
+
     //check the user is logged in and check the userMode,if the user already logged in, the state will be
     //set to the current user's username and userMode('user' or 'admin')
+    //If the user hasn't logged in, the userMode will be 'guest'
     checkSession(this);
   }
 
-  state = {
-    username: '', //will be changed to '' later after each page implement back-end calls
-    userMode: 'guest', //'admin','user'
-    userId: '',
-  };
-
   render() {
     console.log(this.state);
-    return (
+    return this.state.checkSessionIsFinished ? (
       <div>
         <BrowserRouter>
           <Switch>
-            {/* Similar to a switch statement - shows the component depending on the URL path */}
-            {/* Each Route below shows a different component depending on the exact path in the URL  */}
             <Route
               exact
               path={['/', '/Feed']}
@@ -54,13 +49,29 @@ class App extends React.Component {
             <Route
               exact
               path="/ManageUsers"
-              render={() => <ManageUsers appState={this.state} />}
+              render={(props) => (
+                <div>
+                  {this.state.userMode !== 'admin' ? (
+                    <Unauthorized {...props} app={this} />
+                  ) : (
+                    <ManageUsers appState={this.state} />
+                  )}
+                </div>
+              )}
             />
 
             <Route
               exact
               path="/ManageRecipes"
-              render={() => <ManageRecipes appState={this.state} />}
+              render={(props) => (
+                <div>
+                  {this.state.userMode !== 'admin' ? (
+                    <Unauthorized {...props} app={this} />
+                  ) : (
+                    <ManageRecipes appState={this.state} />
+                  )}
+                </div>
+              )}
             />
             <Route
               exact
@@ -107,6 +118,8 @@ class App extends React.Component {
           </Switch>
         </BrowserRouter>
       </div>
+    ) : (
+      <div>Loading</div>
     );
   }
 }
