@@ -56,16 +56,17 @@ class Feed extends React.Component {
         });
         return (
           <Thumbnail
-            recipeName={recipe[0].recipeName}
-            owner={recipe[0].owner}
-            ingredients={recipe[0].ingredients}
-            instructions={recipe[0].instructions}
-            servingSize={recipe[0].servingSize}
-            cookTimeHrs={recipe[0].cookTimeHrs}
-            cookTimeMins={recipe[0].cookTimeMins}
-            tags={recipe[0].tags}
-            recipePhoto={recipe[0].recipePhoto.image_url}
-            likes={recipe[0].likes}
+            // recipeName={recipe[0].recipeName}
+            // owner={recipe[0].owner}
+            // ingredients={recipe[0].ingredients}
+            // instructions={recipe[0].instructions}
+            // servingSize={recipe[0].servingSize}
+            // cookTimeHrs={recipe[0].cookTimeHrs}
+            // cookTimeMins={recipe[0].cookTimeMins}
+            // tags={recipe[0].tags}
+            // recipePhoto={recipe[0].recipePhoto.image_url}
+            // likes={recipe[0].likes}
+            recipeId={recipe[0]._id}
             key={uid(recipe[0])}
           />
         );
@@ -81,16 +82,17 @@ class Feed extends React.Component {
       this.state.recipes.map((recipe) => {
         return (
           <Thumbnail
-            recipeName={recipe.recipeName}
-            owner={recipe.owner}
-            ingredients={recipe.ingredients}
-            instructions={recipe.instructions}
-            servingSize={recipe.servingSize}
-            cookTimeHrs={recipe.cookTimeHrs}
-            cookTimeMins={recipe.cookTimeMins}
-            tags={recipe.tags}
-            recipePhoto={recipe.recipePhoto.image_url}
-            likes={recipe.likes}
+            // recipeName={recipe.recipeName}
+            // owner={recipe.owner}
+            // ingredients={recipe.ingredients}
+            // instructions={recipe.instructions}
+            // servingSize={recipe.servingSize}
+            // cookTimeHrs={recipe.cookTimeHrs}
+            // cookTimeMins={recipe.cookTimeMins}
+            // tags={recipe.tags}
+            // recipePhoto={recipe.recipePhoto.image_url}
+            // likes={recipe.likes}
+            recipeId={recipe._id}
             key={uid(recipe)}
           />
         );
