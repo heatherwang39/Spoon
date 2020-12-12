@@ -122,13 +122,10 @@ app.use(
 app.post("/users/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
-
-  //   log(username, password);
   // Use the static method on the User model to find a user
-  // by their email and password
+  // by their username and password
   User.findByUsernamePassword(username, password)
     .then((user) => {
-      log(user);
       // Add the user's id to the session.
       // We can check later if this exists to ensure we are logged in.
       req.session.userId = user._id;
@@ -141,7 +138,6 @@ app.post("/users/login", (req, res) => {
       }
       req.session.userMode = checkedMode;
       res.send({ username: user.username, userMode: checkedMode });
-      log(req.session);
     })
     .catch((error) => {
       log(error);
@@ -171,14 +167,16 @@ app.get("/users/check-session", (req, res) => {
       userMode: req.session.userMode,
     });
   } else {
-    res.status(401).send();
+    res.send({
+      username: "",
+      userMode: "guest",
+    });
   }
 });
 
 // get the currently logged-in user
 // returned json is user document
 app.get("/api/users/currentUser", mongoChecker, (req, res) => {
-
   if (!ObjectID.isValid(req.session.userId)) {
     res.status(404).send();
     return; // so that we don't run the rest of the handler.
@@ -190,7 +188,7 @@ app.get("/api/users/currentUser", mongoChecker, (req, res) => {
         if (!user) {
           res.status(404).send("Resource not found");
         } else {
-          console.log(user)
+          console.log(user);
           res.send({ user });
         }
       })
@@ -598,7 +596,7 @@ app.get("*", (req, res) => {
     "/AccountCreate",
     "/SignIn",
     "/LogOut",
-    "/UserProfile",
+    "/UserProfile/*",
     "/Unauthorized",
   ];
   if (!goodPageRoutes.includes(req.url)) {
