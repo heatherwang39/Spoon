@@ -23,7 +23,7 @@ class Thumbnail extends React.Component {
       this.setState({
         own: own,
       })
-      console.log(this.state.loggedUser)
+      // console.log(this.state.loggedUser)
     }
   }
 
@@ -97,7 +97,7 @@ class Thumbnail extends React.Component {
         <div className="thumbnail-picture">
           <div className="thumbnail-hover" onClick={this.openPopup} />
           <div className="thumbnail-likes">
-          {!this.state.own && this.props.appState.userMode !== 'guest' && (<Button
+          {!this.state.own && this.props.userMode !== 'guest' && (<Button
               className="recipe-like-button"
               color="secondary"
               disableRipple

@@ -211,8 +211,10 @@ class UserProfile extends React.Component {
                   if (recipe[0] != null) {
                     return (
                       <Thumbnail
-                        recipeId={recipe[0].recipe_id}
-                      />
+                        userMode={this.props.appState.userMode}
+                        recipeId={recipe_id}
+                        key={uid(recipe[0])}
+s                      />
                     );
                   } else {
                     return <div></div>;
