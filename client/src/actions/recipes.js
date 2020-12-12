@@ -234,7 +234,7 @@ export const getRecipe = (component, recipeId) => {
 }
 
 // check if the logged in user has liked the recipe
-export const checkFollow = (component, id) => {
+export const checkLiked = (component, id) => {
   const url = '/api/users/currentUser';
   fetch(url)
   .then((res) => {
@@ -257,4 +257,30 @@ export const checkFollow = (component, id) => {
   .catch((error) => {
     console.log(error);
   });
+}
+
+// get the user id of the recipe owner
+export const getOwnerId = (component, username) => {
+  const url = '/api/users'
+  fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+        return res.json();
+      } else {
+        console.log('Could not get users');
+      }
+    })
+    .then((json) => {
+      json.users.forEach((user) => {
+        if (user.username === username) {
+          component.setState({
+            ownerId: username,
+          })
+        }
+      })
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
