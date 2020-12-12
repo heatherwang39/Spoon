@@ -73,38 +73,74 @@ export const addRecipe = (component) => {
   fetch(request)
     .then((recipe) => {
       if (recipe.status === 200) {
-        alert('Successfully added the recipe!');
-        addToUser(this.props.appState.username, [
-          { path: '/recipes', value: recipe.json()._id },
-        ]); // Add recipe to author's profile
+        console.log("recipe created!")
+        return recipe.json()
       } else {
         // TODO: DON'T USE ALERTS
-        alert('Could not upload recipe!');
+        alert('Could not create recipe!');
       }
     })
+    .then((json)=>{
+      newRecipeUpdates(json)
+    })
     .catch((error) => {
+      console.log("Could not create recipe");
       console.log(error);
     });
 };
 
-// Update recipe info
-export const updateRecipe = (recipeId, changes) => {
-  // Changes should be an array of {path, value} objects
-  const url = '/api/recipes/' + recipeId;
-  const request = new Request(url, {
-    method: 'PATCH',
-    body: changes,
-  });
+export const newRecipeUpdates = (recipe) => { 
+  //updates recipes list of recipe owner to include new recipe
+  //takes component object and recipe json object
 
-  fetch(request).then((res) => {
+  const url = `/api/users/currentUser`;
+  fetch(url)
+  .then((res) => {
     if (res.status === 200) {
+      // return a promise that resolves with the JSON body
       return res.json();
     } else {
-      // TODO: DON'T USE ALERTS
-      alert('Could not update recipe!');
+      console.log('Could not get user');
     }
+  })
+  .then((json) => {
+    console.log("user", json.user)
+    addToUser(json.user._id , [ // Add recipe to author's profile
+      { 'path': '/recipes', 'value': recipe },
+    ]); 
+    
+    json.user.followers.forEach((followerId) => { // Add recipe to followers' feeds
+      console.log("follower id:", followerId)
+      updateFeed(followerId, recipe)
+    })
+
+    alert('Successfully added the recipe!');
+  })    
+  .catch((error) => {
+    console.log(error);
   });
-};
+}
+
+export const updateFeed = (id, recipe) => {
+  const url = `/api/users/${id}`;
+  fetch(url)
+  .then((res) => {
+    if (res.status === 200) {
+      // return a promise that resolves with the JSON body
+      return res.json();
+    } else {
+      console.log("Could not add recipe to follower");
+    }
+  })
+  .then((json) => {
+    const feed = json.user.feed
+    if (feed.length == 9){
+      feed.shift()
+    }
+    feed.push(recipe)
+    addToUser(id, [{'path':'/feed', 'value': feed }])
+  })//json is user object
+}
 
 export const deleteRecipe = (manageComp, recipeId) => {
   // Create our request constructor with all the parameters we need
