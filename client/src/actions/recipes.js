@@ -60,10 +60,12 @@ export const changeRecipePhoto = (image, component) => {
 };
 
 // send a POST request with a new recipe
-export const addRecipe = (component) => {
+export const addRecipe = (component, username) => {
+  const body = component.state
+  body.owner = username
   const request = new Request('/api/recipes', {
     method: 'post',
-    body: JSON.stringify(component.state),
+    body: JSON.stringify(body),
     headers: {
       Accept: 'application/json, text/plain, */*',
       'Content-Type': 'application/json',
@@ -152,7 +154,7 @@ export const updateFeed = (id, recipe) => {
   })
   .then((json) => {
     const feed = json.user.feed
-    if (feed.length == 9){
+    if (feed.length === 9){
       feed.shift()
     }
     feed.push(recipe)

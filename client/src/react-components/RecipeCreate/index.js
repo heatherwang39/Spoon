@@ -13,7 +13,7 @@ import { addRecipe, changeRecipePhoto } from '../../actions/recipes';
 class RecipeCreate extends React.Component {
   state = {
     recipeName: '',
-    owner: this.props.appState.username,
+    owner: '',
     ingredients: '',
     instructions: '',
     servingSize: '',
@@ -77,7 +77,7 @@ class RecipeCreate extends React.Component {
     if (!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
       alert('Please fill out all the required fields!');
     } else {
-      addRecipe(this);
+      addRecipe(this, this.props.appState.username);
     }
     event.preventDefault();
   };
