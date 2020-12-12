@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import './styles.css';
 import { checkLiked, getRecipe, getOwnerId } from '../../actions/recipes';
@@ -43,7 +45,9 @@ class Thumbnail extends React.Component {
     recipePhoto: '', // imageSchema object
     likes: 0,
     loggedUser: {},
-    own: false
+    own: false,    
+    alertMessage: '',
+    openAlert: false,
   };
 
   openPopup = () => {
@@ -58,11 +62,11 @@ class Thumbnail extends React.Component {
     if (!this.state.liked) {
       // add recipe to liked of user
       this.state.loggedUser.liked.push(this.state.recipeId)
-      addToUser(this.state.loggedUser._id, [{'path': '/liked', 'value': this.state.loggedUser.liked}])
+      addToUser(this, this.state.loggedUser._id, [{'path': '/liked', 'value': this.state.loggedUser.liked}])
 
       // increase likes on recipe
       const likes = this.state.likes + 1;
-      addToUser(this.state.loggedUser._id, [{'path': '/likes', 'value': likes}])
+      addToUser(this, this.state.loggedUser._id, [{'path': '/likes', 'value': likes}])
       this.setState({
         liked: true,
         likes: likes,
@@ -73,11 +77,11 @@ class Thumbnail extends React.Component {
       if (index !== -1) {
         this.state.loggedUser.liked.splice(index, 1)
       }
-      addToUser(this.state.loggedUser._id, [{'path': '/liked', 'value': this.state.loggedUser.liked}])
+      addToUser(this, this.state.loggedUser._id, [{'path': '/liked', 'value': this.state.loggedUser.liked}])
 
       // decease likes on recipe
       const likes = this.state.likes - 1;
-      addToUser(this.state.loggedUser._id, [{'path': '/likes', 'value': likes}])
+      addToUser(this, this.state.loggedUser._id, [{'path': '/likes', 'value': likes}])
       this.setState({
         liked: false,
         likes: likes,
@@ -142,7 +146,19 @@ class Thumbnail extends React.Component {
             </div>
           ) : null}
         </div>
-
+        <Snackbar
+            open={this.state.openAlert}
+            autoHideDuration={6000}
+            onClose={this.closeAlert}
+          >
+            <MuiAlert
+              onClose={this.closeAlert}
+              variant="filled"
+              severity="error"
+            >
+              {this.state.alertMessage}
+            </MuiAlert>
+        </Snackbar>
         <RecipePopup
           recipeName={this.state.recipeName}
           owner={this.state.owner}

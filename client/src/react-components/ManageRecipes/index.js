@@ -19,11 +19,12 @@ class ManageRecipes extends React.Component {
   state = {
     searchedRecipe: '',
     recipes: [],
-    openWarning: false,
+    alertMessage: '',
+    openAlert: false,
   };
 
-  closeWarning = () => {
-    this.setState({ openWarning: false });
+  closeAlert = () => {
+    this.setState({ openAlert: false });
   };
 
   searchRecipe = () => {
@@ -44,6 +45,19 @@ class ManageRecipes extends React.Component {
           placeholder="For example: Chicken"
           label="Recipe Keyword"
         />
+        <Snackbar
+          open={this.state.openAlert}
+          autoHideDuration={6000}
+          onClose={this.closeAlert}
+        >
+          <MuiAlert
+            onClose={this.closeAlert}
+            variant="filled"
+            severity="error"
+          >
+            {this.state.alertMessage}
+          </MuiAlert>
+        </Snackbar>
         <br />
         <br />
         <RecipeList
@@ -51,19 +65,6 @@ class ManageRecipes extends React.Component {
           searchedRecipe={this.state.searchedRecipe}
           manageRecipeComponent={this}
         />
-        <Snackbar
-          open={this.state.openWarning}
-          autoHideDuration={6000}
-          onClose={this.closeWarning}
-        >
-          <MuiAlert
-            onClose={this.closeWarning}
-            variant="filled"
-            severity="error"
-          >
-            Could not get all recipes!
-          </MuiAlert>
-        </Snackbar>
       </div>
     );
   }

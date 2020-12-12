@@ -3,6 +3,8 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import Header from '../Header';
 import { updateLoginForm, login } from '../../actions/user';
@@ -64,6 +66,12 @@ class SignIn extends React.Component {
   state = {
     username: '',
     password: '',
+    alertMessage: '',
+    openAlert: false,
+  };
+
+  closeAlert = () => {
+    this.setState({ openAlert: false });
   };
 
   render() {
@@ -136,16 +144,29 @@ class SignIn extends React.Component {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            {app.state.userMode !== 'guest' ? (
-              <Typography color="primary">
-                You have successfully logged in
-              </Typography>
-            ) : (
-              <Typography color="secondary">
-                Please enter the correct credentials
-              </Typography>
-            )}
-            {/* <Typography>{this.state.message}</Typography> */}
+            <Snackbar
+              open={this.state.openAlert}
+              autoHideDuration={6000}
+              onClose={this.closeAlert}
+            >
+              <MuiAlert
+                onClose={this.closeAlert}
+                variant="filled"
+                severity="error"
+              >
+                {this.state.alertMessage}
+              </MuiAlert>
+            </Snackbar>
+
+            {app.state.userMode !== 'guest'
+              ? this.setState({
+                  alertMessage: 'You have successfully logged in!',
+                })
+              : this.setState({
+                  alertMessage: 'Please enter the correct credentials',
+                })
+            }
+            
           </Grid>
         </Grid>
       </div>
