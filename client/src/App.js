@@ -12,6 +12,7 @@ import RecipeCreate from './react-components/RecipeCreate';
 import AccountCreate from './react-components/AccountCreate';
 import SignIn from './react-components/SignIn';
 import LogOut from './react-components/LogOut';
+import Unauthorized from './react-components/Unauthorized';
 
 class App extends React.Component {
   // constructor(props) {
@@ -32,6 +33,7 @@ class App extends React.Component {
   };
 
   render() {
+    console.log(this.state.userMode);
     return (
       <div>
         <BrowserRouter>
@@ -51,8 +53,17 @@ class App extends React.Component {
             <Route
               exact
               path="/ManageUsers"
-              render={() => <ManageUsers appState={this.state} />}
+              render={(props) => (
+                <div>
+                  {this.state.userMode === 'guest' ? (
+                    <Unauthorized {...props} app={this} />
+                  ) : (
+                    <ManageUsers appState={this.state} />
+                  )}
+                </div>
+              )}
             />
+
             <Route
               exact
               path="/ManageRecipes"
@@ -95,6 +106,11 @@ class App extends React.Component {
               )}
             />
             <Route exact path="/LogOut" render={() => <LogOut app={this} />} />
+            <Route
+              exact
+              path="/Unauthorized"
+              render={(props) => <Unauthorized {...props} app={this} />}
+            />
           </Switch>
         </BrowserRouter>
       </div>
