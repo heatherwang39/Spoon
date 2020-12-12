@@ -29,7 +29,7 @@ class Header extends React.Component {
     },
     accountPages: [
       {
-        link: `../UserProfile/${this.props.state.username}`,
+        link: `../UserProfile/${this.props.state.userId}`,
         name: 'My Profile',
         mode: ['user', 'admin'],
         icon: SentimentSatisfiedIcon,
