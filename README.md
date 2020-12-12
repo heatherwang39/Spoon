@@ -4,7 +4,7 @@ Welcome to Spoon! A social media-esque web application where users can share and
 
 ## Demo
 
-You can access the site [here](https://our-heroku-url.herokuapp.com/).
+You can access the site [here](https://stormy-beach-31181.herokuapp.com).
 
 ## Development
 
@@ -68,7 +68,8 @@ Administrators have all of the aforementioned functionalities as well as the abi
 
 Here are a few examples of possible interactions with the site:
 
-- [insert photos]
+- Create recipe
+<img height="300" src="./images/create_recipe.png"/>
 
 ## Routes
 
