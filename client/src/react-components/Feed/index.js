@@ -72,16 +72,17 @@ class Feed extends React.Component {
             </p>
             {this.state.users
               .filter((u) => {
+                // console.log(`u: ${u.username}, state: ${this.state.user}`)
                 return u.username === this.state.user;
               })
               .map((u) => {
+                // console.log(u)
                 u.feed.map((recipe_id) => {
-                  const recipe = this.state.recipes.filter((r) => {
-                    return r.recipeId === recipe_id;
-                  });
-                  return <Thumbnail userMode={this.props.appState.userMode} recipeId={recipe[0]._id} />;
+                  // console.log(recipe_id)
+                  return <Thumbnail userMode={this.props.appState.userMode} recipeId={recipe_id} />;
                 });
-              })}
+              })
+            }
           </TabPanel>
           <TabPanel
             value={this.state.tabVal}
