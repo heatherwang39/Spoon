@@ -23,7 +23,7 @@ class Thumbnail extends React.Component {
       this.setState({
         own: own,
       })
-      // console.log(this.state.loggedUser)
+      // console.log(this.state)
     }
   }
 

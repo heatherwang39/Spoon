@@ -36,7 +36,7 @@ class RecipeInfo extends React.Component {
           <img
             className="recipeCover"
             alt="food"
-            src={recipe.recipePhoto}
+            src={recipe.recipePhoto.image_url}
             onClick={() => openPopup(this, recipe.likes)}
           />
         </Grid>
@@ -76,7 +76,7 @@ class RecipeInfo extends React.Component {
           cookTimeHrs={recipe.cookTimeHrs}
           cookTimeMins={recipe.cookTimeMins}
           tags={recipe.tags}
-          recipePhoto={recipe.recipePhoto}
+          recipePhoto={recipe.recipePhoto.image_url}
           likes={this.state.likes}
           handleLike={() => handleLike(this)}
           liked={this.state.liked}

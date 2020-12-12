@@ -126,7 +126,19 @@ class Feed extends React.Component {
             <p className="feed-message">
               See latest recipes from the chefs you are following!
             </p>
-            {this.showDiscover}
+            {this.state.users
+              .filter((u) => {
+                // console.log(`u: ${u.username}, state: ${this.state.user}`)
+                return u.username === this.state.user;
+              })
+              .map((u) => {
+                // console.log(u)
+                u.feed.map((recipe_id) => {
+                  // console.log(recipe_id)
+                  return <Thumbnail userMode={this.props.appState.userMode} recipeId={recipe_id} />;
+                });
+              })
+            }
           </TabPanel>
           <TabPanel
             value={this.state.tabVal}

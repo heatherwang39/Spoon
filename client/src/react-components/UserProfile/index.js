@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
 import { setUserProfile, checkFollow, addToUser, getCurrentUser } from './../../actions/users.js';
+import { allRecipes } from './../../actions/recipes.js';
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -196,7 +197,7 @@ class UserProfile extends React.Component {
                   return (
                     <Thumbnail
                       userMode={this.props.appState.userMode}
-                      recipeId={recipe._id}
+                      recipeId={recipe}
                       editRecipe={() => this.editRecipe(recipe)}
                       deleteRecipe={() => this.deleteRecipe(recipe)}
                     />
@@ -205,20 +206,13 @@ class UserProfile extends React.Component {
             </TabPanel>
             <TabPanel value={this.state.tabVal} index={1}>
               {this.state.liked.map((recipe_id) => {
-                  const recipe = this.state.recipes.filter((r) => {
-                    return r.recipeId === recipe_id;
-                  });
-                  if (recipe[0] != null) {
-                    return (
-                      <Thumbnail
-                        userMode={this.props.appState.userMode}
-                        recipeId={recipe_id}
-                        key={uid(recipe[0])}
-s                      />
-                    );
-                  } else {
-                    return <div></div>;
-                  }
+                  return (
+                    <Thumbnail
+                      userMode={this.props.appState.userMode}
+                      recipeId={recipe_id}
+                      key={uid(recipe_id)}
+                    />
+                  );
                 })
               }
             </TabPanel>
