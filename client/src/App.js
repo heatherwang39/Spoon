@@ -53,7 +53,15 @@ class App extends React.Component {
             <Route
               exact
               path="/ManageUsers"
-              render={() => <ManageUsers appState={this.state} />}
+              render={(props) => (
+                <div>
+                  {this.state.userMode === 'guest' ? (
+                    <Unauthorized {...props} app={this} />
+                  ) : (
+                    <ManageUsers appState={this.state} />
+                  )}
+                </div>
+              )}
             />
 
             <Route
