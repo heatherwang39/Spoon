@@ -10,7 +10,7 @@ export const checkSession = (app) => {
     })
     .then((json) => {
       if (json && json.username) {
-        app.setState({ username: json.username, userMode: json.userMode });
+        app.setState({ username: json.username, userMode: json.userMode, userId: json.userId});
       }
     })
     .catch((error) => {
@@ -52,6 +52,7 @@ export const login = (comp, app) => {
         app.setState({
           username: json.username,
           userMode: json.userMode,
+          userId: json.userId,
         });
       }
     })
@@ -75,6 +76,7 @@ export const logout = (logoutComp, app) => {
       app.setState({
         username: 'user1', // will be set to '' after other page implemented the back end call
         userMode: 'guest',
+        userId: '',
       });
       console.log(json);
       logoutComp.setState({
@@ -131,11 +133,17 @@ export const signupHelper = (signupComp, app) => {
 
   // Send the request with fetch()
   fetch(sesRequest)
-    .then((ses)=>{
+    .then((res)=> {
+      if (res.status === 200) {
+        return res.json();
+      }
+    })
+    .then((json)=>{
       signupComp.setState({message: 'You have successfully signed up. You will be redirected to your feed in 2 seconds!'})
       setTimeout(() => app.setState({
-        username: signupComp.state.username,
-        userMode: "user" //newly created user is never admin
+        username: json.username,
+        userMode: "user", //newly created user is never admin
+        userId: json.userId
       }), 2000);
     })
     .catch((error) => {

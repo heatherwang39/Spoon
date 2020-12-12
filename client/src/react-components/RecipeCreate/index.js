@@ -13,7 +13,7 @@ import { addRecipe, changeRecipePhoto } from '../../actions/recipes';
 class RecipeCreate extends React.Component {
   state = {
     recipeName: '',
-    owner: '',
+    owner: this.props.appState.username,
     ingredients: '',
     instructions: '',
     servingSize: '',
