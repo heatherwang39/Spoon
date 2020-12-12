@@ -214,7 +214,6 @@ export const getRecipe = (component, recipeId) => {
       }
     })
     .then((json) => {
-      console.log(json.recipe)
       component.setState({
         recipeName: json.recipe.recipeName,
         owner: json.recipe.owner,
