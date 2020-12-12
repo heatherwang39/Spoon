@@ -6,6 +6,9 @@ import Typography from '@material-ui/core/Typography';
 
 import Header from '../Header';
 import { updateLoginForm, login } from '../../actions/user';
+
+import './styles.css';
+
 // this is both the sign in page and the page you get taken to when you log out
 class SignIn extends React.Component {
   // state = {
@@ -90,11 +93,18 @@ class SignIn extends React.Component {
         ) : (
           <Header state={{ username: 'guest', userMode: 'guest' }} />
         )}
-        <Grid container justify="center" alignItems="center" spacing={1}>
-          <Grid item xs={5}>
+        <Typography variant="h2" color="secondary" gutterBottom>
+          Sign In
+        </Typography>
+        <Grid
+          container
+          className="signInContainer"
+          justify="center"
+          alignItems="center"
+          spacing={1}
+        >
+          <Grid item xs={8}>
             <TextField
-              // value={this.state.username}
-              // onChange={this.handleInputChange}
               onChange={(e) => updateLoginForm(this, e.target)}
               type="text"
               name="username"
@@ -105,13 +115,10 @@ class SignIn extends React.Component {
             />
           </Grid>
 
-          <Grid item xs={5}>
+          <Grid item xs={8}>
             <TextField
-              // value={this.state.password}
-              // onChange={this.handleInputChange}
               onChange={(e) => updateLoginForm(this, e.target)}
               name="password"
-              placeholder="e.g. user"
               label="Password"
               variant="outlined"
               type="password"
