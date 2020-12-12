@@ -597,6 +597,7 @@ app.get("*", (req, res) => {
     "/SignIn",
     "/LogOut",
     "/UserProfile",
+    "/Unauthorized",
   ];
   if (!goodPageRoutes.includes(req.url)) {
     // if url not in expected page routes, set status to 404.
