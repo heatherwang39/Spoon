@@ -160,16 +160,18 @@ app.get("/users/logout", (req, res) => {
 
 // A route to check if a user is logged in on the session
 app.get("/users/check-session", (req, res) => {
-  // log(req.session);
+  log(req.session);
   if (req.session.username) {
     res.send({
       username: req.session.username,
       userMode: req.session.userMode,
+      userId: req.session.userId,
     });
   } else {
     res.send({
       username: "",
       userMode: "guest",
+      userId: "",
     });
   }
 });

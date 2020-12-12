@@ -30,10 +30,11 @@ class App extends React.Component {
   state = {
     username: '', //will be changed to '' later after each page implement back-end calls
     userMode: 'guest', //'admin','user'
+    userId: '',
   };
 
   render() {
-    console.log(this.state.userMode);
+    console.log(this.state);
     return (
       <div>
         <BrowserRouter>
