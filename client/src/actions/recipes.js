@@ -89,9 +89,27 @@ export const addRecipe = (component) => {
     });
 };
 
+// Update recipe info
+export const updateRecipe = (recipeId, changes) => {
+  // Changes should be an array of {path, value} objects
+  const url = '/api/recipes/' + recipeId;
+  const request = new Request(url, {
+    method: 'PATCH',
+    body: changes,
+  });
+
+  fetch(request).then((res) => {
+    if (res.status === 200) {
+      return res.json();
+    } else {
+      // TODO: DON'T USE ALERTS
+      alert('Could not update recipe!');
+    }
+  });
+};
+
 export const newRecipeUpdates = (recipe) => { 
-  //updates recipes list of recipe owner to include new recipe
-  //takes component object and recipe json object
+  //updates to do after creating a recipe
 
   const url = `/api/users/currentUser`;
   fetch(url)
