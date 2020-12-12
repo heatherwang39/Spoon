@@ -128,10 +128,10 @@ export const newRecipeUpdates = (recipe) => {
       }
     })
     .then((json) => {
-      console.log('user', json.user);
+      json.user.recipes.push(recipe._id);
       addToUser(json.user._id, [
         // Add recipe to author's profile
-        { path: '/recipes', value: recipe },
+        { path: '/recipes', value: json.user.recipes },
       ]);
 
       json.user.followers.forEach((followerId) => {
