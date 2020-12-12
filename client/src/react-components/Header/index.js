@@ -17,8 +17,6 @@ import PeopleIcon from '@material-ui/icons/People';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import './styles.css';
 
-import { checkSession } from '../../actions/user';
-
 /* Component for the Header */
 class Header extends React.Component {
   state = {
@@ -77,13 +75,6 @@ class Header extends React.Component {
     ],
   };
 
-  componentDidMount() {
-    //check the user is logged in and check the userMode,if the user already logged in, the state will be
-    //set to the current user's username and userMode('user' or 'admin')
-    checkSession(this.props);
-
-  }
-
   render() {
     const { state } = this.props;
 
@@ -93,7 +84,7 @@ class Header extends React.Component {
           <Toolbar className="toolbar">
             {/* title/feed */}
             <Link
-              href={'../Feed'}
+              href={'../'}
               style={{ textDecoration: 'none', color: 'unset' }}
             >
               <img
