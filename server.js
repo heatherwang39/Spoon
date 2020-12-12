@@ -463,7 +463,7 @@ app.post("/api/recipes", async (req, res) => {
 
 //delete recipe
 //returned json is recipe document
-app.delete("/api/recipes/:id", adminAuthenticate, async (req, res) => {
+app.delete("/api/recipes/:id", authenticate, async (req, res) => {
   const id = req.params.id;
 
   // Validate id
