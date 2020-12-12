@@ -11,6 +11,7 @@ import './styles.css';
 
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
+import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
 
 class Feed extends React.Component {
@@ -41,63 +42,6 @@ class Feed extends React.Component {
     this.setState({
       tabVal: val,
     });
-  };
-
-  showDiscover = () => {
-    const user = this.state.users.filter((u) => {
-      return u.username === this.state.user;
-    })[0];
-    if (user === 'undefined') {
-      return;
-    } else {
-      user.feed.map((recipe_id) => {
-        const recipe = this.state.recipes.filter((r) => {
-          return r.recipeId === recipe_id;
-        });
-        return (
-          <Thumbnail
-            // recipeName={recipe[0].recipeName}
-            // owner={recipe[0].owner}
-            // ingredients={recipe[0].ingredients}
-            // instructions={recipe[0].instructions}
-            // servingSize={recipe[0].servingSize}
-            // cookTimeHrs={recipe[0].cookTimeHrs}
-            // cookTimeMins={recipe[0].cookTimeMins}
-            // tags={recipe[0].tags}
-            // recipePhoto={recipe[0].recipePhoto.image_url}
-            // likes={recipe[0].likes}
-            recipeId={recipe[0]._id}
-            key={uid(recipe[0])}
-          />
-        );
-      });
-    }
-  };
-
-  showFeed = () => {
-    const recipes = this.state.recipes;
-    if (recipes === 'undefined') {
-      return;
-    } else {
-      this.state.recipes.map((recipe) => {
-        return (
-          <Thumbnail
-            // recipeName={recipe.recipeName}
-            // owner={recipe.owner}
-            // ingredients={recipe.ingredients}
-            // instructions={recipe.instructions}
-            // servingSize={recipe.servingSize}
-            // cookTimeHrs={recipe.cookTimeHrs}
-            // cookTimeMins={recipe.cookTimeMins}
-            // tags={recipe.tags}
-            // recipePhoto={recipe.recipePhoto.image_url}
-            // likes={recipe.likes}
-            recipeId={recipe._id}
-            key={uid(recipe)}
-          />
-        );
-      });
-    }
   };
 
   render() {
@@ -147,7 +91,9 @@ class Feed extends React.Component {
             <p className="feed-message">
               See the newest recipes posted onto Spoon!
             </p>
-            {this.showFeed}
+            {this.state.recipes.map((recipe) => {
+              return <Thumbnail userMode={this.props.appState.userMode} recipeId={recipe._id} />;
+            })}
           </TabPanel>
         </div>
         <Snackbar
