@@ -75,12 +75,20 @@ export const checkFollow = (component, id) => {
 //add to user info (e.g. liked, recipes, following etc.)
 export const addToUser = (userId, changes) => {
   //changes should be an array of {path, value} objects
-  const url = '/api/user/' + userId;
-  const request = new Request(url, {
+  const url = '/api/users/' + userId;
+
+  const send = {
     //id is user id
-    method: 'patch',
-    body: changes,
-  });
+    method: 'PATCH',
+    body: JSON.stringify(changes),
+    headers: {
+      Accept: 'application/json, text/plain, /',
+      'Content-Type': 'application/json',
+    }
+  }
+
+  console.log(send)
+  const request = new Request(url, send);
 
   fetch(request)
     .then((res) => {

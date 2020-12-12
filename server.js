@@ -158,6 +158,7 @@ app.get("/users/check-session", (req, res) => {
 // get the currently logged-in user
 // returned json is user document
 app.get("/api/users/currentUser", mongoChecker, (req, res) => {
+
   if (!ObjectID.isValid(req.session.userId)) {
     res.status(404).send();
     return; // so that we don't run the rest of the handler.
@@ -169,6 +170,7 @@ app.get("/api/users/currentUser", mongoChecker, (req, res) => {
         if (!user) {
           res.status(404).send("Resource not found");
         } else {
+          console.log(user)
           res.send({ user });
         }
       })
