@@ -23,7 +23,7 @@ const RecipeSchema = new mongoose.Schema({
     trim: true,
   },
   owner: {
-    type: String, //stores the string of the user's uername TODO: CHANGE TO USERSCHEMA
+    type: String, //stores the string of the user's uername
   },
   ingredients: {
     type: [String],
