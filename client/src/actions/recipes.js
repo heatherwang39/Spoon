@@ -262,7 +262,7 @@ export const getOwnerId = (component, username) => {
       }
     })
     .then((json) => {
-      json.users.forEach((user) => {
+      json.forEach((user) => {
         if (user.username === username) {
           component.setState({
             ownerId: username,
