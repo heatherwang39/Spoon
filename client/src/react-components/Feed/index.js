@@ -43,7 +43,7 @@ class Feed extends React.Component {
     });
   };
 
-  showFeed = () => {
+  showDiscover = () => {
     const user = this.state.users.filter((u) => {
       return u.username === this.state.user;
     })[0];
@@ -67,6 +67,31 @@ class Feed extends React.Component {
             recipePhoto={recipe[0].recipePhoto.image_url}
             likes={recipe[0].likes}
             key={uid(recipe[0])}
+          />
+        );
+      });
+    }
+  };
+
+  showFeed = () => {
+    const recipes = this.state.recipes;
+    if (recipes === 'undefined') {
+      return;
+    } else {
+      this.state.recipes.map((recipe) => {
+        return (
+          <Thumbnail
+            recipeName={recipe.recipeName}
+            owner={recipe.owner}
+            ingredients={recipe.ingredients}
+            instructions={recipe.instructions}
+            servingSize={recipe.servingSize}
+            cookTimeHrs={recipe.cookTimeHrs}
+            cookTimeMins={recipe.cookTimeMins}
+            tags={recipe.tags}
+            recipePhoto={recipe.recipePhoto.image_url}
+            likes={recipe.likes}
+            key={uid(recipe)}
           />
         );
       });
@@ -99,7 +124,7 @@ class Feed extends React.Component {
             <p className="feed-message">
               See latest recipes from the chefs you are following!
             </p>
-            {this.showFeed}
+            {this.showDiscover}
           </TabPanel>
           <TabPanel
             value={this.state.tabVal}
@@ -108,23 +133,7 @@ class Feed extends React.Component {
             <p className="feed-message">
               See the newest recipes posted onto Spoon!
             </p>
-            {this.state.recipes.map((recipe) => {
-              return (
-                <Thumbnail
-                  recipeName={recipe.recipeName}
-                  owner={recipe.owner}
-                  ingredients={recipe.ingredients}
-                  instructions={recipe.instructions}
-                  servingSize={recipe.servingSize}
-                  cookTimeHrs={recipe.cookTimeHrs}
-                  cookTimeMins={recipe.cookTimeMins}
-                  tags={recipe.tags}
-                  recipePhoto={recipe.recipePhoto.image_url}
-                  likes={recipe.likes}
-                  key={uid(recipe)}
-                />
-              );
-            })}
+            {this.showFeed}
           </TabPanel>
         </div>
         <Snackbar
