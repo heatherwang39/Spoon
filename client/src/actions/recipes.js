@@ -93,7 +93,11 @@ export const updateRecipe = (recipeId, changes) => {
   const url = '/api/recipes/' + recipeId;
   const request = new Request(url, {
     method: 'PATCH',
-    body: changes,
+    body: JSON.stringify(changes),
+    headers: {
+      Accept: 'application/json, text/plain, /',
+      'Content-Type': 'application/json',
+    }
   });
 
   fetch(request).then((res) => {
@@ -142,3 +146,61 @@ export const deleteRecipe = (manageComp, recipeId) => {
       console.log(error);
     });
 };
+
+// Get a specified recipe and set state variables for thumbnail
+export const getRecipe = (component, recipeId) => {
+  const url = `/api/recipes/${recipeId}`;
+  fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+        return res.json();
+      } else {
+        console.log('Could not get recipe');
+      }
+    })
+    .then((json) => {
+      console.log(json.recipe)
+      component.setState({
+        recipeName: json.recipe.recipeName,
+        owner: json.recipe.owner,
+        ingredients: json.recipe.ingredients,
+        instructions: json.recipe.instructions,
+        servingSize: json.recipe.servingSize,
+        cookTimeHrs: json.recipe.cookTimeHrs,
+        cookTimeMins: json.recipe.cookTimeMins,
+        tags: json.recipe.tags,
+        recipePhoto: json.recipe.recipePhoto.image_url,
+        likes: json.recipe.likes,
+       });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+// check if the logged in user has liked the recipe
+export const checkFollow = (component, id) => {
+  const url = '/api/users/currentUser';
+  fetch(url)
+  .then((res) => {
+    if (res.status === 200) {
+      // return a promise that resolves with the JSON body
+      return res.json();
+    } else {
+      console.log('Could not get user');
+    }
+  })
+  .then((json) => {
+    json.user.liked.forEach((rid) => {
+      if (rid === id) {
+        component.setState({
+          liked: true,
+        })
+      }
+    })
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}

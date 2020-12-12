@@ -49,7 +49,7 @@ export const setUserProfile = (component, id, loggedUser) => {
 };
 
 // get the current user
-export const getCurrentUser = (component, id) => {
+export const getCurrentUser = (component) => {
   const url = '/api/users/currentUser';
   fetch(url)
   .then((res) => {
