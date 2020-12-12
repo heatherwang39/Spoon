@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import { updateRecipe, changeRecipePhoto } from '../../actions/recipes';
 
 import './styles.css';
 
@@ -24,6 +25,7 @@ class RecipeEdit extends React.Component {
       servingSize: '',
       cookTimeHrs: '',
       cookTimeMins: '',
+      og_tags: '',
       tags: '',
       recipePhoto: '',
     };
@@ -38,7 +40,7 @@ class RecipeEdit extends React.Component {
       servingSize: nextProps.servingSize,
       cookTimeHrs: nextProps.cookTimeHrs,
       cookTimeMins: nextProps.cookTimeMins,
-      tags: nextProps.tags,
+      og_tags: nextProps.og_tags,
       recipePhoto: nextProps.recipePhoto,
     });
   }
@@ -50,36 +52,65 @@ class RecipeEdit extends React.Component {
     });
   };
 
-  onPhotoUpload = (event) => {
-    const reader = new FileReader();
-    reader.addEventListener('load', () => {
-      this.setState({ recipePhoto: reader.result });
-    });
-    reader.readAsDataURL(event.target.files[0]);
-    this.setState({
-      recipePhoto: event.target.files[0],
-    });
-  };
-
   tagChosen = (event) => {
     const target = event.target;
     const name = target.name;
-    const newtags = { ...this.state.tags, [name]: target.checked };
+    const newtags = { ...this.state.og_tags, [name]: target.checked };
+    this.setState(
+      {
+        og_tags: newtags,
+      },
+      function () {
+        let tags = Object.assign({}, this.state.og_tags);
+        let new_tags = [];
+        for (let key in tags) {
+          let value = tags[key];
+          if (value) {
+            new_tags.push(key.toString());
+          }
+        }
+        this.setState({
+          tags: new_tags,
+        });
+      }
+    );
+  };
+
+  jsonInputChange = (event) => {
+    const name = event.target.name;
     this.setState({
-      tags: newtags,
+      [name]: event.target.value.toString().split('\n'),
     });
   };
 
   editRecipe = (event) => {
-    // BACK-END CALL
-    alert('You tried to edit recipe: ' + this.state.recipeName + '! This is a back-end call that will be implemented in Phase 2.')
+    const {
+      recipeName,
+      ingredients,
+      instructions,
+      servingSize,
+      cookTimeMins,
+      recipePhoto,
+    } = this.state;
+    if (!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
+      alert('Please fill out all the required fields!');
+    } else {
+      updateRecipe(this.state.recipe.json()._id, [
+        { path: '/recipeName', value: this.state.recipeName },
+        { path: '/ingredients', value: this.state.ingredients },
+        { path: '/instructions', value: this.state.instructions },
+        { path: '/servingSize', value: this.state.servingSize },
+        { path: '/cookTimeMins', value: this.state.cookTimeMins },
+        { path: '/cookTimeHrs', value: this.state.cookTimeHrs },
+        { path: '/tags', value: this.state.tags },
+        { path: '/recipePhoto', value: this.state.recipePhoto },
+      ]);
+    }
+    event.preventDefault();
   };
 
   render() {
-    const {
-      open,
-      closePopup,
-    } = this.props;
+    const { open, closePopup } = this.props;
 
     return (
       <div>
@@ -180,28 +211,32 @@ class RecipeEdit extends React.Component {
                 </Grid>
                 <br />
                 <Grid item xs={12}>
-                  <label htmlFor="createRecipePhoto">
-                    <input
-                      accept="image/*"
-                      id="createRecipePhoto"
-                      type="file"
-                      onChange={this.onPhotoUpload}
-                    />
+                  <form
+                    className="image-form"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      changeRecipePhoto(e.target, this);
+                    }}
+                  >
+                    <div class="image-form__field">
+                      <label></label>
+                      <input name="image" accept="image/*" type="file" />
+                    </div>
                     <Button
-                      component="span"
                       variant="contained"
                       color="secondary"
-                      name="createRecipePhoto"
+                      type="submit"
                       startIcon={<CloudUploadIcon />}
+                      className="image-form__submit-button"
                     >
                       Upload New Photo*
                     </Button>
-                  </label>
+                  </form>
                 </Grid>
               </Grid>
               <Grid item xs={6}>
                 <img
-                  src={this.state.recipePhoto}
+                  src={this.state.recipePhoto.image_url}
                   alt="food"
                   id="placeholderRecipeCreateImage"
                 />
@@ -210,12 +245,12 @@ class RecipeEdit extends React.Component {
                 <TextField
                   multiline
                   value={this.state.ingredients}
-                  onChange={this.handleInputChange}
+                  onChange={this.jsonInputChange}
                   type="text"
                   name="ingredients"
                   label="Ingredients"
                   rows={8}
-                  helperText="Please list each ingredient separated by commas."
+                  helperText="Please list each ingredient on a new line."
                   variant="outlined"
                   fullWidth
                 />
@@ -224,12 +259,12 @@ class RecipeEdit extends React.Component {
                 <TextField
                   multiline
                   value={this.state.instructions}
-                  onChange={this.handleInputChange}
+                  onChange={this.jsonInputChange}
                   type="text"
                   name="instructions"
                   label="Instructions"
                   rows={10}
-                  helperText="Please list each instruction separated by commas."
+                  helperText="Please number each instruction listed on a new line."
                   variant="outlined"
                   fullWidth
                 />
@@ -240,7 +275,7 @@ class RecipeEdit extends React.Component {
                 </Typography>
               </Grid>
               <Grid item xs={12}>
-                <Tags tagChosen={this.tagChosen} tags={this.state.tags} />
+                <Tags tagChosen={this.tagChosen} tags={this.state.og_tags} />
               </Grid>
               <Grid item xs={12}>
                 <Button

@@ -35,8 +35,10 @@ export const setUserProfile = (component, id, loggedUser) => {
     .then((json) => {
       component.setState({ 
         own: json.user.username === loggedUser,
+        userId: json.user._id,
         username: json.user.username, 
-        followers: json.user.followers.length,
+        followers: json.user.followers,
+        numFollowers: json.user.followers.length,
         recipes: json.user.recipes,
         liked: json.user.liked
        });
@@ -46,9 +48,9 @@ export const setUserProfile = (component, id, loggedUser) => {
     });
 };
 
-// check if the logged in user is following the user whose profile they are viewing
-export const checkFollow = (component, id) => {
-  const url = `/users/currentUser`;
+// get the current user
+export const getCurrentUser = (component, id) => {
+  const url = '/api/users/currentUser';
   fetch(url)
   .then((res) => {
     if (res.status === 200) {
@@ -59,10 +61,33 @@ export const checkFollow = (component, id) => {
     }
   })
   .then((json) => {
-    json.user.following.forEach((user) => {
-      if (user._id === id) {
+    component.setState({
+      loggedUser: json.user
+    })
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+}
+
+// check if the logged in user is following the user whose profile they are viewing
+export const checkFollow = (component, id) => {
+  const url = '/api/users/currentUser';
+  fetch(url)
+  .then((res) => {
+    if (res.status === 200) {
+      // return a promise that resolves with the JSON body
+      return res.json();
+    } else {
+      console.log('Could not get user');
+    }
+  })
+  .then((json) => {
+    json.user.following.forEach((uid) => {
+      if (uid === id) {
         component.setState({
-          follow: true
+          follow: true,
+          color: 'default'
         })
       }
     })

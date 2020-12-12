@@ -84,6 +84,26 @@ const authenticate = (req, res, next) => {
   }
 };
 
+// Middleware for authentication of resources that only admins have access to
+const adminAuthenticate = (req, res, next) => {
+  if (req.session.userId && req.session.userMode == "admin") {
+    User.findById(req.session.userId)
+      .then((user) => {
+        if (!user) {
+          return Promise.reject();
+        } else {
+          req.user = user;
+          next();
+        }
+      })
+      .catch((error) => {
+        res.status(401).send("Unauthorized");
+      });
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+};
+
 /*** Session handling **************************************/
 // Create a session and session cookie
 app.use(
@@ -92,7 +112,7 @@ app.use(
     resave: false,
     saveUninitialized: false,
     cookie: {
-      expires: 60000,
+      expires: 600000,
       httpOnly: true,
     },
   })
@@ -229,7 +249,7 @@ app.post("/api/users", mongoChecker, (req, res) => {
 // Route for deleting a user
 // Returned JSON should be the database document removed.
 // DELETE /users.:id
-app.delete("/api/users/:id", mongoChecker, (req, res) => {
+app.delete("/api/users/:id", mongoChecker, adminAuthenticate, (req, res) => {
   const id = req.params.id;
 
   // Validate id
@@ -258,7 +278,7 @@ app.delete("/api/users/:id", mongoChecker, (req, res) => {
 // user:
 /*
 [
-  { "op": "replace", "path": "/followers", "value": ["user1", "user2"] },
+  { "path": "/followers", "value": ["user1", "user2"] },
   ...
 ]
 Returned JSON should be the database document updated.
@@ -445,7 +465,7 @@ app.post("/api/recipes", async (req, res) => {
 
 //delete recipe
 //returned json is recipe document
-app.delete("/api/recipes/:id", async (req, res) => {
+app.delete("/api/recipes/:id", adminAuthenticate, async (req, res) => {
   const id = req.params.id;
 
   // Validate id
@@ -568,12 +588,23 @@ app.use(express.static(path.join(__dirname, "/client/build")));
 // All routes other than above will go to index.html
 app.get("*", (req, res) => {
   // check for page routes that we expect in the frontend to provide correct status code.
-  const goodPageRoutes = ["/", "/login", "/feed"];
+  const goodPageRoutes = [
+    "/",
+    "/Feed",
+    "/ManageUsers",
+    "/ManageRecipes",
+    "/Search",
+    "/RecipeCreate",
+    "/AccountCreate",
+    "/SignIn",
+    "/LogOut",
+    "/UserProfile",
+    "/Unauthorized",
+  ];
   if (!goodPageRoutes.includes(req.url)) {
     // if url not in expected page routes, set status to 404.
     res.status(404);
   }
-
   // send index.html
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
