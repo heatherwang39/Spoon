@@ -42,7 +42,7 @@ class UserProfile extends React.Component {
     recipes: [],
     liked: [],
     editOpen: false, // Whether or not the edit recipe popup is open
-    recipeToEdit: '',
+    recipeToEdit: {},
     og_tags: {
       // back-end call (?)
       Breakfast: false,
