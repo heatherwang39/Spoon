@@ -61,8 +61,8 @@ export const changeRecipePhoto = (image, component) => {
 
 // send a POST request with a new recipe
 export const addRecipe = (component, username) => {
-  const body = component.state
-  body.owner = username
+  const body = component.state;
+  body.owner = username;
   const request = new Request('/api/recipes', {
     method: 'post',
     body: JSON.stringify(body),
@@ -75,18 +75,18 @@ export const addRecipe = (component, username) => {
   fetch(request)
     .then((recipe) => {
       if (recipe.status === 200) {
-        console.log("recipe created!")
-        return recipe.json()
+        console.log('recipe created!');
+        return recipe.json();
       } else {
         // TODO: DON'T USE ALERTS
         alert('Could not create recipe!');
       }
     })
-    .then((json)=>{
-      newRecipeUpdates(json)
+    .then((json) => {
+      newRecipeUpdates(json);
     })
     .catch((error) => {
-      console.log("Could not create recipe");
+      console.log('Could not create recipe');
       console.log(error);
     });
 };
@@ -101,7 +101,7 @@ export const updateRecipe = (recipeId, changes) => {
     headers: {
       Accept: 'application/json, text/plain, /',
       'Content-Type': 'application/json',
-    }
+    },
   });
 
   fetch(request).then((res) => {
@@ -114,93 +114,82 @@ export const updateRecipe = (recipeId, changes) => {
   });
 };
 
-export const newRecipeUpdates = (recipe) => { 
+export const newRecipeUpdates = (recipe) => {
   //updates to do after creating a recipe
 
   const url = `/api/users/currentUser`;
   fetch(url)
-  .then((res) => {
-    if (res.status === 200) {
-      // return a promise that resolves with the JSON body
-      return res.json();
-    } else {
-      console.log('Could not get user');
-    }
-  })
-  .then((json) => {
-    console.log("user", json.user)
-    addToUser(json.user._id , [ // Add recipe to author's profile
-      { 'path': '/recipes', 'value': recipe },
-    ]); 
-    
-    json.user.followers.forEach((followerId) => { // Add recipe to followers' feeds
-      console.log("follower id:", followerId)
-      updateFeed(followerId, recipe)
+    .then((res) => {
+      if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+        return res.json();
+      } else {
+        console.log('Could not get user');
+      }
     })
+    .then((json) => {
+      console.log('user', json.user);
+      addToUser(json.user._id, [
+        // Add recipe to author's profile
+        { path: '/recipes', value: recipe },
+      ]);
 
-    alert('Successfully added the recipe!');
-  })    
-  .catch((error) => {
-    console.log(error);
-  });
-}
+      json.user.followers.forEach((followerId) => {
+        // Add recipe to followers' feeds
+        console.log('follower id:', followerId);
+        updateFeed(followerId, recipe);
+      });
+
+      alert('Successfully added the recipe!');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 export const updateFeed = (id, recipe) => {
   const url = `/api/users/${id}`;
   fetch(url)
-  .then((res) => {
-    if (res.status === 200) {
-      // return a promise that resolves with the JSON body
-      return res.json();
-    } else {
-      console.log("Could not add recipe to follower");
-    }
-  })
-  .then((json) => {
-    const feed = json.user.feed
-    if (feed.length === 9){
-      feed.shift()
-    }
-    feed.push(recipe)
-    addToUser(id, [{'path':'/feed', 'value': feed }])
-  })//json is user object
-}
+    .then((res) => {
+      if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+        return res.json();
+      } else {
+        console.log('Could not add recipe to follower');
+      }
+    })
+    .then((json) => {
+      const feed = json.user.feed;
+      if (feed.length === 9) {
+        feed.shift();
+      }
+      feed.push(recipe);
+      addToUser(id, [{ path: '/feed', value: feed }]);
+    }); //json is user object
+};
 
-export const deleteRecipe = (manageComp, recipeId) => {
+export const deleteRecipe = async (manageComp, recipeId) => {
   // Create our request constructor with all the parameters we need
   const request = new Request(`/api/recipes/${recipeId}`, {
     method: 'delete',
   });
-
-  // delete the user
-  fetch(request)
-    .then((res) => {
-      if (res.status === 200) {
-        console.log('delete the recipe successfully.');
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
-  //get all updated users
   const url = '/api/recipes';
-  fetch(url)
-    .then((res) => {
-      if (res.status === 200) {
-        return res.json();
-      }
-    })
-    .then((json) => {
-      if (json) {
-        manageComp.setState({
-          recipes: json,
-        });
-      }
-    })
-    .catch((error) => {
-      console.log(error);
+  // delete the recipes
+  try {
+    const res = await fetch(request);
+    if (res.status === 200) {
+      console.log('delete the recipe successfully.');
+    }
+    const resGet = await fetch(url);
+    const json = await resGet.json();
+    manageComp.setState({
+      recipes: json,
     });
+    console.log('reset manageCome');
+    console.log(manageComp);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Get a specified recipe and set state variables for thumbnail
@@ -227,42 +216,42 @@ export const getRecipe = (component, recipeId) => {
         tags: json.recipe.tags,
         recipePhoto: json.recipe.recipePhoto.image_url,
         likes: json.recipe.likes,
-       });
+      });
     })
     .catch((error) => {
       console.log(error);
     });
-}
+};
 
 // check if the logged in user has liked the recipe
 export const checkLiked = (component, id) => {
   const url = '/api/users/currentUser';
   fetch(url)
-  .then((res) => {
-    if (res.status === 200) {
-      // return a promise that resolves with the JSON body
-      return res.json();
-    } else {
-      console.log('Could not get user');
-    }
-  })
-  .then((json) => {
-    json.user.liked.forEach((rid) => {
-      if (rid === id) {
-        component.setState({
-          liked: true,
-        })
+    .then((res) => {
+      if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+        return res.json();
+      } else {
+        console.log('Could not get user');
       }
     })
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+    .then((json) => {
+      json.user.liked.forEach((rid) => {
+        if (rid === id) {
+          component.setState({
+            liked: true,
+          });
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 // get the user id of the recipe owner
 export const getOwnerId = (component, username) => {
-  const url = '/api/users'
+  const url = '/api/users';
   fetch(url)
     .then((res) => {
       if (res.status === 200) {
@@ -277,11 +266,11 @@ export const getOwnerId = (component, username) => {
         if (user.username === username) {
           component.setState({
             ownerId: username,
-          })
+          });
         }
-      })
+      });
     })
     .catch((error) => {
       console.log(error);
     });
-}
+};
