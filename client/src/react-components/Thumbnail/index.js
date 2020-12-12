@@ -9,7 +9,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import './styles.css';
-import { getRecipe } from '../../actions/recipes';
+import { checkLiked, getRecipe, getOwnerId } from '../../actions/recipes';
 import { getCurrentUser, addToUser } from '../../actions/users';
 
 class Thumbnail extends React.Component {
@@ -17,10 +17,13 @@ class Thumbnail extends React.Component {
     getRecipe(this, this.state.recipeId);
     if (this.props.userMode !== 'guest') {
       getCurrentUser(this)
+      checkLiked(this, this.state.recipeId)
+      getOwnerId(this, this.state.owner)
       const own = this.state.owner === this.state.loggedUser
       this.setState({
         own: own,
       })
+      console.log(this.state.loggedUser)
     }
   }
 
@@ -29,6 +32,7 @@ class Thumbnail extends React.Component {
     liked: false, // Whether or not the logged in user has liked this recipe
     recipeId: this.props.recipeId,
     recipeName: '',
+    ownerId: '', // user id of the owner
     owner: '', // username of recipe owner
     ingredients: [],
     instructions: [],
@@ -84,8 +88,6 @@ class Thumbnail extends React.Component {
   render() {
     const { open } = this.state;
     const {
-      // userMode,
-      // recipeId,
       editRecipe,
       deleteRecipe,
     } = this.props;
@@ -95,7 +97,7 @@ class Thumbnail extends React.Component {
         <div className="thumbnail-picture">
           <div className="thumbnail-hover" onClick={this.openPopup} />
           <div className="thumbnail-likes">
-            <Button
+          {!this.state.own && this.props.appState.userMode !== 'guest' && (<Button
               className="recipe-like-button"
               color="secondary"
               disableRipple
@@ -103,7 +105,7 @@ class Thumbnail extends React.Component {
             >
               {!this.state.liked && <FavoriteOutlined />}
               {this.state.liked && <FavoriteIcon />}
-            </Button>
+            </Button>)}
             <Typography color="secondary">{this.state.likes}</Typography>
           </div>
           <img className="thumbnail-picture" src={this.state.recipePhoto} alt="Recipe" />
@@ -112,7 +114,7 @@ class Thumbnail extends React.Component {
           <p className="thumbnail-recipe-name">{this.state.recipeName}</p>
         </div>
         <div className="thumbnail-username">
-          <Link className="text-link" to={`../UserProfile/5fd3d204dbad7546c8b7d8c5`}>
+          <Link className="text-link" to={`../UserProfile/${this.state.ownerId}`}>
             <p className="thumbnail-username">{this.state.owner}</p>
           </Link>
         </div>
