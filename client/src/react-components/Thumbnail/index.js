@@ -23,7 +23,6 @@ class Thumbnail extends React.Component {
         own: own,
       })
     }
-    console.log(this.state)
   }
 
   state = {
