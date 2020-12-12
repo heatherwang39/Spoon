@@ -214,7 +214,7 @@ class UserProfile extends React.Component {
                         userMode={this.props.appState.userMode}
                         recipeId={recipe_id}
                         key={uid(recipe[0])}
-                      />
+s                      />
                     );
                   } else {
                     return <div></div>;

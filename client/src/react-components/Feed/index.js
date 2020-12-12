@@ -79,7 +79,7 @@ class Feed extends React.Component {
                   const recipe = this.state.recipes.filter((r) => {
                     return r.recipeId === recipe_id;
                   });
-                  return <Thumbnail recipeId={recipe[0]._id} />;
+                  return <Thumbnail userMode={this.props.appState.userMode} recipeId={recipe[0]._id} />;
                 });
               })}
           </TabPanel>
@@ -91,7 +91,7 @@ class Feed extends React.Component {
               See the newest recipes posted onto Spoon!
             </p>
             {this.state.recipes.map((recipe) => {
-              return <Thumbnail recipeId={recipe._id} />;
+              return <Thumbnail userMode={this.props.appState.userMode} recipeId={recipe._id} />;
             })}
           </TabPanel>
         </div>
