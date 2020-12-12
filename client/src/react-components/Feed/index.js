@@ -43,15 +43,19 @@ class Feed extends React.Component {
     });
   };
 
-  showDiscover = () => {
+  showFeed = () => {
+    console.log('show feed')
     const user = this.state.users.filter((u) => {
       return u.username === this.state.user;
     })[0];
     if (user === 'undefined') {
+      console.log('recipes undef (feed)')
       return;
     } else {
+      
       user.feed.map((recipe_id) => {
         const recipe = this.state.recipes.filter((r) => {
+          console.log(r)
           return r.recipeId === recipe_id;
         });
         return (
@@ -74,12 +78,16 @@ class Feed extends React.Component {
     }
   };
 
-  showFeed = () => {
+  showDiscover = () => {
+    console.log('show discover')
     const recipes = this.state.recipes;
     if (recipes === 'undefined') {
+      console.log('recipes undef (discover)')
       return;
     } else {
+      
       this.state.recipes.map((recipe) => {
+        console.log(recipe)
         return (
           <Thumbnail
             // recipeName={recipe.recipeName}
@@ -126,7 +134,7 @@ class Feed extends React.Component {
             <p className="feed-message">
               See latest recipes from the chefs you are following!
             </p>
-            {this.showDiscover}
+            {/* {this.showDiscover} */}
           </TabPanel>
           <TabPanel
             value={this.state.tabVal}
@@ -135,7 +143,17 @@ class Feed extends React.Component {
             <p className="feed-message">
               See the newest recipes posted onto Spoon!
             </p>
-            {this.showFeed}
+            {/* {this.showFeed} */}
+            {this.state.recipes.map((recipe) => {
+              console.log(recipe)
+              return (
+                <Thumbnail
+                  userMode={this.props.appState.userMode}
+                  recipeId={recipe._id}
+                  key={uid(recipe)}
+                />
+              );
+            })}
           </TabPanel>
         </div>
         <Snackbar
