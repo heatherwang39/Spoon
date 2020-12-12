@@ -9,13 +9,12 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 import './styles.css';
-import { checkLiked, getRecipe, getOwnerId } from '../../actions/recipes';
+import { checkLiked, getRecipe, updateRecipe } from '../../actions/recipes';
 import { getCurrentUser, addToUser } from '../../actions/users';
 
 class Thumbnail extends React.Component {
   componentDidMount() {
     getRecipe(this, this.state.recipeId);
-    // getOwnerId(this, this.state.owner);
     if (this.props.userMode !== 'guest') {
       getCurrentUser(this)
       checkLiked(this, this.state.recipeId)
@@ -62,7 +61,7 @@ class Thumbnail extends React.Component {
 
       // increase likes on recipe
       const likes = this.state.likes + 1;
-      addToUser(this.state.loggedUser._id, [{'path': '/likes', 'value': likes}])
+      updateRecipe(this.state.recipeId, [{'path': '/likes', 'value': likes}])
       this.setState({
         liked: true,
         likes: likes,
@@ -77,7 +76,7 @@ class Thumbnail extends React.Component {
 
       // decease likes on recipe
       const likes = this.state.likes - 1;
-      addToUser(this.state.loggedUser._id, [{'path': '/likes', 'value': likes}])
+      updateRecipe(this.state.recipeId, [{'path': '/likes', 'value': likes}])
       this.setState({
         liked: false,
         likes: likes,
