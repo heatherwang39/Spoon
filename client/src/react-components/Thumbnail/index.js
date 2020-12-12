@@ -15,16 +15,16 @@ import { getCurrentUser, addToUser } from '../../actions/users';
 class Thumbnail extends React.Component {
   componentDidMount() {
     getRecipe(this, this.state.recipeId);
+    // getOwnerId(this, this.state.owner);
     if (this.props.userMode !== 'guest') {
       getCurrentUser(this)
       checkLiked(this, this.state.recipeId)
-      getOwnerId(this, this.state.owner)
       const own = this.state.owner === this.state.loggedUser
       this.setState({
         own: own,
       })
-      // console.log(this.state)
     }
+    console.log(this.state)
   }
 
   state = {

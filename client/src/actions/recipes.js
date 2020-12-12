@@ -194,8 +194,8 @@ export const deleteRecipe = async (manageComp, recipeId) => {
 
 // Get a specified recipe and set state variables for thumbnail
 export const getRecipe = (component, recipeId) => {
-  const url = `/api/recipes/${recipeId}`;
-  fetch(url)
+  const url1 = `/api/recipes/${recipeId}`;
+  fetch(url1)
     .then((res) => {
       if (res.status === 200) {
         // return a promise that resolves with the JSON body
@@ -221,6 +221,29 @@ export const getRecipe = (component, recipeId) => {
     .catch((error) => {
       console.log(error);
     });
+
+  const url2 = '/api/users';
+  fetch(url2)
+    .then((res) => {
+      if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+        return res.json();
+      } else {
+        console.log('Could not get users');
+      }
+    })
+    .then((json) => {
+      json.forEach((user) => {
+        if (user.username === component.state.owner) {
+          component.setState({
+            ownerId: user._id,
+          });
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 // check if the logged in user has liked the recipe
@@ -240,32 +263,6 @@ export const checkLiked = (component, id) => {
         if (rid === id) {
           component.setState({
             liked: true,
-          });
-        }
-      });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
-// get the user id of the recipe owner
-export const getOwnerId = (component, username) => {
-  const url = '/api/users';
-  fetch(url)
-    .then((res) => {
-      if (res.status === 200) {
-        // return a promise that resolves with the JSON body
-        return res.json();
-      } else {
-        console.log('Could not get users');
-      }
-    })
-    .then((json) => {
-      json.forEach((user) => {
-        if (user.username === username) {
-          component.setState({
-            ownerId: username,
           });
         }
       });

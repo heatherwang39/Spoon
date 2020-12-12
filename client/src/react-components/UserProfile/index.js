@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
 import { setUserProfile, checkFollow, addToUser, getCurrentUser } from './../../actions/users.js';
-import { allRecipes } from './../../actions/recipes.js';
 
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
