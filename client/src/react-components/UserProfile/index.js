@@ -24,16 +24,15 @@ class UserProfile extends React.Component {
     const userId = pathname.slice(pathname.lastIndexOf('/') + 1);
     setUserProfile(this, userId, this.props.appState.username)
     if (this.props.appState.userMode !== 'guest') {
-      getCurrentUser(this, userId)
+      getCurrentUser(this)
       checkFollow(this, userId)
-      console.log(this.state.follow)
     }
   }
 
   state = {
     tabVal: 0,
     own: false, // Whether or not this is the user's own page
-    loggedUser: {}, // user id of currently logged in user
+    loggedUser: {}, // currently logged in user
     userId: '', // user id of profile user
     username: '', // username of profile user
     follow: false, // Whether or not the logged in user is following this user
@@ -196,17 +195,8 @@ class UserProfile extends React.Component {
               {this.state.recipes.map((recipe) => {
                   return (
                     <Thumbnail
-                      recipeName={recipe.recipeName}
-                      owner={recipe.owner}
-                      ingredients={recipe.ingredients}
-                      instructions={recipe.instructions}
-                      servingSize={recipe.servingSize}
-                      cookTimeHrs={recipe.cookTimeHrs}
-                      cookTimeMins={recipe.cookTimeMins}
-                      tags={recipe.tags}
-                      recipePhoto={recipe.recipePhoto}
-                      likes={recipe.likes}
-                      own={this.state.own}
+                      userMode={this.props.appState.userMode}
+                      recipeId={recipe}
                       editRecipe={() => this.editRecipe(recipe)}
                       deleteRecipe={() => this.deleteRecipe(recipe)}
                       key={uid(recipe)}
@@ -222,16 +212,7 @@ class UserProfile extends React.Component {
                   if (recipe[0] != null) {
                     return (
                       <Thumbnail
-                        recipeName={recipe[0].recipeName}
-                        owner={recipe[0].owner}
-                        ingredients={recipe[0].ingredients}
-                        instructions={recipe[0].instructions}
-                        servingSize={recipe[0].servingSize}
-                        cookTimeHrs={recipe[0].cookTimeHrs}
-                        cookTimeMins={recipe[0].cookTimeMins}
-                        tags={recipe[0].tags}
-                        recipePhoto={recipe[0].recipePhoto}
-                        likes={recipe[0].likes}
+                        recipeId={recipe_id}
                         key={uid(recipe[0])}
                       />
                     );
@@ -243,7 +224,7 @@ class UserProfile extends React.Component {
             </TabPanel>
           </div>
         </div>
-        <RecipeEdit
+        {/* <RecipeEdit
           recipeName={this.state.recipeToEdit.recipeName}
           owner={this.state.recipeToEdit.owner}
           ingredients={this.state.recipeToEdit.ingredients}
@@ -255,7 +236,7 @@ class UserProfile extends React.Component {
           recipePhoto={this.state.recipeToEdit.recipePhoto}
           open={editOpen}
           closePopup={this.closePopup}
-        />
+        /> */}
         <Snackbar open={this.state.openWarning} autoHideDuration={6000} onClose={this.closeWarning}>
           <MuiAlert onClose={this.closeWarning} variant="filled" severity="error">
             Could not get all recipes!
