@@ -60,17 +60,7 @@ class RecipeList extends React.Component {
           .map((recipe) => {
             return (
               <Thumbnail
-                recipeName={recipe.recipeName}
-                owner={recipe.owner}
-                ingredients={recipe.ingredients}
-                instructions={recipe.instructions}
-                servingSize={recipe.servingSize}
-                cookTimeHrs={recipe.cookTimeHrs}
-                cookTimeMins={recipe.cookTimeMins}
-                tags={recipe.tags}
-                recipePhoto={recipe.recipePhoto.image_url}
-                likes={recipe.likes}
-                key={uid(recipe)}
+                recipeId={recipe._id}
               />
             );
           })}

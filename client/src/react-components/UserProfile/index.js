@@ -196,10 +196,9 @@ class UserProfile extends React.Component {
                   return (
                     <Thumbnail
                       userMode={this.props.appState.userMode}
-                      recipeId={recipe}
+                      recipeId={recipe._id}
                       editRecipe={() => this.editRecipe(recipe)}
                       deleteRecipe={() => this.deleteRecipe(recipe)}
-                      key={uid(recipe)}
                     />
                   );
                 })}
@@ -212,9 +211,13 @@ class UserProfile extends React.Component {
                   if (recipe[0] != null) {
                     return (
                       <Thumbnail
+<<<<<<< HEAD
                         userMode={this.props.appState.userMode}
                         recipeId={recipe_id}
                         key={uid(recipe[0])}
+=======
+                        recipeId={recipe[0].recipe_id}
+>>>>>>> c1584b8786a17531061e0db158a93bc74af558e5
                       />
                     );
                   } else {

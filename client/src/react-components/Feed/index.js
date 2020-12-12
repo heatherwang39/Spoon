@@ -11,6 +11,7 @@ import './styles.css';
 
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
+import Button from '@material-ui/core/Button';
 import { uid } from 'react-uid';
 
 class Feed extends React.Component {
@@ -43,6 +44,7 @@ class Feed extends React.Component {
     });
   };
 
+<<<<<<< HEAD
   showFeed = () => {
     console.log('show feed')
     const user = this.state.users.filter((u) => {
@@ -108,6 +110,8 @@ class Feed extends React.Component {
     }
   };
 
+=======
+>>>>>>> c1584b8786a17531061e0db158a93bc74af558e5
   render() {
     // eslint-disable-next-line react/prop-types
     const { appState } = this.props;
@@ -134,7 +138,22 @@ class Feed extends React.Component {
             <p className="feed-message">
               See latest recipes from the chefs you are following!
             </p>
+<<<<<<< HEAD
             {/* {this.showDiscover} */}
+=======
+            {this.state.users
+              .filter((u) => {
+                return u.username === this.state.user;
+              })
+              .map((u) => {
+                u.feed.map((recipe_id) => {
+                  const recipe = this.state.recipes.filter((r) => {
+                    return r.recipeId === recipe_id;
+                  });
+                  return <Thumbnail recipeId={recipe[0]._id} />;
+                });
+              })}
+>>>>>>> c1584b8786a17531061e0db158a93bc74af558e5
           </TabPanel>
           <TabPanel
             value={this.state.tabVal}
@@ -143,6 +162,7 @@ class Feed extends React.Component {
             <p className="feed-message">
               See the newest recipes posted onto Spoon!
             </p>
+<<<<<<< HEAD
             {/* {this.showFeed} */}
             {this.state.recipes.map((recipe) => {
               console.log(recipe)
@@ -153,6 +173,10 @@ class Feed extends React.Component {
                   key={uid(recipe)}
                 />
               );
+=======
+            {this.state.recipes.map((recipe) => {
+              return <Thumbnail recipeId={recipe._id} />;
+>>>>>>> c1584b8786a17531061e0db158a93bc74af558e5
             })}
           </TabPanel>
         </div>
