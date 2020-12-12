@@ -77,7 +77,7 @@ class Feed extends React.Component {
               })
               .map((u) => {
                 // console.log(u)
-                u.feed.map((recipe_id) => {
+                return u.feed.map((recipe_id) => {
                   // console.log(recipe_id)
                   return <Thumbnail userMode={this.props.appState.userMode} recipeId={recipe_id} />;
                 });
