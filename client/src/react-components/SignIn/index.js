@@ -164,7 +164,7 @@ class SignIn extends React.Component {
                 {this.state.alertMessage}
               </MuiAlert>
             </Snackbar>
-
+{/* 
             {app.state.userMode !== 'guest'
               ? this.setState({
                   alertMessage: 'You have successfully logged in!',
@@ -172,7 +172,7 @@ class SignIn extends React.Component {
               : this.setState({
                   alertMessage: 'Please enter the correct credentials',
                 })
-            }
+            } */}
             
           </Grid>
         </Grid>

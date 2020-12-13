@@ -9,8 +9,13 @@ export const checkSession = (app) => {
       }
     })
     .then((json) => {
-      if (json && json.username) {
-        app.setState({ username: json.username, userMode: json.userMode, userId: json.userId});
+      if (json) {
+        app.setState({
+          username: json.username,
+          userMode: json.userMode,
+          userId: json.userId,
+          checkSessionIsFinished: true,
+        });
       }
     })
     .catch((error) => {
@@ -46,6 +51,7 @@ export const login = (comp, app) => {
       if (res.status === 200) {
         return res.json();
       }
+      comp.setState({openAlert: true, alertMessage: 'Incorrect username and/or password.'})
     })
     .then((json) => {
       if (json.username !== undefined) {
