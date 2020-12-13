@@ -67,6 +67,7 @@ class SignIn extends React.Component {
   state = {
     username: '',
     password: '',
+    message: '',
   };
 
   render() {
@@ -143,15 +144,9 @@ class SignIn extends React.Component {
             </Button>
           </Grid>
           <Grid item xs={12}>
-            {app.state.userMode !== 'guest' ? (
-              <Typography color="primary">
-                You have successfully logged in
-              </Typography>
-            ) : (
               <Typography color="secondary">
-                Please enter the correct credentials
+                {this.state.message}
               </Typography>
-            )}
             {/* <Typography>{this.state.message}</Typography> */}
           </Grid>
         </Grid>

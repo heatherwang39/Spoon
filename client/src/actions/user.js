@@ -50,6 +50,9 @@ export const login = (comp, app) => {
     .then((res) => {
       if (res.status === 200) {
         return res.json();
+      } 
+      else {
+        comp.setState({message: "Username or password is incorrect!"})
       }
     })
     .then((json) => {
@@ -59,7 +62,7 @@ export const login = (comp, app) => {
           userMode: json.userMode,
           userId: json.userId,
         });
-      }
+      } 
     })
     .catch((error) => {
       console.log(error);
