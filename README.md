@@ -58,7 +58,7 @@ More details about functionality below.
 
 - **View Recipes**: When a user clicks on the image of a recipe Thumbnail, a recipe pop-up will appear. This pop-up contains more detailed information about the recipe, such as its ingredients, instructions, tags, and more. While on the pop-up the only thing the user can do is exit it.
 
-  <img height="300" src="./images/search_recipes.png"/>
+  <img height="300" src="./images/search_recipe.png"/>
 
 - **View User Profiles**: When a guest user clicks on the username displayed on a recipe Thumbnail, they are sent to the user's profile page. The profile page will have the user's username, their number of followers, and 2 tabs that show recipe Thumbnails. The first tab is Recipes. This tab will show all of the recipes that the user has posted. The second tab is Likes. This tab will show all of the recipes that the user has liked. 
 
