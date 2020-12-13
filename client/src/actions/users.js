@@ -9,7 +9,7 @@ export const getAllUsers = (component) => {
         // return a promise that resolves with the JSON body
         return res.json();
       } else {
-        component.setState({openAlert: true, alertMessage: 'Could not get users.'})   
+        console.log('Could not get users');
       }
     })
     .then((json) => {
@@ -29,7 +29,7 @@ export const setUserProfile = (component, id, loggedUser) => {
         // return a promise that resolves with the JSON body
         return res.json();
       } else {
-        component.setState({openAlert: true, alertMessage: 'Could not get user!'})   
+        console.log('Could not get user');
       }
     })
     .then((json) => {
@@ -57,7 +57,7 @@ export const getCurrentUser = (component) => {
       // return a promise that resolves with the JSON body
       return res.json();
     } else {
-      component.setState({openAlert: true, alertMessage: 'Could not get user.'})
+      console.log('Could not get user');
     }
   })
   .then((json) => {
@@ -79,7 +79,7 @@ export const checkFollow = (component, id) => {
       // return a promise that resolves with the JSON body
       return res.json();
     } else {
-      component.setState({openAlert: true, alertMessage: 'Could not get user.'})   
+      console.log('Could not get user');
     }
   })
   .then((json) => {
@@ -98,7 +98,7 @@ export const checkFollow = (component, id) => {
 }
 
 //add to user info (e.g. liked, recipes, following etc.)
-export const addToUser = (component, userId, changes) => {
+export const addToUser = (userId, changes) => {
   //changes should be an array of {path, value} objects
   const url = '/api/users/' + userId;
 
@@ -121,7 +121,7 @@ export const addToUser = (component, userId, changes) => {
         return res.json();
       } else {
         // TODO: DON'T USE ALERTS
-        component.setState({openAlert: true, alertMessage: "Could not update user!"});
+        alert('Could not update user!');
       }
     })
     .catch((error) => {

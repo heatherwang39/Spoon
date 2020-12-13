@@ -6,6 +6,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import DropDownMenu from './DropDownMenu.js';
 import HeaderButton from './HeaderButton.js';
+import { getCurrentUser } from './../../actions/users.js';
 
 //icons
 import SearchIcon from '@material-ui/icons/Search';
@@ -29,7 +30,7 @@ class Header extends React.Component {
     },
     accountPages: [
       {
-        link: `../UserProfile/${this.props.state.userId}` ,
+        link: `../UserProfile/${this.props.state.userId}`,
         name: 'My Profile',
         mode: ['user', 'admin'],
         icon: SentimentSatisfiedIcon,

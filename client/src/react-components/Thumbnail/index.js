@@ -7,8 +7,6 @@ import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 
 import './styles.css';
 import { checkLiked, getRecipe, updateRecipe } from '../../actions/recipes';
@@ -39,9 +37,6 @@ class Thumbnail extends React.Component {
     recipePhoto: '', // imageSchema object
     likes: 0,
     loggedUser: {},
-    own: false,    
-    alertMessage: '',
-    openAlert: false,
   };
 
   openPopup = () => {
@@ -151,18 +146,7 @@ class Thumbnail extends React.Component {
             </div>
           ) : null}
         </div>
-        <Snackbar
-            open={this.state.openAlert}
-            autoHideDuration={6000}
-            onClose={this.closeAlert}
-          >
-            <MuiAlert
-              onClose={this.closeAlert}
-              severity="error"
-            >
-              {this.state.alertMessage}
-            </MuiAlert>
-        </Snackbar>
+
         <RecipePopup
           recipeName={this.state.recipeName}
           owner={this.state.owner}

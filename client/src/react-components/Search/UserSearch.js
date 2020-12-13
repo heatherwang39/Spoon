@@ -3,26 +3,19 @@ import './styles.css';
 import SearchBar from '../SearchBar';
 import UserInfo from '../ManageUsers/UserInfo';
 import { getAllUsers } from '../../actions/users';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 
 class UserSearch extends React.Component {
   state = {
     currInput: '',
-    searchedName: null,
+    searchedName:
+      null,
     users: [],
-    alertMessage: '',
-    openAlert: false,
-  };
-
-  componentDidMount() {
-    //get users
-    getAllUsers(this);
   }
 
-  closeAlert = () => {
-    this.setState({ openAlert: false });
-  };
+  componentDidMount(){
+    //get users
+    getAllUsers(this);
+  } 
 
   handleInputChange = (event) => {
     const target = event.target;
@@ -40,7 +33,7 @@ class UserSearch extends React.Component {
   };
 
   render() {
-    const { userMode } = this.props;
+    const {userMode} = this.props
     return (
       <div>
         <SearchBar
@@ -50,16 +43,6 @@ class UserSearch extends React.Component {
           placeholder="For example: Heather"
           label="Search User"
         />
-        <Snackbar
-          open={this.state.openAlert}
-          autoHideDuration={6000}
-          onClose={this.closeAlert}
-        >
-          <MuiAlert onClose={this.closeAlert} variant="filled" severity="error">
-            {this.state.alertMessage}
-          </MuiAlert>
-        </Snackbar>
-
         <UserInfo
           users={this.state.users}
           searchedName={this.state.searchedName}

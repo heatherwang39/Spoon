@@ -2,13 +2,12 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import './styles.css';
+// import * as data from '../../api/data';
 import { getAllUsers, updateSearchUserForm } from '../../actions/manage';
 
 import Header from '../Header';
 import SearchBar from '../SearchBar';
 import UserInfo from './UserInfo';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 
 class ManageUsers extends React.Component {
   constructor(props) {
@@ -16,8 +15,6 @@ class ManageUsers extends React.Component {
     this.state = {
       searchedName: '',
       users: [],
-      alertMessage: '',
-      openAlert: false,
     };
   }
 
@@ -37,10 +34,6 @@ class ManageUsers extends React.Component {
     console.log('You are searching for: ' + this.state.searchedName);
   };
 
-  closeAlert = () => {
-    this.setState({ openAlert: false });
-  };
-
   render() {
     return (
       <div>
@@ -55,15 +48,6 @@ class ManageUsers extends React.Component {
           placeholder="For example: Heather"
           label="User Name"
         />
-        <Snackbar
-          open={this.state.openAlert}
-          autoHideDuration={6000}
-          onClose={this.closeAlert}
-        >
-          <MuiAlert onClose={this.closeAlert} variant="filled" severity="error">
-            {this.state.alertMessage}
-          </MuiAlert>
-        </Snackbar>
         <UserInfo
           users={this.state.users}
           searchedName={this.state.searchedName}

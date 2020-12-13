@@ -9,8 +9,6 @@ import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import { updateRecipe, changeRecipePhoto } from '../../actions/recipes';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
 
 import './styles.css';
 
@@ -30,14 +28,8 @@ class RecipeEdit extends React.Component {
       og_tags: '',
       tags: '',
       recipePhoto: '',
-      alertMessage: '',
-      openAlert: false,
     };
   }
-
-  closeAlert = () => {
-    this.setState({ openAlert: false });
-  };
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -100,17 +92,10 @@ class RecipeEdit extends React.Component {
       cookTimeMins,
       recipePhoto,
     } = this.state;
-    if (
-      !recipeName ||
-      !ingredients ||
-      !instructions ||
-      !servingSize ||
-      !cookTimeMins ||
-      !recipePhoto
-    ) {
+    if (!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
       alert('Please fill out all the required fields!');
     } else {
-      updateRecipe(this, this.state.recipe.json()._id, [
+      updateRecipe(this.state.recipe.json()._id, [
         { path: '/recipeName', value: this.state.recipeName },
         { path: '/ingredients', value: this.state.ingredients },
         { path: '/instructions', value: this.state.instructions },
@@ -303,19 +288,6 @@ class RecipeEdit extends React.Component {
                 </Button>
               </Grid>
             </Grid>
-            <Snackbar
-              open={this.state.openAlert}
-              autoHideDuration={6000}
-              onClose={this.closeAlert}
-            >
-              <MuiAlert
-                onClose={this.closeAlert}
-                variant="filled"
-                severity="error"
-              >
-                {this.state.alertMessage}
-              </MuiAlert>
-            </Snackbar>
           </DialogContent>
         </Dialog>
       </div>
