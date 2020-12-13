@@ -104,11 +104,32 @@ export const deleteRecipeFromLikedList = async (recipeId) => {
       const jsonUsers = await resGet.json();
       jsonUsers.forEach((user) => {
         const updatedLikedPage = user.liked.filter(
-          (recipeIdInLikedPage) => recipeIdInLikedPage != recipeId
+          (recipeIdInLikedPage) => recipeIdInLikedPage !== recipeId
         );
         addToUser(user._id, [
           // Update the updatedLiked(delete the user's recipe from it)
           { path: '/liked', value: updatedLikedPage },
+        ]);
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteRecipeFromFeedPage = async (recipeId) => {
+  const getUsersRequest = '/api/users';
+  try {
+    const resGet = await fetch(getUsersRequest);
+    if (resGet.status === 200) {
+      const jsonUsers = await resGet.json();
+      jsonUsers.forEach((user) => {
+        const updatedFeedPage = user.feed.filter(
+          (recipeIdInFeedPage) => recipeIdInFeedPage !== recipeId
+        );
+        addToUser(user._id, [
+          // Update the updatedLiked(delete the user's recipe from it)
+          { path: '/feed', value: updatedFeedPage },
         ]);
       });
     }
@@ -125,7 +146,7 @@ export const updateFollowersFollowingList = async (userId, followerId) => {
     if (resGet.status === 200) {
       const jsonFollower = await resGet.json();
       const updatedFollowingList = jsonFollower.user.following.filter(
-        (id) => id != userId
+        (id) => id !== userId
       );
       addToUser(followerId, [
         // Add the updatedFollowingList to follower's following list
@@ -146,7 +167,7 @@ export const updateFollowersFeedPage = async (jsonUser, followerId) => {
       const jsonFollower = await resGetFollower.json();
       jsonUser.recipes.forEach((recipeId) => {
         const updatedFeedPage = jsonFollower.user.feed.filter(
-          (recipeIdInFeed) => recipeIdInFeed != recipeId
+          (recipeIdInFeed) => recipeIdInFeed !== recipeId
         );
         addToUser(followerId, [
           // Update the updatedFeedPage of the user's follower(delete the user's recipe from it)

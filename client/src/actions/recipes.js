@@ -1,6 +1,7 @@
 //API function calls for recipes collection
 
 import { addToUser } from './users';
+import { deleteRecipeFromLikedList, deleteRecipeFromFeedPage } from './manage';
 
 // A function to send a GET request to the web server
 // to get all the recipes
@@ -10,7 +11,10 @@ export const allRecipes = (recipeList) => {
       if (res.status === 200) {
         return res.json();
       } else {
-        recipeList.setState({openAlert: true, alertMessage: "Couldn't get recipes!"})
+        recipeList.setState({
+          openAlert: true,
+          alertMessage: "Couldn't get recipes!",
+        });
       }
     })
     .then((json) => {
@@ -42,11 +46,14 @@ export const changeRecipePhoto = (image, component) => {
 
   fetch(request)
     .then((res) => {
-      if (res.status === 200) { 
+      if (res.status === 200) {
         return res.json();
       } else {
         // TODO: DON'T USE ALERTS
-        component.setState({openAlert: true, alertMessage: "Could not upload the image!"})
+        component.setState({
+          openAlert: true,
+          alertMessage: 'Could not upload the image!',
+        });
       }
     })
     .then((image) => {
@@ -78,7 +85,10 @@ export const addRecipe = (component, username) => {
         console.log('recipe created!');
         return recipe.json();
       } else {
-        component.setState({openAlert: true, alertMessage: 'Could not create recipe!'}) 
+        component.setState({
+          openAlert: true,
+          alertMessage: 'Could not create recipe!',
+        });
       }
     })
     .then((json) => {
@@ -104,10 +114,16 @@ export const updateRecipe = (component, recipeId, changes) => {
 
   fetch(request).then((res) => {
     if (res.status === 200) {
-      component.setState({openAlert: true, alertMessage: 'Recipe updated successfully!'}) 
+      component.setState({
+        openAlert: true,
+        alertMessage: 'Recipe updated successfully!',
+      });
       return res.json();
     } else {
-      component.setState({openAlert: true, alertMessage: 'Could not update recipe!'}) 
+      component.setState({
+        openAlert: true,
+        alertMessage: 'Could not update recipe!',
+      });
     }
   });
 };
@@ -122,7 +138,10 @@ export const newRecipeUpdates = (component, recipe) => {
         // return a promise that resolves with the JSON body
         return res.json();
       } else {
-        component.setState({openAlert: true, alertMessage: "Could not update the recipe!"});
+        component.setState({
+          openAlert: true,
+          alertMessage: 'Could not update the recipe!',
+        });
       }
     })
     .then((json) => {
@@ -151,7 +170,10 @@ export const updateFeed = (component, id, recipe) => {
         // return a promise that resolves with the JSON body
         return res.json();
       } else {
-        component.setState({openAlert: true, alertMessage: 'Could not add recipe to follower'}) 
+        component.setState({
+          openAlert: true,
+          alertMessage: 'Could not add recipe to follower',
+        });
       }
     })
     .then((json) => {
@@ -174,16 +196,22 @@ export const deleteRecipe = async (manageComp, recipeId) => {
   try {
     const res = await fetch(request);
     if (res.status === 200) {
-      manageComp.setState({openAlert: true, alertMessage: 'Deleted the recipe successfully.'})   
+      manageComp.setState({
+        openAlert: true,
+        alertMessage: 'Deleted the recipe successfully.',
+      });
       const resGet = await fetch(url);
       const json = await resGet.json();
       manageComp.setState({
         recipes: json,
       });
-      console.log('reset manageCome');
-      console.log(manageComp);
+      deleteRecipeFromLikedList(recipeId);
+      deleteRecipeFromFeedPage(recipeId);
     } else {
-      manageComp.setState({openAlert: true, alertMessage: 'Could not delete recipe.'}) 
+      manageComp.setState({
+        openAlert: true,
+        alertMessage: 'Could not delete recipe.',
+      });
     }
     const resGet = await fetch(url);
     const json = await resGet.json();
@@ -204,7 +232,10 @@ export const getRecipe = (component, recipeId) => {
         // return a promise that resolves with the JSON body
         return res.json();
       } else {
-        component.setState({openAlert: true, alertMessage: 'Could not get recipe!'})
+        component.setState({
+          openAlert: true,
+          alertMessage: 'Could not get recipe!',
+        });
       }
     })
     .then((json) => {
@@ -232,7 +263,10 @@ export const getRecipe = (component, recipeId) => {
         // return a promise that resolves with the JSON body
         return res.json();
       } else {
-        component.setState({openAlert: true, alertMessage: 'Could not get recipe author!'}) 
+        component.setState({
+          openAlert: true,
+          alertMessage: 'Could not get recipe author!',
+        });
       }
     })
     .then((json) => {
@@ -258,7 +292,10 @@ export const checkLiked = (component, id) => {
         // return a promise that resolves with the JSON body
         return res.json();
       } else {
-        component.setState({openAlert: true, alertMessage: 'Could not get user!'}) 
+        component.setState({
+          openAlert: true,
+          alertMessage: 'Could not get user!',
+        });
       }
     })
     .then((json) => {
