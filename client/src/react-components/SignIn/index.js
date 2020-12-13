@@ -11,7 +11,6 @@ import { updateLoginForm, login } from '../../actions/user';
 
 import './styles.css';
 
-// this is both the sign in page and the page you get taken to when you log out
 class SignIn extends React.Component {
 
   constructor(props) {

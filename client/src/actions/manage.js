@@ -102,7 +102,7 @@ export const updateFollowersFollowingList = async (userId, followerId) => {
     if (resGet.status === 200) {
       const jsonFollower = await resGet.json();
       const updatedFollowingList = jsonFollower.following.filter(
-        (id) => id != userId
+        (id) => id !== userId
       );
       addToUser(followerId, [
         // Add the updatedFollowingList to follower's following list

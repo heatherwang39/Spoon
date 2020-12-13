@@ -1,5 +1,4 @@
 import React from 'react';
-import { uid } from 'react-uid';
 import { allRecipes } from './../../actions/recipes';
 
 import Snackbar from "@material-ui/core/Snackbar";
@@ -17,11 +16,12 @@ class RecipeList extends React.Component {
   state = {
     color: 'secondary',
     recipes: [],
-    openWarning: false,
+    alertMessage: '',
+    openAlert: false,
   };
 
-  closeWarning = () => {
-    this.setState({ openWarning: false });
+  closeAlert = () => {
+    this.setState({ openAlert: false });
   };
 
   closePopup = () => {
@@ -64,11 +64,19 @@ class RecipeList extends React.Component {
               />
             );
           })}
-        <Snackbar open={this.state.openWarning} autoHideDuration={6000} onClose={this.closeWarning}>
-          <MuiAlert onClose={this.closeWarning} variant="filled" severity="error">
-            Could not get all recipes!
-          </MuiAlert>
-        </Snackbar>
+          <Snackbar
+            open={this.state.openAlert}
+            autoHideDuration={6000}
+            onClose={this.closeAlert}
+          >
+            <MuiAlert
+              onClose={this.closeAlert}
+              variant="filled"
+              severity="error"
+            >
+              {this.state.alertMessage}
+            </MuiAlert>
+          </Snackbar>
       </div>
     );
   }
