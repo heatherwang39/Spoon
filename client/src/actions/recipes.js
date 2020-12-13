@@ -1,6 +1,11 @@
 //API function calls for recipes collection
 
 import { addToUser } from './users';
+import {
+  deleteRecipeFromLikedList,
+  deleteRecipeFromFeedPage,
+  deleteRecipeFromOwners,
+} from './manage';
 
 // A function to send a GET request to the web server
 // to get all the recipes
@@ -178,15 +183,29 @@ export const deleteRecipe = async (manageComp, recipeId) => {
   try {
     const res = await fetch(request);
     if (res.status === 200) {
-      console.log('delete the recipe successfully.');
+      manageComp.setState({
+        openAlert: true,
+        alertMessage: 'Deleted the recipe successfully.',
+      });
+      const resGet = await fetch(url);
+      const json = await resGet.json();
+      manageComp.setState({
+        recipes: json,
+      });
+      deleteRecipeFromLikedList(recipeId);
+      deleteRecipeFromFeedPage(recipeId);
+      deleteRecipeFromOwners(recipeId);
+    } else {
+      manageComp.setState({
+        openAlert: true,
+        alertMessage: 'Could not delete recipe.',
+      });
     }
     const resGet = await fetch(url);
     const json = await resGet.json();
     manageComp.setState({
       recipes: json,
     });
-    console.log('reset manageCome');
-    console.log(manageComp);
   } catch (error) {
     console.log(error);
   }
