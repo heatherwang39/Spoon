@@ -30,8 +30,6 @@ cd ..
 npm start
 ```
 
-The site will be on http://localhost:5000/.
-
 ***
 
 ## Login Credentials
