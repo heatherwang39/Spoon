@@ -5,11 +5,15 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 import { uid } from 'react-uid';
-import { setUserProfile, checkFollow, addToUser, getCurrentUser } from './../../actions/users.js';
-
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
+import {
+  setUserProfile,
+  checkFollow,
+  addToUser,
+  getCurrentUser,
+} from './../../actions/users.js';
 
 import './styles.css';
 
@@ -22,10 +26,10 @@ class UserProfile extends React.Component {
   componentDidMount() {
     const pathname = this.props.location.pathname;
     const userId = pathname.slice(pathname.lastIndexOf('/') + 1);
-    setUserProfile(this, userId, this.props.appState.username)
+    setUserProfile(this, userId, this.props.appState.username);
     if (this.props.appState.userMode !== 'guest') {
-      getCurrentUser(this)
-      checkFollow(this, userId)
+      getCurrentUser(this);
+      checkFollow(this, userId);
     }
   }
 
@@ -52,11 +56,12 @@ class UserProfile extends React.Component {
       Vegan: false,
       NutFree: false,
     },
-    openWarning: false,
+    alertMessage: '',
+    openAlert: false,
   };
 
-  closeWarning = () => {
-    this.setState({ openWarning: false });
+  closeAlert = () => {
+    this.setState({ openAlert: false });
   };
 
   editRecipe = (recipe) => {
@@ -109,12 +114,16 @@ class UserProfile extends React.Component {
   handleFollow = (e) => {
     if (!this.state.follow) {
       // add logged user to followers of user profile
-      this.state.followers.push(this.state.loggedUser._id)
-      addToUser(this.state.userId, [{'path': '/followers', 'value': this.state.followers}])
+      this.state.followers.push(this.state.loggedUser._id);
+      addToUser(this, this.state.userId, [
+        { path: '/followers', value: this.state.followers },
+      ]);
 
       // add user profile to following of logged user
-      this.state.loggedUser.following.push(this.state.userId)
-      addToUser(this.state.loggedUser._id, [{'path': '/following', 'value': this.state.loggedUser.following}])
+      this.state.loggedUser.following.push(this.state.userId);
+      addToUser(this, this.state.loggedUser._id, [
+        { path: '/following', value: this.state.loggedUser.following },
+      ]);
 
       // change state of follow related variables
       const followers = this.state.numFollowers + 1;
@@ -125,18 +134,22 @@ class UserProfile extends React.Component {
       });
     } else {
       // remove logged user from followers of user profile
-      const index1 = this.state.followers.indexOf(this.state.loggedUser._id)
+      const index1 = this.state.followers.indexOf(this.state.loggedUser._id);
       if (index1 !== -1) {
-        this.state.followers.splice(index1, 1)
+        this.state.followers.splice(index1, 1);
       }
-      addToUser(this.state.userId, [{'path': '/followers', 'value': this.state.followers}])
+      addToUser(this, this.state.userId, [
+        { path: '/followers', value: this.state.followers },
+      ]);
 
       // remove user profile from following of logged user
-      const index2 = this.state.loggedUser.following.indexOf(this.state.userId)
+      const index2 = this.state.loggedUser.following.indexOf(this.state.userId);
       if (index2 !== -1) {
-        this.state.loggedUser.following.splice(index2, 1)
+        this.state.loggedUser.following.splice(index2, 1);
       }
-      addToUser(this.state.loggedUser._id, [{'path': '/following', 'value': this.state.loggedUser.following}])
+      addToUser(this, this.state.loggedUser._id, [
+        { path: '/following', value: this.state.loggedUser.following },
+      ]);
 
       // change state of follow related variables
       const followers = this.state.numFollowers - 1;
@@ -193,27 +206,26 @@ class UserProfile extends React.Component {
             </AppBar>
             <TabPanel value={this.state.tabVal} index={0}>
               {this.state.recipes.map((recipe) => {
-                  return (
-                    <Thumbnail
-                      userMode={this.props.appState.userMode}
-                      recipeId={recipe}
-                      editRecipe={() => this.editRecipe(recipe)}
-                      deleteRecipe={() => this.deleteRecipe(recipe)}
-                    />
-                  );
-                })}
+                return (
+                  <Thumbnail
+                    userMode={this.props.appState.userMode}
+                    recipeId={recipe}
+                    editRecipe={() => this.editRecipe(recipe)}
+                    deleteRecipe={() => this.deleteRecipe(recipe)}
+                  />
+                );
+              })}
             </TabPanel>
             <TabPanel value={this.state.tabVal} index={1}>
               {this.state.liked.map((recipe_id) => {
-                  return (
-                    <Thumbnail
-                      userMode={this.props.appState.userMode}
-                      recipeId={recipe_id}
-                      key={uid(recipe_id)}
-                    />
-                  );
-                })
-              }
+                return (
+                  <Thumbnail
+                    userMode={this.props.appState.userMode}
+                    recipeId={recipe_id}
+                    key={uid(recipe_id)}
+                  />
+                );
+              })}
             </TabPanel>
           </div>
         </div>
@@ -230,9 +242,13 @@ class UserProfile extends React.Component {
           open={editOpen}
           closePopup={this.closePopup}
         /> */}
-        <Snackbar open={this.state.openWarning} autoHideDuration={6000} onClose={this.closeWarning}>
-          <MuiAlert onClose={this.closeWarning} variant="filled" severity="error">
-            Could not get all recipes!
+        <Snackbar
+          open={this.state.openAlert}
+          autoHideDuration={6000}
+          onClose={this.closeAlert}
+        >
+          <MuiAlert onClose={this.closeAlert} variant="filled" severity="error">
+            {this.state.alertMessage}
           </MuiAlert>
         </Snackbar>
       </div>
