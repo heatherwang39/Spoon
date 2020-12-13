@@ -41,7 +41,8 @@ Users can create their own account, or preview the website as a guest. There are
 | Username | Password |
 | -------- | -------- |
 | admin    | admin    |
-| user     | user     |
+| user1    | user1    |
+| user2    | user2    |
 
 ***
 
