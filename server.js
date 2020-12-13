@@ -137,7 +137,11 @@ app.post("/users/login", (req, res) => {
         checkedMode = "user";
       }
       req.session.userMode = checkedMode;
-      res.send({ username: user.username, userMode: checkedMode });
+      res.send({
+        username: user.username,
+        userMode: checkedMode,
+        userId: user._id,
+      });
     })
     .catch((error) => {
       log(error);
