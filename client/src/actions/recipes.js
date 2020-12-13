@@ -110,7 +110,31 @@ export const updateRecipe = (recipeId, changes) => {
   fetch(request)
     .then((res) => {
       if (res.status === 200) {
-        alert('Recipe edited! You can close the window now.')
+        return res.json();
+      } else {
+        alert('Could not update recipe!');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const updateRecipeForEdit = (recipeId, changes) => {
+  // Changes should be an array of {path, value} objects
+  const url = '/api/recipes/' + recipeId;
+  const request = new Request(url, {
+    method: 'PATCH',
+    body: JSON.stringify(changes),
+    headers: {
+      Accept: 'application/json, text/plain, /',
+      'Content-Type': 'application/json',
+    },
+  });
+  fetch(request)
+    .then((res) => {
+      if (res.status === 200) {
+        alert('Recipe edited! You can close the window now.');
         return res.json();
       } else {
         alert('Could not update recipe!');

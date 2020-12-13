@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import { updateRecipe, changeRecipePhoto } from '../../actions/recipes';
+import { updateRecipeForEdit, changeRecipePhoto } from '../../actions/recipes';
 
 import './styles.css';
 
@@ -105,7 +105,7 @@ class RecipeEdit extends React.Component {
     } else {
       const json_ingredints = this.state.ingredients.toString().split('\n');
       const json_instructions = this.state.instructions.toString().split('\n');
-      updateRecipe(this.props.recipeId, [
+      updateRecipeForEdit(this.props.recipeId, [
         { path: '/recipeName', value: this.state.recipeName },
         { path: '/ingredients', value: json_ingredints },
         { path: '/instructions', value: json_instructions },
