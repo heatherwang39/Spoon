@@ -11,8 +11,6 @@ import './styles.css';
 
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
-import Button from '@material-ui/core/Button';
-import { uid } from 'react-uid';
 
 class Feed extends React.Component {
   componentDidMount() {
@@ -62,7 +60,7 @@ class Feed extends React.Component {
           <Tab label="Discover" disableRipple />
         </Tabs>
         <div className="feed">
-          <Header state={appState} />
+          <Header state={appState}/>
           <TabPanel
             value={this.state.tabVal}
             index={this.state.userMode !== 'guest' ? 0 : null}
