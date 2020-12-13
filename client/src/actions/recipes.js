@@ -1,6 +1,11 @@
 //API function calls for recipes collection
 
 import { addToUser } from './users';
+import {
+  deleteRecipeFromLikedList,
+  deleteRecipeFromFeedPage,
+  deleteRecipeFromOwners,
+} from './manage';
 
 // A function to send a GET request to the web server
 // to get all the recipes
@@ -14,7 +19,6 @@ export const allRecipes = (recipeList) => {
       }
     })
     .then((json) => {
-      console.log('json', json);
       recipeList.setState({ recipes: json });
     })
     .catch((error) => {
@@ -139,7 +143,6 @@ export const newRecipeUpdates = (recipe) => {
 
       json.user.followers.forEach((followerId) => {
         // Add recipe to followers' feeds
-        console.log('follower id:', followerId);
         updateFeed(followerId, recipe);
       });
 
@@ -181,7 +184,23 @@ export const deleteRecipe = async (manageComp, recipeId) => {
   try {
     const res = await fetch(request);
     if (res.status === 200) {
-      console.log('delete the recipe successfully.');
+      manageComp.setState({
+        openAlert: true,
+        alertMessage: 'Deleted the recipe successfully.',
+      });
+      const resGet = await fetch(url);
+      const json = await resGet.json();
+      manageComp.setState({
+        recipes: json,
+      });
+      deleteRecipeFromLikedList(recipeId);
+      deleteRecipeFromFeedPage(recipeId);
+      deleteRecipeFromOwners(recipeId);
+    } else {
+      manageComp.setState({
+        openAlert: true,
+        alertMessage: 'Could not delete recipe.',
+      });
     }
     const resGet = await fetch(url);
     const json = await resGet.json();

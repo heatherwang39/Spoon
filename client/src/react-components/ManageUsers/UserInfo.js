@@ -38,7 +38,7 @@ class UserInfo extends React.Component {
                   <Grid item xs={4}>
                     <Link
                       className="text-link"
-                      to={`../UserProfile/${user.username}`}
+                      to={`../UserProfile/${user._id}`}
                     >
                       <Typography variant="h6" color="secondary" align="left">
                         {user.username}
@@ -66,7 +66,7 @@ class UserInfo extends React.Component {
                       <Button variant="contained" color="secondary">
                         <Link
                           className="user-info-link"
-                          to={`../UserProfile/${user.username}`}
+                          to={`../UserProfile/${user._id}`}
                         >
                           View profile
                         </Link>

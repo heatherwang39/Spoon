@@ -33,15 +33,15 @@ export const setUserProfile = (component, id, loggedUser) => {
       }
     })
     .then((json) => {
-      component.setState({ 
+      component.setState({
         own: json.user.username === loggedUser,
         userId: json.user._id,
-        username: json.user.username, 
+        username: json.user.username,
         followers: json.user.followers,
         numFollowers: json.user.followers.length,
         recipes: json.user.recipes,
-        liked: json.user.liked
-       });
+        liked: json.user.liked,
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -52,50 +52,50 @@ export const setUserProfile = (component, id, loggedUser) => {
 export const getCurrentUser = (component) => {
   const url = '/api/users/currentUser';
   fetch(url)
-  .then((res) => {
-    if (res.status === 200) {
-      // return a promise that resolves with the JSON body
-      return res.json();
-    } else {
-      console.log('Could not get user');
-    }
-  })
-  .then((json) => {
-    component.setState({
-      loggedUser: json.user
+    .then((res) => {
+      if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+        return res.json();
+      } else {
+        console.log('Could not get user');
+      }
     })
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+    .then((json) => {
+      component.setState({
+        loggedUser: json.user,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 // check if the logged in user is following the user whose profile they are viewing
 export const checkFollow = (component, id) => {
   const url = '/api/users/currentUser';
   fetch(url)
-  .then((res) => {
-    if (res.status === 200) {
-      // return a promise that resolves with the JSON body
-      return res.json();
-    } else {
-      console.log('Could not get user');
-    }
-  })
-  .then((json) => {
-    json.user.following.forEach((uid) => {
-      if (uid === id) {
-        component.setState({
-          follow: true,
-          color: 'default'
-        })
+    .then((res) => {
+      if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+        return res.json();
+      } else {
+        console.log('Could not get user');
       }
     })
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-}
+    .then((json) => {
+      json.user.following.forEach((uid) => {
+        if (uid === id) {
+          component.setState({
+            follow: true,
+            color: 'default',
+          });
+        }
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 
 //add to user info (e.g. liked, recipes, following etc.)
 export const addToUser = (userId, changes) => {
@@ -109,10 +109,9 @@ export const addToUser = (userId, changes) => {
     headers: {
       Accept: 'application/json, text/plain, /',
       'Content-Type': 'application/json',
-    }
-  }
+    },
+  };
 
-  console.log(send)
   const request = new Request(url, send);
 
   fetch(request)
