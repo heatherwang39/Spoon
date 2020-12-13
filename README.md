@@ -56,9 +56,9 @@ More details about functionality below.
 
 - **Search**: On the right side of the header, there is a Search button. Clicking this will bring the user to the Search page. On this page, a user can search for recipes or users. For recipes, all recipe Thumbnails will be shown by default. Then the user can type in the search bar, adjust the time it takes to make the recipe, and check/uncheck different tags depending on what they are looking for. The recipes shown will update automatically. For users, the user will need to type something into the Search bar and press Search for results to come up. All users with matching usernames will appear. After doing a search, the user can click on the recipe Thumbnail image to see a recipe pop-up, or click on a user's username to see a user's profile.
 
-- **View Recipes**: When a user clicks on the image of a recipe Thumbnail, a recipe pop-up will appear. This pop-up contains more detailed information about the recipe, such as its ingredients, instructions, tags, and more. While on the pop-up the only thing the user can do is exit it.
-
   <img height="300" src="./images/search_recipe.png"/>
+
+- **View Recipes**: When a user clicks on the image of a recipe Thumbnail, a recipe pop-up will appear. This pop-up contains more detailed information about the recipe, such as its ingredients, instructions, tags, and more. While on the pop-up the only thing the user can do is exit it.
 
 - **View User Profiles**: When a guest user clicks on the username displayed on a recipe Thumbnail, they are sent to the user's profile page. The profile page will have the user's username, their number of followers, and 2 tabs that show recipe Thumbnails. The first tab is Recipes. This tab will show all of the recipes that the user has posted. The second tab is Likes. This tab will show all of the recipes that the user has liked. 
 
