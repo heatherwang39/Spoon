@@ -13,53 +13,6 @@ import './styles.css';
 
 // this is both the sign in page and the page you get taken to when you log out
 class SignIn extends React.Component {
-  // state = {
-  //   message: '',
-  //   password: '',
-  //   username: '',
-  //   // header: <Header state={this.props.appState} />,
-  //   successFlag: false,
-  // };
-
-  // componentDidMount() {
-  //   const newState = { username: 'guest', userMode: 'guest' };
-  //   this.setState({
-  //     header: <Header state={newState} />,
-  //   });
-  // }
-
-  // handleInputChange = (event) => {
-  //   const name = event.target.name;
-  //   this.setState({
-  //     [name]: event.target.value,
-  //   });
-  // };
-
-  // check = () => {
-  //   if (
-  //     (this.state.username === 'user' && this.state.password === 'user') ||
-  //     (this.state.username === 'admin' && this.state.password === 'admin')
-  //   ) {
-  //     this.success();
-  //   } else {
-  //     this.setState({ message: 'You have entered incorrect credentials.' });
-  //   }
-  //   this.setState({
-  //     username: '',
-  //     password: '',
-  //   });
-  // };
-
-  // success = () => {
-  //   const newState = {
-  //     username: this.state.username,
-  //     userMode: this.state.username,
-  //   };
-  //   this.setState({
-  //     header: <Header state={newState} />,
-  //   });
-  //   this.setState({ message: 'You have successfully signed in!' });
-  // };
 
   constructor(props) {
     super(props);
@@ -144,37 +97,21 @@ class SignIn extends React.Component {
               disableRipple
             >
               Sign In
-              {/* Here is where we would 
-                validate the user's login, 
-                and retrieve their account 
-                information from the backend. */}
             </Button>
           </Grid>
-          <Grid item xs={12}>
-            <Snackbar
-              open={this.state.openAlert}
-              autoHideDuration={6000}
+          <Snackbar
+            open={this.state.openAlert}
+            autoHideDuration={6000}
+            onClose={this.closeAlert}
+          >
+            <MuiAlert
               onClose={this.closeAlert}
+              variant="filled"
+              severity="error"
             >
-              <MuiAlert
-                onClose={this.closeAlert}
-                variant="filled"
-                severity="error"
-              >
-                {this.state.alertMessage}
-              </MuiAlert>
-            </Snackbar>
-{/* 
-            {app.state.userMode !== 'guest'
-              ? this.setState({
-                  alertMessage: 'You have successfully logged in!',
-                })
-              : this.setState({
-                  alertMessage: 'Please enter the correct credentials',
-                })
-            } */}
-            
-          </Grid>
+              {this.state.alertMessage}
+            </MuiAlert>
+          </Snackbar>
         </Grid>
       </div>
     );

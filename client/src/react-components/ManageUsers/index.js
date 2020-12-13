@@ -2,7 +2,6 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 import './styles.css';
-// import * as data from '../../api/data';
 import { getAllUsers, updateSearchUserForm } from '../../actions/manage';
 
 import Header from '../Header';
