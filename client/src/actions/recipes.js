@@ -185,8 +185,6 @@ export const deleteRecipe = async (manageComp, recipeId) => {
     manageComp.setState({
       recipes: json,
     });
-    console.log('reset manageCome');
-    console.log(manageComp);
   } catch (error) {
     console.log(error);
   }
