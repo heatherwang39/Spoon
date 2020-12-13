@@ -103,15 +103,18 @@ export const updateRecipe = (recipeId, changes) => {
       'Content-Type': 'application/json',
     },
   });
-
-  fetch(request).then((res) => {
-    if (res.status === 200) {
-      return res.json();
-    } else {
-      // TODO: DON'T USE ALERTS
-      alert('Could not update recipe!');
-    }
-  });
+  fetch(request)
+    .then((res) => {
+      if (res.status === 200) {
+        alert('Recipe edited! You can close the window now.')
+        return res.json();
+      } else {
+        alert('Could not update recipe!');
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export const newRecipeUpdates = (recipe) => {
@@ -188,6 +191,37 @@ export const deleteRecipe = async (manageComp, recipeId) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+// Get a specified recipe and set state variables for editing
+export const getRecipeToEdit = (component, recipeId) => {
+  const url = `/api/recipes/${recipeId}`;
+  fetch(url)
+    .then((res) => {
+      if (res.status === 200) {
+        // return a promise that resolves with the JSON body
+        return res.json();
+      } else {
+        console.log('Could not get recipe');
+      }
+    })
+    .then((json) => {
+      component.setState({
+        recipeNameEdit: json.recipe.recipeName,
+        ownerEdit: json.recipe.owner,
+        ingredientsEdit: json.recipe.ingredients,
+        instructionsEdit: json.recipe.instructions,
+        servingSizeEdit: json.recipe.servingSize,
+        cookTimeHrsEdit: json.recipe.cookTimeHrs,
+        cookTimeMinsEdit: json.recipe.cookTimeMins,
+        tagsEdit: json.recipe.tags,
+        recipePhotoEdit: json.recipe.recipePhoto,
+        likesEdit: json.recipe.likes,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 // Get a specified recipe and set state variables for thumbnail

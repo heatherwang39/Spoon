@@ -7,14 +7,22 @@ import Button from '@material-ui/core/Button';
 import { Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
+import RecipeEdit from './RecipeEdit';
 
 import './styles.css';
-import { checkLiked, getRecipe, updateRecipe } from '../../actions/recipes';
+import {
+  checkLiked,
+  getRecipe,
+  getRecipeToEdit,
+  updateRecipe,
+  deleteRecipe,
+} from '../../actions/recipes';
 import { getCurrentUser, addToUser } from '../../actions/users';
 
 class Thumbnail extends React.Component {
   componentDidMount() {
     getRecipe(this, this.state.recipeId);
+    getRecipeToEdit(this, this.state.recipeId);
     if (this.props.userMode !== 'guest') {
       getCurrentUser(this);
       checkLiked(this, this.state.recipeId);
@@ -34,9 +42,29 @@ class Thumbnail extends React.Component {
     cookTimeHrs: 0,
     cookTimeMins: 0,
     tags: [],
+    og_tags: {
+      Breakfast: false,
+      Lunch: false,
+      Dinner: false,
+      Dessert: false,
+      Vegan: false,
+      NutFree: false,
+    },
     recipePhoto: '', // imageSchema object
     likes: 0,
     loggedUser: {},
+    editOpen: false, // Whether or not the edit recipe popup is open
+    // BELOW IS FOR THE RECIPE TO EDIT
+    recipeNameEdit: '',
+    ownerEdit: '',
+    ingredientsEdit: [],
+    instructionsEdit: [],
+    servingSizeEdit: 0,
+    cookTimeHrsEdit: 0,
+    cookTimeMinsEdit: 0,
+    tagsEdit: [],
+    recipePhotoEdit: '',
+    likesEdit: 0,
   };
 
   openPopup = () => {
@@ -45,6 +73,36 @@ class Thumbnail extends React.Component {
 
   closePopup = () => {
     this.setState({ open: false });
+  };
+
+  editRecipe = () => {
+    this.setState(
+      {
+        editOpen: true,
+      },
+      function () {
+        let tags = this.state.tags;
+        let new_tags = [];
+        if (tags) {
+          tags.map((tag) => new_tags.push(tag.toString()));
+        }
+        if (new_tags) {
+          const og_tags = this.state.og_tags;
+          for (let i = 0; i < new_tags.length; i++) {
+            console.log(new_tags[i]);
+            og_tags[new_tags[i]] = true;
+          }
+          this.setState({
+            og_tags: og_tags,
+            tagsEdit: og_tags,
+          });
+        }
+      }
+    );
+  };
+
+  closeEditPopup = () => {
+    this.setState({ editOpen: false });
   };
 
   handleLike = () => {
@@ -83,8 +141,7 @@ class Thumbnail extends React.Component {
   };
 
   render() {
-    const { open } = this.state;
-    const { editRecipe, deleteRecipe } = this.props;
+    const { open, editOpen } = this.state;
 
     return (
       <div className="thumbnail">
@@ -129,7 +186,7 @@ class Thumbnail extends React.Component {
                 variant="text"
                 color="secondary"
                 size="small"
-                onClick={editRecipe}
+                onClick={() => this.editRecipe()}
                 startIcon={<EditIcon />}
               >
                 Edit
@@ -138,7 +195,7 @@ class Thumbnail extends React.Component {
                 variant="text"
                 color="secondary"
                 size="small"
-                onClick={deleteRecipe}
+                onClick={() => deleteRecipe(this, this.state.recipeId)}
                 startIcon={<DeleteIcon />}
               >
                 Delete
@@ -162,6 +219,21 @@ class Thumbnail extends React.Component {
           liked={this.state.liked}
           open={open}
           closePopup={this.closePopup}
+        />
+
+        <RecipeEdit
+          recipeId={this.state.recipeId}
+          recipeName={this.state.recipeNameEdit}
+          owner={this.state.ownerEdit}
+          ingredients={this.state.ingredientsEdit}
+          instructions={this.state.instructionsEdit}
+          servingSize={this.state.servingSizeEdit}
+          cookTimeHrs={this.state.cookTimeHrsEdit}
+          cookTimeMins={this.state.cookTimeMinsEdit}
+          tags={this.state.tagsEdit}
+          recipePhoto={this.state.recipePhotoEdit}
+          open={editOpen}
+          closePopup={this.closeEditPopup}
         />
       </div>
     );

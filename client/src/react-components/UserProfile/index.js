@@ -15,7 +15,6 @@ import './styles.css';
 
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
-import RecipeEdit from './RecipeEdit';
 import { withRouter } from 'react-router-dom';
 
 class UserProfile extends React.Component {
@@ -58,47 +57,7 @@ class UserProfile extends React.Component {
   closeWarning = () => {
     this.setState({ openWarning: false });
   };
-
-  editRecipe = (recipe) => {
-    this.setState(
-      {
-        editOpen: true,
-        recipeToEdit: recipe,
-      },
-      function () {
-        let tags = this.state.recipeToEdit.tags;
-        let new_tags = [];
-        if (tags) {
-          tags.map((tag) => new_tags.push(tag.toString()));
-        }
-        if (new_tags) {
-          const og_tags = this.state.og_tags;
-          for (let i = 0; i < new_tags.length; i++) {
-            console.log(new_tags[i]);
-            og_tags[new_tags[i]] = true;
-          }
-          this.setState({
-            og_tags: og_tags,
-          });
-        }
-      }
-    );
-  };
-
-  closePopup = () => {
-    this.setState({ editOpen: false });
-  };
-
-  deleteRecipe = (recipe) => {
-    const recipesToKeep = this.state.recipes.filter((r) => {
-      return r !== recipe;
-    });
-    this.setState({
-      recipes: recipesToKeep,
-    });
-    alert('Recipe ' + recipe.recipeName + ' has been deleted!');
-  };
-
+  
   handleTabs = (e, val) => {
     this.setState({
       tabVal: val,
@@ -148,7 +107,6 @@ class UserProfile extends React.Component {
   };
 
   render() {
-    const { editOpen } = this.state;
     return (
       <div>
         <Header state={this.props.appState} />
@@ -197,8 +155,6 @@ class UserProfile extends React.Component {
                     <Thumbnail
                       userMode={this.props.appState.userMode}
                       recipeId={recipe}
-                      editRecipe={() => this.editRecipe(recipe)}
-                      deleteRecipe={() => this.deleteRecipe(recipe)}
                     />
                   );
                 })}
@@ -217,19 +173,7 @@ class UserProfile extends React.Component {
             </TabPanel>
           </div>
         </div>
-        {/* <RecipeEdit
-          recipeName={this.state.recipeToEdit.recipeName}
-          owner={this.state.recipeToEdit.owner}
-          ingredients={this.state.recipeToEdit.ingredients}
-          instructions={this.state.recipeToEdit.instructions}
-          servingSize={this.state.recipeToEdit.servingSize}
-          cookTimeHrs={this.state.recipeToEdit.cookTimeHrs}
-          cookTimeMins={this.state.recipeToEdit.cookTimeMins}
-          tags={this.state.og_tags}
-          recipePhoto={this.state.recipeToEdit.recipePhoto}
-          open={editOpen}
-          closePopup={this.closePopup}
-        /> */}
+
         <Snackbar open={this.state.openWarning} autoHideDuration={6000} onClose={this.closeWarning}>
           <MuiAlert onClose={this.closeWarning} variant="filled" severity="error">
             Could not get all recipes!

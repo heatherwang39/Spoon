@@ -18,6 +18,7 @@ class RecipeEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      recipeId: '',
       recipeName: '',
       owner: '',
       ingredients: '',
@@ -25,7 +26,7 @@ class RecipeEdit extends React.Component {
       servingSize: '',
       cookTimeHrs: '',
       cookTimeMins: '',
-      og_tags: '',
+      edit_tags: '',
       tags: '',
       recipePhoto: '',
     };
@@ -40,7 +41,7 @@ class RecipeEdit extends React.Component {
       servingSize: nextProps.servingSize,
       cookTimeHrs: nextProps.cookTimeHrs,
       cookTimeMins: nextProps.cookTimeMins,
-      og_tags: nextProps.og_tags,
+      tags: nextProps.tags,
       recipePhoto: nextProps.recipePhoto,
     });
   }
@@ -55,22 +56,22 @@ class RecipeEdit extends React.Component {
   tagChosen = (event) => {
     const target = event.target;
     const name = target.name;
-    const newtags = { ...this.state.og_tags, [name]: target.checked };
+    const newtags = { ...this.state.tags, [name]: target.checked };
     this.setState(
       {
-        og_tags: newtags,
+        tags: newtags,
       },
       function () {
-        let tags = Object.assign({}, this.state.og_tags);
+        let json_tags = Object.assign({}, this.state.tags);
         let new_tags = [];
-        for (let key in tags) {
-          let value = tags[key];
+        for (let key in json_tags) {
+          let value = json_tags[key];
           if (value) {
             new_tags.push(key.toString());
           }
         }
         this.setState({
-          tags: new_tags,
+          edit_tags: new_tags,
         });
       }
     );
@@ -92,17 +93,26 @@ class RecipeEdit extends React.Component {
       cookTimeMins,
       recipePhoto,
     } = this.state;
-    if (!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
+    if (
+      !recipeName ||
+      !ingredients ||
+      !instructions ||
+      !servingSize ||
+      !cookTimeMins ||
+      !recipePhoto
+    ) {
       alert('Please fill out all the required fields!');
     } else {
-      updateRecipe(this.state.recipe.json()._id, [
+      const json_ingredints = this.state.ingredients.toString().split('\n');
+      const json_instructions = this.state.instructions.toString().split('\n');
+      updateRecipe(this.props.recipeId, [
         { path: '/recipeName', value: this.state.recipeName },
-        { path: '/ingredients', value: this.state.ingredients },
-        { path: '/instructions', value: this.state.instructions },
+        { path: '/ingredients', value: json_ingredints },
+        { path: '/instructions', value: json_instructions },
         { path: '/servingSize', value: this.state.servingSize },
         { path: '/cookTimeMins', value: this.state.cookTimeMins },
         { path: '/cookTimeHrs', value: this.state.cookTimeHrs },
-        { path: '/tags', value: this.state.tags },
+        { path: '/tags', value: this.state.edit_tags },
         { path: '/recipePhoto', value: this.state.recipePhoto },
       ]);
     }
@@ -237,7 +247,7 @@ class RecipeEdit extends React.Component {
               <Grid item xs={6}>
                 <img
                   src={this.state.recipePhoto.image_url}
-                  alt="food"
+                  alt="Recipe Food"
                   id="placeholderRecipeCreateImage"
                 />
               </Grid>
@@ -245,7 +255,7 @@ class RecipeEdit extends React.Component {
                 <TextField
                   multiline
                   value={this.state.ingredients}
-                  onChange={this.jsonInputChange}
+                  onChange={this.handleInputChange}
                   type="text"
                   name="ingredients"
                   label="Ingredients"
@@ -259,7 +269,7 @@ class RecipeEdit extends React.Component {
                 <TextField
                   multiline
                   value={this.state.instructions}
-                  onChange={this.jsonInputChange}
+                  onChange={this.handleInputChange}
                   type="text"
                   name="instructions"
                   label="Instructions"
@@ -275,7 +285,7 @@ class RecipeEdit extends React.Component {
                 </Typography>
               </Grid>
               <Grid item xs={12}>
-                <Tags tagChosen={this.tagChosen} tags={this.state.og_tags} />
+                <Tags tagChosen={this.tagChosen} tags={this.state.tags} />
               </Grid>
               <Grid item xs={12}>
                 <Button
