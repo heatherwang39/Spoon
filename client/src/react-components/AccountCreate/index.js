@@ -7,14 +7,16 @@ import Typography from '@material-ui/core/Typography';
 import Header from '../Header';
 import { signup } from '../../actions/user';
 
+import './styles.css';
+
 class AccountCreate extends React.Component {
   state = {
-    message: "",
-    username: "",
-    password: "",
-    repeatedPassword: "",
-    isAdmin: false
-  }
+    message: '',
+    username: '',
+    password: '',
+    repeatedPassword: '',
+    isAdmin: false,
+  };
 
   constructor(props) {
     super(props);
@@ -36,24 +38,18 @@ class AccountCreate extends React.Component {
   };
 
   check = () => {
-    if (this.state.password === "" || this.state.username === ""){
-      this.setState({message:
-        "Please enter a username and password."}
-      )
+    if (this.state.password === '' || this.state.username === '') {
+      this.setState({ message: 'Please enter a username and password.' });
+    } else if (this.state.password !== this.state.repeatedPassword) {
+      this.setState({ message: "The two passwords don't match." });
+    } else {
+      this.success();
     }
-    else if (this.state.password !== this.state.repeatedPassword){
-      this.setState({message:
-        "The two passwords don't match."}
-      )      
-    }
-    else {
-      this.success()
-    }
-  }
+  };
 
   success = () => {
-    signup(this, this.props.app)
-  }
+    signup(this, this.props.app);
+  };
 
   render() {
     const { app } = this.props;
@@ -69,8 +65,17 @@ class AccountCreate extends React.Component {
         ) : (
           <Header state={{ username: 'guest', userMode: 'guest' }} />
         )}
-        <Grid container justify="center" alignItems="center" spacing={1}>
-          <Grid item xs={4}>
+        <Typography variant="h2" color="secondary" gutterBottom>
+          Create Account
+        </Typography>
+        <Grid
+          container
+          className="createAccountContainer"
+          justify="center"
+          alignItems="center"
+          spacing={1}
+        >
+          <Grid item xs={8}>
             <TextField
               name="username"
               value={this.state.username}
@@ -82,25 +87,23 @@ class AccountCreate extends React.Component {
               fullWidth
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={8}>
             <TextField
               name="password"
               value={this.state.password}
               onChange={this.handleInputChange}
-              placeholder="e.g. user"
               label="Password"
               variant="outlined"
               type="password"
               fullWidth
             />
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={8}>
             <TextField
               name="repeatedPassword"
               value={this.state.repeatedPassword}
               onChange={this.handleInputChange}
-              placeholder="e.g. user"
-              label="Repeat Password"
+              label="Confirm Password"
               variant="outlined"
               type="password"
               fullWidth
@@ -116,12 +119,11 @@ class AccountCreate extends React.Component {
             >
               Sign Up
             </Button>
-            </Grid>
+          </Grid>
 
           <Grid item xs={12}>
             <Typography>{this.state.message}</Typography>
           </Grid>
-
         </Grid>
       </div>
     );

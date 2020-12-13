@@ -126,10 +126,10 @@ export const newRecipeUpdates = (component, recipe) => {
       }
     })
     .then((json) => {
-      console.log('user', json.user);
-      addToUser(component, json.user._id, [
+      json.user.recipes.push(recipe._id);
+      addToUser(json.user._id, [
         // Add recipe to author's profile
-        { path: '/recipes', value: recipe },
+        { path: '/recipes', value: json.user.recipes },
       ]);
 
       json.user.followers.forEach((followerId) => {
@@ -185,7 +185,11 @@ export const deleteRecipe = async (manageComp, recipeId) => {
     } else {
       manageComp.setState({openAlert: true, alertMessage: 'Could not delete recipe.'}) 
     }
-
+    const resGet = await fetch(url);
+    const json = await resGet.json();
+    manageComp.setState({
+      recipes: json,
+    });
   } catch (error) {
     console.log(error);
   }

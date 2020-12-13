@@ -137,7 +137,11 @@ app.post("/users/login", (req, res) => {
         checkedMode = "user";
       }
       req.session.userMode = checkedMode;
-      res.send({ username: user.username, userMode: checkedMode });
+      res.send({
+        username: user.username,
+        userMode: checkedMode,
+        userId: user._id,
+      });
     })
     .catch((error) => {
       log(error);
@@ -284,7 +288,7 @@ app.delete("/api/users/:id", mongoChecker, adminAuthenticate, (req, res) => {
 Returned JSON should be the database document updated.
 */
 // PATCH /users/:id
-app.patch("/api/users/:id", mongoChecker, (req, res) => {
+app.patch("/api/users/:id", mongoChecker, authenticate, (req, res) => {
   const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {

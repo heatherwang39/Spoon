@@ -105,6 +105,7 @@ class UserProfile extends React.Component {
   };
 
   handleTabs = (e, val) => {
+    console.log(this.state.loggedUser)
     this.setState({
       tabVal: val,
     });
@@ -161,10 +162,9 @@ class UserProfile extends React.Component {
   };
 
   render() {
-    const { editOpen } = this.state;
     return (
       <div>
-        <Header state={this.props.appState} />
+        <Header state={this.props.appState}/>
         <div className="userprofile-profile">
           <div>
             <Typography
