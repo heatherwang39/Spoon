@@ -19,7 +19,6 @@ export const allRecipes = (recipeList) => {
       }
     })
     .then((json) => {
-      console.log('json', json);
       recipeList.setState({ recipes: json });
     })
     .catch((error) => {
@@ -141,7 +140,6 @@ export const newRecipeUpdates = (recipe) => {
 
       json.user.followers.forEach((followerId) => {
         // Add recipe to followers' feeds
-        console.log('follower id:', followerId);
         updateFeed(followerId, recipe);
       });
 

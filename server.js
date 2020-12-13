@@ -288,7 +288,7 @@ app.delete("/api/users/:id", mongoChecker, adminAuthenticate, (req, res) => {
 Returned JSON should be the database document updated.
 */
 // PATCH /users/:id
-app.patch("/api/users/:id", mongoChecker, (req, res) => {
+app.patch("/api/users/:id", mongoChecker, authenticate, (req, res) => {
   const id = req.params.id;
 
   if (!ObjectID.isValid(id)) {
