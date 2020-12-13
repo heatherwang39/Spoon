@@ -1,7 +1,6 @@
 //API function calls for recipes collection
 
 import { addToUser } from './users';
-import { deleteRecipeFromLikedList, deleteRecipeFromFeedPage } from './manage';
 
 // A function to send a GET request to the web server
 // to get all the recipes
@@ -11,14 +10,7 @@ export const allRecipes = (recipeList) => {
       if (res.status === 200) {
         return res.json();
       } else {
-<<<<<<< HEAD
         recipeList.setState({ openWarning: true });
-=======
-        recipeList.setState({
-          openAlert: true,
-          alertMessage: "Couldn't get recipes!",
-        });
->>>>>>> 5fcc02e60740010a399c8c38c51e466440c1240c
       }
     })
     .then((json) => {
@@ -54,14 +46,7 @@ export const changeRecipePhoto = (image, component) => {
         return res.json();
       } else {
         // TODO: DON'T USE ALERTS
-<<<<<<< HEAD
         alert('Could not upload the image');
-=======
-        component.setState({
-          openAlert: true,
-          alertMessage: 'Could not upload the image!',
-        });
->>>>>>> 5fcc02e60740010a399c8c38c51e466440c1240c
       }
     })
     .then((image) => {
