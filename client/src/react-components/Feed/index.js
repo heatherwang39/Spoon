@@ -11,8 +11,6 @@ import './styles.css';
 
 import Thumbnail from '../Thumbnail';
 import Header from '../Header';
-import Button from '@material-ui/core/Button';
-import { uid } from 'react-uid';
 
 class Feed extends React.Component {
   componentDidMount() {
@@ -31,11 +29,12 @@ class Feed extends React.Component {
     recipes: [],
     user: this.props.appState.username,
     userMode: this.props.appState.userMode,
-    openWarning: false,
+    alertMessage: '',
+    openAlert: false,
   };
 
-  closeWarning = () => {
-    this.setState({ openWarning: false });
+  closeAlert = () => {
+    this.setState({ openAlert: false });
   };
 
   handleTabs = (e, val) => {
@@ -62,7 +61,7 @@ class Feed extends React.Component {
           <Tab label="Discover" disableRipple />
         </Tabs>
         <div className="feed">
-          <Header state={appState} />
+          <Header state={appState}/>
           <TabPanel
             value={this.state.tabVal}
             index={this.state.userMode !== 'guest' ? 0 : null}
@@ -94,18 +93,19 @@ class Feed extends React.Component {
           </TabPanel>
         </div>
         <Snackbar
-          open={this.state.openWarning}
-          autoHideDuration={6000}
-          onClose={this.closeWarning}
-        >
-          <MuiAlert
-            onClose={this.closeWarning}
-            variant="filled"
-            severity="error"
+            open={this.state.openAlert}
+            autoHideDuration={6000}
+            onClose={this.closeAlert}
           >
-            Could not get all recipes!
-          </MuiAlert>
+            <MuiAlert
+              onClose={this.closeAlert}
+              variant="filled"
+              severity="error"
+            >
+              {this.state.alertMessage}
+            </MuiAlert>
         </Snackbar>
+
       </div>
     );
   }

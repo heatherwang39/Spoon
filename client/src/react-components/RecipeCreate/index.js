@@ -4,6 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import './styles.css';
 import Header from '../Header';
@@ -24,7 +26,13 @@ class RecipeCreate extends React.Component {
     },
     tags: [],
     recipePhoto: '',
-    likes: '0',
+    likes: '0',    
+    alertMessage: '',
+    openAlert: false,
+  };
+  
+  closeAlert = () => {
+    this.setState({ openAlert: false });
   };
 
   tagChosen = (event) => {
@@ -75,7 +83,7 @@ class RecipeCreate extends React.Component {
       recipePhoto,
     } = this.state;
     if (!recipeName || !ingredients || !instructions || !servingSize || !cookTimeMins || !recipePhoto) {
-      alert('Please fill out all the required fields!');
+      this.setState({openAlert: true, alertMessage: 'Please fill out all the required fields!'}) 
     } else {
       addRecipe(this, this.props.appState.username);
     }
@@ -242,6 +250,19 @@ class RecipeCreate extends React.Component {
             </Button>
           </Grid>
         </Grid>
+        <Snackbar
+            open={this.state.openAlert}
+            autoHideDuration={6000}
+            onClose={this.closeAlert}
+          >
+            <MuiAlert
+              onClose={this.closeAlert}
+              variant="filled"
+              severity="error"
+            >
+              {this.state.alertMessage}
+            </MuiAlert>
+          </Snackbar>
       </div>
     );
   }
